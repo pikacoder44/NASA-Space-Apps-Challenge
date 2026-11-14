@@ -78,13 +78,13 @@ const HAZARDS: HazardData[] = [
 export function HazardsPentagon() {
   const [activeHazardIndex, setActiveHazardIndex] = useState(0);
 
-  // Pentagon nodes coordinates (radius 120, center 160, 160)
+  // Expanded Pentagon nodes coordinates (radius 140, center 190, 190 in 380x380 SVG)
   const pentagonNodes = [
-    { x: 160, y: 40 },   // Top (Radiation)
-    { x: 274, y: 122 },  // Top Right (Isolation)
-    { x: 230, y: 256 },  // Bottom Right (Distance)
-    { x: 90,  y: 256 },  // Bottom Left (Gravity)
-    { x: 46,  y: 122 },  // Top Left (Environment)
+    { x: 190, y: 50,  labelY: 20 },   // Top (Radiation) - label well above circle
+    { x: 323, y: 147, labelY: 190 },  // Top Right (Isolation)
+    { x: 272, y: 304, labelY: 340 },  // Bottom Right (Distance) - label below
+    { x: 108, y: 304, labelY: 340 },  // Bottom Left (Gravity) - label below
+    { x: 57,  y: 147, labelY: 190 },  // Top Left (Environment)
   ];
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -122,14 +122,14 @@ export function HazardsPentagon() {
         {/* Content: Left Diagram (max 440px) + Right Table of Contents Rows */}
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Desktop SVG Pentagon Diagram (5/12, max 440px) */}
-          <div className="hidden lg:flex lg:col-span-5 flex-col items-center justify-center p-2 max-w-[440px]">
-            <div className="relative w-[320px] h-[320px] flex items-center justify-center">
+          {/* Desktop SVG Pentagon Diagram (5/12, enlarged with clear spacing) */}
+          <div className="hidden lg:flex lg:col-span-5 flex-col items-center justify-center p-2">
+            <div className="relative w-[380px] h-[380px] flex items-center justify-center">
               
               <svg
-                width="320"
-                height="320"
-                viewBox="0 0 320 320"
+                width="380"
+                height="380"
+                viewBox="0 0 380 380"
                 className="overflow-visible select-none focus:outline-hidden"
                 tabIndex={0}
                 onKeyDown={handleKeyDown}
@@ -137,8 +137,8 @@ export function HazardsPentagon() {
                 aria-label="5 NASA Hazards diagram"
               >
                 {/* Center Node "Crew" */}
-                <circle cx="160" cy="160" r="30" fill="#1B4B52" stroke="#3FB6A8" strokeWidth="1.75" />
-                <text x="160" y="164" textAnchor="middle" className="text-xs font-bold fill-white tracking-wider">
+                <circle cx="190" cy="190" r="34" fill="#1B4B52" stroke="#3FB6A8" strokeWidth="2" />
+                <text x="190" y="195" textAnchor="middle" className="text-xs font-bold fill-white tracking-widest">
                   CREW
                 </text>
 
@@ -148,12 +148,12 @@ export function HazardsPentagon() {
                   return (
                     <line
                       key={`line-${i}`}
-                      x1="160"
-                      y1="160"
+                      x1="190"
+                      y1="190"
                       x2={node.x}
                       y2={node.y}
                       stroke={isActive ? '#F2A65A' : '#1B4B52'}
-                      strokeWidth={isActive ? '2' : '1'}
+                      strokeWidth={isActive ? '2.5' : '1.25'}
                       strokeDasharray={isActive ? 'none' : '3 3'}
                     />
                   );
@@ -164,7 +164,7 @@ export function HazardsPentagon() {
                   points={pentagonNodes.map(n => `${n.x},${n.y}`).join(' ')}
                   fill="none"
                   stroke="#1B4B52"
-                  strokeWidth="1"
+                  strokeWidth="1.25"
                 />
 
                 {/* 5 Outer Hazard Nodes */}
@@ -186,7 +186,7 @@ export function HazardsPentagon() {
                         <circle
                           cx={node.x}
                           cy={node.y}
-                          r="26"
+                          r="30"
                           fill="#F2A65A"
                           fillOpacity="0.2"
                         />
@@ -196,33 +196,33 @@ export function HazardsPentagon() {
                       <circle
                         cx={node.x}
                         cy={node.y}
-                        r="18"
+                        r="21"
                         className="transition-colors duration-200"
                         fill={isActive ? '#F2A65A' : '#1B4B52'}
                         stroke={isActive ? '#FFFFFF' : '#3FB6A8'}
-                        strokeWidth={isActive ? '2' : '1'}
+                        strokeWidth={isActive ? '2.5' : '1.5'}
                         style={{ outline: 'none' }}
                       />
 
                       {/* Number */}
                       <text
                         x={node.x}
-                        y={node.y + 4}
+                        y={node.y + 5}
                         textAnchor="middle"
-                        className={`text-xs font-bold ${
+                        className={`text-[13px] font-black ${
                           isActive ? 'fill-[#172A2B]' : 'fill-white'
                         }`}
                       >
                         0{i + 1}
                       </text>
 
-                      {/* Label under/above node */}
+                      {/* Label placed safely outside the circle */}
                       <text
                         x={node.x}
-                        y={node.y > 160 ? node.y + 22 : node.y - 14}
+                        y={node.labelY}
                         textAnchor="middle"
-                        className={`text-xs font-medium transition-colors ${
-                          isActive ? 'fill-[#F2A65A]' : 'fill-white/80 group-hover:fill-white'
+                        className={`text-[13px] font-semibold tracking-tight transition-colors ${
+                          isActive ? 'fill-[#F2A65A]' : 'fill-white/85 group-hover:fill-white'
                         }`}
                       >
                         {item.shortLabel}
@@ -233,7 +233,7 @@ export function HazardsPentagon() {
               </svg>
 
             </div>
-            <p className="mt-2 text-xs text-white/60 text-center">
+            <p className="mt-3 text-xs text-white/60 text-center">
               Click a node or use arrow keys to inspect each hazard
             </p>
           </div>

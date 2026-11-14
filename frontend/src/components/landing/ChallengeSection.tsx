@@ -86,22 +86,22 @@ export function ChallengeSection() {
             </div>
           </div>
 
-          {/* Right 6 Columns: 4/5 Aspect Photo of Astronaut Working (NO close-up face) */}
+          {/* Right 6 Columns: 4/5 Aspect Photo of Deep Space Transit (NASA Orion with Earth and Moon) */}
           <div className="lg:col-span-6 flex flex-col items-center lg:items-end">
             <Reveal delay={0.2} className="w-full max-w-[480px]">
               <div className="relative aspect-4/5 max-h-[560px] w-full rounded-2xl overflow-hidden shadow-lg border border-[#D9E2DE] bg-[#EAF0ED]">
                 <Image
-                  src="/images/nasa/iss-spacewalk-eva.jpg"
-                  alt="NASA astronaut working outside the International Space Station on orbital trusses"
+                  src="/images/nasa/mars-transit-concept.jpg"
+                  alt="NASA spacecraft during deep space exploration transit with Earth and Moon visible in deep field distance"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover object-center"
                 />
               </div>
 
-              {/* Verified Attribution under photo (NO fake quotes, NO floating card) */}
+              {/* Verified Attribution under photo */}
               <div className="mt-3 flex items-center justify-between text-xs text-[#60716E] px-1">
-                <span>Image: NASA public domain</span>
+                <span>NASA public domain (art002e012489)</span>
                 <a
                   href="https://www.nasa.gov/hrp/hazards/"
                   target="_blank"
