@@ -133,3 +133,37 @@ astrotrack/
 ```bash
 git clone https://github.com/your-team/astrotrack.git
 cd astrotrack
+
+2. Backend setup
+bash
+
+cd backend
+python -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+cp .env.example .env            # Fill in DATABASE_URL and SECRET_KEY
+uvicorn app.main:app --reload --port 8000
+
+API docs available at http://localhost:8000/docs (FastAPI auto-generates Swagger UI).
+3. Frontend setup
+bash
+
+cd frontend
+npm install
+cp .env.local.example .env.local   # Set NEXT_PUBLIC_API_URL=http://localhost:8000
+npm run dev
+
+App available at http://localhost:3000.
+4. Database setup
+bash
+
+cd database
+psql -U postgres -c "CREATE DATABASE astrotrack;"
+psql -U postgres -d astrotrack -f migrations/001_initial.sql
+psql -U postgres -d astrotrack -f seeds/health_reference_ranges.sql
+
+5. Or just use Docker 🐳
+bash
+
+docker-compose up --build
+
