@@ -20,10 +20,11 @@ interface RoutineListProps {
 }
 
 const DEFAULT_TASKS: RoutineTask[] = [
-  { id: "task-1", title: "Morning Vitals & Pulse Oximetry", category: "Medical", completed: true, due_time: "07:30 UTC" },
-  { id: "task-2", title: "ARED Resistive Countermeasure (60 min)", category: "Exercise", completed: true, due_time: "10:00 UTC" },
-  { id: "task-3", title: "T2 Treadmill Aerobic Session (30 min)", category: "Exercise", completed: false, due_time: "16:00 UTC" },
-  { id: "task-4", title: "Evening Subjective Check-in & Sleep Prep", category: "Mental Health", completed: false, due_time: "21:30 UTC" }
+  { id: "task-1", title: "Morning Vitals & Pulse Oximetry Check-in", category: "Medical", completed: true, due_time: "07:30 UTC" },
+  { id: "task-2", title: "ARED Resistive Countermeasure Protocol (60 min)", category: "Exercise", completed: true, due_time: "10:00 UTC" },
+  { id: "task-3", title: "T2 Treadmill Aerobic Endurance Session (30 min)", category: "Exercise", completed: false, due_time: "15:30 UTC" },
+  { id: "task-4", title: "Cognitive Psychomotor Vigilance Assessment", category: "Mental Health", completed: false, due_time: "18:00 UTC" },
+  { id: "task-5", title: "Evening Subjective Well-Being & Sleep Logging", category: "Medical", completed: false, due_time: "21:30 UTC" }
 ];
 
 const CREW_BADGES = [
@@ -57,11 +58,12 @@ const CREW_BADGES = [
 ];
 
 export default function RoutineList({ 
-  tasks = DEFAULT_TASKS, 
+  tasks, 
   points = 340, 
   streakDays = 7 
 }: RoutineListProps) {
-  const [taskList, setTaskList] = useState<RoutineTask[]>(tasks);
+  const effectiveTasks = (tasks && tasks.length > 0) ? tasks : DEFAULT_TASKS;
+  const [taskList, setTaskList] = useState<RoutineTask[]>(effectiveTasks);
   const [currentPoints, setCurrentPoints] = useState<number>(points);
 
   const toggleTask = (id: string) => {
