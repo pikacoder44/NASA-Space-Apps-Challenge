@@ -25,13 +25,12 @@ const TIMELINE_DATA: SolData[] = [
 ];
 
 export function ScenarioScrubberSection() {
-  const [selectedSolIndex, setSelectedSolIndex] = useState(6); // Default Sol 90
+  const [selectedSolIndex, setSelectedSolIndex] = useState(6);
   const [isPlaying, setIsPlaying] = useState(false);
   const shouldReduceMotion = usePrefersReducedMotion();
 
   const current = TIMELINE_DATA[selectedSolIndex];
 
-  // Auto-scrubber player
   useEffect(() => {
     if (!isPlaying || shouldReduceMotion) return;
     const interval = setInterval(() => {
@@ -41,7 +40,7 @@ export function ScenarioScrubberSection() {
   }, [isPlaying, shouldReduceMotion]);
 
   return (
-    <section id="scenario" className="relative py-24 sm:py-32 bg-[#0A1A1F] text-white overflow-hidden">
+    <section id="scenario" className="relative py-20 sm:py-28 bg-[#12343B] text-white overflow-hidden">
       {/* Background Mars Image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -49,27 +48,27 @@ export function ScenarioScrubberSection() {
           alt="Mars surface panoramic terrain captured by NASA Curiosity rover"
           fill
           sizes="100vw"
-          className="object-cover object-center opacity-30"
+          className="object-cover object-center opacity-40"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A1A1F] via-[#0A1A1F]/80 to-[#0A1A1F]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#12343B] via-[#12343B]/80 to-[#12343B]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         
         {/* Header */}
         <Reveal>
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-xs font-bold tracking-widest text-[#F2A65A] uppercase">
-              05 — Walkthrough Scenario
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-sm font-medium text-[#F2A65A]">
+              05 — Walkthrough scenario
             </span>
-            <div className="w-12 h-px bg-[#234954]" />
+            <div className="w-10 h-px bg-[#1B4B52]" />
           </div>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight">
                 Sol 84 → Sol 90: How a subtle shift unfolds.
               </h2>
-              <p className="mt-3 text-base sm:text-lg text-[#C0D1CE] max-w-2xl leading-relaxed">
+              <p className="mt-2 text-base text-white/85 max-w-2xl leading-relaxed">
                 Acute medical crises are rare. Cumulative sleep debt and rising resting pulse develop quietly over days. Scrub the timeline to watch AstroTrack detect the drift.
               </p>
             </div>
@@ -78,30 +77,30 @@ export function ScenarioScrubberSection() {
               href="/dashboard"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#F2A65A] text-[#172A2B] font-bold text-sm hover:bg-[#E09448] shadow-md transition-all active:scale-[0.98] shrink-0"
             >
-              <span>Open Demo Cockpit</span>
+              <span>Open demo cockpit</span>
               <ArrowRight size={16} />
             </Link>
           </div>
         </Reveal>
 
         {/* Timeline Scrubber Container */}
-        <div className="mt-12 bg-[#0F2A30]/90 backdrop-blur-md border border-[#234954] rounded-3xl p-6 sm:p-10 shadow-2xl space-y-8">
+        <div className="mt-10 bg-[#1B4B52]/90 backdrop-blur-md border border-[#3FB6A8]/30 rounded-2xl p-6 sm:p-8 shadow-xl space-y-6">
           
           {/* Stepper Controls */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#A2BEB9]">
-                Select Mission Day
+              <span className="text-sm font-medium text-white/80">
+                Select mission sol:
               </span>
               
               {!shouldReduceMotion && (
                 <button
                   type="button"
                   onClick={() => setIsPlaying(!isPlaying)}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-[#182C30] hover:bg-[#1E373C] border border-[#234954] text-[#EAF0ED] cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold bg-[#12343B] hover:bg-[#12343B]/80 border border-white/20 text-white cursor-pointer"
                 >
                   {isPlaying ? <Pause size={12} /> : <Play size={12} />}
-                  <span>{isPlaying ? 'Pause Playback' : 'Autoplay Timeline'}</span>
+                  <span>{isPlaying ? 'Pause' : 'Autoplay'}</span>
                 </button>
               )}
             </div>
@@ -118,16 +117,16 @@ export function ScenarioScrubberSection() {
                       setSelectedSolIndex(index);
                       setIsPlaying(false);
                     }}
-                    className={`p-2.5 rounded-xl text-center transition-all cursor-pointer border ${
+                    className={`p-2 sm:p-3 rounded-xl text-center transition-all cursor-pointer border ${
                       isSelected
-                        ? 'bg-[#F2A65A] text-[#172A2B] border-[#F2A65A] font-extrabold shadow-md scale-105'
+                        ? 'bg-[#F2A65A] text-[#172A2B] border-[#F2A65A] font-bold shadow-md'
                         : item.status === 'watch'
-                        ? 'bg-[#0A1A1F] text-[#F2A65A] border-[#A96617]/50 hover:bg-[#182C30]'
-                        : 'bg-[#0A1A1F] text-[#C0D1CE] border-[#234954] hover:bg-[#182C30]'
+                        ? 'bg-[#12343B] text-[#F2A65A] border-[#F2A65A]/40 hover:bg-[#12343B]/80'
+                        : 'bg-[#12343B] text-white/80 border-white/10 hover:bg-[#12343B]/80'
                     }`}
                   >
-                    <span className="block text-[11px] font-medium opacity-80">Day</span>
-                    <span className="block text-sm sm:text-base font-bold">Sol {item.sol}</span>
+                    <span className="block text-xs opacity-75">Sol</span>
+                    <span className="block text-sm sm:text-base font-bold">{item.sol}</span>
                   </button>
                 );
               })}
@@ -135,31 +134,31 @@ export function ScenarioScrubberSection() {
           </div>
 
           {/* Telemetry Display for Selected Sol */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-4 border-t border-[#234954]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center pt-4 border-t border-white/15">
             
-            {/* Vitals Gauges (5/12) */}
-            <div className="lg:col-span-5 grid grid-cols-2 gap-4">
+            {/* Vitals (5/12) */}
+            <div className="lg:col-span-5 grid grid-cols-2 gap-3.5">
               
               {/* Sleep Box */}
-              <div className="p-4 rounded-2xl bg-[#0A1A1F] border border-[#234954] space-y-1">
-                <span className="text-xs text-[#A2BEB9] font-medium">Sleep Duration</span>
+              <div className="p-3.5 rounded-xl bg-[#12343B] border border-white/10 space-y-1">
+                <span className="text-xs text-white/70 font-medium">Sleep duration</span>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-extrabold text-white">{current.sleep}</span>
-                  <span className="text-xs text-[#829994]">hours</span>
+                  <span className="text-2xl font-bold text-white">{current.sleep}</span>
+                  <span className="text-xs text-white/60">hours</span>
                 </div>
-                <span className={`text-[11px] font-semibold block ${current.sleep < 6 ? 'text-[#F2A65A]' : 'text-[#3FB6A8]'}`}>
-                  {current.sleep < 6 ? `${(current.sleep - 7.3).toFixed(1)} h deficit` : 'Within baseline'}
+                <span className={`text-xs font-semibold block ${current.sleep < 6 ? 'text-[#F2A65A]' : 'text-[#3FB6A8]'}`}>
+                  {current.sleep < 6 ? `${(current.sleep - 7.3).toFixed(1)} h deficit` : 'Nominal baseline'}
                 </span>
               </div>
 
               {/* Heart Rate Box */}
-              <div className="p-4 rounded-2xl bg-[#0A1A1F] border border-[#234954] space-y-1">
-                <span className="text-xs text-[#A2BEB9] font-medium">Resting Heart Rate</span>
+              <div className="p-3.5 rounded-xl bg-[#12343B] border border-white/10 space-y-1">
+                <span className="text-xs text-white/70 font-medium">Resting heart rate</span>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-extrabold text-white">{current.hr}</span>
-                  <span className="text-xs text-[#829994]">bpm</span>
+                  <span className="text-2xl font-bold text-white">{current.hr}</span>
+                  <span className="text-xs text-white/60">bpm</span>
                 </div>
-                <span className={`text-[11px] font-semibold block ${current.hr > 68 ? 'text-[#F2A65A]' : 'text-[#3FB6A8]'}`}>
+                <span className={`text-xs font-semibold block ${current.hr > 68 ? 'text-[#F2A65A]' : 'text-[#3FB6A8]'}`}>
                   {current.hr > 68 ? `+${current.hr - 62} bpm elevation` : 'Nominal 62 bpm'}
                 </span>
               </div>
@@ -167,7 +166,7 @@ export function ScenarioScrubberSection() {
             </div>
 
             {/* Narrative & Status Assessment (7/12) */}
-            <div className="lg:col-span-7 space-y-4">
+            <div className="lg:col-span-7 space-y-3">
               <div className="flex items-center gap-3">
                 <span
                   className={`px-3 py-1 rounded-md text-xs font-bold flex items-center gap-1.5 ${
@@ -177,22 +176,16 @@ export function ScenarioScrubberSection() {
                   }`}
                 >
                   {current.status === 'watch' ? <AlertTriangle size={14} /> : <ShieldCheck size={14} />}
-                  <span>{current.status === 'watch' ? 'Watch Status' : 'Nominal Green'}</span>
+                  <span>{current.status === 'watch' ? 'Watch status' : 'Nominal green'}</span>
                 </span>
-                <span className="text-xs text-[#A2BEB9]">
-                  Trajectory Evaluation for Mission Commander
+                <span className="text-xs text-white/70">
+                  Telemetry evaluation for Sol {current.sol}
                 </span>
               </div>
 
-              <p className="text-sm sm:text-base text-white leading-relaxed">
+              <p className="text-sm text-white/90 leading-relaxed">
                 {current.notes}
               </p>
-
-              {current.status === 'watch' && (
-                <div className="p-3.5 rounded-xl bg-[#122B31] border border-[#A96617]/50 text-xs text-[#F2A65A]">
-                  <strong>Autonomous Action:</strong> Sleep recovery nap recommended; acoustic sleep berth review scheduled before Sol 91 EVA.
-                </div>
-              )}
             </div>
 
           </div>

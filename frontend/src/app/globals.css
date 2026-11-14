@@ -16,9 +16,9 @@
   --ink: #172A2B;
   --ink-muted: #60716E;
 
-  /* Landing & Cinematic Space Tokens */
-  --space-950: #0A1A1F;
-  --space-900: #0F2A30;
+  /* Landing & Space Tokens (Calm, Deep Teal-Navy) */
+  --space-950: #12343B;
+  --space-900: #1B4B52;
   --teal-600: #176B68;
   --teal-400: #3FB6A8;
   --accent: #F2A65A;

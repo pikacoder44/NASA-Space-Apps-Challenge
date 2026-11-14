@@ -7,16 +7,16 @@ import { ShieldCheck, ExternalLink } from 'lucide-react';
 
 export function LandingFooter() {
   return (
-    <footer className="bg-[#0A1A1F] text-[#A2BEB9] border-t border-[#1E373C] pt-16 pb-12 text-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-12">
+    <footer className="bg-[#12343B] text-white/80 border-t border-[#1B4B52] pt-14 pb-10 text-xs">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-10">
         
         {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           
           {/* Brand Info (5/12) */}
-          <div className="md:col-span-5 space-y-4">
-            <Logo size="md" showSubtitle inverted />
-            <p className="text-sm text-[#829994] max-w-sm leading-relaxed">
+          <div className="md:col-span-5 space-y-3">
+            <Logo size="md" inverted href="/" />
+            <p className="text-sm text-white/70 max-w-sm leading-relaxed mt-2">
               Autonomous physiological baseline monitoring cockpit designed for long-duration deep space exploration missions.
             </p>
             <div className="flex items-center gap-2 text-xs text-[#3FB6A8]">
@@ -26,8 +26,8 @@ export function LandingFooter() {
           </div>
 
           {/* Links Column 1: Application (2/12) */}
-          <div className="md:col-span-2 space-y-3">
-            <h4 className="font-bold text-white uppercase tracking-wider text-[11px]">
+          <div className="md:col-span-2 space-y-2.5">
+            <h4 className="font-semibold text-white text-xs">
               Application
             </h4>
             <ul className="space-y-2">
@@ -38,36 +38,36 @@ export function LandingFooter() {
               </li>
               <li>
                 <Link href="/readings/new" className="hover:text-white transition-colors">
-                  Record Reading
+                  Record reading
                 </Link>
               </li>
               <li>
                 <Link href="/body-map" className="hover:text-white transition-colors">
-                  Interactive Body Map
+                  Interactive body map
                 </Link>
               </li>
               <li>
                 <Link href="/demo" className="hover:text-white transition-colors">
-                  Sol 90 Walkthrough
+                  Sol 90 walkthrough
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Links Column 2: Architecture & Guides (2/12) */}
-          <div className="md:col-span-2 space-y-3">
-            <h4 className="font-bold text-white uppercase tracking-wider text-[11px]">
-              Research & Protocols
+          {/* Links Column 2: Protocols (2/12) */}
+          <div className="md:col-span-2 space-y-2.5">
+            <h4 className="font-semibold text-white text-xs">
+              Research & protocols
             </h4>
             <ul className="space-y-2">
               <li>
                 <Link href="/app/guides" className="hover:text-white transition-colors">
-                  Measurement Guides
+                  Measurement guides
                 </Link>
               </li>
               <li>
                 <Link href="/app/radiation" className="hover:text-white transition-colors">
-                  Radiation Shelter
+                  Radiation shelter
                 </Link>
               </li>
               <li>
@@ -77,18 +77,18 @@ export function LandingFooter() {
               </li>
               <li>
                 <Link href="/about" className="hover:text-white transition-colors">
-                  About Team & Mission
+                  About team & mission
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Links Column 3: NASA Literature (3/12) */}
-          <div className="md:col-span-3 space-y-3">
-            <h4 className="font-bold text-white uppercase tracking-wider text-[11px]">
-              Official Space Agency Sources
+          {/* Links Column 3: Sources (3/12) */}
+          <div className="md:col-span-3 space-y-2.5">
+            <h4 className="font-semibold text-white text-xs">
+              Official space agency sources
             </h4>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2">
               <li>
                 <a
                   href="https://www.nasa.gov/hrp/hazards/"
@@ -128,7 +128,7 @@ export function LandingFooter() {
         </div>
 
         {/* Bottom Legal Disclaimer */}
-        <div className="pt-8 border-t border-[#1E373C] flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left text-[#829994]">
+        <div className="pt-6 border-t border-[#1B4B52] flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left text-white/60">
           <div className="flex items-center gap-2">
             <ShieldCheck size={16} className="text-[#3FB6A8] shrink-0" />
             <p>

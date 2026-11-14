@@ -5,15 +5,15 @@ import Link from 'next/link';
 import { Logo } from '../brand/Logo';
 import { useAuth } from '../../context/AuthContext';
 import { Menu, X, ArrowRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const NAV_LINKS = [
   { label: 'Challenge', href: '#challenge' },
   { label: '5 Hazards', href: '#hazards' },
-  { label: 'How It Works', href: '#how-it-works' },
+  { label: 'How it works', href: '#how-it-works' },
   { label: 'Indicators', href: '#indicators' },
-  { label: 'Sol 90 Scenario', href: '#scenario' },
-  { label: 'Official Sources', href: '#sources' },
+  { label: 'Sol 90 scenario', href: '#scenario' },
+  { label: 'Official sources', href: '#sources' },
 ];
 
 export function LandingNavbar() {
@@ -35,16 +35,16 @@ export function LandingNavbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           scrolled
-            ? 'bg-[#0A1A1F]/90 backdrop-blur-md border-b border-[#233E44] shadow-lg py-3'
-            : 'bg-transparent py-4 sm:py-5'
+            ? 'bg-[#12343B]/95 backdrop-blur-md border-b border-[#1B4B52] shadow-md py-3.5'
+            : 'bg-transparent py-5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4">
-          {/* Logo */}
-          <Logo size="md" showSubtitle inverted />
+          {/* Logo (36px mark, crisp, white text on dark navbar, NO subtitle) */}
+          <Logo size="md" inverted href="/" />
 
           {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-7 text-[14px] font-medium text-[#C0D1CE]">
+          <nav className="hidden lg:flex items-center gap-7 text-[15px] font-medium text-white/80">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.label}
@@ -63,14 +63,14 @@ export function LandingNavbar() {
                 href="/dashboard"
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold bg-[#176B68] text-white hover:bg-[#135754] shadow-md transition-all active:scale-[0.98]"
               >
-                <span>Open Dashboard</span>
+                <span>Open dashboard</span>
                 <ArrowRight size={15} />
               </Link>
             ) : (
               <>
                 <Link
                   href="/login"
-                  className="px-3.5 py-2 text-sm font-semibold text-[#D8E6E3] hover:text-white transition-colors"
+                  className="px-3.5 py-2 text-sm font-semibold text-white/85 hover:text-white transition-colors"
                 >
                   Log in
                 </Link>
@@ -84,11 +84,11 @@ export function LandingNavbar() {
             )}
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile hamburger */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg text-[#EAF0ED] hover:bg-[#1A3840] transition-colors cursor-pointer"
+            className="lg:hidden p-2 rounded-lg text-white hover:bg-[#1B4B52] transition-colors cursor-pointer"
             aria-label={mobileMenuOpen ? 'Close navigation' : 'Open navigation'}
           >
             {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -104,36 +104,36 @@ export function LandingNavbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-16 z-30 bg-[#0A1A1F] border-b border-[#233E44] p-5 shadow-2xl lg:hidden flex flex-col gap-4"
+            className="fixed inset-x-0 top-16 z-30 bg-[#12343B] border-b border-[#1B4B52] p-5 shadow-2xl lg:hidden flex flex-col gap-4 text-white"
           >
-            <nav className="flex flex-col gap-3">
+            <nav className="flex flex-col gap-2">
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="py-2 px-3 rounded-lg text-base font-medium text-[#EAF0ED] hover:bg-[#182C30] transition-colors"
+                  className="py-2.5 px-3 rounded-lg text-base font-medium text-white/90 hover:bg-[#1B4B52] transition-colors"
                 >
                   {link.label}
                 </a>
               ))}
             </nav>
 
-            <div className="pt-4 border-t border-[#233E44] flex flex-col gap-2.5">
+            <div className="pt-4 border-t border-[#1B4B52] flex flex-col gap-2.5">
               {user ? (
                 <Link
                   href="/dashboard"
                   onClick={() => setMobileMenuOpen(false)}
                   className="w-full text-center py-2.5 rounded-xl font-bold text-sm bg-[#176B68] text-white"
                 >
-                  Open Dashboard
+                  Open dashboard
                 </Link>
               ) : (
                 <>
                   <Link
                     href="/login"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="w-full text-center py-2.5 rounded-xl font-semibold text-sm border border-[#233E44] text-[#EAF0ED]"
+                    className="w-full text-center py-2.5 rounded-xl font-semibold text-sm border border-white/20 text-white"
                   >
                     Log in
                   </Link>
