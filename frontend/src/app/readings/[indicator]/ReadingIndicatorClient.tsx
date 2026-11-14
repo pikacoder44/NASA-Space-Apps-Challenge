@@ -13,7 +13,6 @@ import {
   Clock,
   Sparkles
 } from 'lucide-react';
-import { AppShell } from '../../../components/layout/AppShell';
 import { getReadings } from '../../../lib/api';
 import { STATUS_COLORS } from '../../../lib/colors';
 import type { Indicator, Reading } from '../../../lib/types';
@@ -118,8 +117,7 @@ export default function ReadingIndicatorClient({ indicatorKey }: Props) {
   }));
 
   return (
-    <AppShell>
-      <div className="max-w-6xl mx-auto space-y-6 pb-12">
+    <div className="max-w-6xl mx-auto space-y-6 pb-12">
         {/* Navigation Breadcrumb */}
         <div className="flex items-center justify-between">
           <Link 
@@ -267,6 +265,5 @@ export default function ReadingIndicatorClient({ indicatorKey }: Props) {
           </p>
         </div>
       </div>
-    </AppShell>
   );
 }

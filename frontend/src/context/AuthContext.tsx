@@ -42,15 +42,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (isMounted) {
           const liveSession: UserSession = {
             token: liveToken,
-            expiresAt: Date.now() + 24 * 60 * 60 * 1000,
+            expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
             user: {
               id: me.id,
               name: me.name,
               email: me.email,
-              role: (me.role as UserProfile['role']) || 'commander',
-              flightAssignment: 'AstroTrack Mars Transit Sol 90',
-              avatarInitials: me.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'AT',
-              lastLoginAt: new Date().toISOString()
+              role: me.role || 'CDR-01',
+              mission: 'AstroTrack Mars Transit Sol 90',
+              avatarInitials: me.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'CM'
             }
           };
           setSession(liveSession);
@@ -93,15 +92,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const me = await getMe();
         const liveSession: UserSession = {
           token: authRes.access_token,
-          expiresAt: Date.now() + 24 * 60 * 60 * 1000,
+          expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
           user: {
             id: me.id,
             name: me.name,
             email: me.email,
-            role: (me.role as UserProfile['role']) || 'commander',
-            flightAssignment: 'AstroTrack Mars Transit Sol 90',
-            avatarInitials: me.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'AT',
-            lastLoginAt: new Date().toISOString()
+            role: me.role || 'CDR-01',
+            mission: 'AstroTrack Mars Transit Sol 90',
+            avatarInitials: me.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'CM'
           }
         };
         setSession(liveSession);

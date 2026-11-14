@@ -11,7 +11,6 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { z } from 'zod';
-import { AppShell } from '../../../components/layout/AppShell';
 import { submitReading, getGuidance } from '../../../lib/api';
 import { STATUS_COLORS, STATUS_LABEL } from '../../../lib/colors';
 import type { Indicator, Status, Reading, GuidanceData } from '../../../lib/types';
@@ -187,8 +186,7 @@ export default function NewReadingPage() {
   };
 
   return (
-    <AppShell>
-      <div className="max-w-3xl mx-auto space-y-6 pb-12 relative">
+    <div className="max-w-3xl mx-auto space-y-6 pb-12 relative">
         {/* Success Toast */}
         {showToast && (
           <div className="fixed top-20 right-4 sm:right-8 z-50 flex items-center gap-2.5 p-4 rounded-xl bg-surface border-2 border-[#22c55e] text-main shadow-2xl animate-in slide-in-from-top-4 duration-200">
@@ -346,6 +344,5 @@ export default function NewReadingPage() {
           </div>
         )}
       </div>
-    </AppShell>
   );
 }
