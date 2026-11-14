@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+/* Light Theme as Default (NASA Spaceflight Clean Canvas) */
+:root {
+  --canvas: #F4F6F4;
+  --surface: #FFFFFF;
+  --surface-alt: #F8FAFC;
+  --surface-muted: #E2E8F0;
+  --main: #172A2B;
+  --muted: #60716E;
+  --border: #D9E2DE;
+  --brand: #176B68;
+  --brand-hover: #125553;
+  --line: #D9E2DE;
+  --deep-space: #172A2B;
+  --ink: #172A2B;
+  --ink-muted: #60716E;
+
+  /* Landing & Space Tokens (Calm, Deep Teal-Navy) */
+  --space-950: #12343B;
+  --space-900: #1B4B52;
+  --teal-600: #176B68;
+  --teal-400: #3FB6A8;
+  --accent: #F2A65A;
+  --accent-hover: #E09448;
+
+  /* Official Status Colors (lib/colors.ts) */
+  --status-normal: #22c55e;
+  --status-warning: #eab308;
+  --status-critical: #ef4444;
+  --status-empty: #6b7280;
+
+  /* Status soft backgrounds */
+  --teal: #176B68;
+  --teal-soft: rgba(23, 107, 104, 0.12);
+  --teal-hover: #125553;
+  --green: #22c55e;
+  --green-soft: rgba(34, 197, 94, 0.12);
+  --amber: #eab308;
+  --amber-soft: rgba(234, 179, 8, 0.12);
+  --red: #ef4444;
+  --red-soft: rgba(239, 68, 68, 0.12);
+  --unknown: #6b7280;
+  --unknown-soft: rgba(107, 114, 128, 0.12);
+}
+
+/* Dark Mode Toggle Support */
+[data-theme="dark"], .dark {
+  --canvas: #0B1315;
+  --surface: #122023;
+  --surface-alt: #182C30;
+  --surface-muted: #1E373C;
+  --main: #F1F5F9;
+  --muted: #94A3B8;
+  --border: #233E44;
+  --brand: #14B8A6;
+  --brand-hover: #0D9488;
+  --line: #233E44;
+  --deep-space: #070D0E;
+  --ink: #F1F5F9;
+  --ink-muted: #94A3B8;
+
+  --space-950: #061114;
+  --space-900: #0A1C22;
+  --teal-600: #14B8A6;
+  --teal-400: #2DD4BF;
+  --accent: #F2A65A;
+  --accent-hover: #E09448;
+
+  --status-normal: #22c55e;
+  --status-warning: #eab308;
+  --status-critical: #ef4444;
+  --status-empty: #6b7280;
+
+  --teal: #14B8A6;
+  --teal-soft: rgba(20, 184, 166, 0.15);
+  --teal-hover: #0D9488;
+  --green: #22c55e;
+  --green-soft: rgba(34, 197, 94, 0.15);
+  --amber: #eab308;
+  --amber-soft: rgba(234, 179, 8, 0.15);
+  --red: #ef4444;
+  --red-soft: rgba(239, 68, 68, 0.15);
+  --unknown: #6b7280;
+  --unknown-soft: rgba(107, 114, 128, 0.15);
+}
+
+@theme {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-surface-muted: var(--surface-muted);
+  --color-main: var(--main);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-deep-space: var(--deep-space);
+  --color-space-950: var(--space-950);
+  --color-space-900: var(--space-900);
+  --color-teal-600: var(--teal-600);
+  --color-teal-400: var(--teal-400);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  
+  --color-normal: var(--status-normal);
+  --color-warning: var(--status-warning);
+  --color-critical: var(--status-critical);
+  --color-empty: var(--status-empty);
+
+  --color-teal-primary: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+  --color-teal-hover: var(--teal-hover);
+  --color-green-status: var(--green);
+  --color-green-soft: var(--green-soft);
+  --color-amber-status: var(--amber);
+  --color-amber-soft: var(--amber-soft);
+  --color-red-status: var(--red);
+  --color-red-soft: var(--red-soft);
+  --color-unknown: var(--unknown);
+  --color-unknown-soft: var(--unknown-soft);
+}
+
+body {
+  background-color: var(--canvas);
+  color: var(--main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
+}
