@@ -2,14 +2,11 @@
 
 import React, { useSyncExternalStore } from 'react';
 import Link from 'next/link';
-import { APP_NAME } from '../../lib/branding';
-
-const emptySubscribe = () => () => {};
+import { Logo } from '../brand/Logo';
 import { usePathname, useRouter } from 'next/navigation';
 import { 
   LayoutDashboard, 
   CheckSquare, 
-  Activity, 
   Layers, 
   TrendingUp, 
   AlertTriangle, 
@@ -20,16 +17,14 @@ import {
   ClipboardList, 
   Award, 
   Zap, 
-  Settings,
-  History,
-  Home,
   LogOut,
   ChevronLeft,
-  ChevronRight,
-  ShieldCheck
+  ChevronRight
 } from 'lucide-react';
 import { useHealth } from '../../context/HealthContext';
 import { useAuth } from '../../context/AuthContext';
+
+const emptySubscribe = () => () => {};
 
 interface SidebarNavigationProps {
   onItemClick?: () => void;
@@ -50,7 +45,7 @@ export function SidebarNavigation({
   const { user, signOut } = useAuth();
   const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
 
-    const groups = [
+  const groups = [
     {
       title: 'Monitor',
       items: [
@@ -113,13 +108,12 @@ export function SidebarNavigation({
               : 'text-[#60716E] hover:bg-[#EAF0ED] hover:text-[#172A2B]'
           }`}
         >
-          <Icon size={20} className={isActive ? 'text-white' : 'text-[#60716E] group-hover:text-[#172A2B]'} />
+          <Icon size={18} className={isActive ? 'text-white' : 'text-[#60716E] group-hover:text-[#172A2B]'} />
           {item.count !== undefined && item.count > 0 && (
             <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#A96617] text-white text-[10px] font-bold flex items-center justify-center">
               {item.count}
             </span>
           )}
-          {/* Accessible hover tooltip for icon rail */}
           <span className="sr-only">{item.name}</span>
         </Link>
       );
@@ -137,7 +131,7 @@ export function SidebarNavigation({
         }`}
       >
         <div className="flex items-center gap-3 truncate">
-          <Icon size={20} className={`shrink-0 ${isActive ? 'text-white' : 'text-[#60716E]'}`} />
+          <Icon size={18} className={`shrink-0 ${isActive ? 'text-white' : 'text-[#60716E]'}`} />
           <span className="truncate">{item.name}</span>
         </div>
 
@@ -181,23 +175,17 @@ export function SidebarNavigation({
   const displayInitials = user?.avatarInitials || 'CM';
 
   return (
-    <aside className="flex flex-col justify-between h-full select-none">
-      {/* 1. Header / Logo Block (V3 §4: 44px mark + AAHMS 20px + 12px subtitle) */}
+    <aside className="flex flex-col justify-between h-full select-none p-4">
+      {/* 1. Header / Logo Block (Clean 20px padding, NO subtitle) */}
       {!isMobileDrawer && (
-        <div className="flex items-center justify-between pb-3 pt-1 border-b border-[#D9E2DE] mb-3 px-1">
-          <Link href="/dashboard" className="flex items-center gap-2.5 truncate group">
-            <div className="w-9 h-9 rounded-xl bg-[#176B68] text-white flex items-center justify-center shrink-0 shadow-sm group-hover:bg-[#135754] transition-colors">
-              <ShieldCheck size={19} />
-            </div>
-            {!isCollapsed && (
-              <div className="min-w-0">
-                <span className="text-[16px] font-extrabold tracking-tight text-[#172A2B] block leading-tight">
-                  {APP_NAME}
-                </span>
-                <span className="text-[11px] text-[#176B68] font-semibold block truncate leading-none">
-                  Health Monitoring
-                </span>
+        <div className="flex items-center justify-between pb-4 pt-1 border-b border-[#D9E2DE] mb-3">
+          <Link href="/dashboard" className="flex items-center gap-2.5 truncate">
+            {isCollapsed ? (
+              <div className="w-9 h-9 rounded-xl bg-[#176B68] flex items-center justify-center text-white shrink-0">
+                <Logo size="sm" href="" />
               </div>
+            ) : (
+              <Logo size="md" href="" />
             )}
           </Link>
 
@@ -206,7 +194,7 @@ export function SidebarNavigation({
               type="button"
               onClick={onToggleCollapse}
               aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-              className="p-1.5 rounded-lg text-[#60716E] hover:bg-[#EAF0ED] hover:text-[#172A2B] transition-colors"
+              className="p-1 rounded-lg text-[#60716E] hover:bg-[#EAF0ED] hover:text-[#172A2B] transition-colors"
             >
               {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
             </button>
@@ -214,8 +202,8 @@ export function SidebarNavigation({
         </div>
       )}
 
-      {/* 2. Navigation Groups */}
-      <nav className="flex-1 space-y-2 py-0.5 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden" aria-label="Dashboard Navigation">
+      {/* 2. Navigation Groups (fit without scrolling) */}
+      <nav className="flex-1 space-y-2 py-1 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden" aria-label="Dashboard Navigation">
         {groups.map((group) => (
           <div key={group.title} className="space-y-1">
             {!isCollapsed && (
@@ -230,7 +218,7 @@ export function SidebarNavigation({
         ))}
       </nav>
 
-      {/* 3. Bottom User Card & Logout (V3 §4) */}
+      {/* 3. Bottom User Card & Logout */}
       <div className="pt-3 border-t border-[#D9E2DE] mt-2">
         {mounted && (
           <div
@@ -254,7 +242,6 @@ export function SidebarNavigation({
               )}
             </div>
 
-            {/* Logout button */}
             {(!isCollapsed || isMobileDrawer) ? (
               <button
                 type="button"
@@ -262,7 +249,7 @@ export function SidebarNavigation({
                 title="Log out session"
                 className="p-2 rounded-lg text-[#60716E] hover:text-[#B33C3C] hover:bg-[#F9E7E5] transition-colors cursor-pointer"
               >
-                <LogOut size={18} />
+                <LogOut size={16} />
               </button>
             ) : (
               <button

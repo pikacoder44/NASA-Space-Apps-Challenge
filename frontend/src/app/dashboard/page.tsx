@@ -22,7 +22,6 @@ import {
   TrendingUp,
   Award
 } from 'lucide-react';
-import { APP_NAME, APP_SUBTITLE } from '../../lib/branding';
 import { STATUS_COLORS } from '../../lib/colors';
 import { getDashboardSummary, getRoutineTasks } from '../../lib/api';
 import type { DashboardSummary, RoutineTask, Indicator } from '../../lib/types';
@@ -191,42 +190,36 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto pb-12">
-      {/* 1. Header Strip */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-white border border-[#D9E2DE] shadow-xs">
+      {/* 1. Simple Greeting Row */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-[#176B68] bg-[#DCEDEA] px-2.5 py-0.5 rounded-full">
-              Mission Sol {summary?.astronaut.mission_day || 90}
-            </span>
-            <span className="text-xs text-[#60716E]">Mars Transit Phase</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#172A2B] tracking-tight">
+            Dashboard
+          </h2>
+          <p className="text-sm text-[#60716E] mt-0.5">
+            Crew Member (demo) · CDR-01 · Sol {summary?.astronaut.mission_day || 90}
             {isDegradedLink && (
-              <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#8A520F] bg-[#FBF0D9] border border-[#EED8A7] px-2 py-0.5 rounded-full">
+              <span className="ml-2 inline-flex items-center gap-1 text-xs font-semibold text-[#8A520F] bg-[#FBF0D9] border border-[#EED8A7] px-2 py-0.5 rounded-full">
                 <Radio size={11} className="shrink-0" />
                 Cached Sol 89 Data
               </span>
             )}
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#172A2B] mt-1 tracking-tight">
-            {APP_NAME} <span className="text-sm font-normal text-[#60716E] block sm:inline">· {APP_SUBTITLE}</span>
-          </h1>
-          <p className="text-sm text-[#60716E] mt-0.5">
-            Cockpit evaluation for Crew Member (demo) · CDR-01
           </p>
         </div>
 
         <div className="flex items-center gap-2.5">
           <Link
             href="/readings/new"
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm bg-[#176B68] text-white hover:bg-[#125553] shadow-xs transition-all cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-bold text-sm bg-[#176B68] text-white hover:bg-[#125553] shadow-xs transition-all cursor-pointer"
           >
-            <PlusCircle size={17} />
+            <PlusCircle size={16} />
             <span>Record Reading</span>
           </Link>
           <Link
             href="/body-map"
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm bg-white hover:bg-[#F4F6F4] text-[#172A2B] border border-[#D9E2DE] transition-all cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-bold text-sm bg-white hover:bg-[#F4F6F4] text-[#172A2B] border border-[#D9E2DE] transition-all cursor-pointer"
           >
-            <Compass size={17} />
+            <Compass size={16} />
             <span>Body Map</span>
           </Link>
         </div>
