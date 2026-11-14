@@ -1,9 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import { HeartPulse } from 'lucide-react';
-import { APP_NAME, APP_SUBTITLE } from '../../lib/branding';
+import { Logo } from '../brand/Logo';
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -25,20 +23,10 @@ export function AuthLayout({
       <div className="w-full max-w-[440px] bg-white rounded-2xl border border-[#D9E2DE] p-6 sm:p-8 shadow-xs space-y-6">
         {/* Top Header inside card: Logo, Title, Subtitle */}
         <div className="text-center space-y-2">
-          <Link href="/" className="inline-flex items-center gap-2 group mb-1">
-            <div className="w-9 h-9 rounded-xl bg-[#176B68] text-white flex items-center justify-center font-bold shadow-xs">
-              <HeartPulse size={20} className="stroke-[2.2]" />
-            </div>
-            <div className="text-left">
-              <span className="font-extrabold text-lg tracking-tight text-[#172A2B] block leading-none">
-                {APP_NAME}
-              </span>
-              <span className="text-[11px] text-[#60716E] font-medium block">
-                AAHMS Crew Terminal
-              </span>
-            </div>
-          </Link>
-          <h1 className="text-2xl font-extrabold tracking-tight text-[#172A2B] pt-1">
+          <div className="flex justify-center mb-1">
+            <Logo size="md" href="/" />
+          </div>
+          <h1 className="text-2xl font-bold tracking-tight text-[#172A2B] pt-1">
             {title}
           </h1>
           <p className="text-xs sm:text-sm text-[#60716E] leading-relaxed">

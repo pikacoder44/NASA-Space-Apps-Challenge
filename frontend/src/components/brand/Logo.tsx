@@ -6,7 +6,6 @@ import { APP_NAME } from '../../lib/branding';
 
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
-  showSubtitle?: boolean;
   inverted?: boolean;
   className?: string;
   href?: string;
@@ -14,65 +13,53 @@ interface LogoProps {
 
 export function Logo({
   size = 'md',
-  showSubtitle = false,
   inverted = false,
   className = '',
   href = '/'
 }: LogoProps) {
-  const iconSizes = {
-    sm: 24,
-    md: 32,
-    lg: 40,
-  };
-
-  const textSizes = {
-    sm: 'text-sm',
-    md: 'text-base',
-    lg: 'text-xl',
-  };
-
-  const px = iconSizes[size];
+  const iconPx = size === 'sm' ? 24 : size === 'lg' ? 40 : 36;
+  const textSize = size === 'sm' ? 'text-base' : size === 'lg' ? 'text-2xl' : 'text-xl';
 
   const logoMark = (
     <svg
-      width={px}
-      height={px}
-      viewBox="0 0 40 40"
+      width={iconPx}
+      height={iconPx}
+      viewBox="0 0 36 36"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="shrink-0 transition-transform duration-200 group-hover:scale-105"
       aria-label={`${APP_NAME} logo`}
     >
-      {/* Background circle badge */}
+      {/* 36px rounded square mark in solid teal */}
       <rect
-        width="40"
-        height="40"
-        rx="10"
-        className={inverted ? "fill-[#0F2A30]" : "fill-[#176B68]"}
+        width="36"
+        height="36"
+        rx="9"
+        fill="#176B68"
       />
-      {/* Orbit ellipse tilted */}
+      {/* Crisp white orbit ellipse */}
       <ellipse
-        cx="20"
-        cy="20"
-        rx="14"
-        ry="7"
-        transform="rotate(-25 20 20)"
-        stroke={inverted ? "#3FB6A8" : "#EAF0ED"}
-        strokeWidth="1.6"
-        strokeOpacity="0.85"
-      />
-      {/* Dot on the orbit representing spacecraft / celestial body */}
-      <circle
-        cx="32"
-        cy="15"
-        r="2"
-        fill={inverted ? "#F2A65A" : "#FFFFFF"}
-      />
-      {/* Heartbeat / ECG pulse crossing horizontally */}
-      <path
-        d="M9 20h6l2.2-4.5 3.6 9 2.7-6 1.8 1.5H31"
-        stroke={inverted ? "#FFFFFF" : "#F2A65A"}
+        cx="18"
+        cy="18"
+        rx="12.5"
+        ry="6.5"
+        transform="rotate(-22 18 18)"
+        stroke="#FFFFFF"
         strokeWidth="1.75"
+        strokeOpacity="0.9"
+      />
+      {/* Single celestial dot */}
+      <circle
+        cx="28"
+        cy="13.5"
+        r="1.8"
+        fill="#F2A65A"
+      />
+      {/* Bold single heartbeat pulse line crossing the orbit */}
+      <path
+        d="M7 18h6l2-4 3.5 8 2.5-5 1.5 1H29"
+        stroke="#FFFFFF"
+        strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -80,26 +67,15 @@ export function Logo({
   );
 
   const content = (
-    <div className={`inline-flex items-center gap-2.5 group select-none ${className}`}>
+    <div className={`inline-flex items-center gap-3 group select-none ${className}`}>
       {logoMark}
-      <div className="leading-none">
-        <span
-          className={`font-bold tracking-tight block ${textSizes[size]} ${
-            inverted ? 'text-white' : 'text-[#172A2B]'
-          }`}
-        >
-          {APP_NAME}
-        </span>
-        {showSubtitle && (
-          <span
-            className={`text-[10px] block mt-0.5 font-medium tracking-normal ${
-              inverted ? 'text-[#A2BEB9]' : 'text-[#60716E]'
-            }`}
-          >
-            AAHMS · Astronaut Health Monitor
-          </span>
-        )}
-      </div>
+      <span
+        className={`font-semibold tracking-tight leading-none ${textSize} ${
+          inverted ? 'text-white' : 'text-[#172A2B]'
+        }`}
+      >
+        {APP_NAME}
+      </span>
     </div>
   );
 
