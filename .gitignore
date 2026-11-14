@@ -1,0 +1,135 @@
+# ==============================================================================
+# AstroTrack Monorepo — Shared .gitignore (Frontend & Backend)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Node.js & Next.js (Frontend)
+# ------------------------------------------------------------------------------
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+out/
+**/out/
+build/
+dist/
+.npm
+*.tsbuildinfo
+.turbo/
+
+# Node package manager logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ------------------------------------------------------------------------------
+# 2. Python & FastAPI (Backend)
+# ------------------------------------------------------------------------------
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Python distribution & packaging
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+.venv/
+**/.venv/
+venv/
+**/venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# ------------------------------------------------------------------------------
+# 3. Environment Variables & Credentials
+# ------------------------------------------------------------------------------
+.env
+.env.*
+.env*.local
+**/.env
+**/.env.*
+**/.env*.local
+!.env.example
+!**/.env.example
+*.pem
+
+# ------------------------------------------------------------------------------
+# 4. Testing, Coverage & Linters
+# ------------------------------------------------------------------------------
+.pytest_cache/
+**/.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+.ruff_cache/
+
+# ------------------------------------------------------------------------------
+# 5. Databases (Local SQLite & development caches)
+# ------------------------------------------------------------------------------
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+
+# ------------------------------------------------------------------------------
+# 6. Docker
+# ------------------------------------------------------------------------------
+# Local overrides only (preserves Dockerfile, Dockerfile.dev, and docker-compose.yml)
+docker-compose.override.yml
+
+# ------------------------------------------------------------------------------
+# 7. Logs & Temporary Files
+# ------------------------------------------------------------------------------
+*.log
+logs/
+*.tmp
+*.temp
+
+# ------------------------------------------------------------------------------
+# 8. IDEs & Operating System Artifacts
+# ------------------------------------------------------------------------------
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
