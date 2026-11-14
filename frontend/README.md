@@ -1,119 +1,127 @@
-# AAHMS Frontend — Autonomous Astronaut Health Monitoring System
-## NASA Space Apps Challenge 2026: “Create Health Monitoring Software for Astronauts on Space Missions”
+# AstroTrack — Astronaut Adaptive Health Monitoring System (AAHMS)
+### NASA Space Apps Challenge 2026 · Challenge: "Create Health Monitoring Software for Astronauts on Space Missions"
 
-The **Autonomous Astronaut Health Monitoring System (AAHMS)** frontend is a production-grade, responsive aerospace web application built with **React 19**, **Next.js 16 (App Router with Turbopack)**, **TypeScript 5**, **Tailwind CSS v4**, and **Framer Motion**.
+Autonomous clinical cockpit and vital sign monitoring software designed for long-duration human spaceflight under deep-space communication delays (up to 22 minutes to Mars).
 
 ---
 
-## 1. Quick Start & Commands
+## 🚀 Quick Start & Installation
 
+### Prerequisites
+- Node.js 20+ and npm
+
+### 1. Install Dependencies
 ```bash
-# 1. Install dependencies
 npm install
+```
 
-# 2. Run local development server (hot-reload at http://localhost:3000)
+### 2. Configure Environment
+Copy `.env.example` to `.env.local`:
+```bash
+cp .env.example .env.local
+```
+
+| Variable | Default Value | Description |
+| :--- | :--- | :--- |
+| `NEXT_PUBLIC_API_URL` | `http://localhost:8000` | Team FastAPI backend base URL as specified in `docs/frontend_guide.md` |
+| `NEXT_PUBLIC_USE_API` | `false` | Set to `true` to route requests to live FastAPI backend; `false` runs offline demo mode |
+| `NEXT_PUBLIC_API_BASE_URL` | `http://localhost:8000/api/v1` | Proposed v1 API prefix for extended modules |
+
+### 3. Run Development Server
+```bash
 npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-# 3. Run production linter (ESLint 9, zero errors required)
+### 4. Production Build & Lint
+```bash
 npm run lint
-
-# 4. Compile optimized production build (typechecks & prerenders static routes)
 npm run build
-
-# 5. Start production server
-npm run start
 ```
 
 ---
 
-## 2. Environment Variables & Modes
+## 🎮 Demo Mode vs. API Mode
 
-The frontend operates in two distinct modes configured via `.env.local`:
+### Demo Mode (`NEXT_PUBLIC_USE_API=false`)
+- **100% Offline-First:** Fully functional without a backend server or internet connection.
+- **Realistic Sol 90 Telemetry:** Evaluates 10 physiological vitals during interplanetary transit to Mars.
+- **Salted-Hash Local Auth:** Client-side credentials using PBKDF2 with SHA-256 (100,000 iterations).
+- **Preconfigured Astronaut Profiles:**
+  - `commander@aahms.nasa.gov` (Password: `Apollo-2026!`)
+  - `doctor@aahms.nasa.gov` (Password: `Apollo-2026!`)
+  - `specialist@aahms.nasa.gov` (Password: `Apollo-2026!`)
+  - `engineer@aahms.nasa.gov` (Password: `Apollo-2026!`)
 
-| Variable | Default Value | Description |
-|---|---|---|
-| `NEXT_PUBLIC_USE_API` | `false` | When `false`, the app runs in **Demo Mode**, using the browser Web Crypto and client simulation repository (`DemoHealthRepository`). When `true`, it connects to the FastAPI backend. |
-| `NEXT_PUBLIC_API_BASE_URL` | `http://localhost:8000/api/v1` | Base URL for FastAPI backend endpoints *(proposed, to be confirmed with backend team)*. |
+### API Mode (`NEXT_PUBLIC_USE_API=true`)
+- Authenticates against the FastAPI backend using JWT tokens via `POST /api/auth/login`.
+- Transmits vital sign telemetry to `POST /api/readings`.
+- Retrieves summary state via `GET /api/dashboard/summary`.
 
-Refer to [`.env.example`](.env.example) for placeholder configuration.
-
----
-
-## 3. Demo Login Accounts
-
-Pre-configured astronaut accounts for judges and evaluators (stored with SHA-256 Web Crypto salted hashing in browser localStorage):
-
-| Role | Email | Password | Mission Context |
-|---|---|---|---|
-| **Mission Commander** | `commander@aahms.nasa.gov` | `Apollo-2026!` | Lead commander with active Sol 90 sleep-debt advisory. |
-| **Flight Surgeon** | `doctor@aahms.nasa.gov` | `Apollo-2026!` | Medical officer with clinical audit and telemetry downlink privileges. |
-| **One-Click Demo** | *Quick button on `/login`* | *Auto-filled* | Instant evaluator session bypassing manual form entry. |
-| **Google Demo** | *Continue with Google (Demo)* | *None* | Honest modal stating Google OAuth is not connected in demo mode; initiates simulated session. |
+### Token Storage Strategy
+- As agreed in the team guidelines, the JWT token is stored in client **`localStorage`** under keys `aahms_auth_token` and `token`.
+- Automatically rehydrated on application mount and included in the `Authorization: Bearer <token>` header for all authenticated API requests.
 
 ---
 
-## 4. Complete Application Pages
+## 🧭 Complete Application Routes
 
-### Public Routes
-- **`/`** — Home Landing Page: Hero, 10 supported measures stat strip, personal baseline interactive slider, architecture overview, feature tabs, Sol 90 Mars timeline, FAQ, and footer.
-- **`/about`** — Science & Hazards: Cupola banner (`iss034e010734`), 3-tier architecture breakdown (Next.js, FastAPI, Gemini via backend), academic citations, and research disclaimer.
-- **`/demo`** — 7-Step Guided Walkthrough: Day 90 mission scenario narrative with interactive flight scenario switcher (`HealthContext.setScenario`).
-- **`/login`** — Terminal Sign-In: 45% visual split, demo prefill chips, honest Google demo dialog, and redirect logic.
-- **`/signup`** — Crew Registration: Mission role selection, prototype research terms acknowledgment, and salted SHA-256 password storage.
-- **`/reset-password`** — Passcode Calibration: Token-based credential recovery with live 4-level strength meter.
-
-### Protected Astronaut Console Routes (`/app/*`)
-- **`/app`** — Mission Cockpit / Overview: Single status triage banner (worst-condition rule), 8/4 grid, 7d/30d/mission Recharts trend chart, and dosimeter widget.
-- **`/app/check-in`** — Rapid Daily Health Log: Under-60-second 4-step wizard, numerical validation, and *"Saved on this device · pending sync"* offline confirmation.
-- **`/app/indicators`** — Physiological Telemetry Catalog: 10 supported measures with real-time text search and organ category filtering.
-- **`/app/indicators/[indicator]`** — Indicator Deep-Dive: Dedicated telemetry view with longitudinal baseline envelopes and active medical advisory links.
-- **`/app/body-map`** — Interactive Anatomical Map: 3-layer toggle (Organ Systems, Countermeasures, Dosimetry), NASA EVA imagery (`iss034e035879`), and hotspot selection.
-- **`/app/trends`** — Longitudinal Trend Analysis: Multi-horizon envelope tracking (7d, 30d, Full Mission), drift detection, and data completeness metric.
-- **`/app/alerts`** — Explainable Advisories: Transparent non-blackbox variance reasoning, crew acknowledgment toggles, and flight surgeon escalation criteria.
-- **`/app/alerts/[id]`** — Alert Detail View: Interactive operational countermeasure checklist and contributing vital telemetry breakdown.
-- **`/app/guides`** — Standard Operating Procedures: 6 flight hardware measurement manuals with execution times and category tags.
-- **`/app/guides/[slug]`** — SOP Step-by-Step Manual: Phase 1 prep, Phase 2 execution, spaceflight pitfalls, and flight hardware troubleshooting.
-- **`/app/ai-explanation`** — Autonomous AI Synthesis Lab: 3 simulated states (Pre-written Demo response, API-ready contract dispatch, and deterministic offline fallback).
-- **`/app/radiation`** — Cosmic Dosimetry: Van Allen Probes imagery (`PIA26047`), career limit progress bar (600 mSv), and solar storm shelter guidance.
-- **`/app/exercise`** — Countermeasure Adherence: NASA ARED banner (`iss038e022180`), weekly target adherence ribbon, and workout logging form.
-- **`/app/records`** — Diagnostic Lab Records: Storage and visualization for glucometer, SANS near-vision acuity cards, and refractometers.
-- **`/app/consistency`** — Protocol Consistency & Gamification: Ethical non-punitive streak tracking, protocol points, and unlocked achievement badges.
-- **`/app/reaction-test`** — Psychomotor Vigilance Test (PVT): 5-round reaction speed test measuring millisecond response latency and fatigue risk index.
-- **`/app/log`** — Telemetry Retention & Ground Sync: Chronological audit of Sol 85–90, pending queue status, and JSON telemetry export.
-- **`/app/settings`** — Mission Preferences: Demonstration scenario switcher, units toggle (Celsius/Fahrenheit), reduced motion toggle, and local JSON export.
-- **`/_not-found`** — Trajectory Lost (404): Custom aerospace orbital recovery screen.
-- **`/error`** — Diagnostic Error Boundary: Safe recovery with retry action.
+| Route | View Description | Target Guideline |
+| :--- | :--- | :--- |
+| `/` | Landing page: Mission context, 5 Hazards of Spaceflight, live metric preview | Public |
+| `/about` | Mission narrative: Sol 90 Mars transit scenario and NASA HRP alignment | Public |
+| `/demo` | 7-step guided evaluator walkthrough with live scenario preset switcher | Public |
+| `/login` | Crew authentication terminal (JWT in API mode, salted demo in demo mode) | Auth |
+| `/signup` | Astronaut profile onboarding with role selection | Auth |
+| `/reset-password` | Emergency credential reset simulation | Auth |
+| `/forgot-password` | Access recovery request | Auth |
+| `/dashboard` | **AstroTrack Main Cockpit:** Status summary, sparklines, context text, ⓘ info tooltips | Core Dashboard |
+| `/readings/new` | **Data Entry Form:** Inline units, Zod validation, live preview, guidance panel | Core Ingestion |
+| `/readings/[indicator]` | **Longitudinal Trends:** Recharts line chart with normal/warning bands & 7d/30d toggles | Core Analytics |
+| `/body-map` | **Interactive Body Map:** Anatomical zone selector with targeted physiological vitals | Core Anatomy |
+| `/app` | Sol 90 Deep-Space Flight Console (extended cockpit view) | Mission Tool |
+| `/app/radiation` | Space Radiation Dosimetry & Solar Particle Event shelter tracking | Mission Tool |
+| `/app/exercise` | ARED resistive & T2 treadmill countermeasure compliance log | Mission Tool |
+| `/app/reaction-test` | Cognitive vigilance and reaction time psychomotor test | Mission Tool |
+| `/app/consistency` | Gamification streak counter, points, and crew badges | Mission Tool |
+| `/app/ai-explanation` | Gemini clinical reasoning interface with offline cached fallbacks | Mission Tool |
+| `/app/guides` | Measurement protocols for astronaut self-assessment | Mission Tool |
 
 ---
 
-## 5. Backend Integration Points & Proposed API Contracts
+## 🔌 API Integration Contract
 
-All endpoints below are **proposed and to be confirmed with the backend engineering team**. Endpoints are centralized in [`src/services/apiClient.ts`](src/services/apiClient.ts):
+All backend communication is centralized in [`src/lib/api.ts`](file:///c:/Users/Universal%20Computer/Desktop/2026%20NASA%20Space%20Apps%20Challenge/frontend/src/lib/api.ts).
 
-| Integration Domain | Proposed HTTP Method & Path | Description |
-|---|---|---|
-| **Mission Overview** | `GET /api/v1/mission/overview` | Returns aggregate astronaut status, active alerts, key indicator snapshots, and sync state. |
-| **Indicator Detail** | `GET /api/v1/indicators/{id}` | Fetches detailed snapshot and reference bounds for a single physiological metric. |
-| **Indicator History** | `GET /api/v1/indicators/{id}/history?range=30d` | Returns historical data points, rolling baseline envelope, and trend trajectory. |
-| **Daily Check-In** | `POST /api/v1/check-in` | Submits self-reported vitals and subjective scores. Returns `SaveResult` and gamification points. |
-| **Alerts Catalog** | `GET /api/v1/alerts` | Fetches active Yellow/Red health advisories with contributing indicators. |
-| **Radiation Summary** | `GET /api/v1/radiation/summary` | Retrieves dosimeter readings, daily rate, and career reference limit status. |
-| **Exercise Logging** | `GET /api/v1/exercise/entries`<br>`POST /api/v1/exercise` | Logs and retrieves countermeasure workouts (ARED, CEVIS, T2). |
-| **Manual Lab Records** | `GET /api/v1/records/manual`<br>`POST /api/v1/records/manual` | Ingests diagnostic lab readings (glucometer, refractometer, SANS vision). |
-| **Telemetry Downlink** | `GET /api/v1/sync/status`<br>`POST /api/v1/sync/downlink` | Checks Deep Space Network queue status and submits queued telemetry packets. |
-| **AI Synthesis** | `POST /api/v1/health/ai-explanation` | Dispatches telemetry snapshots to FastAPI backend, which prompts Gemini and returns structured clinical explanation. |
-| **Auth Session** | `POST /api/v1/auth/login`<br>`POST /api/v1/auth/register`<br>`GET /api/v1/auth/session` | Handles crew credential verification and session token issuance. |
+### Endpoints Confirmed from `docs/backend_guide.md`
+| Method | Endpoint | Purpose |
+| :--- | :--- | :--- |
+| `POST` | `/api/auth/register` | Create astronaut profile |
+| `POST` | `/api/auth/login` | Authenticate crew and return JWT access token |
+| `GET` | `/api/astronauts/me` | Return authenticated astronaut profile |
+| `POST` | `/api/readings` | Ingest new physiological reading and return evaluated status |
+| `GET` | `/api/readings?indicator={key}&days={n}` | Return historical time-series readings for trend charts |
+| `GET` | `/api/dashboard/summary` | Return aggregated indicators, overall status, and pending tasks |
+| `GET` | `/api/guidance/{indicator}/{status}` | Return clinical space medicine guidance & countermeasure text |
+| `GET` | `/api/body-map/{body_part}` | Return indicators associated with anatomical zone |
+| `GET` | `/api/routine/today` | Return today's scheduled health routines & checklist |
+
+### Proposed Endpoints *(To be confirmed with backend team)*
+| Method | Endpoint | Proposed Purpose | Status |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/api/v1/health/ai-explanation` | Request AI clinical reasoning explanation for vital anomalies | Proposed, to be confirmed |
 
 ---
 
-## 6. Open Questions for the Engineering Team
+## ⚠️ Important Note on Shared Schemas (`lib/types.ts`)
 
-1. **Database & Timeseries Architecture**:
-   - What database will the FastAPI backend utilize for timeseries physiological telemetry (e.g., PostgreSQL with TimescaleDB, DuckDB, or SQLite for local edge testing)?
-2. **Authentication Ownership & Session Mechanism**:
-   - Will the production backend issue httpOnly JWT session cookies or bearer tokens in an `Authorization` header?
-3. **Telemetry Downlink Conflict Resolution**:
-   - During long communications blackouts where an astronaut logs multiple check-ins offline, what timestamp precedence rule will the backend apply during batch synchronization?
-4. **AI Explanation Payload Semantics**:
-   - For `POST /api/v1/health/ai-explanation`, will the Gemini response be streamed via Server-Sent Events (SSE) or returned as a single JSON object?
-   - How should the AI `confidence` percentage be mathematically defined (e.g., pattern match vector similarity vs model logprobs)?
+> **Notice:** The types defined in [`src/lib/types.ts`](file:///c:/Users/Universal%20Computer/Desktop/2026%20NASA%20Space%20Apps%20Challenge/frontend/src/lib/types.ts) (`Status`, `Indicator`, `Reading`, `NewReading`, `DashboardSummary`, `RoutineTask`) were copied from the team's frontend guideline (`docs/frontend_guide.md`). They **must be verified against the backend's real Pydantic schemas** (`backend/app/schemas/`) once the backend repository models are committed to ensure field-level naming alignment.
+
+---
+
+## ❓ Open Questions for the Backend Engineering Team
+
+1. **Database & Migrations:** Are reference ranges seeded into PostgreSQL via SQL scripts or dynamically managed via FastAPI admin endpoints?
+2. **Session Lifespan & Refresh:** What is the JWT expiration duration (e.g. 24h vs. 7 days), and is a refresh token endpoint (`POST /api/auth/refresh`) planned?
+3. **Offline Sync Queue Protocol:** When reconnecting after link degradation, does `POST /api/readings` accept bulk arrays `NewReading[]`, or should the client dispatch sequential HTTP requests?
+4. **AI Explanation Contract:** Should the Gemini clinical explanation endpoint be mounted under `/api/guidance/ai-explain` or `/api/v1/health/ai-explanation`?
