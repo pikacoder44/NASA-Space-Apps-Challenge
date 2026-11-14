@@ -141,8 +141,8 @@ export async function getDashboardSummary(): Promise<DashboardSummary> {
     console.warn("Falling back to demo dashboard summary:", error);
     return {
       astronaut: {
-        name: "Dr. Sarah Connor",
-        role: "Mission Commander (CDR)",
+        name: "Crew Member (demo)",
+        role: "CDR-01",
         mission_day: 90
       },
       indicators: [

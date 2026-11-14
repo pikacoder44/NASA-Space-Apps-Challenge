@@ -207,7 +207,7 @@ export default function NewReadingPage() {
             <ArrowLeft size={14} />
             <span>Back to Dashboard</span>
           </Link>
-          <span className="text-xs font-mono text-muted">AstroTrack Telemetry Ingestion</span>
+          <span className="text-xs text-[#60716E]">AstroTrack Telemetry Ingestion</span>
         </div>
 
         {/* Card Header */}
@@ -264,7 +264,7 @@ export default function NewReadingPage() {
               <label htmlFor="reading-val" className="text-sm font-bold text-main">
                 {currentConfig.label}
               </label>
-              <span className="text-xs text-muted font-mono">
+              <span className="text-xs text-[#60716E] font-medium">
                 Valid: {currentConfig.min} – {currentConfig.max} {currentConfig.unit}
               </span>
             </div>

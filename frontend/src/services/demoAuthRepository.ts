@@ -22,7 +22,7 @@ export class DemoAuthRepository implements AuthRepository {
   private defaultUser: UserProfile = {
     id: 'user_cdr_01',
     email: 'commander@aahms.internal',
-    name: 'Sarah Walker',
+    name: 'Crew Member (demo)',
     role: 'Commander (CDR-01)',
     mission: 'ARES-V Mars Transit',
     avatarInitials: 'SW'

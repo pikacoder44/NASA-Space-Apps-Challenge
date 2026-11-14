@@ -75,14 +75,12 @@ export function BodyMapInteractive({ initialSystemId = 'cardiovascular', onSelec
       <div className="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left column: SVG Human Body Diagram with Interactive Hotspots (5 cols) */}
         <div className="lg:col-span-5 flex flex-col items-center justify-center p-4 rounded-xl bg-[#F4F6F4] border border-[#D9E2DE]/80 relative min-h-[440px]">
-          <div className="text-[11px] font-mono uppercase tracking-wider text-[#60716E] mb-2 text-center">
-            Select an anatomical region to explore flight effects
-          </div>
+          <div className="text-xs text-[#60716E] mb-3 text-center font-medium">Select an anatomical zone to inspect spaceflight adaptations</div>
 
           {/* Scientific SVG Human Figure */}
           <svg
             viewBox="0 0 280 480"
-            className="w-full max-w-[240px] h-auto drop-shadow-sm select-none"
+            className="w-full max-w-[340px] h-auto drop-shadow-sm select-none"
             aria-label="Interactive Human Body Anatomy Map"
           >
             <defs>
@@ -149,8 +147,8 @@ export function BodyMapInteractive({ initialSystemId = 'cardiovascular', onSelec
                 className="transition-all duration-200 group-hover:scale-110"
               />
               <circle cx="140" cy="50" r="4" fill="#A96617" />
-              <text x="170" y="48" fontSize="10" fontWeight="bold" fill="#172A2B" fontFamily="monospace">
-                BRAIN & SLEEP
+              <text x="170" y="48" fontSize="14" fontWeight="600" fill="#172A2B">
+                Brain & Sleep
               </text>
               <line x1="156" y1="50" x2="166" y2="50" stroke="#172A2B" strokeWidth="1" strokeDasharray="2 2" />
             </g>
@@ -175,8 +173,8 @@ export function BodyMapInteractive({ initialSystemId = 'cardiovascular', onSelec
                 className="transition-all duration-200 group-hover:scale-110"
               />
               <circle cx="140" cy="62" r="2.5" fill="#247A55" />
-              <text x="80" y="66" fontSize="9" fontWeight="bold" fill="#60716E" fontFamily="monospace" textAnchor="end">
-                VISION (SANS)
+              <text x="80" y="66" fontSize="13" fontWeight="600" fill="#172A2B" textAnchor="end">
+                Vision (SANS)
               </text>
               <line x1="86" y1="63" x2="131" y2="63" stroke="#60716E" strokeWidth="1" strokeDasharray="2 2" />
             </g>
@@ -202,8 +200,8 @@ export function BodyMapInteractive({ initialSystemId = 'cardiovascular', onSelec
                 className="transition-all duration-200 group-hover:scale-110"
               />
               <circle cx="144" cy="124" r="5" fill="#A96617" />
-              <text x="175" y="127" fontSize="10" fontWeight="bold" fill="#172A2B" fontFamily="monospace">
-                CARDIOVASCULAR
+              <text x="175" y="127" fontSize="14" fontWeight="600" fill="#172A2B">
+                Cardiovascular
               </text>
               <line x1="162" y1="124" x2="172" y2="124" stroke="#172A2B" strokeWidth="1" strokeDasharray="2 2" />
             </g>
@@ -230,7 +228,7 @@ export function BodyMapInteractive({ initialSystemId = 'cardiovascular', onSelec
                 className="transition-all duration-200 group-hover:scale-105"
               />
               <circle cx="140" cy="195" r="3" fill="#247A55" />
-              <text x="80" y="198" fontSize="9" fontWeight="bold" fill="#60716E" fontFamily="monospace" textAnchor="end">
+              <text x="80" y="198" fontSize="13" fontWeight="600" fill="#172A2B" textAnchor="end">
                 BONES & MUSCLE
               </text>
               <line x1="86" y1="195" x2="132" y2="195" stroke="#60716E" strokeWidth="1" strokeDasharray="2 2" />
@@ -256,8 +254,8 @@ export function BodyMapInteractive({ initialSystemId = 'cardiovascular', onSelec
                 className="transition-all duration-200 group-hover:scale-110"
               />
               <circle cx="140" cy="270" r="4" fill="#247A55" />
-              <text x="170" y="274" fontSize="9" fontWeight="bold" fill="#60716E" fontFamily="monospace">
-                IMMUNE & RADIATION
+              <text x="170" y="274" fontSize="13" fontWeight="600" fill="#172A2B">
+                Radiation & Immune
               </text>
               <line x1="156" y1="270" x2="166" y2="270" stroke="#60716E" strokeWidth="1" strokeDasharray="2 2" />
             </g>

@@ -145,7 +145,7 @@ export function TopBar({ mobileMenuOpen, setMobileMenuOpen }: TopBarProps) {
               <Link
                 href="/app/settings"
                 className="md:hidden w-8 h-8 rounded-full bg-[#176B68] text-white font-bold text-xs flex items-center justify-center shrink-0 ml-1"
-                title={user?.name || 'Commander Sarah Walker'}
+                title={user?.name || 'Crew Member (demo)'}
               >
                 {user?.avatarInitials || 'SW'}
               </Link>
