@@ -14,6 +14,8 @@ import {
   X,
   ChevronRight
 } from 'lucide-react';
+import { ThemeToggle } from '../ui/ThemeToggle';
+import { APP_NAME } from '../../lib/branding';
 
 interface TopBarProps {
   mobileMenuOpen: boolean;
@@ -72,9 +74,9 @@ export function TopBar({ mobileMenuOpen, setMobileMenuOpen }: TopBarProps) {
             </div>
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
-                <span className="font-bold text-base tracking-tight text-[#172A2B]">AAHMS</span>
-                <span className="hidden xs:inline text-xs px-1.5 py-0.5 rounded-full bg-[#DCEDEA] text-[#176B68] font-semibold">
-                  Space Apps 2026
+                <span className="font-extrabold text-base tracking-tight text-[#172A2B]">{APP_NAME}</span>
+                <span className="hidden xs:inline text-[11px] px-1.5 py-0.5 rounded-full bg-[#DCEDEA] text-[#176B68] font-bold">
+                  AAHMS
                 </span>
               </div>
             </div>
@@ -115,6 +117,8 @@ export function TopBar({ mobileMenuOpen, setMobileMenuOpen }: TopBarProps) {
                 <RefreshCw size={13} className={isSyncing ? 'animate-spin text-[#176B68]' : 'text-[#60716E]'} />
                 <span className="hidden md:inline">{isSyncing ? 'Syncing...' : 'Sync DSN'}</span>
               </button>
+
+              <ThemeToggle />
 
               {/* Alerts shortcut badge */}
               <Link

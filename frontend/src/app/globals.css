@@ -1,34 +1,78 @@
 @import "tailwindcss";
 
+/* Dark-First Spacecraft Cockpit Tokens (Default) */
 :root {
-  --canvas: #F4F6F4;
+  --canvas: #0B1315;
+  --surface: #122023;
+  --surface-alt: #182C30;
+  --surface-muted: #1E373C;
+  --main: #F1F5F9;
+  --muted: #94A3B8;
+  --border: #233E44;
+  --brand: #14B8A6;
+  --brand-hover: #0D9488;
+  --line: #233E44;
+  --deep-space: #070D0E;
+  --ink: #F1F5F9;
+  --ink-muted: #94A3B8;
+
+  /* Official Status Colors (docs/frontend_guide.md) */
+  --status-normal: #22c55e;
+  --status-warning: #eab308;
+  --status-critical: #ef4444;
+  --status-empty: #6b7280;
+
+  /* Legacy aliases for backward compatibility */
+  --teal: #14B8A6;
+  --teal-soft: rgba(20, 184, 166, 0.15);
+  --teal-hover: #0D9488;
+  --green: #22c55e;
+  --green-soft: rgba(34, 197, 94, 0.15);
+  --amber: #eab308;
+  --amber-soft: rgba(234, 179, 8, 0.15);
+  --red: #ef4444;
+  --red-soft: rgba(239, 68, 68, 0.15);
+  --unknown: #6b7280;
+  --unknown-soft: rgba(107, 114, 128, 0.15);
+}
+
+/* Light Mode Toggle Support */
+[data-theme="light"], .light {
+  --canvas: #F8FAFC;
   --surface: #FFFFFF;
-  --surface-muted: #EAF0ED;
-  --ink: #172A2B;
-  --ink-muted: #60716E;
-  --line: #D9E2DE;
-  --deep-space: #122B31;
-  --teal: #176B68;
-  --teal-soft: #DCEDEA;
-  --teal-hover: #135754;
-  --green: #247A55;
-  --green-soft: #E4F2E9;
-  --amber: #A96617;
-  --amber-soft: #FBF0D9;
-  --red: #B33C3C;
-  --red-soft: #F9E7E5;
-  --unknown: #6B7A78;
-  --unknown-soft: #EEF1F0;
+  --surface-alt: #F1F5F9;
+  --surface-muted: #E2E8F0;
+  --main: #0F172A;
+  --muted: #64748B;
+  --border: #E2E8F0;
+  --brand: #0D9488;
+  --brand-hover: #0F766E;
+  --line: #E2E8F0;
+  --deep-space: #1E293B;
+  --ink: #0F172A;
+  --ink-muted: #64748B;
 }
 
 @theme {
   --color-canvas: var(--canvas);
   --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
   --color-surface-muted: var(--surface-muted);
+  --color-main: var(--main);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
   --color-line: var(--line);
   --color-deep-space: var(--deep-space);
+  
+  --color-normal: var(--status-normal);
+  --color-warning: var(--status-warning);
+  --color-critical: var(--status-critical);
+  --color-empty: var(--status-empty);
+
   --color-teal-primary: var(--teal);
   --color-teal-soft: var(--teal-soft);
   --color-teal-hover: var(--teal-hover);
@@ -44,92 +88,36 @@
 
 body {
   background-color: var(--canvas);
-  color: var(--ink);
+  color: var(--main);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px; /* Minimum 16px body text as requested in guidelines */
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   width: 100%;
 }
 
-/* Fluid Responsive Typography Scale (Section 2) */
+/* Fluid Responsive Typography Scale */
 .page-title {
   font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.2;
 }
 
 .metric-value {
-  font-size: clamp(1.75rem, 1.2rem + 1.2vw, 2.25rem);
+  font-size: clamp(1.75rem, 1.2rem + 1.2vw, 2.5rem);
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
   line-height: 1.1;
 }
 
-/* Tabular numerals for all numbers and telemetry readouts */
 .tabular-data {
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.01em;
 }
 
-/* Hard min-height & text wrapping safety to prevent ellipsis truncation */
 .baseline-box {
   min-height: 48px;
   overflow-wrap: anywhere;
-}
-
-/* Responsive Auto-Fit Grid (Section 3.2) */
-.card-grid {
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
-  align-items: stretch;
-}
-
-.card-grid > * {
-  min-width: 0;
-  height: 100%;
-}
-
-/* Container query for cards */
-.indicator-card-container {
-  container-type: inline-size;
-}
-
-/* Tap Target standard (>=44px) */
-.tap-target {
-  min-height: 44px;
-  min-width: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Accessible focus ring */
-*:focus-visible {
-  outline: 2px solid var(--teal);
-  outline-offset: 2px;
-}
-
-/* Remove Next.js dev indicator artifacts */
-nextjs-portal,
-[data-nextjs-toast],
-div[data-nextjs-dev-overlay] {
-  display: none !important;
-}
-
-/* Scrollbar polish */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--surface-muted);
-}
-::-webkit-scrollbar-thumb {
-  background: #B6C6C2;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #8FA6A0;
 }
