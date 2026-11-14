@@ -38,6 +38,7 @@ import {
   Globe2
 } from 'lucide-react';
 import { StatusBadge } from '../components/ui/StatusBadge';
+import { HealthStatus } from '../types/health';
 
 export default function HomePage() {
   // --- Section 5: NASA 5 Hazards State ---
@@ -960,7 +961,7 @@ export default function HomePage() {
                 <span className="text-xs font-bold text-[#176B68]">{solSteps[selectedSolStep].sol} Operational Log</span>
                 <h3 className="text-lg font-bold text-[#172A2B]">{solSteps[selectedSolStep].title}</h3>
               </div>
-              <StatusBadge status={solSteps[selectedSolStep].status as any} size="sm" />
+              <StatusBadge status={solSteps[selectedSolStep].status as HealthStatus} size="sm" />
             </div>
 
             <p className="text-sm text-[#172A2B] leading-relaxed">

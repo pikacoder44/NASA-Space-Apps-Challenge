@@ -36,8 +36,9 @@ function LoginForm() {
     try {
       await signIn(email, password, rememberTerminal);
       router.push(nextUrl);
-    } catch (err: any) {
-      setErrorMessage(err?.message || 'Authentication failed. Please verify credentials.');
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Authentication failed. Please verify credentials.';
+      setErrorMessage(msg);
     } finally {
       setSubmitting(false);
     }
@@ -60,8 +61,9 @@ function LoginForm() {
     try {
       await signInWithGoogle();
       router.push(nextUrl);
-    } catch (err: any) {
-      setErrorMessage(err?.message || 'Google demo sign-in failed.');
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Google demo sign-in failed.';
+      setErrorMessage(msg);
     } finally {
       setSubmitting(false);
     }

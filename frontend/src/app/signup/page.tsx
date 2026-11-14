@@ -74,8 +74,9 @@ export default function SignupPage() {
     try {
       await signUp(name, email, password, acknowledged, role);
       router.push('/app');
-    } catch (err: any) {
-      setErrorMessage(err?.message || 'Failed to initialize astronaut profile.');
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Failed to initialize astronaut profile.';
+      setErrorMessage(msg);
     } finally {
       setSubmitting(false);
     }
