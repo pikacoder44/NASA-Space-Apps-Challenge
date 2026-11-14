@@ -16,6 +16,14 @@
   --ink: #172A2B;
   --ink-muted: #60716E;
 
+  /* Landing & Cinematic Space Tokens */
+  --space-950: #0A1A1F;
+  --space-900: #0F2A30;
+  --teal-600: #176B68;
+  --teal-400: #3FB6A8;
+  --accent: #F2A65A;
+  --accent-hover: #E09448;
+
   /* Official Status Colors (lib/colors.ts) */
   --status-normal: #22c55e;
   --status-warning: #eab308;
@@ -52,6 +60,13 @@
   --ink: #F1F5F9;
   --ink-muted: #94A3B8;
 
+  --space-950: #061114;
+  --space-900: #0A1C22;
+  --teal-600: #14B8A6;
+  --teal-400: #2DD4BF;
+  --accent: #F2A65A;
+  --accent-hover: #E09448;
+
   --status-normal: #22c55e;
   --status-warning: #eab308;
   --status-critical: #ef4444;
@@ -84,6 +99,12 @@
   --color-ink-muted: var(--ink-muted);
   --color-line: var(--line);
   --color-deep-space: var(--deep-space);
+  --color-space-950: var(--space-950);
+  --color-space-900: var(--space-900);
+  --color-teal-600: var(--teal-600);
+  --color-teal-400: var(--teal-400);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
   
   --color-normal: var(--status-normal);
   --color-warning: var(--status-warning);
