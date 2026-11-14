@@ -24,6 +24,7 @@ import { STATUS_COLORS, STATUS_LABEL } from '../../lib/colors';
 import { getDashboardSummary, getRoutineTasks } from '../../lib/api';
 import type { DashboardSummary, RoutineTask, Indicator } from '../../lib/types';
 import { AppShell } from '../../components/layout/AppShell';
+import RoutineList from '../../components/RoutineList';
 
 interface IndicatorInfo {
   what: string;
@@ -374,53 +375,9 @@ export default function DashboardPage() {
 
         {/* Bottom Split: Routines / Gamification & Quick Links */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-2">
-          {/* Daily Routine Tasks */}
-          <div className="lg:col-span-2 p-5 rounded-2xl bg-surface border border-border space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Calendar size={18} className="text-brand" />
-                <h3 className="font-bold text-base text-main">Today&apos;s Health Routine &amp; Compliance</h3>
-              </div>
-              <Link href="/app/consistency" className="text-xs font-bold text-brand hover:underline">
-                View Gamification Badges
-              </Link>
-            </div>
-
-            <div className="space-y-2.5">
-              {routines.map((task) => (
-                <div 
-                  key={task.id}
-                  className={`p-3 rounded-xl border flex items-center justify-between transition-all ${
-                    task.completed 
-                      ? 'bg-surface-alt/40 border-border text-muted' 
-                      : 'bg-surface border-brand/20 text-main shadow-2xs'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className={`w-5 h-5 rounded-md flex items-center justify-center text-xs font-bold ${
-                      task.completed ? 'bg-[#22c55e] text-white' : 'border border-border text-transparent'
-                    }`}>
-                      {task.completed ? '✓' : ''}
-                    </div>
-                    <div>
-                      <div className={`text-sm font-bold ${task.completed ? 'line-through text-muted' : 'text-main'}`}>
-                        {task.title}
-                      </div>
-                      <div className="text-[11px] text-muted flex items-center gap-2">
-                        <span>{task.category}</span>
-                        {task.due_time && <span>· Due {task.due_time}</span>}
-                      </div>
-                    </div>
-                  </div>
-
-                  <span className={`text-[11px] font-bold px-2 py-0.5 rounded ${
-                    task.completed ? 'bg-[#22c55e]/10 text-[#22c55e]' : 'bg-[#eab308]/10 text-[#eab308]'
-                  }`}>
-                    {task.completed ? 'COMPLETED' : 'PENDING'}
-                  </span>
-                </div>
-              ))}
-            </div>
+          {/* Daily Routine Tasks with Gamification & Badges */}
+          <div className="lg:col-span-2">
+            <RoutineList tasks={routines} points={340} streakDays={7} />
           </div>
 
           {/* Quick Mission Modules Access */}
