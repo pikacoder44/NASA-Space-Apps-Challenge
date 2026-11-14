@@ -2,6 +2,7 @@
 
 import React, { useSyncExternalStore } from 'react';
 import Link from 'next/link';
+import { APP_NAME } from '../../lib/branding';
 
 const emptySubscribe = () => () => {};
 import { usePathname, useRouter } from 'next/navigation';
@@ -49,14 +50,12 @@ export function SidebarNavigation({
   const { user, signOut } = useAuth();
   const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
 
-  const groups = [
+    const groups = [
     {
-      title: 'AstroTrack Cockpit',
+      title: 'Monitor',
       items: [
         { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
         { name: 'Record Reading', href: '/readings/new', icon: CheckSquare, badge: 'New' },
-        { name: 'Body Map', href: '/body-map', icon: Layers },
-        { name: 'Overview (Sol 90)', href: '/app', icon: Activity },
         { name: 'Trends', href: '/app/trends', icon: TrendingUp },
         { name: 'Alerts', href: '/app/alerts', icon: AlertTriangle, count: overview?.activeAlerts?.length || 0 }
       ]
@@ -64,7 +63,7 @@ export function SidebarNavigation({
     {
       title: 'Explore',
       items: [
-        { name: 'Body Map', href: '/app/body-map', icon: Layers },
+        { name: 'Body Map', href: '/body-map', icon: Layers },
         { name: 'Radiation', href: '/app/radiation', icon: ShieldAlert },
         { name: 'Exercise', href: '/app/exercise', icon: Dumbbell },
         { name: 'Guides', href: '/app/guides', icon: BookOpen }
@@ -77,14 +76,6 @@ export function SidebarNavigation({
         { name: 'Manual Records', href: '/app/records', icon: ClipboardList },
         { name: 'Consistency', href: '/app/consistency', icon: Award },
         { name: 'Reaction Test', href: '/app/reaction-test', icon: Zap }
-      ]
-    },
-    {
-      title: 'Utility',
-      items: [
-        { name: 'Mission Log', href: '/app/log', icon: History },
-        { name: 'Settings', href: '/app/settings', icon: Settings },
-        { name: 'Public Landing', href: '/', icon: Home }
       ]
     }
   ];
@@ -116,7 +107,7 @@ export function SidebarNavigation({
           href={item.href}
           onClick={onItemClick}
           title={item.name}
-          className={`flex items-center justify-center h-11 w-11 mx-auto rounded-xl transition-all relative group ${
+          className={`flex items-center justify-center h-9 w-9 mx-auto rounded-lg transition-all relative group ${
             isActive
               ? 'bg-[#176B68] text-white shadow-xs'
               : 'text-[#60716E] hover:bg-[#EAF0ED] hover:text-[#172A2B]'
@@ -139,7 +130,7 @@ export function SidebarNavigation({
         key={item.href}
         href={item.href}
         onClick={onItemClick}
-        className={`flex items-center justify-between h-11 px-3 rounded-xl text-base transition-colors ${
+        className={`flex items-center justify-between h-9 px-2.5 rounded-lg text-sm transition-colors ${
           isActive
             ? 'bg-[#176B68] text-white font-semibold shadow-xs'
             : 'text-[#172A2B] font-medium hover:bg-[#EAF0ED] hover:text-[#176B68]'
@@ -185,47 +176,46 @@ export function SidebarNavigation({
     );
   };
 
-  const displayName = user?.name || 'Sarah Walker';
-  const displayRole = user?.role || 'Commander (CDR-01)';
-  const displayInitials = user?.avatarInitials || 'SW';
+  const displayName = user?.name || 'Crew Member (demo)';
+  const displayRole = user?.role || 'CDR-01';
+  const displayInitials = user?.avatarInitials || 'CM';
 
   return (
     <aside className="flex flex-col justify-between h-full select-none">
       {/* 1. Header / Logo Block (V3 §4: 44px mark + AAHMS 20px + 12px subtitle) */}
       {!isMobileDrawer && (
-        <div className="flex items-center justify-between pb-3 pt-1 border-b border-[#D9E2DE] mb-2 px-1">
-          <Link href="/app" className="flex items-center gap-2.5 truncate">
-            <div className="w-10 h-10 rounded-xl bg-[#176B68] text-white flex items-center justify-center shrink-0 shadow-xs">
-              <ShieldCheck size={22} />
+        <div className="flex items-center justify-between pb-2.5 pt-0.5 border-b border-[#D9E2DE] mb-2 px-1">
+          <Link href="/dashboard" className="flex items-center gap-2.5 truncate">
+            <div className="w-8 h-8 rounded-xl bg-[#176B68] text-white flex items-center justify-center shrink-0 shadow-xs">
+              <ShieldCheck size={18} />
             </div>
             {!isCollapsed && (
               <div className="min-w-0">
-                <span className="text-xl font-extrabold tracking-tight text-[#172A2B] block leading-none">
-                  AAHMS
+                <span className="text-base font-extrabold tracking-tight text-[#172A2B] block leading-none">
+                  {APP_NAME}
                 </span>
-                <span className="text-xs text-[#60716E] font-medium block truncate mt-0.5">
-                  Astronaut Health Monitoring
+                <span className="text-[11px] text-[#60716E] font-medium block truncate mt-0.5">
+                  Astronaut Health Monitor
                 </span>
               </div>
             )}
           </Link>
 
-          {/* Desktop Rail Toggle */}
           {onToggleCollapse && (
             <button
               type="button"
               onClick={onToggleCollapse}
               aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-              className="p-1.5 rounded-lg text-[#60716E] hover:bg-[#EAF0ED] hover:text-[#172A2B] transition-colors"
+              className="p-1 rounded-lg text-[#60716E] hover:bg-[#EAF0ED] hover:text-[#172A2B] transition-colors"
             >
-              {isCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+              {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
             </button>
           )}
         </div>
       )}
 
       {/* 2. Navigation Groups */}
-      <nav className="flex-1 space-y-4 py-1 overflow-y-auto" aria-label="Dashboard Navigation">
+      <nav className="flex-1 space-y-2 py-0.5 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden" aria-label="Dashboard Navigation">
         {groups.map((group) => (
           <div key={group.title} className="space-y-1">
             {!isCollapsed && (

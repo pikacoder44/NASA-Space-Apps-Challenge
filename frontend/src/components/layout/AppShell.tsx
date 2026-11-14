@@ -89,7 +89,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               isSidebarCollapsed ? 'w-[72px]' : 'w-[264px]'
             }`}
           >
-            <div className="sticky top-16 h-[calc(100vh-64px)] p-3">
+            <div className="sticky top-16 h-[calc(100dvh-64px)] p-3">
               <Suspense fallback={<div className="p-4 text-xs text-[#60716E]">Loading navigation...</div>}>
                 <SidebarNavigation
                   isCollapsed={isSidebarCollapsed}

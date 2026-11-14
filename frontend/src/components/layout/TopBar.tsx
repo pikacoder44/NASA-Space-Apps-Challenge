@@ -68,19 +68,7 @@ export function TopBar({ mobileMenuOpen, setMobileMenuOpen }: TopBarProps) {
             </button>
           )}
 
-          <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#176B68] text-white flex items-center justify-center shadow-xs transition-transform group-hover:scale-105 shrink-0">
-              <HeartPulse size={18} className="stroke-[2.2]" />
-            </div>
-            <div className="min-w-0">
-              <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-base tracking-tight text-[#172A2B]">{APP_NAME}</span>
-                <span className="hidden xs:inline text-[11px] px-1.5 py-0.5 rounded-full bg-[#DCEDEA] text-[#176B68] font-bold">
-                  AAHMS
-                </span>
-              </div>
-            </div>
-          </Link>
+          
 
           {!isPublicRoute && (
             <div className="hidden lg:flex items-center gap-1.5 text-sm text-[#60716E] ml-2 border-l border-[#D9E2DE] pl-3 truncate">
