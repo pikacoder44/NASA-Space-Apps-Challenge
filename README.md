@@ -93,3 +93,43 @@ These are the **required references** for the challenge. Every team member shoul
 ---
 
 ## 📁 Repository Structure
+astrotrack/
+├── frontend/ # Next.js application
+│ ├── app/
+│ ├── components/
+│ ├── lib/
+│ └── public/
+├── backend/ # FastAPI application
+│ ├── app/
+│ │ ├── main.py
+│ │ ├── routers/
+│ │ ├── models/
+│ │ ├── schemas/
+│ │ ├── services/
+│ │ └── core/
+│ ├── tests/
+│ └── requirements.txt
+├── database/ # Migrations, seeds, ERD
+│ ├── migrations/
+│ ├── seeds/
+│ └── ERD.md
+├── docs/ # Design docs, API contract
+├── docker-compose.yml
+└── README.md # ← This file
+
+
+
+---
+
+## 🚦 Quick Start (For Developers)
+
+### Prerequisites
+- Node.js 20+ and npm
+- Python 3.11+
+- PostgreSQL 15+ (or Docker)
+- Git
+
+### 1. Clone the repo
+```bash
+git clone https://github.com/your-team/astrotrack.git
+cd astrotrack
