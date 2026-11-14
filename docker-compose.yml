@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-astro_user}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-astro_pass}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set}
       POSTGRES_DB: ${POSTGRES_DB:-astrotrack_db}
     ports:
       - "5432:5432"
@@ -33,7 +33,7 @@ services:
       SECRET_KEY: ${SECRET_KEY:-insecure_dev_secret_key_for_hackathon_only}
       FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
       POSTGRES_USER: ${POSTGRES_USER:-astro_user}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-astro_pass}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set}
       POSTGRES_DB: ${POSTGRES_DB:-astrotrack_db}
     depends_on:
       db:
