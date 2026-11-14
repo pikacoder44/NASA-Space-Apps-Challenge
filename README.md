@@ -1,127 +1,97 @@
-# 🚀 AstroTrack — Astronaut Health Monitoring System
+# AstroTrack — Astronaut Health Monitoring System
 
-> **NASA Space Apps Challenge 2026 · Challenge: Create Health Monitoring Software for Astronauts on Space Missions**
+> **NASA Space Apps Challenge 2026** · Challenge: *Create Health Monitoring Software for Astronauts on Space Missions*
 
----
-
-## 📖 What Is This Project? (Read This First — 2 Minutes)
-
-Imagine you're an astronaut on a 3-year mission to Mars. There's no hospital. No doctor down the hall. The nearest flight surgeon is **225 million kilometers away**, and a message takes up to **22 minutes** to reach Earth.
-
-On long missions, astronauts must **check their own health** — blood pressure, heart rate, sleep, mood, bone density, and more — and decide: *"Am I okay? Should I tell the crew? Should I take action now?"*
-
-**AstroTrack** is the software that helps them do exactly that.
-
-Think of it as a **fitness app + doctor's checklist + dashboard** designed for space. The astronaut:
-
-1. **Enters health data** (typed numbers, clicks, or camera input)
-2. **Sees it visualized** on an interactive human body map with color coding (🟢 normal, 🟡 watch, 🔴 act now)
-3. **Gets plain-language guidance** — what the reading means, why it matters in space, and what to do next
-4. **Tracks trends over time** with dynamic charts
-5. **Earns points for completing health tasks** (gamification keeps them engaged)
-
-### Why Does This Matter?
-
-Long-duration spaceflight exposes astronauts to **NASA's Five Hazards of Human Spaceflight**:
-
-| # | Hazard | Health Risk It Causes |
-|---|--------|----------------------|
-| 1 | ☢️ **Space Radiation** | Immune changes, cell damage |
-| 2 | 🧘 **Isolation & Confinement** | Depression, sleep problems, mood changes |
-| 3 | 📡 **Distance from Earth** | Can't rely on doctors — must self-assess |
-| 4 | 🌍 **Gravity Fields** (microgravity/partial g) | Bone loss, muscle loss, cardiovascular deconditioning |
-| 5 | 🏠 **Hostile Closed Environment** | Nutrition issues, infection risk, immune changes |
-
-Our tool turns these risks into **measurable indicators** an astronaut can check anytime.
+AstroTrack is a self-service health monitoring dashboard designed for long-duration spaceflight. Because communications between Earth and deep-space missions face significant latency (up to 22 minutes each way to Mars), crews cannot rely on real-time guidance from flight surgeons. AstroTrack provides an autonomous, easy-to-use interface for astronauts to record vital metrics, review automated status evaluations, and follow actionable medical guidance.
 
 ---
 
-## 🎯 Project Goal
+## Key Features
 
-Build a **visual, easy-to-use health monitoring tool** that:
-
-- ✅ Gathers health indicators (blood pressure, heart rate, blood sugar, body temperature, sleep hours, mood, and more)
-- ✅ Helps astronauts **evaluate** their health status at a glance
-- ✅ Provides **actionable guidance** on treatments and improvements
-- ✅ Works for **different environments**: spacecraft, space station, rover, or planetary base
-- ✅ Requires **no medical expertise** — the tool explains everything
-
----
-
-## 🧩 Core Features
-
-| Feature | Description |
-|---------|-------------|
-| **Interactive Body Map** | Clickable human figure — click a body part to see its health indicators and status |
-| **Health Indicator Input** | Keyboard, mouse, and camera input for measurements |
-| **Color-Coded Status** | 🟢 Normal / 🟡 Needs Attention / 🔴 Act Now — understandable in one glance |
-| **Dynamic Charts** | Graphs showing each indicator's trend over time |
-| **Smart Guidance** | Plain-language explanations: what the reading means, space-related risks, and recommended actions |
-| **Mission Routine Prompts** | Reminds astronauts when it's time to take measurements or do health tasks |
-| **Gamification** | Points, streaks, and badges for completing health check-ins |
-| **Measurement Instructions** | Step-by-step "how to measure" guides for every indicator |
+- **Interactive Body Map:** Click specific body regions to view relevant indicators, status history, and symptoms.
+- **Vital Signs & Metric Logging:** Log core metrics including heart rate, blood pressure, body temperature, blood sugar, sleep duration, and self-reported mood.
+- **Status Evaluation:** Automatic three-tier status evaluation based on NASA and aerospace medical ranges:
+  - 🟢 **Normal** — Within expected baseline for resting spaceflight conditions.
+  - 🟡 **Watch** — Borderline or shifting; warrants monitoring and re-measurement.
+  - 🔴 **Act Now** — Out of safe range; immediate crew notification and operational countermeasures required.
+- **Trend Analysis:** Dynamic charts powered by Recharts with threshold zones to identify gradual physical deconditioning or emerging health issues.
+- **Actionable Guidance:** Direct, plain-language guidance explaining what each measurement indicates in a microgravity context and clear next steps.
+- **Mission Routines & Checklists:** Gamified daily health check-ins, streaks, and prompts to keep crew compliant with monitoring protocols.
 
 ---
 
-## 🏗️ Tech Stack
+## System Architecture & Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| **Frontend** | Next.js (React) + TypeScript + Tailwind CSS + Recharts (charts) |
-| **Backend** | Python + FastAPI |
-| **Database** | PostgreSQL (primary) + SQLite (local/offline fallback) |
-| **Auth** | JWT-based astronaut profiles |
-| **Deployment** | Vercel (frontend) + Render/Railway (backend) + Supabase/Neon (database) |
-
----
-
-## 📚 NASA & Partner Resources We Use
-
-These are the **required references** for the challenge. Every team member should skim at least the first two links.
-
-### NASA Resources
-- **[5 Hazards of Human Spaceflight](https://www.nasa.gov/hrp/hazards/)** — The foundation of our health risk model
-- **[Risks of Human Spaceflight](https://www.nasa.gov/hrp/risks/)** — Risk-to-indicator mapping
-- **[Ongoing HRP Research in Space](https://www.nasa.gov/hrp/ongoing-hrp-research/)** — Scientific grounding
-
-### Space Agency Partner Resources
-- **[CSA: Monitoring Radiation for Astronaut Health](https://www.asc-csa.gc.ca/eng/news/articles/2026/2026-02-26-monitoring-radiation-astronaut-health.asp)** — Radiation exposure tracking
-- **[CSA: Why Do We Conduct Science Experiments in Space?](https://www.asc-csa.gc.ca/eng/iss/science/why-do-we-conduct-science-experiments-in-space.asp)** — Context on space health research
-
-> ⚠️ **These links must be listed in the final NASA Space Apps submission form** under "NASA Data" and "Space Agency Partner & Other Data."
+| Layer | Stack | Details |
+|---|---|---|
+| **Frontend** | Next.js (React), TypeScript, Tailwind CSS | Responsive dashboard with dark-mode first UI for mission environments |
+| **Charts** | Recharts | Multi-interval trend visualization with threshold bands |
+| **Backend** | Python 3.11+, FastAPI, Pydantic | REST API with schema validation and automated OpenAPI docs |
+| **Database** | PostgreSQL, SQLAlchemy | Stores astronaut profiles, time-series readings, reference ranges, and guidance texts |
+| **Authentication** | JWT (JSON Web Tokens) | Secure per-crew profile management |
+| **Deployment** | Vercel (Frontend), Render / Railway (Backend) | Cloud deployment with local Docker support |
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
+
+```text
 astrotrack/
-├── frontend/ # Next.js application
-│ ├── app/
-│ ├── components/
-│ ├── lib/
-│ └── public/
-├── backend/ # FastAPI application
-│ ├── app/
-│ │ ├── main.py
-│ │ ├── routers/
-│ │ ├── models/
-│ │ ├── schemas/
-│ │ ├── services/
-│ │ └── core/
-│ ├── tests/
-│ └── requirements.txt
-├── database/ # Migrations, seeds, ERD
-│ ├── migrations/
-│ ├── seeds/
-│ └── ERD.md
-├── docs/ # Design docs, API contract
-├── docker-compose.yml
-└── README.md # ← This file
-
-
+├── frontend/             # Next.js application
+│   ├── app/              # App router pages (dashboard, body-map, readings)
+│   ├── components/       # Reusable UI components
+│   └── lib/              # API clients, TypeScript definitions, and theme tokens
+├── backend/              # FastAPI application
+│   ├── app/              # Routes, models, schemas, and evaluation engine
+│   ├── core/             # Database connection, auth, and environment configuration
+│   └── tests/            # Pytest test suite
+├── database/             # Relational schema management
+│   ├── migrations/       # Versioned SQL migration scripts
+│   └── seeds/            # NASA-backed reference ranges and guidance entries
+├── docs/                 # Team implementation guidelines
+│   ├── frontend_guide.md
+│   ├── backend_guide.md
+│   ├── database_guideline.md
+│   └── submission_guide.md
+├── docker-compose.yml    # Local multi-container setup
+└── README.md
+```
 
 ---
 
-## 🚦 Quick Start (For Developers)
+## Team Guides
+
+Detailed specifications and implementation rules for each component:
+
+- 📘 [Frontend Team Guidelines](docs/frontend_guide.md) — UI design rules, page layouts, TypeScript types, and Recharts setup.
+- 📙 [Backend Team Guidelines](docs/backend_guide.md) — API contract, status evaluation logic, and endpoint specifications.
+- 🗄️ [Database Guidelines](docs/database_guideline.md) — Schema, indexes, migrations workflow, and seed data.
+- 📋 [Submission Guide](docs/submission_guide.md) — Hackathon deliverables checklist, demo video/slides format, and submission steps.
+
+---
+
+## Grounded in NASA Research
+
+AstroTrack's indicators and guidance map directly to **NASA's Five Hazards of Human Spaceflight**:
+
+| Hazard | Spaceflight Impact | Monitored Indicators |
+|---|---|---|
+| **1. Space Radiation** | Cellular and immune changes | Blood markers, symptoms |
+| **2. Isolation & Confinement** | Mood disruption, sleep disturbances | Sleep hours, mood score, cognitive checklist |
+| **3. Distance from Earth** | No real-time clinical access | Automated triage and guidance engine |
+| **4. Gravity Fields (Microgravity)** | Muscle atrophy, cardiovascular deconditioning, fluid shift | Heart rate, blood pressure, body temperature |
+| **5. Hostile Closed Environments** | Nutritional shifts, pathogen load | Blood glucose, physiological vitals |
+
+### Official References
+- **[NASA Human Research Program: 5 Hazards of Human Spaceflight](https://www.nasa.gov/hrp/hazards/)**
+- **[NASA HRP: Risks of Human Spaceflight](https://www.nasa.gov/hrp/risks/)**
+- **[NASA HRP: Ongoing Research in Space](https://www.nasa.gov/hrp/ongoing-hrp-research/)**
+- **[CSA: Monitoring Radiation for Astronaut Health](https://www.asc-csa.gc.ca/eng/news/articles/2026/2026-02-26-monitoring-radiation-astronaut-health.asp)**
+- **[CSA: Why Do We Conduct Science Experiments in Space?](https://www.asc-csa.gc.ca/eng/iss/science/why-do-we-conduct-science-experiments-in-space.asp)**
+
+---
+
+## Local Development Setup
 
 ### Prerequisites
 - Node.js 20+ and npm
@@ -129,41 +99,44 @@ astrotrack/
 - PostgreSQL 15+ (or Docker)
 - Git
 
-### 1. Clone the repo
+### 1. Clone Repository
 ```bash
 git clone https://github.com/your-team/astrotrack.git
 cd astrotrack
+```
 
-2. Backend setup
-bash
-
+### 2. Backend Setup
+```bash
 cd backend
 python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
+source venv/bin/activate       # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
-cp .env.example .env            # Fill in DATABASE_URL and SECRET_KEY
+cp .env.example .env           # Configure DATABASE_URL and SECRET_KEY
 uvicorn app.main:app --reload --port 8000
+```
+Interactive API documentation will be available at [http://localhost:8000/docs](http://localhost:8000/docs).
 
-API docs available at http://localhost:8000/docs (FastAPI auto-generates Swagger UI).
-3. Frontend setup
-bash
-
-cd frontend
+### 3. Frontend Setup
+```bash
+cd ../frontend
 npm install
 cp .env.local.example .env.local   # Set NEXT_PUBLIC_API_URL=http://localhost:8000
 npm run dev
+```
+The application will be accessible at [http://localhost:3000](http://localhost:3000).
 
-App available at http://localhost:3000.
-4. Database setup
-bash
-
-cd database
+### 4. Database Setup
+```bash
+cd ../database
 psql -U postgres -c "CREATE DATABASE astrotrack;"
 psql -U postgres -d astrotrack -f migrations/001_initial.sql
-psql -U postgres -d astrotrack -f seeds/health_reference_ranges.sql
+psql -U postgres -d astrotrack -f seeds/reference_ranges.sql
+psql -U postgres -d astrotrack -f seeds/guidance_texts.sql
+psql -U postgres -d astrotrack -f seeds/health_tasks.sql
+```
 
-5. Or just use Docker 🐳
-bash
-
+### 5. Docker Setup (Alternative)
+To spin up all services concurrently:
+```bash
 docker-compose up --build
-
+```
