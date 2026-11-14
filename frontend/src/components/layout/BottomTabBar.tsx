@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { 
   LayoutDashboard, 
   CheckSquare, 
-  Activity, 
+  Layers, 
   AlertTriangle, 
   MoreHorizontal,
   X
@@ -19,31 +19,33 @@ export function BottomTabBar() {
   const { overview } = useHealth();
   const [moreOpen, setMoreOpen] = useState(false);
 
-  // Only render on dashboard routes
-  if (!pathname.startsWith('/app')) {
+  const isAuth = pathname === '/login' || pathname === '/signup' || pathname === '/forgot-password' || pathname === '/reset-password';
+  const isPublic = pathname === '/' || pathname === '/about' || pathname === '/demo';
+
+  if (isAuth || isPublic) {
     return null;
   }
 
   const alertCount = overview?.activeAlerts?.length || 0;
 
   const tabs = [
-    { name: 'Overview', href: '/app', icon: LayoutDashboard },
-    { name: 'Log', href: '/app/check-in', icon: CheckSquare },
-    { name: 'Indicators', href: '/app/indicators', icon: Activity },
+    { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+    { name: 'Record', href: '/readings/new', icon: CheckSquare },
+    { name: 'Body Map', href: '/body-map', icon: Layers },
     { name: 'Alerts', href: '/app/alerts', icon: AlertTriangle, count: alertCount }
   ];
 
   return (
     <>
-      {/* Fixed bottom navigation for mobile screens (<640px) */}
+      {/* Fixed bottom navigation for mobile screens (<768px) */}
       <nav
         aria-label="Mobile Navigation Bar"
-        className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-[#D9E2DE] px-2 py-1 shadow-lg"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-[#D9E2DE] px-2 py-1 shadow-lg"
       >
         <div className="grid grid-cols-5 items-center justify-around">
           {tabs.map((tab) => {
             const Icon = tab.icon;
-            const isActive = pathname === tab.href || (tab.href !== '/app' && pathname.startsWith(tab.href));
+            const isActive = pathname === tab.href || (tab.href !== '/dashboard' && pathname.startsWith(tab.href));
             return (
               <Link
                 key={tab.name}
@@ -82,7 +84,7 @@ export function BottomTabBar() {
       {/* "More" Sheet Modal for Mobile */}
       {moreOpen && (
         <div
-          className="fixed inset-0 z-50 sm:hidden bg-black/40 backdrop-blur-xs flex items-end"
+          className="fixed inset-0 z-50 md:hidden bg-black/40 backdrop-blur-xs flex items-end"
           onClick={() => setMoreOpen(false)}
         >
           <div
