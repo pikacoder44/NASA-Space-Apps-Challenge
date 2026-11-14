@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, ReactNode, Suspense } from 'react';
-import { DemoScenarioBanner } from '../ui/DemoScenarioBanner';
+import React, { useState, ReactNode, Suspense } from 'react';
 import { TopBar } from './TopBar';
 import { SidebarNavigation } from './SidebarNavigation';
 import { BottomTabBar } from './BottomTabBar';
@@ -71,13 +70,8 @@ export function AppShell({ children }: { children: ReactNode }) {
   return (
     <AuthGate>
       <div className="min-h-screen bg-[#F4F6F4] flex flex-col text-[#172A2B]">
-        {/* 1. Global Demo Scenario Banner */}
-        <Suspense fallback={<div className="h-8 bg-[#122B31]" />}>
-          <DemoScenarioBanner />
-        </Suspense>
-
-        {/* 2. Top Application Bar */}
-        <Suspense fallback={<div className="h-14 sm:h-16 bg-white border-b border-[#D9E2DE]" />}>
+        {/* Top Application Bar (includes scenario selector) */}
+        <Suspense fallback={<div className="h-14 bg-white border-b border-[#D9E2DE]" />}>
           <TopBar mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
         </Suspense>
 

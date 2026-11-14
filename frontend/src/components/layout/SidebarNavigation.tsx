@@ -184,18 +184,18 @@ export function SidebarNavigation({
     <aside className="flex flex-col justify-between h-full select-none">
       {/* 1. Header / Logo Block (V3 §4: 44px mark + AAHMS 20px + 12px subtitle) */}
       {!isMobileDrawer && (
-        <div className="flex items-center justify-between pb-2.5 pt-0.5 border-b border-[#D9E2DE] mb-2 px-1">
-          <Link href="/dashboard" className="flex items-center gap-2.5 truncate">
-            <div className="w-8 h-8 rounded-xl bg-[#176B68] text-white flex items-center justify-center shrink-0 shadow-xs">
-              <ShieldCheck size={18} />
+        <div className="flex items-center justify-between pb-3 pt-1 border-b border-[#D9E2DE] mb-3 px-1">
+          <Link href="/dashboard" className="flex items-center gap-2.5 truncate group">
+            <div className="w-9 h-9 rounded-xl bg-[#176B68] text-white flex items-center justify-center shrink-0 shadow-sm group-hover:bg-[#135754] transition-colors">
+              <ShieldCheck size={19} />
             </div>
             {!isCollapsed && (
               <div className="min-w-0">
-                <span className="text-base font-extrabold tracking-tight text-[#172A2B] block leading-none">
+                <span className="text-[16px] font-extrabold tracking-tight text-[#172A2B] block leading-tight">
                   {APP_NAME}
                 </span>
-                <span className="text-[11px] text-[#60716E] font-medium block truncate mt-0.5">
-                  Astronaut Health Monitor
+                <span className="text-[11px] text-[#176B68] font-semibold block truncate leading-none">
+                  Health Monitoring
                 </span>
               </div>
             )}
@@ -206,7 +206,7 @@ export function SidebarNavigation({
               type="button"
               onClick={onToggleCollapse}
               aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-              className="p-1 rounded-lg text-[#60716E] hover:bg-[#EAF0ED] hover:text-[#172A2B] transition-colors"
+              className="p-1.5 rounded-lg text-[#60716E] hover:bg-[#EAF0ED] hover:text-[#172A2B] transition-colors"
             >
               {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
             </button>

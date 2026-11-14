@@ -16,6 +16,8 @@ export function ThemeToggle() {
         // ignore
       }
     }
+    // Always ensure light is the default on first load
+    document.documentElement.removeAttribute('data-theme');
     return 'light';
   });
 
@@ -23,11 +25,11 @@ export function ThemeToggle() {
     if (theme === 'light') {
       setTheme('dark');
       document.documentElement.setAttribute('data-theme', 'dark');
-      try { localStorage.setItem('astrotrack_theme', 'dark'); } catch {}
+      try { localStorage.setItem('astrotrack_theme', 'dark'); } catch { /* ignore */ }
     } else {
       setTheme('light');
       document.documentElement.removeAttribute('data-theme');
-      try { localStorage.setItem('astrotrack_theme', 'light'); } catch {}
+      try { localStorage.setItem('astrotrack_theme', 'light'); } catch { /* ignore */ }
     }
   };
 
@@ -35,11 +37,14 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="p-2 rounded-xl text-muted hover:text-main hover:bg-surface-alt transition-colors cursor-pointer border border-border"
-      title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} cockpit mode`}
+      className="p-2 rounded-xl transition-colors cursor-pointer border border-[#D9E2DE] hover:bg-[#EAF0ED] text-[#60716E] hover:text-[#172A2B]"
+      title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} mode`}
       aria-label="Toggle theme mode"
     >
-      {theme === 'dark' ? <Sun size={16} className="text-amber-400" /> : <Moon size={16} className="text-[#176B68]" />}
+      {theme === 'dark'
+        ? <Sun size={16} className="text-amber-400" />
+        : <Moon size={16} className="text-[#176B68]" />
+      }
     </button>
   );
 }
