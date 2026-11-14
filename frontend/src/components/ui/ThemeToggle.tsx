@@ -4,26 +4,30 @@ import React, { useState } from 'react';
 import { Sun, Moon } from 'lucide-react';
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('astrotrack_theme') as 'dark' | 'light' | null;
-      if (saved === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
-        return 'light';
+      try {
+        const saved = localStorage.getItem('astrotrack_theme') as 'light' | 'dark' | null;
+        if (saved === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          return 'dark';
+        }
+      } catch {
+        // ignore
       }
     }
-    return 'dark';
+    return 'light';
   });
 
   const toggleTheme = () => {
-    if (theme === 'dark') {
-      setTheme('light');
-      document.documentElement.setAttribute('data-theme', 'light');
-      localStorage.setItem('astrotrack_theme', 'light');
-    } else {
+    if (theme === 'light') {
       setTheme('dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
+      try { localStorage.setItem('astrotrack_theme', 'dark'); } catch {}
+    } else {
+      setTheme('light');
       document.documentElement.removeAttribute('data-theme');
-      localStorage.setItem('astrotrack_theme', 'dark');
+      try { localStorage.setItem('astrotrack_theme', 'light'); } catch {}
     }
   };
 
@@ -35,7 +39,7 @@ export function ThemeToggle() {
       title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} cockpit mode`}
       aria-label="Toggle theme mode"
     >
-      {theme === 'dark' ? <Sun size={16} className="text-amber-400" /> : <Moon size={16} className="text-teal-600" />}
+      {theme === 'dark' ? <Sun size={16} className="text-amber-400" /> : <Moon size={16} className="text-[#176B68]" />}
     </button>
   );
 }

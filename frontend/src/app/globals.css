@@ -1,7 +1,43 @@
 @import "tailwindcss";
 
-/* Dark-First Spacecraft Cockpit Tokens (Default) */
+/* Light Theme as Default (NASA Spaceflight Clean Canvas) */
 :root {
+  --canvas: #F4F6F4;
+  --surface: #FFFFFF;
+  --surface-alt: #F8FAFC;
+  --surface-muted: #E2E8F0;
+  --main: #172A2B;
+  --muted: #60716E;
+  --border: #D9E2DE;
+  --brand: #176B68;
+  --brand-hover: #125553;
+  --line: #D9E2DE;
+  --deep-space: #172A2B;
+  --ink: #172A2B;
+  --ink-muted: #60716E;
+
+  /* Official Status Colors (lib/colors.ts) */
+  --status-normal: #22c55e;
+  --status-warning: #eab308;
+  --status-critical: #ef4444;
+  --status-empty: #6b7280;
+
+  /* Status soft backgrounds */
+  --teal: #176B68;
+  --teal-soft: rgba(23, 107, 104, 0.12);
+  --teal-hover: #125553;
+  --green: #22c55e;
+  --green-soft: rgba(34, 197, 94, 0.12);
+  --amber: #eab308;
+  --amber-soft: rgba(234, 179, 8, 0.12);
+  --red: #ef4444;
+  --red-soft: rgba(239, 68, 68, 0.12);
+  --unknown: #6b7280;
+  --unknown-soft: rgba(107, 114, 128, 0.12);
+}
+
+/* Dark Mode Toggle Support */
+[data-theme="dark"], .dark {
   --canvas: #0B1315;
   --surface: #122023;
   --surface-alt: #182C30;
@@ -16,13 +52,11 @@
   --ink: #F1F5F9;
   --ink-muted: #94A3B8;
 
-  /* Official Status Colors (docs/frontend_guide.md) */
   --status-normal: #22c55e;
   --status-warning: #eab308;
   --status-critical: #ef4444;
   --status-empty: #6b7280;
 
-  /* Legacy aliases for backward compatibility */
   --teal: #14B8A6;
   --teal-soft: rgba(20, 184, 166, 0.15);
   --teal-hover: #0D9488;
@@ -34,23 +68,6 @@
   --red-soft: rgba(239, 68, 68, 0.15);
   --unknown: #6b7280;
   --unknown-soft: rgba(107, 114, 128, 0.15);
-}
-
-/* Light Mode Toggle Support */
-[data-theme="light"], .light {
-  --canvas: #F8FAFC;
-  --surface: #FFFFFF;
-  --surface-alt: #F1F5F9;
-  --surface-muted: #E2E8F0;
-  --main: #0F172A;
-  --muted: #64748B;
-  --border: #E2E8F0;
-  --brand: #0D9488;
-  --brand-hover: #0F766E;
-  --line: #E2E8F0;
-  --deep-space: #1E293B;
-  --ink: #0F172A;
-  --ink-muted: #64748B;
 }
 
 @theme {
@@ -90,34 +107,10 @@ body {
   background-color: var(--canvas);
   color: var(--main);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px; /* Minimum 16px body text as requested in guidelines */
+  font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   width: 100%;
-}
-
-/* Fluid Responsive Typography Scale */
-.page-title {
-  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
-  font-weight: 800;
-  line-height: 1.2;
-}
-
-.metric-value {
-  font-size: clamp(1.75rem, 1.2rem + 1.2vw, 2.5rem);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-}
-
-.tabular-data {
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.01em;
-}
-
-.baseline-box {
-  min-height: 48px;
-  overflow-wrap: anywhere;
 }
