@@ -51,11 +51,12 @@ export function SidebarNavigation({
 
   const groups = [
     {
-      title: 'Monitor',
+      title: 'AstroTrack Cockpit',
       items: [
-        { name: 'Overview', href: '/app', icon: LayoutDashboard },
-        { name: 'Daily Log', href: '/app/check-in', icon: CheckSquare, badge: overview?.dailyCheckInDone ? 'Done' : 'Pending' },
-        { name: 'Indicators', href: '/app/indicators', icon: Activity },
+        { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+        { name: 'Record Reading', href: '/readings/new', icon: CheckSquare, badge: 'New' },
+        { name: 'Body Map', href: '/body-map', icon: Layers },
+        { name: 'Overview (Sol 90)', href: '/app', icon: Activity },
         { name: 'Trends', href: '/app/trends', icon: TrendingUp },
         { name: 'Alerts', href: '/app/alerts', icon: AlertTriangle, count: overview?.activeAlerts?.length || 0 }
       ]
