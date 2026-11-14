@@ -4,20 +4,18 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
   Activity, 
-  CheckCircle2, 
-  AlertTriangle, 
   ArrowLeft, 
   Send, 
-  Sparkles, 
-  ExternalLink,
   Info,
-  Clock,
-  RotateCcw
+  CheckCircle,
+  AlertCircle
 } from 'lucide-react';
+import { z } from 'zod';
 import { AppShell } from '../../../components/layout/AppShell';
 import { submitReading, getGuidance } from '../../../lib/api';
 import { STATUS_COLORS, STATUS_LABEL } from '../../../lib/colors';
 import type { Indicator, Status, Reading, GuidanceData } from '../../../lib/types';
+import GuidancePanel from '../../../components/GuidancePanel';
 
 interface IndicatorConfig {
   key: Indicator;
@@ -114,11 +112,28 @@ const INDICATORS: IndicatorConfig[] = [
 export default function NewReadingPage() {
   const [selectedKey, setSelectedKey] = useState<Indicator>('heart_rate');
   const [val, setVal] = useState<number>(74);
+  const [validationError, setValidationError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [savedReading, setSavedReading] = useState<Reading | null>(null);
   const [guidance, setGuidance] = useState<GuidanceData | null>(null);
+  const [showToast, setShowToast] = useState(false);
 
   const currentConfig = INDICATORS.find(i => i.key === selectedKey) || INDICATORS[0];
+
+  // Zod Validator dynamically created per indicator
+  const validateWithZod = (value: number, config: IndicatorConfig): boolean => {
+    const schema = z.number()
+      .min(config.min, { message: `Value must be at least ${config.min} ${config.unit} (aerospace physiological limit).` })
+      .max(config.max, { message: `Value cannot exceed ${config.max} ${config.unit} (aerospace physiological limit).` });
+
+    const result = schema.safeParse(value);
+    if (!result.success) {
+      setValidationError(result.error.issues[0]?.message || 'Invalid reading');
+      return false;
+    }
+    setValidationError(null);
+    return true;
+  };
 
   // Evaluate status live before submitting
   const evaluateStatus = (value: number, config: IndicatorConfig): Status => {
@@ -133,8 +148,17 @@ export default function NewReadingPage() {
 
   const previewStatus = evaluateStatus(val, currentConfig);
 
+  const handleValueChange = (newVal: number) => {
+    setVal(newVal);
+    validateWithZod(newVal, currentConfig);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validateWithZod(val, currentConfig)) {
+      return;
+    }
+
     setSubmitting(true);
     setSavedReading(null);
     setGuidance(null);
@@ -148,6 +172,10 @@ export default function NewReadingPage() {
       });
       setSavedReading(result);
 
+      // Trigger success toast
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 4500);
+
       // Fetch NASA/CSA clinical guidance
       const guideData = await getGuidance(selectedKey, result.status);
       setGuidance(guideData);
@@ -160,7 +188,18 @@ export default function NewReadingPage() {
 
   return (
     <AppShell>
-      <div className="max-w-3xl mx-auto space-y-6 pb-12">
+      <div className="max-w-3xl mx-auto space-y-6 pb-12 relative">
+        {/* Success Toast */}
+        {showToast && (
+          <div className="fixed top-20 right-4 sm:right-8 z-50 flex items-center gap-2.5 p-4 rounded-xl bg-surface border-2 border-[#22c55e] text-main shadow-2xl animate-in slide-in-from-top-4 duration-200">
+            <CheckCircle size={20} className="text-[#22c55e] shrink-0" />
+            <div>
+              <div className="font-extrabold text-xs">Telemetry Reading Recorded!</div>
+              <div className="text-[11px] text-muted">Saved on local spacecraft terminal · Pending DSN sync</div>
+            </div>
+          </div>
+        )}
+
         {/* Navigation Breadcrumb */}
         <div className="flex items-center justify-between">
           <Link 
@@ -186,7 +225,7 @@ export default function NewReadingPage() {
           </div>
         </div>
 
-        {/* Ingestion Form */}
+        {/* Ingestion Form with Zod Validation */}
         <form onSubmit={handleSubmit} className="p-6 rounded-2xl bg-surface border border-border space-y-6 shadow-xs">
           {/* Indicator Selector */}
           <div className="space-y-2">
@@ -203,6 +242,7 @@ export default function NewReadingPage() {
                     onClick={() => {
                       setSelectedKey(ind.key);
                       setVal(ind.defaultVal);
+                      setValidationError(null);
                       setSavedReading(null);
                       setGuidance(null);
                     }}
@@ -236,22 +276,30 @@ export default function NewReadingPage() {
                 id="reading-val"
                 type="number"
                 step={currentConfig.key === 'body_temp' || currentConfig.key === 'sleep_hours' ? '0.1' : '1'}
-                min={currentConfig.min}
-                max={currentConfig.max}
-                value={val}
-                onChange={(e) => setVal(parseFloat(e.target.value) || 0)}
+                value={isNaN(val) ? '' : val}
+                onChange={(e) => handleValueChange(parseFloat(e.target.value))}
                 required
-                className="w-full text-4xl sm:text-5xl font-mono font-extrabold px-4 py-3 rounded-xl bg-surface border-2 border-border focus:border-brand focus:outline-none text-main shadow-inner transition-colors"
+                className={`w-full text-4xl sm:text-5xl font-mono font-extrabold px-4 py-3 rounded-xl bg-surface border-2 text-main shadow-inner transition-colors focus:outline-none ${
+                  validationError ? 'border-[#ef4444]' : 'border-border focus:border-brand'
+                }`}
               />
               <span className="absolute right-4 text-xl sm:text-2xl font-mono font-bold text-muted pointer-events-none">
                 {currentConfig.unit}
               </span>
             </div>
 
-            {/* Live Status Preview Before Submit */}
+            {/* Zod Validation Error Display */}
+            {validationError && (
+              <div className="flex items-center gap-1.5 text-xs font-bold text-[#ef4444] pt-1 animate-in fade-in">
+                <AlertCircle size={14} />
+                <span>{validationError}</span>
+              </div>
+            )}
+
+            {/* Live Evaluation Preview Before Submit */}
             <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between">
               <div className="flex items-center gap-2 text-xs">
-                <span className="text-muted">Live Evaluation:</span>
+                <span className="text-muted">Live Evaluation Preview:</span>
                 <span 
                   className="px-2 py-0.5 rounded font-extrabold text-white text-[11px] uppercase tracking-wider"
                   style={{ backgroundColor: STATUS_COLORS[previewStatus] }}
@@ -260,7 +308,7 @@ export default function NewReadingPage() {
                 </span>
               </div>
               <span className="text-xs text-muted">
-                Normal range: {currentConfig.normalRange[0]}–{currentConfig.normalRange[1]} {currentConfig.unit}
+                Normal target: {currentConfig.normalRange[0]}–{currentConfig.normalRange[1]} {currentConfig.unit}
               </span>
             </div>
           </div>
@@ -277,7 +325,7 @@ export default function NewReadingPage() {
           {/* Big Submit Button */}
           <button
             type="submit"
-            disabled={submitting}
+            disabled={submitting || !!validationError}
             className="w-full py-4 rounded-xl font-extrabold text-base bg-brand text-white hover:bg-brand-hover shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
           >
             {submitting ? (
@@ -293,62 +341,8 @@ export default function NewReadingPage() {
 
         {/* Guidance Panel (Appears after submitting reading) */}
         {savedReading && guidance && (
-          <div 
-            className="p-6 rounded-2xl border space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-300"
-            style={{ 
-              borderColor: STATUS_COLORS[savedReading.status],
-              backgroundColor: savedReading.status === 'normal' ? 'rgba(34, 197, 94, 0.06)' : 'rgba(234, 179, 8, 0.08)'
-            }}
-          >
-            <div className="flex items-center justify-between pb-3 border-b border-border/60">
-              <div className="flex items-center gap-2">
-                <div 
-                  className="w-7 h-7 rounded-lg flex items-center justify-center text-white font-bold"
-                  style={{ backgroundColor: STATUS_COLORS[savedReading.status] }}
-                >
-                  {savedReading.status === 'normal' ? <CheckCircle2 size={16} /> : <AlertTriangle size={16} />}
-                </div>
-                <div>
-                  <h3 className="font-extrabold text-base text-main">{guidance.title}</h3>
-                  <div className="text-xs text-muted">
-                    Logged {savedReading.value} {savedReading.unit} · {new Date(savedReading.measured_at).toLocaleTimeString()} UTC
-                  </div>
-                </div>
-              </div>
-
-              <span 
-                className="px-2.5 py-0.5 rounded text-xs font-extrabold text-white uppercase tracking-wider"
-                style={{ backgroundColor: STATUS_COLORS[savedReading.status] }}
-              >
-                {STATUS_LABEL[savedReading.status]}
-              </span>
-            </div>
-
-            <div className="space-y-2 text-sm text-main leading-relaxed">
-              <p>
-                <strong>Spaceflight Explanation: </strong>
-                {guidance.explanation}
-              </p>
-              <p className="p-3 rounded-xl bg-surface border border-border font-medium text-xs text-main">
-                <strong>Recommended Countermeasure: </strong>
-                {guidance.action}
-              </p>
-            </div>
-
-            <div className="pt-2 flex items-center justify-between text-xs text-muted border-t border-border/40">
-              <a 
-                href={guidance.citation_url || 'https://www.nasa.gov/hrp'} 
-                target="_blank" 
-                rel="noreferrer"
-                className="font-bold text-brand hover:underline flex items-center gap-1"
-              >
-                <span>Citation: {guidance.citation}</span>
-                <ExternalLink size={12} />
-              </a>
-              <Link href="/dashboard" className="font-bold text-main hover:underline">
-                Return to Cockpit →
-              </Link>
-            </div>
+          <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
+            <GuidancePanel status={savedReading.status} guidance={guidance} />
           </div>
         )}
       </div>
