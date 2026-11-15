@@ -203,7 +203,7 @@ class TestDashboardSummary(unittest.TestCase):
 
         # 3. Custom SIMULATOR_DATA_PATH environment variable override
         with patch.dict(os.environ, {SIMULATOR_ENV_VAR: "/custom/path/mission_data.json"}):
-            self.assertEqual(get_simulator_data_path(), "/custom/path/mission_data.json")
+            self.assertEqual(get_simulator_data_path(), os.path.abspath("/custom/path/mission_data.json"))
 
         # 4. Successful mocked data loading independent of repository disk file
         mock_records = [
