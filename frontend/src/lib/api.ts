@@ -1,7 +1,7 @@
 // lib/api.ts — AstroTrack API client conforming to docs/frontend_guide.md & backend_guide.md
 import type { NewReading, Reading, Indicator, Status, DashboardSummary, RoutineTask, GuidanceData } from "./types";
 
-const API = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
+const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 export function getToken(): string | null {
   if (typeof window === "undefined") return null;
@@ -241,7 +241,7 @@ export async function getBodyPartIndicators(bodyPart: string): Promise<{ body_pa
  * Proposed AI Explanation Endpoint (to be confirmed with backend team)
  */
 export async function getAIExplanation(params: { indicator?: string; status?: string; prompt?: string }) {
-  const res = await fetch(`${API}/api/v1/health/ai-explanation`, {
+  const res = await fetch(`${API}/api/health/ai-explanation`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
