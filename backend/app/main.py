@@ -46,8 +46,9 @@ app = FastAPI(
         "Provides physiological telemetry evaluation, personal baseline anomaly detection, "
         "space medicine guidance, routine task management, and dashboard summary services."
     ),
-    docs_url="/docs",
-    redoc_url="/redoc",
+    docs_url="/api/docs",
+    redoc_url="/api/redoc",
+    openapi_url="/api/openapi.json",
     lifespan=lifespan,
 )
 
@@ -60,19 +61,44 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+@app.get("/docs", include_in_schema=False)
+def docs_redirect():
+    """Redirect local /docs requests to /api/docs."""
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url="/api/docs")
+
+
+@app.get("/redoc", include_in_schema=False)
+def redoc_redirect():
+    """Redirect local /redoc requests to /api/redoc."""
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url="/api/redoc")
+
+
+@app.get("/openapi.json", include_in_schema=False)
+def openapi_redirect():
+    """Redirect local /openapi.json requests to /api/openapi.json."""
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url="/api/openapi.json")
+
+
 # Top-level operational endpoints
 @app.get("/", tags=["health"], summary="Root service status")
+@app.get("/api", tags=["health"], summary="Root service status (mounted)")
+@app.get("/api/", tags=["health"], summary="Root service status (mounted slash)")
 def root():
     """Service status and API documentation entry point."""
     return {
         "service": settings.PROJECT_NAME,
         "version": settings.VERSION,
         "status": "operational",
-        "docs": "/docs",
+        "docs": "/api/docs",
     }
 
 
 @app.get("/health", tags=["health"], summary="Health check endpoint")
+@app.get("/api/health", tags=["health"], summary="Health check endpoint (mounted)")
 def health_check():
     """Verify application liveness and database connectivity."""
     db_status = "connected"

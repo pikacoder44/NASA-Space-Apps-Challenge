@@ -1,7 +1,38 @@
 // lib/api.ts — AstroTrack API client conforming to docs/frontend_guide.md & backend_guide.md
 import type { NewReading, Reading, Indicator, Status, DashboardSummary, RoutineTask, GuidanceData } from "./types";
 
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+/**
+ * Resolves the backend base URL for API requests.
+ * In Vercel multi-service deployments:
+ * - On the server (functions/SSR): uses process.env.BACKEND_URL (injected by Vercel service binding).
+ * - On the client: uses process.env.NEXT_PUBLIC_API_URL or defaults to empty string '' (using Vercel rewrites on the same domain).
+ * - In local standalone dev: falls back to http://localhost:8000 when neither is set.
+ */
+export function getApiBaseUrl(): string {
+  if (typeof window === "undefined" && process.env.BACKEND_URL) {
+    return process.env.BACKEND_URL.replace(/\/+$/, "");
+  }
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL.replace(/\/+$/, "");
+  }
+  if (typeof window !== "undefined") {
+    return "";
+  }
+  return "http://localhost:8000";
+}
+
+export function buildApiUrl(path: string): string {
+  const base = getApiBaseUrl();
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  if (!base) {
+    return normalizedPath;
+  }
+  try {
+    return new URL(normalizedPath.replace(/^\/+/, ""), `${base}/`).toString();
+  } catch {
+    return `${base}${normalizedPath}`;
+  }
+}
 
 export function getToken(): string | null {
   if (typeof window === "undefined") return null;
@@ -26,7 +57,7 @@ export function clearToken(): void {
 // --- 1. Authentication (Confirmed in backend_guide.md) ---
 
 export async function loginUser(email: string, password: string):Promise<{ access_token: string; token_type: string }> {
-  const res = await fetch(`${API}/api/auth/login`, {
+  const res = await fetch(buildApiUrl("/api/auth/login"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password })
@@ -40,7 +71,7 @@ export async function loginUser(email: string, password: string):Promise<{ acces
 }
 
 export async function registerUser(email: string, password: string, name: string, role?: string): Promise<{ id: string; email: string }> {
-  const res = await fetch(`${API}/api/auth/register`, {
+  const res = await fetch(buildApiUrl("/api/auth/register"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password, name, role })
@@ -50,7 +81,7 @@ export async function registerUser(email: string, password: string, name: string
 }
 
 export async function getMe(): Promise<{ id: string; email: string; name: string; role: string }> {
-  const res = await fetch(`${API}/api/astronauts/me`, {
+  const res = await fetch(buildApiUrl("/api/astronauts/me"), {
     headers: {
       ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {})
     }
@@ -63,7 +94,7 @@ export async function getMe(): Promise<{ id: string; email: string; name: string
 
 export async function submitReading(data: NewReading): Promise<Reading> {
   try {
-    const res = await fetch(`${API}/api/readings`, {
+    const res = await fetch(buildApiUrl("/api/readings"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -90,7 +121,7 @@ export async function submitReading(data: NewReading): Promise<Reading> {
 
 export async function getReadings(indicator: Indicator, days: number = 30): Promise<Reading[]> {
   try {
-    const res = await fetch(`${API}/api/readings?indicator=${indicator}&days=${days}`, {
+    const res = await fetch(buildApiUrl(`/api/readings?indicator=${indicator}&days=${days}`), {
       headers: {
         ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {})
       }
@@ -130,7 +161,7 @@ export async function getReadings(indicator: Indicator, days: number = 30): Prom
 
 export async function getDashboardSummary(): Promise<DashboardSummary> {
   try {
-    const res = await fetch(`${API}/api/dashboard/summary`, {
+    const res = await fetch(buildApiUrl("/api/dashboard/summary"), {
       headers: {
         ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {})
       }
@@ -164,7 +195,7 @@ export async function getDashboardSummary(): Promise<DashboardSummary> {
 
 export async function getRoutineTasks(): Promise<RoutineTask[]> {
   try {
-    const res = await fetch(`${API}/api/routine/today`, {
+    const res = await fetch(buildApiUrl("/api/routine/today"), {
       headers: {
         ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {})
       }
@@ -186,7 +217,7 @@ export async function getRoutineTasks(): Promise<RoutineTask[]> {
 
 export async function getGuidance(indicator: Indicator, status: Status): Promise<GuidanceData> {
   try {
-    const res = await fetch(`${API}/api/guidance/${indicator}/${status}`, {
+    const res = await fetch(buildApiUrl(`/api/guidance/${indicator}/${status}`), {
       headers: {
         ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {})
       }
@@ -218,7 +249,7 @@ export async function getGuidance(indicator: Indicator, status: Status): Promise
 
 export async function getBodyPartIndicators(bodyPart: string): Promise<{ body_part: string; indicators: Indicator[]; status: Status }> {
   try {
-    const res = await fetch(`${API}/api/body-map/${bodyPart}`, {
+    const res = await fetch(buildApiUrl(`/api/body-map/${bodyPart}`), {
       headers: {
         ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {})
       }
@@ -241,7 +272,7 @@ export async function getBodyPartIndicators(bodyPart: string): Promise<{ body_pa
  * Proposed AI Explanation Endpoint (to be confirmed with backend team)
  */
 export async function getAIExplanation(params: { indicator?: string; status?: string; prompt?: string }) {
-  const res = await fetch(`${API}/api/health/ai-explanation`, {
+  const res = await fetch(buildApiUrl("/api/health/ai-explanation"), {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

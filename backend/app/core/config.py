@@ -28,18 +28,33 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
 
-    # CORS
+    # CORS: in production set FRONTEND_URL to your Vercel deployment URL.
+    # CORS_ORIGINS is derived from FRONTEND_URL at runtime; the wildcard "*" is
+    # intentionally removed in production — set FRONTEND_URL properly instead.
     FRONTEND_URL: str = os.getenv("FRONTEND_URL", "http://localhost:3000")
-    CORS_ORIGINS: List[str] = [
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:8000",
-        "http://127.0.0.1:8000",
-        "*"
-    ]
+
+    @property
+    def CORS_ORIGINS(self) -> List[str]:  # type: ignore[override]
+        """Build CORS origins list dynamically from FRONTEND_URL."""
+        origins = [
+            "http://localhost:3000",
+            "http://127.0.0.1:3000",
+            "http://localhost:8000",
+            "http://127.0.0.1:8000",
+        ]
+        if self.FRONTEND_URL and self.FRONTEND_URL not in origins:
+            origins.append(self.FRONTEND_URL)
+        # Only add wildcard in permissive local/demo mode (AUTH_REQUIRED=false)
+        if not self.AUTH_REQUIRED:
+            origins.append("*")
+        return origins
 
     # Authentication requirement toggle:
     # When False (default for demo), anonymous requests map to demo astronaut.
+    # Set AUTH_REQUIRED=true in production if you want per-user data isolation.
+    # WARNING: AUTH_REQUIRED=false means any unauthenticated request reads/writes
+    # the shared demo astronaut's data. This is intentional for the hackathon demo
+    # but means ALL visitors share one health record.
     AUTH_REQUIRED: bool = os.getenv("AUTH_REQUIRED", "false").lower() in ("true", "1")
 
     # Demo Astronaut profile info
