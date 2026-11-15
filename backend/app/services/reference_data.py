@@ -7,7 +7,7 @@ They do NOT represent clinical medical diagnosis, official flight surgeon protoc
 or validated NASA medical guidelines.
 """
 
-from typing import Any, Dict, Set
+from typing import Any, Dict, Set, Tuple
 
 DISCLAIMER: str = (
     "Notice: Reference thresholds and ranges are illustrative hackathon demonstration values "
@@ -63,6 +63,19 @@ REFERENCE_RANGES: Dict[str, Dict[str, Any]] = {
         "warning": (4.0, 10.0),
         "display_name": "Subjective Mood Score",
     },
+}
+
+# Physically possible input limits (inclusive). These are NOT health thresholds:
+# they only reject impossible values or typos (e.g. heart rate -50, temperature
+# 98.6 typed in Fahrenheit) before they reach the evaluator or the database.
+PLAUSIBLE_LIMITS: Dict[str, Tuple[float, float]] = {
+    "heart_rate": (20.0, 250.0),
+    "blood_pressure_systolic": (50.0, 260.0),
+    "blood_pressure_diastolic": (20.0, 160.0),
+    "body_temp": (30.0, 45.0),
+    "blood_sugar": (10.0, 600.0),
+    "sleep_hours": (0.0, 24.0),
+    "mood_score": (1.0, 10.0),
 }
 
 # Vital indicators enforce absolute danger limits regardless of personal baseline mode.

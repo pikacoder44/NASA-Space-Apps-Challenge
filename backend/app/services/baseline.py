@@ -33,6 +33,20 @@ MIN_BASELINE_READINGS: int = 7
 MAX_BASELINE_HISTORY: int = 30
 EPSILON_STD: float = 0.01  # Minimum standard deviation to avoid division by zero
 
+# Per-indicator minimum standard deviation used for z-scores (design choice, not
+# an official NASA number). Short or very stable histories give a tiny measured
+# SD, which would turn ordinary day-to-day variation (e.g. +2 bpm) into an
+# "extreme" deviation. The floor is roughly normal day-to-day variability.
+MIN_STD: dict = {
+    "heart_rate": 2.5,
+    "blood_pressure_systolic": 3.0,
+    "blood_pressure_diastolic": 2.0,
+    "body_temp": 0.12,
+    "blood_sugar": 4.0,
+    "sleep_hours": 0.4,
+    "mood_score": 0.5,
+}
+
 
 @dataclass
 class EvalResult:
@@ -221,6 +235,7 @@ def evaluate_baseline(
 
     # Compute baseline statistics directly on pre-validated slice without duplicate validation
     mean, std = _calculate_stats_from_validated(window)
+    std = max(std, MIN_STD.get(indicator, EPSILON_STD))
 
     # Compute z-score with arithmetic overflow guards
     try:
@@ -311,5 +326,17 @@ def evaluate_baseline(
                 f"{display_name} ({float_val:.1f} {unit}) shows extreme deviation ({abs_z:.1f} SD "
                 f"{direction_word} your baseline of {mean:.1f} {unit}, based on your last {history_len} readings)."
             )
+
+    # A value inside the population normal reference range is never "critical":
+    # a large personal deviation there is a warning (watch and re-measure), not "act now".
+    nlo, nhi = ref["normal"]
+    if status == "critical" and nlo <= float_val <= nhi:
+        status = "warning"
+        direction_word = "above" if z_score >= 0 else "below"
+        reason = (
+            f"{display_name} ({float_val:.1f} {unit}) is {abs(z_score):.1f} SD {direction_word} "
+            f"your baseline ({mean:.1f} {unit}, based on your last {history_len} readings), "
+            f"but still within the normal reference range ({nlo:.1f} - {nhi:.1f} {unit})."
+        )
 
     return EvalResult(status=status, reason=reason, mode="baseline")

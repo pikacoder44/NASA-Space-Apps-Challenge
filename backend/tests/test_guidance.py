@@ -72,5 +72,50 @@ class TestGuidance(unittest.TestCase):
             self.assertIsInstance(t["completed"], bool)
 
 
+
+class TestBodyMapAndRoutineFromReadings(unittest.TestCase):
+    """Body map status and routine tasks follow the astronaut's logged readings."""
+
+    @classmethod
+    def setUpClass(cls):
+        from app.core.database import Base, engine
+        Base.metadata.create_all(bind=engine)
+        cls.client = TestClient(app)
+
+    def setUp(self):
+        import uuid
+        email = f"routine_{uuid.uuid4().hex[:10]}@astrotrack.space"
+        self.client.post("/api/auth/register", json={"email": email, "password": "TestPass123!", "name": "Routine Crew"})
+        token = self.client.post("/api/auth/login", json={"email": email, "password": "TestPass123!"}).json()["access_token"]
+        self.h = {"Authorization": f"Bearer {token}"}
+
+    def test_unknown_body_part_returns_404(self):
+        self.assertEqual(self.client.get("/api/body-map/tail", headers=self.h).status_code, 404)
+
+    def test_body_map_aliases(self):
+        body = self.client.get("/api/body-map/heart", headers=self.h).json()
+        self.assertEqual(body["body_part"], "chest")
+        self.assertEqual(self.client.get("/api/body-map/Full-Body", headers=self.h).json()["body_part"], "full_body")
+
+    def test_body_map_status_is_worst_latest_reading(self):
+        self.assertEqual(self.client.get("/api/body-map/chest", headers=self.h).json()["status"], "normal")
+        self.client.post("/api/readings", json={"indicator": "heart_rate", "value": 190}, headers=self.h)
+        self.assertEqual(self.client.get("/api/body-map/chest", headers=self.h).json()["status"], "critical")
+        self.assertEqual(self.client.get("/api/body-map/head", headers=self.h).json()["status"], "normal")
+
+    def test_routine_without_readings_has_nothing_completed(self):
+        tasks = self.client.get("/api/routine/today", headers=self.h).json()
+        self.assertEqual([t["id"] for t in tasks], ["task-1", "task-2", "task-3", "task-4"])
+        self.assertFalse(any(t["completed"] for t in tasks))
+
+    def test_routine_marks_logged_tasks_and_adds_follow_ups(self):
+        self.client.post("/api/readings", json={"indicator": "heart_rate", "value": 70}, headers=self.h)
+        self.client.post("/api/readings", json={"indicator": "sleep_hours", "value": 3.0}, headers=self.h)
+        tasks = {t["id"]: t for t in self.client.get("/api/routine/today", headers=self.h).json()}
+        self.assertTrue(tasks["task-1"]["completed"])
+        self.assertTrue(tasks["task-4"]["completed"])
+        self.assertEqual(tasks["follow-up-sleep_hours"]["indicator"], "sleep_hours")
+        self.assertNotIn("follow-up-heart_rate", tasks)
+
 if __name__ == "__main__":
     unittest.main()

@@ -11,3 +11,5 @@ class RoutineTask(BaseModel):
     category: str = Field(..., example="Medical")
     completed: bool = Field(default=False, example=True)
     due_time: Optional[str] = Field(default=None, example="07:30 UTC")
+    indicator: Optional[str] = Field(default=None, example="sleep_hours",
+                                     description="Indicator this follow-up task relates to, if any")

@@ -203,7 +203,7 @@ class TestDashboardSummary(unittest.TestCase):
 
         # 3. Custom SIMULATOR_DATA_PATH environment variable override
         with patch.dict(os.environ, {SIMULATOR_ENV_VAR: "/custom/path/mission_data.json"}):
-            self.assertEqual(get_simulator_data_path(), "/custom/path/mission_data.json")
+            self.assertEqual(get_simulator_data_path(), os.path.abspath("/custom/path/mission_data.json"))
 
         # 4. Successful mocked data loading independent of repository disk file
         mock_records = [
@@ -421,6 +421,59 @@ class TestDashboardSummary(unittest.TestCase):
             self.assertIsInstance(ind.name, str)
             self.assertTrue(len(ind.name) > 0)
 
+
+
+class TestDashboardFromDatabase(unittest.TestCase):
+    """Default dashboard uses logged readings; ?day=N uses the simulated scenario."""
+
+    @classmethod
+    def setUpClass(cls):
+        from fastapi.testclient import TestClient
+        from app.core.database import Base, engine
+        from app.main import app
+        Base.metadata.create_all(bind=engine)
+        cls.client = TestClient(app)
+
+    def new_user_headers(self):
+        import uuid
+        email = f"dash_{uuid.uuid4().hex[:10]}@astrotrack.space"
+        self.client.post("/api/auth/register", json={"email": email, "password": "TestPass123!", "name": "Dash Crew"})
+        token = self.client.post("/api/auth/login", json={"email": email, "password": "TestPass123!"}).json()["access_token"]
+        return {"Authorization": f"Bearer {token}"}
+
+    def test_new_astronaut_without_readings_falls_back_to_simulator(self):
+        body = self.client.get("/api/dashboard/summary", headers=self.new_user_headers()).json()
+        self.assertEqual(body["data_source"], "simulator")
+        self.assertEqual(len(body["indicators"]), 7)
+        self.assertTrue(all(i["source"] == "simulator" for i in body["indicators"]))
+
+    def test_submitted_reading_shows_up_on_dashboard(self):
+        headers = self.new_user_headers()
+        res = self.client.post("/api/readings", json={"indicator": "heart_rate", "value": 190}, headers=headers)
+        self.assertEqual(res.json()["status"], "critical")
+        body = self.client.get("/api/dashboard/summary", headers=headers).json()
+        hr = next(i for i in body["indicators"] if i["indicator"] == "heart_rate")
+        self.assertEqual((hr["value"], hr["status"], hr["source"]), (190.0, "critical", "database"))
+        self.assertTrue(hr["measured_at"].endswith("Z"))
+        self.assertEqual(body["overall_status"], "critical")
+        self.assertEqual(body["data_source"], "mixed")
+
+    def test_seeded_demo_dashboard_from_database_tells_day_90_story(self):
+        from scripts.seed import seed_database
+        seed_database(force=True, up_to_day=90)
+        body = self.client.get("/api/dashboard/summary").json()
+        self.assertEqual(body["data_source"], "database")
+        self.assertEqual(body["overall_status"], "warning")
+        self.assertEqual(body["mission_day"], 90)
+        status = {i["indicator"]: i["status"] for i in body["indicators"]}
+        self.assertEqual(status["sleep_hours"], "warning")
+        self.assertEqual(status["heart_rate"], "warning")
+
+    def test_day_parameter_uses_simulator(self):
+        body = self.client.get("/api/dashboard/summary?day=44").json()
+        self.assertEqual(body["data_source"], "simulator")
+        self.assertEqual(body["mission_day"], 44)
+        self.assertEqual(self.client.get("/api/dashboard/summary?day=0").status_code, 422)
 
 if __name__ == "__main__":
     unittest.main()

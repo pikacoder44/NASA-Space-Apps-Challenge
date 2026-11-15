@@ -1,20 +1,45 @@
 """Telemetry readings endpoint: ingestion, clinical evaluation, and historical queries."""
 
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
-from sqlalchemy import desc
 
 from app.core.database import get_db
+from app.core.timeutils import iso_utc, parse_iso_utc, utcnow
 from app.models.astronaut import Astronaut
 from app.models.reading import Reading
 from app.routers.auth import get_current_astronaut
 from app.schemas.reading import NewReading, ReadingResponse
 from app.services.evaluator import evaluate
-from app.services.reference_data import REFERENCE_RANGES, get_unit
+from app.services.readings_service import get_history
+from app.services.reference_data import PLAUSIBLE_LIMITS, REFERENCE_RANGES, get_unit
 
 router = APIRouter()
+
+# Small allowance for clock differences between the client and the server.
+FUTURE_TOLERANCE = timedelta(minutes=5)
+
+
+def _unknown_indicator(indicator: str) -> HTTPException:
+    return HTTPException(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        detail=f"Unknown indicator '{indicator}'. Supported indicators: {list(REFERENCE_RANGES.keys())}",
+    )
+
+
+def to_response(r: Reading) -> ReadingResponse:
+    """Convert a stored reading to the API response (UTC timestamp with 'Z')."""
+    return ReadingResponse(
+        id=r.id,
+        indicator=r.indicator,
+        value=r.value,
+        unit=r.unit,
+        status=r.status,
+        measured_at=iso_utc(r.measured_at),
+        message=r.reason or f"{r.indicator} recorded successfully.",
+        reason=r.reason,
+    )
 
 
 @router.post(
@@ -29,51 +54,52 @@ def submit_reading(
     current_astro: Astronaut = Depends(get_current_astronaut),
 ):
     """Ingest a new measurement, evaluate it against the astronaut's personal baseline,
+    persist the record, and return the evaluation status and reason.
 
-    persist the record, and return the immediate evaluation status and clinical guidance reason.
+    - Unknown indicator, NaN/infinite value, physically impossible value,
+      invalid or future `measured_at`: 422.
+    - The stored unit is always the indicator's standard unit.
+    - History = up to 30 previous values of this indicator measured before this reading.
     """
     indicator = reading_in.indicator
     if indicator not in REFERENCE_RANGES:
+        raise _unknown_indicator(indicator)
+
+    lo, hi = PLAUSIBLE_LIMITS[indicator]
+    if not lo <= reading_in.value <= hi:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail=f"Unknown indicator '{indicator}'. Supported indicators: {list(REFERENCE_RANGES.keys())}",
+            detail=(
+                f"Value {reading_in.value} is not a possible {indicator} measurement "
+                f"(accepted range {lo:g}-{hi:g} {get_unit(indicator)})."
+            ),
         )
 
-    # Resolve unit
-    unit = reading_in.unit or get_unit(indicator)
-
-    # Parse measured_at timestamp
+    now = utcnow()
     if reading_in.measured_at:
         try:
-            measured_dt = datetime.fromisoformat(reading_in.measured_at.replace("Z", "+00:00"))
-        except Exception:
-            measured_dt = datetime.utcnow()
+            measured_dt = parse_iso_utc(reading_in.measured_at)
+        except ValueError:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail="measured_at must be an ISO 8601 timestamp, e.g. 2026-11-15T08:00:00Z.",
+            )
+        if measured_dt > now + FUTURE_TOLERANCE:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail="measured_at cannot be in the future.",
+            )
     else:
-        measured_dt = datetime.utcnow()
+        measured_dt = now
 
-    # Query up to 30 past historical values for this astronaut and indicator (chronological: oldest to newest)
-    past_records = (
-        db.query(Reading.value)
-        .filter(
-            Reading.astronaut_id == current_astro.id,
-            Reading.indicator == indicator,
-        )
-        .order_by(desc(Reading.measured_at))
-        .limit(30)
-        .all()
-    )
-    # Reverse so oldest to newest, as expected by baseline evaluator
-    history = [r[0] for r in reversed(past_records)]
-
-    # Clinical evaluation using Track B brain
+    history = get_history(db, current_astro.id, indicator, before=measured_dt)
     eval_res = evaluate(indicator, reading_in.value, history=history)
 
-    # Save to database
     db_reading = Reading(
         astronaut_id=current_astro.id,
         indicator=indicator,
         value=reading_in.value,
-        unit=unit,
+        unit=get_unit(indicator),
         status=eval_res.status,
         reason=eval_res.reason,
         measured_at=measured_dt,
@@ -81,17 +107,7 @@ def submit_reading(
     db.add(db_reading)
     db.commit()
     db.refresh(db_reading)
-
-    return ReadingResponse(
-        id=db_reading.id,
-        indicator=db_reading.indicator,
-        value=db_reading.value,
-        unit=db_reading.unit,
-        status=db_reading.status,
-        measured_at=db_reading.measured_at.isoformat(),
-        message=db_reading.reason or f"{indicator} recorded successfully.",
-        reason=db_reading.reason,
-    )
+    return to_response(db_reading)
 
 
 @router.get(
@@ -101,36 +117,21 @@ def submit_reading(
 )
 def get_readings(
     indicator: Optional[str] = Query(None, description="Optional indicator filter"),
-    days: int = Query(30, ge=1, le=180, description="Number of past days to query"),
+    days: int = Query(30, ge=1, le=365, description="Only readings from the last N days"),
     db: Session = Depends(get_db),
     current_astro: Astronaut = Depends(get_current_astronaut),
 ):
-    """Retrieve historical chronological readings for the active astronaut."""
-    query = db.query(Reading).filter(Reading.astronaut_id == current_astro.id)
-
+    """Readings of the active astronaut from the last `days` days, oldest first (UTC timestamps)."""
+    now = utcnow()
+    query = db.query(Reading).filter(
+        Reading.astronaut_id == current_astro.id,
+        Reading.measured_at >= now - timedelta(days=days),
+        Reading.measured_at <= now + FUTURE_TOLERANCE,
+    )
     if indicator:
         if indicator not in REFERENCE_RANGES:
-            raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-                detail=f"Unknown indicator '{indicator}'. Supported indicators: {list(REFERENCE_RANGES.keys())}",
-            )
+            raise _unknown_indicator(indicator)
         query = query.filter(Reading.indicator == indicator)
 
-    # Order by timestamp ascending for chart timelines
-    records = query.order_by(Reading.measured_at.asc()).all()
-
-    # If database has few/no records for this indicator (e.g. before full seed),
-    # return the available records
-    return [
-        ReadingResponse(
-            id=r.id,
-            indicator=r.indicator,
-            value=r.value,
-            unit=r.unit,
-            status=r.status,
-            measured_at=r.measured_at.isoformat(),
-            message=r.reason or f"{r.indicator} nominal observation.",
-            reason=r.reason,
-        )
-        for r in records
-    ]
+    records = query.order_by(Reading.measured_at.asc(), Reading.id.asc()).all()
+    return [to_response(r) for r in records]

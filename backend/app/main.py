@@ -16,6 +16,7 @@ from app.routers import (
     routine,
     body_map,
     ai_explanation,
+    nasa,
 )
 
 
@@ -55,6 +56,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
+    allow_origin_regex=settings.CORS_ORIGIN_REGEX,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -98,3 +100,4 @@ app.include_router(guidance.router, prefix="/api/guidance", tags=["guidance"])
 app.include_router(routine.router, prefix="/api/routine", tags=["routine"])
 app.include_router(body_map.router, prefix="/api/body-map", tags=["body-map"])
 app.include_router(ai_explanation.router, tags=["ai-explanation"])
+app.include_router(nasa.router, prefix="/api/nasa", tags=["nasa-data"])

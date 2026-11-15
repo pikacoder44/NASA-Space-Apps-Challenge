@@ -5,9 +5,14 @@ from pydantic import BaseModel, Field
 
 
 class NewReading(BaseModel):
-    """Payload to record a new physiological reading."""
+    """Payload to record a new physiological reading.
+
+    `unit` is accepted for compatibility but ignored: the server always stores the
+    standard unit of the indicator. `measured_at` is ISO 8601 (UTC 'Z' or an offset);
+    it defaults to now and cannot be in the future.
+    """
     indicator: str = Field(..., example="heart_rate")
-    value: float = Field(..., example=72.0)
+    value: float = Field(..., allow_inf_nan=False, example=72.0)
     unit: Optional[str] = Field(default=None, example="bpm")
     measured_at: Optional[str] = Field(default=None, example="2026-11-15T08:00:00Z")
 

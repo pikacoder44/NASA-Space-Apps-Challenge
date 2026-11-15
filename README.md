@@ -91,6 +91,41 @@ AstroTrack's indicators and guidance map directly to **NASA's Five Hazards of Hu
 
 ---
 
+## Backend: how to run
+
+Python 3.11+. Uses SQLite by default, so no database server is needed.
+
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate          # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+cp .env.example .env              # optional, defaults work offline
+uvicorn app.main:app --reload --port 8000
+```
+
+- On first start the demo astronaut is created and **simulated** mission days 1-90 are loaded (Day 90 = today). Reload by hand: `python -m scripts.seed --up-to-day 90 --force`
+- API docs: http://localhost:8000/docs · Health check: http://localhost:8000/health
+- Tests (same as CI): `cd backend && python -m pytest -q`
+- Postman: import `backend/postman/AstroTrack.postman_collection.json` and run the collection (or `newman run backend/postman/AstroTrack.postman_collection.json`).
+- `AUTH_REQUIRED=false` (default): requests without a token use the demo astronaut. Log in with `POST /api/auth/login` and send `Authorization: Bearer <token>` to use your own profile.
+
+| Endpoint | Purpose |
+|---|---|
+| `POST /api/auth/register`, `POST /api/auth/login` | Account and JWT token |
+| `GET /api/astronauts/me` | Current profile |
+| `POST /api/readings`, `GET /api/readings?indicator=&days=` | Log a reading (evaluated on save), trend data |
+| `GET /api/dashboard/summary` | Latest status of all 7 indicators from logged readings (`?day=N`: simulated scenario) |
+| `GET /api/guidance/{indicator}/{status}` | Plain-language guidance |
+| `GET /api/body-map/{part}`, `GET /api/routine/today` | Body map status, today's checklist |
+| `GET /api/nasa/inspiration4/glucose`, `GET /api/nasa/sources` | Real NASA data (OSDR OSD-575) and NASA resources used |
+
+**Data sources:** `data/nasa/` holds real NASA OSDR data (SpaceX Inspiration4 blood glucose, OSD-575; see `data/nasa/README.md`). `data/simulator/` is **synthetic** demo data for the other indicators, always labelled `source: "simulator"` in the API.
+
+**Deploy (Render/Railway):** root directory `backend`, build `pip install -r requirements.txt`, start `uvicorn app.main:app --host 0.0.0.0 --port $PORT`, health check `/health`. Set `SECRET_KEY` and `FRONTEND_URL` (your Vercel URL). Keep the repository `data/` folder available (the default path is `../data`). Free hosting may reset SQLite; the demo data is re-seeded on startup.
+
+---
+
 ## Local Development Setup
 
 ### Prerequisites

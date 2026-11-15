@@ -9,6 +9,7 @@ from app.routers import (
     routine,
     body_map,
     ai_explanation,
+    nasa,
 )
 
 __all__ = [
@@ -20,4 +21,5 @@ __all__ = [
     "routine",
     "body_map",
     "ai_explanation",
+    "nasa",
 ]

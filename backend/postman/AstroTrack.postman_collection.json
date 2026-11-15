@@ -1,0 +1,728 @@
+{
+  "info": {
+    "name": "AstroTrack AAHMS Backend",
+    "description": "End-to-end checks for the AstroTrack FastAPI backend. Run the whole collection in order (folder 2 registers, logs in and stores the token). Set baseUrl to your server.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "email",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Health",
+      "item": [
+        {
+          "name": "Health check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/health"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 and status ok\", () => { pm.response.to.have.status(200); pm.expect(pm.response.json().status).to.eql(\"ok\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Root",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"operational\", () => pm.expect(pm.response.json().status).to.eql(\"operational\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"PostmanPass123!\",\n  \"name\": \"Postman Crew\",\n  \"role\": \"FE-1\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.collectionVariables.set(\"email\", \"postman_\" + Date.now() + \"@astrotrack.space\");"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"201 created\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"no password in response\", () => pm.expect(pm.response.json()).to.not.have.property(\"password_hash\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Register duplicate email -> 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"PostmanPass123!\",\n  \"name\": \"Postman Crew\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"400 duplicate\", () => pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"PostmanPass123!\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200 with token\", () => { pm.response.to.have.status(200); pm.expect(pm.response.json().token_type).to.eql(\"bearer\"); });",
+                  "pm.collectionVariables.set(\"token\", pm.response.json().access_token);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login wrong password -> 401",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"WrongPass999!\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"401\", () => pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Me (logged in)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/astronauts/me"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"returns the registered astronaut\", () => pm.expect(pm.response.json().name).to.eql(\"Postman Crew\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Me (anonymous = demo astronaut)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/astronauts/me"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"demo astronaut id 1\", () => pm.expect(pm.response.json().id).to.eql(\"1\"));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. Readings",
+      "item": [
+        {
+          "name": "Submit reading",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/readings",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"indicator\": \"heart_rate\",\n  \"value\": 72,\n  \"unit\": \"bpm\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const r = pm.response.json();",
+                  "pm.test(\"201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"status is valid\", () => pm.expect([\"normal\",\"warning\",\"critical\"]).to.include(r.status));",
+                  "pm.test(\"UTC timestamp with Z\", () => pm.expect(r.measured_at.endsWith(\"Z\")).to.be.true);",
+                  "pm.test(\"standard unit\", () => pm.expect(r.unit).to.eql(\"bpm\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Unknown indicator -> 422",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/readings",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"indicator\": \"warp_flux\",\n  \"value\": 1\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"422\", () => pm.response.to.have.status(422));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Impossible value (98.6 as Celsius) -> 422",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/readings",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"indicator\": \"body_temp\",\n  \"value\": 98.6\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"422\", () => pm.response.to.have.status(422));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "NaN value -> 422",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/readings",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"indicator\": \"heart_rate\",\n  \"value\": \"NaN\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"422\", () => pm.response.to.have.status(422));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Future timestamp -> 422",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/readings",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"indicator\": \"heart_rate\",\n  \"value\": 70,\n  \"measured_at\": \"2099-01-01T00:00:00Z\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"422\", () => pm.response.to.have.status(422));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "List readings (last 7 days)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/readings?indicator=heart_rate&days=7"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const rows = pm.response.json();",
+                  "pm.test(\"array with my reading\", () => { pm.expect(rows).to.be.an(\"array\"); pm.expect(rows.length).to.be.at.least(1); });",
+                  "pm.test(\"nothing older than 7 days or in the future\", () => {",
+                  "  const now = Date.now();",
+                  "  rows.forEach(r => { const t = Date.parse(r.measured_at); pm.expect(t).to.be.at.least(now - 7*864e5); pm.expect(t).to.be.at.most(now + 6e5); });",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4. Dashboard",
+      "item": [
+        {
+          "name": "Demo dashboard (seeded DB)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/dashboard/summary"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const b = pm.response.json();",
+                  "pm.test(\"7 indicators\", () => pm.expect(b.indicators.length).to.eql(7));",
+                  "pm.test(\"from database\", () => pm.expect(b.data_source).to.eql(\"database\"));",
+                  "pm.test(\"Day 90 story = warning\", () => pm.expect(b.overall_status).to.eql(\"warning\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Submit critical heart rate",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/readings",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"indicator\": \"heart_rate\",\n  \"value\": 190\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"critical\", () => pm.expect(pm.response.json().status).to.eql(\"critical\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "My dashboard shows the new reading",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/dashboard/summary"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const b = pm.response.json();",
+                  "const hr = b.indicators.find(i => i.indicator === \"heart_rate\");",
+                  "pm.test(\"heart rate 190 from database\", () => { pm.expect(hr.value).to.eql(190); pm.expect(hr.source).to.eql(\"database\"); });",
+                  "pm.test(\"overall critical\", () => pm.expect(b.overall_status).to.eql(\"critical\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Simulated scenario day 90",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/dashboard/summary?day=90"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"simulator, warning\", () => { const b = pm.response.json(); pm.expect(b.data_source).to.eql(\"simulator\"); pm.expect(b.overall_status).to.eql(\"warning\"); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "5. Guidance, body map, routine",
+      "item": [
+        {
+          "name": "Guidance sleep warning",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/guidance/sleep_hours/warning"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"has advice and disclaimer\", () => { const b = pm.response.json(); pm.expect(b.advice.length).to.be.above(0); pm.expect(b.disclaimer).to.be.a(\"string\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Guidance invalid status -> 400",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/guidance/heart_rate/purple"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"400\", () => pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Body map chest",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/body-map/chest"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"chest includes heart rate, critical after 190 bpm\", () => { const b = pm.response.json(); pm.expect(b.indicators).to.include(\"heart_rate\"); pm.expect(b.status).to.eql(\"critical\"); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Body map unknown -> 404",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/body-map/tail"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"404\", () => pm.response.to.have.status(404));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Routine today",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/routine/today"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const t = pm.response.json();",
+                  "pm.test(\"4 daily tasks + heart rate follow-up\", () => { pm.expect(t.length).to.be.at.least(5); pm.expect(t.find(x => x.id === \"follow-up-heart_rate\")).to.exist; });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "6. NASA data",
+      "item": [
+        {
+          "name": "NASA sources",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/nasa/sources"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"lists OSD-575\", () => pm.expect(pm.response.json().map(s => s.url)).to.include(\"https://osdr.nasa.gov/bio/repo/data/studies/OSD-575\"));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Inspiration4 glucose (OSD-575)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/nasa/inspiration4/glucose"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const b = pm.response.json();",
+                  "pm.test(\"real NASA data: 4 crew, 28 values\", () => { pm.expect(b.source.study_id).to.eql(\"OSD-575\"); pm.expect(b.crew.length).to.eql(4); pm.expect(b.summary.count).to.eql(28); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "7. AI explanation",
+      "item": [
+        {
+          "name": "AI explanation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/api/health/ai-explanation",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"indicator\": \"sleep_hours\",\n  \"status\": \"warning\"\n}"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -7,6 +7,7 @@ standard deviation edge cases, vital absolute safety priority, and the Day 90 wa
 import os
 import sys
 import unittest
+from unittest.mock import patch
 
 _REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 _BACKEND_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -310,8 +311,13 @@ class TestBaselineEvaluator(unittest.TestCase):
         self.assertAlmostEqual(std, math.sqrt(200.0 / 3.0))
 
 
+    @patch.dict("app.services.baseline.MIN_STD", {}, clear=True)
     def test_z_score_boundary_fp_regression(self):
         """Regression: z=2.5 and z=1.5 exact boundary values must land in warning, not critical/normal.
+
+        Runs without the per-indicator SD floor (so std = EPSILON_STD) and around
+        105 bpm, i.e. outside the normal reference range, so the "never critical
+        inside the normal range" rule does not mask the z-score bands under test.
 
         IEEE 754 representation of values like mean + 2.5 * epsilon_std can produce a
         z-score of 2.5000000000005684 due to catastrophic cancellation in subtraction.
@@ -324,8 +330,8 @@ class TestBaselineEvaluator(unittest.TestCase):
         from app.services.baseline import EPSILON_STD
 
         # Flat history of 7 identical values -> std=0.0, clamped to EPSILON_STD (0.01)
-        h_flat = [65.0] * 7
-        mean = 65.0
+        h_flat = [105.0] * 7
+        mean = 105.0
         eps = EPSILON_STD  # 0.01
 
         # --- Upper bound: z = +2.5 (vitals branch, both directions) ---
@@ -382,8 +388,8 @@ class TestBaselineEvaluator(unittest.TestCase):
                          f"z just above 1.5 must be warning, got {res_above_1p5.status}")
 
         # --- Sleep/mood branch: z = -2.5 boundary (only drops count) ---
-        h_sleep_flat = [7.5] * 7
-        mean_s = 7.5
+        h_sleep_flat = [6.5] * 7
+        mean_s = 6.5
 
         val_sleep_z2p5 = mean_s - 2.5 * eps  # z = -2.5 exact
         res_sleep_at = evaluate_baseline("sleep_hours", val_sleep_z2p5, history=h_sleep_flat)
@@ -395,6 +401,39 @@ class TestBaselineEvaluator(unittest.TestCase):
         self.assertEqual(res_sleep_above.status, "critical",
                          f"sleep z clearly below -2.5 must be critical, got {res_sleep_above.status}")
 
+
+
+class TestBaselineCalibration(unittest.TestCase):
+    """SD floor and 'never critical inside the normal reference range' rule."""
+
+    def test_small_change_on_stable_history_is_normal(self):
+        # Flat 65 bpm history: +2 bpm used to be "extreme deviation" (std clamped to 0.01).
+        res = evaluate_baseline("heart_rate", 67.0, history=[65.0] * 10)
+        self.assertEqual(res.status, "normal")
+
+    def test_value_inside_normal_range_is_never_critical(self):
+        res = evaluate_baseline("heart_rate", 95.0, history=[65.0] * 10)  # z = 12, but 95 is in 60-100
+        self.assertEqual(res.status, "warning")
+        self.assertIn("normal reference range", res.reason)
+        res = evaluate_baseline("body_temp", 37.1, history=[36.5] * 10)
+        self.assertEqual(res.status, "warning")
+
+    def test_large_deviation_outside_normal_range_is_still_critical(self):
+        self.assertEqual(evaluate_baseline("heart_rate", 110.0, history=[65.0] * 10).status, "critical")
+        self.assertEqual(evaluate_baseline("sleep_hours", 4.0, history=[7.5] * 10).status, "critical")
+
+    def test_absolute_vital_limits_unchanged(self):
+        self.assertEqual(evaluate_baseline("heart_rate", 130.0, history=[110.0] * 10).status, "critical")
+
+    def test_simulated_mission_has_few_critical_days_and_day_90_is_warning(self):
+        from app.routers.dashboard import _load_fallback_mission_data, compute_dashboard_summary
+        overall = {
+            d: compute_dashboard_summary(indicator_data=_load_fallback_mission_data(day=d), mission_day=d).overall_status
+            for d in range(1, 181)
+        }
+        self.assertEqual(overall[90], "warning")
+        self.assertEqual([overall[d] for d in (42, 43, 44)], ["critical"] * 3)  # infection event
+        self.assertLessEqual(sum(1 for v in overall.values() if v == "critical"), 10)
 
 if __name__ == "__main__":
     unittest.main()
