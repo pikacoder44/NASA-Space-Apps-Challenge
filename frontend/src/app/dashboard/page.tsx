@@ -11,7 +11,6 @@ import {
   PlusCircle, 
   Compass, 
   ShieldAlert, 
-  CheckCircle2, 
   AlertTriangle,
   ArrowRight,
   Sparkles,
@@ -19,8 +18,7 @@ import {
   X,
   Stethoscope,
   Radio,
-  TrendingUp,
-  Award
+  TrendingUp
 } from 'lucide-react';
 import { STATUS_COLORS } from '../../lib/colors';
 import { getDashboardSummary, getRoutineTasks } from '../../lib/api';
@@ -144,12 +142,12 @@ function Sparkline({ data, color }: { data: number[]; color: string }) {
 
 const TREND_OPTIONS = [
   { id: 'heart_rate', name: 'Resting Heart Rate' },
-  { id: 'sleep', name: 'Sleep Duration' },
-  { id: 'hrv', name: 'Heart Rate Variability' },
-  { id: 'blood_pressure', name: 'Blood Pressure' },
-  { id: 'skin_temperature', name: 'Core Temperature' },
-  { id: 'oxygen_saturation', name: 'Oxygen Saturation' },
-  { id: 'radiation_dosimetry', name: 'Radiation Dosimetry' }
+  { id: 'blood_pressure_systolic', name: 'Systolic Blood Pressure' },
+  { id: 'blood_pressure_diastolic', name: 'Diastolic Blood Pressure' },
+  { id: 'body_temp', name: 'Core Body Temperature' },
+  { id: 'blood_sugar', name: 'Blood Glucose' },
+  { id: 'sleep_hours', name: 'Sleep Duration' },
+  { id: 'mood_score', name: 'Subjective Mood Score' },
 ];
 
 export default function DashboardPage() {
@@ -179,6 +177,7 @@ export default function DashboardPage() {
       case 'blood_pressure_systolic':
       case 'blood_pressure_diastolic': return <Activity size={16} className="text-[#3b82f6]" />;
       case 'body_temp': return <Flame size={16} className="text-[#f97316]" />;
+      case 'blood_sugar': return <Activity size={16} className="text-[#10b981]" />;
       case 'sleep_hours': return <Moon size={16} className="text-[#8b5cf6]" />;
       case 'mood_score': return <Smile size={16} className="text-[#10b981]" />;
       default: return <Activity size={16} className="text-[#14b8a6]" />;
@@ -197,7 +196,7 @@ export default function DashboardPage() {
             Dashboard
           </h2>
           <p className="text-sm text-[#60716E] mt-0.5">
-            Crew Member (demo) · CDR-01 · Sol {summary?.astronaut.mission_day || 90}
+            Crew Member (demo) · CDR-01 · Sol {summary?.astronaut?.mission_day || summary?.mission_day || 90}
             {isDegradedLink && (
               <span className="ml-2 inline-flex items-center gap-1 text-xs font-semibold text-[#8A520F] bg-[#FBF0D9] border border-[#EED8A7] px-2 py-0.5 rounded-full">
                 <Radio size={11} className="shrink-0" />
@@ -304,11 +303,15 @@ export default function DashboardPage() {
           {summary?.indicators.map((ind) => {
             const statusColor = STATUS_COLORS[ind.status] || '#6b7280';
             const detail = INDICATOR_DETAILS[ind.indicator];
-            const contextText = detail 
-              ? detail.contextSentence(ind.value, ind.status) 
+            const fallbackText = detail 
+              ? detail.contextSentence(ind.value ?? ind.latest_value ?? 0, ind.status) 
               : 'Within safe flight baseline range.';
-            const sparklinePoints = detail ? detail.sparkline : [ind.value - 2, ind.value, ind.value + 1, ind.value];
+            const reasonText = ind.reason || ind.message || fallbackText;
+            const sparklinePoints = (ind.trend_7d && ind.trend_7d.length > 0) 
+              ? ind.trend_7d 
+              : (detail ? detail.sparkline : [ind.value - 2, ind.value, ind.value + 1, ind.value]);
             const shortLabel = SHORT_STATUS_LABEL[ind.status] || 'Normal';
+            const displayValue = ind.value ?? ind.latest_value ?? 0;
 
             return (
               <div
@@ -335,17 +338,24 @@ export default function DashboardPage() {
                       </button>
                     </div>
 
-                    <span 
-                      className="text-[11px] font-bold px-2 py-0.5 rounded-full text-white shrink-0"
-                      style={{ backgroundColor: statusColor }}
-                    >
-                      {shortLabel}
-                    </span>
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      {ind.mode && (
+                        <span className="text-[10px] font-semibold uppercase px-1.5 py-0.5 rounded bg-[#EAF0ED] text-[#176B68]">
+                          {ind.mode}
+                        </span>
+                      )}
+                      <span 
+                        className="text-[11px] font-bold px-2 py-0.5 rounded-full text-white shrink-0"
+                        style={{ backgroundColor: statusColor }}
+                      >
+                        {shortLabel}
+                      </span>
+                    </div>
                   </div>
 
                   {/* Value row */}
                   <div className="mt-3 flex items-baseline gap-1.5">
-                    <span className="text-3xl font-extrabold text-[#172A2B] font-mono">{ind.value}</span>
+                    <span className="text-3xl font-extrabold text-[#172A2B] font-mono">{displayValue}</span>
                     <span className="text-xs text-[#60716E]">{ind.unit}</span>
                   </div>
 
@@ -354,9 +364,9 @@ export default function DashboardPage() {
                     <Sparkline data={sparklinePoints} color={statusColor} />
                   </div>
 
-                  {/* Context sentence */}
-                  <p className="mt-2 text-xs text-[#60716E] leading-relaxed">
-                    {contextText}
+                  {/* Context / Reason sentence (clean word wrapping) */}
+                  <p className="mt-2 text-xs text-[#60716E] leading-relaxed break-words line-clamp-3">
+                    {reasonText}
                   </p>
                 </div>
 
@@ -524,6 +534,14 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* Backend Clinical Disclaimer Banner */}
+      {summary?.disclaimer && (
+        <div className="p-3.5 rounded-xl bg-[#F4F6F4] border border-[#D9E2DE] text-xs text-[#60716E] flex items-start gap-2.5">
+          <Info size={15} className="text-[#176B68] shrink-0 mt-0.5" />
+          <p className="leading-relaxed">{summary.disclaimer}</p>
+        </div>
+      )}
     </div>
   );
 }
