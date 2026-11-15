@@ -65,7 +65,7 @@ const INDICATOR_METADATA: Record<Indicator, { name: string; unit: string; normal
     unit: 'mg/dL',
     normal: [70, 140],
     warning: [60, 180],
-    desc: 'Post-absorptive energy metabolism and insulin sensitivity.'
+    desc: 'Capillary glucose monitored for metabolic stability, insulin resistance, and nutrition management in spaceflight.'
   },
   sleep_hours: {
     name: 'Sleep Duration',

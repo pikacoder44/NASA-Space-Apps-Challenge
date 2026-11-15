@@ -1,5 +1,15 @@
 import { DataOrigin, DataQuality } from '../types/health';
 
+export const TREND_OPTIONS = [
+  { id: 'heart_rate', name: 'Resting Heart Rate' },
+  { id: 'blood_pressure_systolic', name: 'Systolic Blood Pressure' },
+  { id: 'blood_pressure_diastolic', name: 'Diastolic Blood Pressure' },
+  { id: 'body_temp', name: 'Core Body Temperature' },
+  { id: 'blood_sugar', name: 'Blood Glucose' },
+  { id: 'sleep_hours', name: 'Sleep Duration' },
+  { id: 'mood_score', name: 'Subjective Mood Score' },
+];
+
 export interface TrendDataPoint {
   missionDay: number;
   dateStr: string;
@@ -45,7 +55,7 @@ export function generateTrendHistory(
     let origin: DataOrigin = 'sensor';
     let quality: DataQuality = 'valid';
 
-    if (indicatorId === 'sleep') {
+    if (indicatorId === 'sleep' || indicatorId === 'sleep_hours') {
       unit = 'hrs';
       title = 'Sleep Duration';
       base = 7.3;
@@ -96,7 +106,7 @@ export function generateTrendHistory(
         const jitter = Math.cos(day * 0.8) * 4;
         val = Math.round(50 + jitter);
       }
-    } else if (indicatorId === 'blood_pressure') {
+    } else if (indicatorId === 'blood_pressure' || indicatorId === 'blood_pressure_systolic') {
       unit = 'mmHg';
       title = 'Systolic Blood Pressure';
       base = 120;
@@ -111,9 +121,24 @@ export function generateTrendHistory(
         const jitter = Math.sin(day * 0.3) * 3;
         val = Math.round(119 + jitter);
       }
-    } else if (indicatorId === 'skin_temperature') {
+    } else if (indicatorId === 'blood_pressure_diastolic') {
+      unit = 'mmHg';
+      title = 'Diastolic Blood Pressure';
+      base = 80;
+      baseLow = 75;
+      baseHigh = 85;
+      baselineLabel = 'Personal Baseline: 80 mmHg (75–85 mmHg)';
+      origin = 'manual';
+
+      if (day >= 87) {
+        val = day === 87 ? 82 : day === 88 ? 84 : day === 89 ? 85 : 86;
+      } else {
+        const jitter = Math.sin(day * 0.4) * 2;
+        val = Math.round(80 + jitter);
+      }
+    } else if (indicatorId === 'skin_temperature' || indicatorId === 'body_temp') {
       unit = '°C';
-      title = 'Core/Skin Temperature';
+      title = 'Core Body Temperature';
       base = 36.7;
       baseLow = 36.4;
       baseHigh = 37.1;
@@ -122,20 +147,20 @@ export function generateTrendHistory(
 
       const jitter = Math.sin(day * 0.6) * 0.15;
       val = Math.round((36.7 + jitter) * 10) / 10;
-    } else if (indicatorId === 'mood') {
-      unit = '/5';
-      title = 'Subjective Mood';
-      base = 4.4;
-      baseLow = 4.0;
-      baseHigh = 5.0;
-      baselineLabel = 'Personal Baseline: 4.4 / 5.0';
+    } else if (indicatorId === 'mood' || indicatorId === 'mood_score') {
+      unit = '/10';
+      title = 'Subjective Mood Score';
+      base = 7.0;
+      baseLow = 6.0;
+      baseHigh = 9.0;
+      baselineLabel = 'Personal Baseline: 7.0 / 10.0';
       origin = 'self_reported';
 
       if (day >= 87) {
-        val = day === 87 ? 3.5 : day === 88 ? 2.9 : day === 89 ? 2.4 : 2.2;
+        val = day === 87 ? 6.2 : day === 88 ? 5.5 : day === 89 ? 4.8 : 4.5;
       } else {
-        const jitter = Math.sin(day * 0.4) * 0.3;
-        val = Math.round((4.3 + jitter) * 10) / 10;
+        const jitter = Math.sin(day * 0.4) * 0.5;
+        val = Math.round((7.0 + jitter) * 10) / 10;
       }
     } else if (indicatorId === 'fatigue') {
       unit = '/5';
@@ -176,9 +201,9 @@ export function generateTrendHistory(
         const jitter = Math.round((Math.sin(day * 0.9) * 5) / 5) * 5;
         val = 60 + jitter;
       }
-    } else if (indicatorId === 'blood_glucose') {
+    } else if (indicatorId === 'blood_glucose' || indicatorId === 'blood_sugar') {
       unit = 'mg/dL';
-      title = 'Fasting Blood Glucose';
+      title = 'Blood Glucose';
       base = 90;
       baseLow = 82;
       baseHigh = 102;
