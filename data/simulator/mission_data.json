@@ -1,0 +1,6302 @@
+[
+  {
+    "day": 1,
+    "indicator": "heart_rate",
+    "value": 64.5
+  },
+  {
+    "day": 1,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.4
+  },
+  {
+    "day": 1,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.7
+  },
+  {
+    "day": 1,
+    "indicator": "body_temp",
+    "value": 36.71
+  },
+  {
+    "day": 1,
+    "indicator": "blood_sugar",
+    "value": 91.4
+  },
+  {
+    "day": 1,
+    "indicator": "sleep_hours",
+    "value": 6.1
+  },
+  {
+    "day": 1,
+    "indicator": "mood_score",
+    "value": 8.2
+  },
+  {
+    "day": 2,
+    "indicator": "heart_rate",
+    "value": 64.1
+  },
+  {
+    "day": 2,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.2
+  },
+  {
+    "day": 2,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.3
+  },
+  {
+    "day": 2,
+    "indicator": "body_temp",
+    "value": 36.63
+  },
+  {
+    "day": 2,
+    "indicator": "blood_sugar",
+    "value": 97.2
+  },
+  {
+    "day": 2,
+    "indicator": "sleep_hours",
+    "value": 7.5
+  },
+  {
+    "day": 2,
+    "indicator": "mood_score",
+    "value": 8.1
+  },
+  {
+    "day": 3,
+    "indicator": "heart_rate",
+    "value": 62.6
+  },
+  {
+    "day": 3,
+    "indicator": "blood_pressure_systolic",
+    "value": 108.4
+  },
+  {
+    "day": 3,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.6
+  },
+  {
+    "day": 3,
+    "indicator": "body_temp",
+    "value": 36.8
+  },
+  {
+    "day": 3,
+    "indicator": "blood_sugar",
+    "value": 92.2
+  },
+  {
+    "day": 3,
+    "indicator": "sleep_hours",
+    "value": 7.0
+  },
+  {
+    "day": 3,
+    "indicator": "mood_score",
+    "value": 8.4
+  },
+  {
+    "day": 4,
+    "indicator": "heart_rate",
+    "value": 60.3
+  },
+  {
+    "day": 4,
+    "indicator": "blood_pressure_systolic",
+    "value": 110.9
+  },
+  {
+    "day": 4,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.2
+  },
+  {
+    "day": 4,
+    "indicator": "body_temp",
+    "value": 36.73
+  },
+  {
+    "day": 4,
+    "indicator": "blood_sugar",
+    "value": 90.9
+  },
+  {
+    "day": 4,
+    "indicator": "sleep_hours",
+    "value": 7.3
+  },
+  {
+    "day": 4,
+    "indicator": "mood_score",
+    "value": 8.2
+  },
+  {
+    "day": 5,
+    "indicator": "heart_rate",
+    "value": 67.5
+  },
+  {
+    "day": 5,
+    "indicator": "blood_pressure_systolic",
+    "value": 108.1
+  },
+  {
+    "day": 5,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.4
+  },
+  {
+    "day": 5,
+    "indicator": "body_temp",
+    "value": 36.37
+  },
+  {
+    "day": 5,
+    "indicator": "blood_sugar",
+    "value": 80.2
+  },
+  {
+    "day": 5,
+    "indicator": "sleep_hours",
+    "value": 6.7
+  },
+  {
+    "day": 5,
+    "indicator": "mood_score",
+    "value": 7.4
+  },
+  {
+    "day": 6,
+    "indicator": "heart_rate",
+    "value": 67.8
+  },
+  {
+    "day": 6,
+    "indicator": "blood_pressure_systolic",
+    "value": 114.3
+  },
+  {
+    "day": 6,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.0
+  },
+  {
+    "day": 6,
+    "indicator": "body_temp",
+    "value": 36.73
+  },
+  {
+    "day": 6,
+    "indicator": "blood_sugar",
+    "value": 87.5
+  },
+  {
+    "day": 6,
+    "indicator": "sleep_hours",
+    "value": 7.0
+  },
+  {
+    "day": 6,
+    "indicator": "mood_score",
+    "value": 7.8
+  },
+  {
+    "day": 7,
+    "indicator": "heart_rate",
+    "value": 65.4
+  },
+  {
+    "day": 7,
+    "indicator": "blood_pressure_systolic",
+    "value": 114.9
+  },
+  {
+    "day": 7,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.6
+  },
+  {
+    "day": 7,
+    "indicator": "body_temp",
+    "value": 36.65
+  },
+  {
+    "day": 7,
+    "indicator": "blood_sugar",
+    "value": 94.9
+  },
+  {
+    "day": 7,
+    "indicator": "sleep_hours",
+    "value": 7.4
+  },
+  {
+    "day": 7,
+    "indicator": "mood_score",
+    "value": 7.6
+  },
+  {
+    "day": 8,
+    "indicator": "heart_rate",
+    "value": 62.7
+  },
+  {
+    "day": 8,
+    "indicator": "blood_pressure_systolic",
+    "value": 110.4
+  },
+  {
+    "day": 8,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.2
+  },
+  {
+    "day": 8,
+    "indicator": "body_temp",
+    "value": 36.56
+  },
+  {
+    "day": 8,
+    "indicator": "blood_sugar",
+    "value": 102.5
+  },
+  {
+    "day": 8,
+    "indicator": "sleep_hours",
+    "value": 6.6
+  },
+  {
+    "day": 8,
+    "indicator": "mood_score",
+    "value": 7.2
+  },
+  {
+    "day": 9,
+    "indicator": "heart_rate",
+    "value": 67.5
+  },
+  {
+    "day": 9,
+    "indicator": "blood_pressure_systolic",
+    "value": 117.0
+  },
+  {
+    "day": 9,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.3
+  },
+  {
+    "day": 9,
+    "indicator": "body_temp",
+    "value": 36.73
+  },
+  {
+    "day": 9,
+    "indicator": "blood_sugar",
+    "value": 98.4
+  },
+  {
+    "day": 9,
+    "indicator": "sleep_hours",
+    "value": 7.0
+  },
+  {
+    "day": 9,
+    "indicator": "mood_score",
+    "value": 7.0
+  },
+  {
+    "day": 10,
+    "indicator": "heart_rate",
+    "value": 63.3
+  },
+  {
+    "day": 10,
+    "indicator": "blood_pressure_systolic",
+    "value": 115.3
+  },
+  {
+    "day": 10,
+    "indicator": "blood_pressure_diastolic",
+    "value": 69.4
+  },
+  {
+    "day": 10,
+    "indicator": "body_temp",
+    "value": 36.61
+  },
+  {
+    "day": 10,
+    "indicator": "blood_sugar",
+    "value": 93.1
+  },
+  {
+    "day": 10,
+    "indicator": "sleep_hours",
+    "value": 6.9
+  },
+  {
+    "day": 10,
+    "indicator": "mood_score",
+    "value": 8.5
+  },
+  {
+    "day": 11,
+    "indicator": "heart_rate",
+    "value": 66.9
+  },
+  {
+    "day": 11,
+    "indicator": "blood_pressure_systolic",
+    "value": 120.1
+  },
+  {
+    "day": 11,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.5
+  },
+  {
+    "day": 11,
+    "indicator": "body_temp",
+    "value": 36.51
+  },
+  {
+    "day": 11,
+    "indicator": "blood_sugar",
+    "value": 89.5
+  },
+  {
+    "day": 11,
+    "indicator": "sleep_hours",
+    "value": 6.6
+  },
+  {
+    "day": 11,
+    "indicator": "mood_score",
+    "value": 8.7
+  },
+  {
+    "day": 12,
+    "indicator": "heart_rate",
+    "value": 63.2
+  },
+  {
+    "day": 12,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.8
+  },
+  {
+    "day": 12,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.9
+  },
+  {
+    "day": 12,
+    "indicator": "body_temp",
+    "value": 36.49
+  },
+  {
+    "day": 12,
+    "indicator": "blood_sugar",
+    "value": 90.7
+  },
+  {
+    "day": 12,
+    "indicator": "sleep_hours",
+    "value": 5.9
+  },
+  {
+    "day": 12,
+    "indicator": "mood_score",
+    "value": 7.2
+  },
+  {
+    "day": 13,
+    "indicator": "heart_rate",
+    "value": 63.2
+  },
+  {
+    "day": 13,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.5
+  },
+  {
+    "day": 13,
+    "indicator": "blood_pressure_diastolic",
+    "value": 76.0
+  },
+  {
+    "day": 13,
+    "indicator": "body_temp",
+    "value": 36.6
+  },
+  {
+    "day": 13,
+    "indicator": "blood_sugar",
+    "value": 93.2
+  },
+  {
+    "day": 13,
+    "indicator": "sleep_hours",
+    "value": 7.2
+  },
+  {
+    "day": 13,
+    "indicator": "mood_score",
+    "value": 8.8
+  },
+  {
+    "day": 14,
+    "indicator": "heart_rate",
+    "value": 67.9
+  },
+  {
+    "day": 14,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.0
+  },
+  {
+    "day": 14,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.5
+  },
+  {
+    "day": 14,
+    "indicator": "body_temp",
+    "value": 36.74
+  },
+  {
+    "day": 14,
+    "indicator": "blood_sugar",
+    "value": 93.7
+  },
+  {
+    "day": 14,
+    "indicator": "sleep_hours",
+    "value": 7.9
+  },
+  {
+    "day": 14,
+    "indicator": "mood_score",
+    "value": 8.0
+  },
+  {
+    "day": 15,
+    "indicator": "heart_rate",
+    "value": 71.2
+  },
+  {
+    "day": 15,
+    "indicator": "blood_pressure_systolic",
+    "value": 110.7
+  },
+  {
+    "day": 15,
+    "indicator": "blood_pressure_diastolic",
+    "value": 77.0
+  },
+  {
+    "day": 15,
+    "indicator": "body_temp",
+    "value": 36.62
+  },
+  {
+    "day": 15,
+    "indicator": "blood_sugar",
+    "value": 89.7
+  },
+  {
+    "day": 15,
+    "indicator": "sleep_hours",
+    "value": 6.4
+  },
+  {
+    "day": 15,
+    "indicator": "mood_score",
+    "value": 7.9
+  },
+  {
+    "day": 16,
+    "indicator": "heart_rate",
+    "value": 69.6
+  },
+  {
+    "day": 16,
+    "indicator": "blood_pressure_systolic",
+    "value": 114.9
+  },
+  {
+    "day": 16,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.7
+  },
+  {
+    "day": 16,
+    "indicator": "body_temp",
+    "value": 36.24
+  },
+  {
+    "day": 16,
+    "indicator": "blood_sugar",
+    "value": 95.2
+  },
+  {
+    "day": 16,
+    "indicator": "sleep_hours",
+    "value": 7.5
+  },
+  {
+    "day": 16,
+    "indicator": "mood_score",
+    "value": 7.6
+  },
+  {
+    "day": 17,
+    "indicator": "heart_rate",
+    "value": 63.0
+  },
+  {
+    "day": 17,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.0
+  },
+  {
+    "day": 17,
+    "indicator": "blood_pressure_diastolic",
+    "value": 77.3
+  },
+  {
+    "day": 17,
+    "indicator": "body_temp",
+    "value": 36.44
+  },
+  {
+    "day": 17,
+    "indicator": "blood_sugar",
+    "value": 90.1
+  },
+  {
+    "day": 17,
+    "indicator": "sleep_hours",
+    "value": 8.0
+  },
+  {
+    "day": 17,
+    "indicator": "mood_score",
+    "value": 7.7
+  },
+  {
+    "day": 18,
+    "indicator": "heart_rate",
+    "value": 63.8
+  },
+  {
+    "day": 18,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.3
+  },
+  {
+    "day": 18,
+    "indicator": "blood_pressure_diastolic",
+    "value": 69.9
+  },
+  {
+    "day": 18,
+    "indicator": "body_temp",
+    "value": 36.63
+  },
+  {
+    "day": 18,
+    "indicator": "blood_sugar",
+    "value": 86.6
+  },
+  {
+    "day": 18,
+    "indicator": "sleep_hours",
+    "value": 7.7
+  },
+  {
+    "day": 18,
+    "indicator": "mood_score",
+    "value": 8.0
+  },
+  {
+    "day": 19,
+    "indicator": "heart_rate",
+    "value": 72.3
+  },
+  {
+    "day": 19,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.0
+  },
+  {
+    "day": 19,
+    "indicator": "blood_pressure_diastolic",
+    "value": 76.4
+  },
+  {
+    "day": 19,
+    "indicator": "body_temp",
+    "value": 36.4
+  },
+  {
+    "day": 19,
+    "indicator": "blood_sugar",
+    "value": 91.5
+  },
+  {
+    "day": 19,
+    "indicator": "sleep_hours",
+    "value": 7.3
+  },
+  {
+    "day": 19,
+    "indicator": "mood_score",
+    "value": 9.2
+  },
+  {
+    "day": 20,
+    "indicator": "heart_rate",
+    "value": 59.6
+  },
+  {
+    "day": 20,
+    "indicator": "blood_pressure_systolic",
+    "value": 115.5
+  },
+  {
+    "day": 20,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.5
+  },
+  {
+    "day": 20,
+    "indicator": "body_temp",
+    "value": 36.83
+  },
+  {
+    "day": 20,
+    "indicator": "blood_sugar",
+    "value": 95.2
+  },
+  {
+    "day": 20,
+    "indicator": "sleep_hours",
+    "value": 7.1
+  },
+  {
+    "day": 20,
+    "indicator": "mood_score",
+    "value": 7.6
+  },
+  {
+    "day": 21,
+    "indicator": "heart_rate",
+    "value": 61.0
+  },
+  {
+    "day": 21,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.7
+  },
+  {
+    "day": 21,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.5
+  },
+  {
+    "day": 21,
+    "indicator": "body_temp",
+    "value": 36.9
+  },
+  {
+    "day": 21,
+    "indicator": "blood_sugar",
+    "value": 89.3
+  },
+  {
+    "day": 21,
+    "indicator": "sleep_hours",
+    "value": 7.3
+  },
+  {
+    "day": 21,
+    "indicator": "mood_score",
+    "value": 6.9
+  },
+  {
+    "day": 22,
+    "indicator": "heart_rate",
+    "value": 63.7
+  },
+  {
+    "day": 22,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.9
+  },
+  {
+    "day": 22,
+    "indicator": "blood_pressure_diastolic",
+    "value": 75.1
+  },
+  {
+    "day": 22,
+    "indicator": "body_temp",
+    "value": 36.82
+  },
+  {
+    "day": 22,
+    "indicator": "blood_sugar",
+    "value": 91.8
+  },
+  {
+    "day": 22,
+    "indicator": "sleep_hours",
+    "value": 6.4
+  },
+  {
+    "day": 22,
+    "indicator": "mood_score",
+    "value": 8.3
+  },
+  {
+    "day": 23,
+    "indicator": "heart_rate",
+    "value": 66.7
+  },
+  {
+    "day": 23,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.7
+  },
+  {
+    "day": 23,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.2
+  },
+  {
+    "day": 23,
+    "indicator": "body_temp",
+    "value": 36.77
+  },
+  {
+    "day": 23,
+    "indicator": "blood_sugar",
+    "value": 92.4
+  },
+  {
+    "day": 23,
+    "indicator": "sleep_hours",
+    "value": 7.6
+  },
+  {
+    "day": 23,
+    "indicator": "mood_score",
+    "value": 8.9
+  },
+  {
+    "day": 24,
+    "indicator": "heart_rate",
+    "value": 66.9
+  },
+  {
+    "day": 24,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.0
+  },
+  {
+    "day": 24,
+    "indicator": "blood_pressure_diastolic",
+    "value": 78.4
+  },
+  {
+    "day": 24,
+    "indicator": "body_temp",
+    "value": 36.64
+  },
+  {
+    "day": 24,
+    "indicator": "blood_sugar",
+    "value": 90.7
+  },
+  {
+    "day": 24,
+    "indicator": "sleep_hours",
+    "value": 7.2
+  },
+  {
+    "day": 24,
+    "indicator": "mood_score",
+    "value": 9.0
+  },
+  {
+    "day": 25,
+    "indicator": "heart_rate",
+    "value": 65.4
+  },
+  {
+    "day": 25,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.8
+  },
+  {
+    "day": 25,
+    "indicator": "blood_pressure_diastolic",
+    "value": 76.0
+  },
+  {
+    "day": 25,
+    "indicator": "body_temp",
+    "value": 36.52
+  },
+  {
+    "day": 25,
+    "indicator": "blood_sugar",
+    "value": 84.2
+  },
+  {
+    "day": 25,
+    "indicator": "sleep_hours",
+    "value": 7.3
+  },
+  {
+    "day": 25,
+    "indicator": "mood_score",
+    "value": 8.2
+  },
+  {
+    "day": 26,
+    "indicator": "heart_rate",
+    "value": 63.1
+  },
+  {
+    "day": 26,
+    "indicator": "blood_pressure_systolic",
+    "value": 115.0
+  },
+  {
+    "day": 26,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.5
+  },
+  {
+    "day": 26,
+    "indicator": "body_temp",
+    "value": 36.45
+  },
+  {
+    "day": 26,
+    "indicator": "blood_sugar",
+    "value": 94.3
+  },
+  {
+    "day": 26,
+    "indicator": "sleep_hours",
+    "value": 7.0
+  },
+  {
+    "day": 26,
+    "indicator": "mood_score",
+    "value": 7.0
+  },
+  {
+    "day": 27,
+    "indicator": "heart_rate",
+    "value": 66.4
+  },
+  {
+    "day": 27,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.8
+  },
+  {
+    "day": 27,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.1
+  },
+  {
+    "day": 27,
+    "indicator": "body_temp",
+    "value": 36.68
+  },
+  {
+    "day": 27,
+    "indicator": "blood_sugar",
+    "value": 94.2
+  },
+  {
+    "day": 27,
+    "indicator": "sleep_hours",
+    "value": 6.7
+  },
+  {
+    "day": 27,
+    "indicator": "mood_score",
+    "value": 8.3
+  },
+  {
+    "day": 28,
+    "indicator": "heart_rate",
+    "value": 68.2
+  },
+  {
+    "day": 28,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.5
+  },
+  {
+    "day": 28,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.0
+  },
+  {
+    "day": 28,
+    "indicator": "body_temp",
+    "value": 36.6
+  },
+  {
+    "day": 28,
+    "indicator": "blood_sugar",
+    "value": 102.2
+  },
+  {
+    "day": 28,
+    "indicator": "sleep_hours",
+    "value": 5.9
+  },
+  {
+    "day": 28,
+    "indicator": "mood_score",
+    "value": 8.5
+  },
+  {
+    "day": 29,
+    "indicator": "heart_rate",
+    "value": 64.0
+  },
+  {
+    "day": 29,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.6
+  },
+  {
+    "day": 29,
+    "indicator": "blood_pressure_diastolic",
+    "value": 77.8
+  },
+  {
+    "day": 29,
+    "indicator": "body_temp",
+    "value": 36.6
+  },
+  {
+    "day": 29,
+    "indicator": "blood_sugar",
+    "value": 102.1
+  },
+  {
+    "day": 29,
+    "indicator": "sleep_hours",
+    "value": 6.8
+  },
+  {
+    "day": 29,
+    "indicator": "mood_score",
+    "value": 8.2
+  },
+  {
+    "day": 30,
+    "indicator": "heart_rate",
+    "value": 63.4
+  },
+  {
+    "day": 30,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.6
+  },
+  {
+    "day": 30,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.2
+  },
+  {
+    "day": 30,
+    "indicator": "body_temp",
+    "value": 36.56
+  },
+  {
+    "day": 30,
+    "indicator": "blood_sugar",
+    "value": 92.9
+  },
+  {
+    "day": 30,
+    "indicator": "sleep_hours",
+    "value": 5.7
+  },
+  {
+    "day": 30,
+    "indicator": "mood_score",
+    "value": 9.4
+  },
+  {
+    "day": 31,
+    "indicator": "heart_rate",
+    "value": 64.5
+  },
+  {
+    "day": 31,
+    "indicator": "blood_pressure_systolic",
+    "value": 118.1
+  },
+  {
+    "day": 31,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.5
+  },
+  {
+    "day": 31,
+    "indicator": "body_temp",
+    "value": 36.64
+  },
+  {
+    "day": 31,
+    "indicator": "blood_sugar",
+    "value": 106.2
+  },
+  {
+    "day": 31,
+    "indicator": "sleep_hours",
+    "value": 6.5
+  },
+  {
+    "day": 31,
+    "indicator": "mood_score",
+    "value": 7.0
+  },
+  {
+    "day": 32,
+    "indicator": "heart_rate",
+    "value": 63.3
+  },
+  {
+    "day": 32,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.7
+  },
+  {
+    "day": 32,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.7
+  },
+  {
+    "day": 32,
+    "indicator": "body_temp",
+    "value": 36.79
+  },
+  {
+    "day": 32,
+    "indicator": "blood_sugar",
+    "value": 90.8
+  },
+  {
+    "day": 32,
+    "indicator": "sleep_hours",
+    "value": 6.1
+  },
+  {
+    "day": 32,
+    "indicator": "mood_score",
+    "value": 7.7
+  },
+  {
+    "day": 33,
+    "indicator": "heart_rate",
+    "value": 69.0
+  },
+  {
+    "day": 33,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.6
+  },
+  {
+    "day": 33,
+    "indicator": "blood_pressure_diastolic",
+    "value": 68.1
+  },
+  {
+    "day": 33,
+    "indicator": "body_temp",
+    "value": 36.59
+  },
+  {
+    "day": 33,
+    "indicator": "blood_sugar",
+    "value": 98.3
+  },
+  {
+    "day": 33,
+    "indicator": "sleep_hours",
+    "value": 8.5
+  },
+  {
+    "day": 33,
+    "indicator": "mood_score",
+    "value": 8.4
+  },
+  {
+    "day": 34,
+    "indicator": "heart_rate",
+    "value": 66.0
+  },
+  {
+    "day": 34,
+    "indicator": "blood_pressure_systolic",
+    "value": 107.7
+  },
+  {
+    "day": 34,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.9
+  },
+  {
+    "day": 34,
+    "indicator": "body_temp",
+    "value": 36.61
+  },
+  {
+    "day": 34,
+    "indicator": "blood_sugar",
+    "value": 94.3
+  },
+  {
+    "day": 34,
+    "indicator": "sleep_hours",
+    "value": 7.5
+  },
+  {
+    "day": 34,
+    "indicator": "mood_score",
+    "value": 7.7
+  },
+  {
+    "day": 35,
+    "indicator": "heart_rate",
+    "value": 61.3
+  },
+  {
+    "day": 35,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.3
+  },
+  {
+    "day": 35,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.1
+  },
+  {
+    "day": 35,
+    "indicator": "body_temp",
+    "value": 36.7
+  },
+  {
+    "day": 35,
+    "indicator": "blood_sugar",
+    "value": 81.6
+  },
+  {
+    "day": 35,
+    "indicator": "sleep_hours",
+    "value": 6.9
+  },
+  {
+    "day": 35,
+    "indicator": "mood_score",
+    "value": 8.3
+  },
+  {
+    "day": 36,
+    "indicator": "heart_rate",
+    "value": 69.9
+  },
+  {
+    "day": 36,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.2
+  },
+  {
+    "day": 36,
+    "indicator": "blood_pressure_diastolic",
+    "value": 75.5
+  },
+  {
+    "day": 36,
+    "indicator": "body_temp",
+    "value": 36.54
+  },
+  {
+    "day": 36,
+    "indicator": "blood_sugar",
+    "value": 88.7
+  },
+  {
+    "day": 36,
+    "indicator": "sleep_hours",
+    "value": 6.7
+  },
+  {
+    "day": 36,
+    "indicator": "mood_score",
+    "value": 9.1
+  },
+  {
+    "day": 37,
+    "indicator": "heart_rate",
+    "value": 68.2
+  },
+  {
+    "day": 37,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.7
+  },
+  {
+    "day": 37,
+    "indicator": "blood_pressure_diastolic",
+    "value": 81.3
+  },
+  {
+    "day": 37,
+    "indicator": "body_temp",
+    "value": 36.6
+  },
+  {
+    "day": 37,
+    "indicator": "blood_sugar",
+    "value": 94.8
+  },
+  {
+    "day": 37,
+    "indicator": "sleep_hours",
+    "value": 7.3
+  },
+  {
+    "day": 37,
+    "indicator": "mood_score",
+    "value": 7.8
+  },
+  {
+    "day": 38,
+    "indicator": "heart_rate",
+    "value": 72.4
+  },
+  {
+    "day": 38,
+    "indicator": "blood_pressure_systolic",
+    "value": 117.3
+  },
+  {
+    "day": 38,
+    "indicator": "blood_pressure_diastolic",
+    "value": 69.5
+  },
+  {
+    "day": 38,
+    "indicator": "body_temp",
+    "value": 36.54
+  },
+  {
+    "day": 38,
+    "indicator": "blood_sugar",
+    "value": 93.9
+  },
+  {
+    "day": 38,
+    "indicator": "sleep_hours",
+    "value": 7.6
+  },
+  {
+    "day": 38,
+    "indicator": "mood_score",
+    "value": 7.1
+  },
+  {
+    "day": 39,
+    "indicator": "heart_rate",
+    "value": 57.8
+  },
+  {
+    "day": 39,
+    "indicator": "blood_pressure_systolic",
+    "value": 105.3
+  },
+  {
+    "day": 39,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.8
+  },
+  {
+    "day": 39,
+    "indicator": "body_temp",
+    "value": 36.58
+  },
+  {
+    "day": 39,
+    "indicator": "blood_sugar",
+    "value": 93.6
+  },
+  {
+    "day": 39,
+    "indicator": "sleep_hours",
+    "value": 6.6
+  },
+  {
+    "day": 39,
+    "indicator": "mood_score",
+    "value": 7.1
+  },
+  {
+    "day": 40,
+    "indicator": "heart_rate",
+    "value": 58.5
+  },
+  {
+    "day": 40,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.2
+  },
+  {
+    "day": 40,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.9
+  },
+  {
+    "day": 40,
+    "indicator": "body_temp",
+    "value": 36.75
+  },
+  {
+    "day": 40,
+    "indicator": "blood_sugar",
+    "value": 95.6
+  },
+  {
+    "day": 40,
+    "indicator": "sleep_hours",
+    "value": 7.0
+  },
+  {
+    "day": 40,
+    "indicator": "mood_score",
+    "value": 8.9
+  },
+  {
+    "day": 41,
+    "indicator": "heart_rate",
+    "value": 64.6
+  },
+  {
+    "day": 41,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.7
+  },
+  {
+    "day": 41,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.7
+  },
+  {
+    "day": 41,
+    "indicator": "body_temp",
+    "value": 36.51
+  },
+  {
+    "day": 41,
+    "indicator": "blood_sugar",
+    "value": 82.3
+  },
+  {
+    "day": 41,
+    "indicator": "sleep_hours",
+    "value": 7.2
+  },
+  {
+    "day": 41,
+    "indicator": "mood_score",
+    "value": 8.2
+  },
+  {
+    "day": 42,
+    "indicator": "heart_rate",
+    "value": 78.0
+  },
+  {
+    "day": 42,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.5
+  },
+  {
+    "day": 42,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.9
+  },
+  {
+    "day": 42,
+    "indicator": "body_temp",
+    "value": 37.74
+  },
+  {
+    "day": 42,
+    "indicator": "blood_sugar",
+    "value": 92.2
+  },
+  {
+    "day": 42,
+    "indicator": "sleep_hours",
+    "value": 6.2
+  },
+  {
+    "day": 42,
+    "indicator": "mood_score",
+    "value": 7.6
+  },
+  {
+    "day": 43,
+    "indicator": "heart_rate",
+    "value": 84.8
+  },
+  {
+    "day": 43,
+    "indicator": "blood_pressure_systolic",
+    "value": 107.6
+  },
+  {
+    "day": 43,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.7
+  },
+  {
+    "day": 43,
+    "indicator": "body_temp",
+    "value": 37.86
+  },
+  {
+    "day": 43,
+    "indicator": "blood_sugar",
+    "value": 100.3
+  },
+  {
+    "day": 43,
+    "indicator": "sleep_hours",
+    "value": 6.9
+  },
+  {
+    "day": 43,
+    "indicator": "mood_score",
+    "value": 8.7
+  },
+  {
+    "day": 44,
+    "indicator": "heart_rate",
+    "value": 76.9
+  },
+  {
+    "day": 44,
+    "indicator": "blood_pressure_systolic",
+    "value": 114.3
+  },
+  {
+    "day": 44,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.2
+  },
+  {
+    "day": 44,
+    "indicator": "body_temp",
+    "value": 37.53
+  },
+  {
+    "day": 44,
+    "indicator": "blood_sugar",
+    "value": 93.9
+  },
+  {
+    "day": 44,
+    "indicator": "sleep_hours",
+    "value": 6.0
+  },
+  {
+    "day": 44,
+    "indicator": "mood_score",
+    "value": 9.4
+  },
+  {
+    "day": 45,
+    "indicator": "heart_rate",
+    "value": 66.8
+  },
+  {
+    "day": 45,
+    "indicator": "blood_pressure_systolic",
+    "value": 105.3
+  },
+  {
+    "day": 45,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.4
+  },
+  {
+    "day": 45,
+    "indicator": "body_temp",
+    "value": 36.54
+  },
+  {
+    "day": 45,
+    "indicator": "blood_sugar",
+    "value": 92.0
+  },
+  {
+    "day": 45,
+    "indicator": "sleep_hours",
+    "value": 7.4
+  },
+  {
+    "day": 45,
+    "indicator": "mood_score",
+    "value": 8.3
+  },
+  {
+    "day": 46,
+    "indicator": "heart_rate",
+    "value": 58.5
+  },
+  {
+    "day": 46,
+    "indicator": "blood_pressure_systolic",
+    "value": 107.9
+  },
+  {
+    "day": 46,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.9
+  },
+  {
+    "day": 46,
+    "indicator": "body_temp",
+    "value": 36.8
+  },
+  {
+    "day": 46,
+    "indicator": "blood_sugar",
+    "value": 100.6
+  },
+  {
+    "day": 46,
+    "indicator": "sleep_hours",
+    "value": 8.3
+  },
+  {
+    "day": 46,
+    "indicator": "mood_score",
+    "value": 6.6
+  },
+  {
+    "day": 47,
+    "indicator": "heart_rate",
+    "value": 67.5
+  },
+  {
+    "day": 47,
+    "indicator": "blood_pressure_systolic",
+    "value": 105.3
+  },
+  {
+    "day": 47,
+    "indicator": "blood_pressure_diastolic",
+    "value": 77.0
+  },
+  {
+    "day": 47,
+    "indicator": "body_temp",
+    "value": 36.64
+  },
+  {
+    "day": 47,
+    "indicator": "blood_sugar",
+    "value": 86.9
+  },
+  {
+    "day": 47,
+    "indicator": "sleep_hours",
+    "value": 8.4
+  },
+  {
+    "day": 47,
+    "indicator": "mood_score",
+    "value": 8.5
+  },
+  {
+    "day": 48,
+    "indicator": "heart_rate",
+    "value": 58.9
+  },
+  {
+    "day": 48,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.0
+  },
+  {
+    "day": 48,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.2
+  },
+  {
+    "day": 48,
+    "indicator": "body_temp",
+    "value": 36.62
+  },
+  {
+    "day": 48,
+    "indicator": "blood_sugar",
+    "value": 89.9
+  },
+  {
+    "day": 48,
+    "indicator": "sleep_hours",
+    "value": 8.0
+  },
+  {
+    "day": 48,
+    "indicator": "mood_score",
+    "value": 7.0
+  },
+  {
+    "day": 49,
+    "indicator": "heart_rate",
+    "value": 66.0
+  },
+  {
+    "day": 49,
+    "indicator": "blood_pressure_systolic",
+    "value": 118.3
+  },
+  {
+    "day": 49,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.9
+  },
+  {
+    "day": 49,
+    "indicator": "body_temp",
+    "value": 36.63
+  },
+  {
+    "day": 49,
+    "indicator": "blood_sugar",
+    "value": 92.9
+  },
+  {
+    "day": 49,
+    "indicator": "sleep_hours",
+    "value": 6.7
+  },
+  {
+    "day": 49,
+    "indicator": "mood_score",
+    "value": 8.5
+  },
+  {
+    "day": 50,
+    "indicator": "heart_rate",
+    "value": 65.3
+  },
+  {
+    "day": 50,
+    "indicator": "blood_pressure_systolic",
+    "value": 108.7
+  },
+  {
+    "day": 50,
+    "indicator": "blood_pressure_diastolic",
+    "value": 77.4
+  },
+  {
+    "day": 50,
+    "indicator": "body_temp",
+    "value": 36.72
+  },
+  {
+    "day": 50,
+    "indicator": "blood_sugar",
+    "value": 91.2
+  },
+  {
+    "day": 50,
+    "indicator": "sleep_hours",
+    "value": 6.7
+  },
+  {
+    "day": 50,
+    "indicator": "mood_score",
+    "value": 7.5
+  },
+  {
+    "day": 51,
+    "indicator": "heart_rate",
+    "value": 68.9
+  },
+  {
+    "day": 51,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.5
+  },
+  {
+    "day": 51,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.1
+  },
+  {
+    "day": 51,
+    "indicator": "body_temp",
+    "value": 36.57
+  },
+  {
+    "day": 51,
+    "indicator": "blood_sugar",
+    "value": 94.8
+  },
+  {
+    "day": 51,
+    "indicator": "sleep_hours",
+    "value": 7.0
+  },
+  {
+    "day": 51,
+    "indicator": "mood_score",
+    "value": 8.5
+  },
+  {
+    "day": 52,
+    "indicator": "heart_rate",
+    "value": 64.4
+  },
+  {
+    "day": 52,
+    "indicator": "blood_pressure_systolic",
+    "value": 114.9
+  },
+  {
+    "day": 52,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.7
+  },
+  {
+    "day": 52,
+    "indicator": "body_temp",
+    "value": 36.58
+  },
+  {
+    "day": 52,
+    "indicator": "blood_sugar",
+    "value": 88.1
+  },
+  {
+    "day": 52,
+    "indicator": "sleep_hours",
+    "value": 6.5
+  },
+  {
+    "day": 52,
+    "indicator": "mood_score",
+    "value": 7.5
+  },
+  {
+    "day": 53,
+    "indicator": "heart_rate",
+    "value": 61.8
+  },
+  {
+    "day": 53,
+    "indicator": "blood_pressure_systolic",
+    "value": 115.0
+  },
+  {
+    "day": 53,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.9
+  },
+  {
+    "day": 53,
+    "indicator": "body_temp",
+    "value": 36.84
+  },
+  {
+    "day": 53,
+    "indicator": "blood_sugar",
+    "value": 102.3
+  },
+  {
+    "day": 53,
+    "indicator": "sleep_hours",
+    "value": 7.1
+  },
+  {
+    "day": 53,
+    "indicator": "mood_score",
+    "value": 6.9
+  },
+  {
+    "day": 54,
+    "indicator": "heart_rate",
+    "value": 63.8
+  },
+  {
+    "day": 54,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.7
+  },
+  {
+    "day": 54,
+    "indicator": "blood_pressure_diastolic",
+    "value": 69.3
+  },
+  {
+    "day": 54,
+    "indicator": "body_temp",
+    "value": 36.56
+  },
+  {
+    "day": 54,
+    "indicator": "blood_sugar",
+    "value": 93.3
+  },
+  {
+    "day": 54,
+    "indicator": "sleep_hours",
+    "value": 6.8
+  },
+  {
+    "day": 54,
+    "indicator": "mood_score",
+    "value": 7.5
+  },
+  {
+    "day": 55,
+    "indicator": "heart_rate",
+    "value": 62.6
+  },
+  {
+    "day": 55,
+    "indicator": "blood_pressure_systolic",
+    "value": 118.3
+  },
+  {
+    "day": 55,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.6
+  },
+  {
+    "day": 55,
+    "indicator": "body_temp",
+    "value": 36.48
+  },
+  {
+    "day": 55,
+    "indicator": "blood_sugar",
+    "value": 90.3
+  },
+  {
+    "day": 55,
+    "indicator": "sleep_hours",
+    "value": 7.7
+  },
+  {
+    "day": 55,
+    "indicator": "mood_score",
+    "value": 7.5
+  },
+  {
+    "day": 56,
+    "indicator": "heart_rate",
+    "value": 66.5
+  },
+  {
+    "day": 56,
+    "indicator": "blood_pressure_systolic",
+    "value": 114.5
+  },
+  {
+    "day": 56,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.9
+  },
+  {
+    "day": 56,
+    "indicator": "body_temp",
+    "value": 36.81
+  },
+  {
+    "day": 56,
+    "indicator": "blood_sugar",
+    "value": 89.5
+  },
+  {
+    "day": 56,
+    "indicator": "sleep_hours",
+    "value": 7.8
+  },
+  {
+    "day": 56,
+    "indicator": "mood_score",
+    "value": 7.4
+  },
+  {
+    "day": 57,
+    "indicator": "heart_rate",
+    "value": 63.7
+  },
+  {
+    "day": 57,
+    "indicator": "blood_pressure_systolic",
+    "value": 116.2
+  },
+  {
+    "day": 57,
+    "indicator": "blood_pressure_diastolic",
+    "value": 75.1
+  },
+  {
+    "day": 57,
+    "indicator": "body_temp",
+    "value": 36.6
+  },
+  {
+    "day": 57,
+    "indicator": "blood_sugar",
+    "value": 86.6
+  },
+  {
+    "day": 57,
+    "indicator": "sleep_hours",
+    "value": 7.5
+  },
+  {
+    "day": 57,
+    "indicator": "mood_score",
+    "value": 7.6
+  },
+  {
+    "day": 58,
+    "indicator": "heart_rate",
+    "value": 62.0
+  },
+  {
+    "day": 58,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.7
+  },
+  {
+    "day": 58,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.6
+  },
+  {
+    "day": 58,
+    "indicator": "body_temp",
+    "value": 36.28
+  },
+  {
+    "day": 58,
+    "indicator": "blood_sugar",
+    "value": 93.6
+  },
+  {
+    "day": 58,
+    "indicator": "sleep_hours",
+    "value": 7.2
+  },
+  {
+    "day": 58,
+    "indicator": "mood_score",
+    "value": 7.6
+  },
+  {
+    "day": 59,
+    "indicator": "heart_rate",
+    "value": 68.3
+  },
+  {
+    "day": 59,
+    "indicator": "blood_pressure_systolic",
+    "value": 114.1
+  },
+  {
+    "day": 59,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.5
+  },
+  {
+    "day": 59,
+    "indicator": "body_temp",
+    "value": 36.5
+  },
+  {
+    "day": 59,
+    "indicator": "blood_sugar",
+    "value": 95.1
+  },
+  {
+    "day": 59,
+    "indicator": "sleep_hours",
+    "value": 6.1
+  },
+  {
+    "day": 59,
+    "indicator": "mood_score",
+    "value": 7.8
+  },
+  {
+    "day": 60,
+    "indicator": "heart_rate",
+    "value": 63.0
+  },
+  {
+    "day": 60,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.2
+  },
+  {
+    "day": 60,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.5
+  },
+  {
+    "day": 60,
+    "indicator": "body_temp",
+    "value": 36.61
+  },
+  {
+    "day": 60,
+    "indicator": "blood_sugar",
+    "value": 97.1
+  },
+  {
+    "day": 60,
+    "indicator": "sleep_hours",
+    "value": 7.2
+  },
+  {
+    "day": 60,
+    "indicator": "mood_score",
+    "value": 7.8
+  },
+  {
+    "day": 61,
+    "indicator": "heart_rate",
+    "value": 61.1
+  },
+  {
+    "day": 61,
+    "indicator": "blood_pressure_systolic",
+    "value": 114.5
+  },
+  {
+    "day": 61,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.3
+  },
+  {
+    "day": 61,
+    "indicator": "body_temp",
+    "value": 36.82
+  },
+  {
+    "day": 61,
+    "indicator": "blood_sugar",
+    "value": 88.6
+  },
+  {
+    "day": 61,
+    "indicator": "sleep_hours",
+    "value": 7.1
+  },
+  {
+    "day": 61,
+    "indicator": "mood_score",
+    "value": 8.0
+  },
+  {
+    "day": 62,
+    "indicator": "heart_rate",
+    "value": 64.7
+  },
+  {
+    "day": 62,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.0
+  },
+  {
+    "day": 62,
+    "indicator": "blood_pressure_diastolic",
+    "value": 68.7
+  },
+  {
+    "day": 62,
+    "indicator": "body_temp",
+    "value": 36.72
+  },
+  {
+    "day": 62,
+    "indicator": "blood_sugar",
+    "value": 94.9
+  },
+  {
+    "day": 62,
+    "indicator": "sleep_hours",
+    "value": 7.8
+  },
+  {
+    "day": 62,
+    "indicator": "mood_score",
+    "value": 9.6
+  },
+  {
+    "day": 63,
+    "indicator": "heart_rate",
+    "value": 64.0
+  },
+  {
+    "day": 63,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.9
+  },
+  {
+    "day": 63,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.0
+  },
+  {
+    "day": 63,
+    "indicator": "body_temp",
+    "value": 36.89
+  },
+  {
+    "day": 63,
+    "indicator": "blood_sugar",
+    "value": 84.2
+  },
+  {
+    "day": 63,
+    "indicator": "sleep_hours",
+    "value": 7.4
+  },
+  {
+    "day": 63,
+    "indicator": "mood_score",
+    "value": 7.0
+  },
+  {
+    "day": 64,
+    "indicator": "heart_rate",
+    "value": 56.7
+  },
+  {
+    "day": 64,
+    "indicator": "blood_pressure_systolic",
+    "value": 104.9
+  },
+  {
+    "day": 64,
+    "indicator": "blood_pressure_diastolic",
+    "value": 69.5
+  },
+  {
+    "day": 64,
+    "indicator": "body_temp",
+    "value": 36.76
+  },
+  {
+    "day": 64,
+    "indicator": "blood_sugar",
+    "value": 88.1
+  },
+  {
+    "day": 64,
+    "indicator": "sleep_hours",
+    "value": 7.0
+  },
+  {
+    "day": 64,
+    "indicator": "mood_score",
+    "value": 7.2
+  },
+  {
+    "day": 65,
+    "indicator": "heart_rate",
+    "value": 67.0
+  },
+  {
+    "day": 65,
+    "indicator": "blood_pressure_systolic",
+    "value": 108.1
+  },
+  {
+    "day": 65,
+    "indicator": "blood_pressure_diastolic",
+    "value": 76.3
+  },
+  {
+    "day": 65,
+    "indicator": "body_temp",
+    "value": 36.45
+  },
+  {
+    "day": 65,
+    "indicator": "blood_sugar",
+    "value": 88.6
+  },
+  {
+    "day": 65,
+    "indicator": "sleep_hours",
+    "value": 7.2
+  },
+  {
+    "day": 65,
+    "indicator": "mood_score",
+    "value": 8.0
+  },
+  {
+    "day": 66,
+    "indicator": "heart_rate",
+    "value": 69.6
+  },
+  {
+    "day": 66,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.4
+  },
+  {
+    "day": 66,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.0
+  },
+  {
+    "day": 66,
+    "indicator": "body_temp",
+    "value": 36.52
+  },
+  {
+    "day": 66,
+    "indicator": "blood_sugar",
+    "value": 89.4
+  },
+  {
+    "day": 66,
+    "indicator": "sleep_hours",
+    "value": 7.6
+  },
+  {
+    "day": 66,
+    "indicator": "mood_score",
+    "value": 8.3
+  },
+  {
+    "day": 67,
+    "indicator": "heart_rate",
+    "value": 64.6
+  },
+  {
+    "day": 67,
+    "indicator": "blood_pressure_systolic",
+    "value": 115.0
+  },
+  {
+    "day": 67,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.7
+  },
+  {
+    "day": 67,
+    "indicator": "body_temp",
+    "value": 36.58
+  },
+  {
+    "day": 67,
+    "indicator": "blood_sugar",
+    "value": 92.8
+  },
+  {
+    "day": 67,
+    "indicator": "sleep_hours",
+    "value": 8.1
+  },
+  {
+    "day": 67,
+    "indicator": "mood_score",
+    "value": 7.9
+  },
+  {
+    "day": 68,
+    "indicator": "heart_rate",
+    "value": 63.9
+  },
+  {
+    "day": 68,
+    "indicator": "blood_pressure_systolic",
+    "value": 108.3
+  },
+  {
+    "day": 68,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.7
+  },
+  {
+    "day": 68,
+    "indicator": "body_temp",
+    "value": 36.51
+  },
+  {
+    "day": 68,
+    "indicator": "blood_sugar",
+    "value": 93.5
+  },
+  {
+    "day": 68,
+    "indicator": "sleep_hours",
+    "value": 5.9
+  },
+  {
+    "day": 68,
+    "indicator": "mood_score",
+    "value": 8.7
+  },
+  {
+    "day": 69,
+    "indicator": "heart_rate",
+    "value": 60.7
+  },
+  {
+    "day": 69,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.3
+  },
+  {
+    "day": 69,
+    "indicator": "blood_pressure_diastolic",
+    "value": 75.6
+  },
+  {
+    "day": 69,
+    "indicator": "body_temp",
+    "value": 36.4
+  },
+  {
+    "day": 69,
+    "indicator": "blood_sugar",
+    "value": 91.6
+  },
+  {
+    "day": 69,
+    "indicator": "sleep_hours",
+    "value": 7.1
+  },
+  {
+    "day": 69,
+    "indicator": "mood_score",
+    "value": 7.3
+  },
+  {
+    "day": 70,
+    "indicator": "heart_rate",
+    "value": 69.3
+  },
+  {
+    "day": 70,
+    "indicator": "blood_pressure_systolic",
+    "value": 117.2
+  },
+  {
+    "day": 70,
+    "indicator": "blood_pressure_diastolic",
+    "value": 68.1
+  },
+  {
+    "day": 70,
+    "indicator": "body_temp",
+    "value": 36.38
+  },
+  {
+    "day": 70,
+    "indicator": "blood_sugar",
+    "value": 95.6
+  },
+  {
+    "day": 70,
+    "indicator": "sleep_hours",
+    "value": 6.3
+  },
+  {
+    "day": 70,
+    "indicator": "mood_score",
+    "value": 7.7
+  },
+  {
+    "day": 71,
+    "indicator": "heart_rate",
+    "value": 65.4
+  },
+  {
+    "day": 71,
+    "indicator": "blood_pressure_systolic",
+    "value": 114.4
+  },
+  {
+    "day": 71,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.4
+  },
+  {
+    "day": 71,
+    "indicator": "body_temp",
+    "value": 36.61
+  },
+  {
+    "day": 71,
+    "indicator": "blood_sugar",
+    "value": 88.5
+  },
+  {
+    "day": 71,
+    "indicator": "sleep_hours",
+    "value": 7.9
+  },
+  {
+    "day": 71,
+    "indicator": "mood_score",
+    "value": 7.7
+  },
+  {
+    "day": 72,
+    "indicator": "heart_rate",
+    "value": 66.1
+  },
+  {
+    "day": 72,
+    "indicator": "blood_pressure_systolic",
+    "value": 110.2
+  },
+  {
+    "day": 72,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.3
+  },
+  {
+    "day": 72,
+    "indicator": "body_temp",
+    "value": 36.57
+  },
+  {
+    "day": 72,
+    "indicator": "blood_sugar",
+    "value": 91.3
+  },
+  {
+    "day": 72,
+    "indicator": "sleep_hours",
+    "value": 6.4
+  },
+  {
+    "day": 72,
+    "indicator": "mood_score",
+    "value": 8.6
+  },
+  {
+    "day": 73,
+    "indicator": "heart_rate",
+    "value": 69.5
+  },
+  {
+    "day": 73,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.9
+  },
+  {
+    "day": 73,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.8
+  },
+  {
+    "day": 73,
+    "indicator": "body_temp",
+    "value": 36.73
+  },
+  {
+    "day": 73,
+    "indicator": "blood_sugar",
+    "value": 96.2
+  },
+  {
+    "day": 73,
+    "indicator": "sleep_hours",
+    "value": 7.3
+  },
+  {
+    "day": 73,
+    "indicator": "mood_score",
+    "value": 8.1
+  },
+  {
+    "day": 74,
+    "indicator": "heart_rate",
+    "value": 67.8
+  },
+  {
+    "day": 74,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.2
+  },
+  {
+    "day": 74,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.6
+  },
+  {
+    "day": 74,
+    "indicator": "body_temp",
+    "value": 36.6
+  },
+  {
+    "day": 74,
+    "indicator": "blood_sugar",
+    "value": 83.5
+  },
+  {
+    "day": 74,
+    "indicator": "sleep_hours",
+    "value": 7.1
+  },
+  {
+    "day": 74,
+    "indicator": "mood_score",
+    "value": 8.3
+  },
+  {
+    "day": 75,
+    "indicator": "heart_rate",
+    "value": 69.0
+  },
+  {
+    "day": 75,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.5
+  },
+  {
+    "day": 75,
+    "indicator": "blood_pressure_diastolic",
+    "value": 75.3
+  },
+  {
+    "day": 75,
+    "indicator": "body_temp",
+    "value": 36.6
+  },
+  {
+    "day": 75,
+    "indicator": "blood_sugar",
+    "value": 87.4
+  },
+  {
+    "day": 75,
+    "indicator": "sleep_hours",
+    "value": 6.2
+  },
+  {
+    "day": 75,
+    "indicator": "mood_score",
+    "value": 7.3
+  },
+  {
+    "day": 76,
+    "indicator": "heart_rate",
+    "value": 60.6
+  },
+  {
+    "day": 76,
+    "indicator": "blood_pressure_systolic",
+    "value": 114.2
+  },
+  {
+    "day": 76,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.5
+  },
+  {
+    "day": 76,
+    "indicator": "body_temp",
+    "value": 36.69
+  },
+  {
+    "day": 76,
+    "indicator": "blood_sugar",
+    "value": 92.3
+  },
+  {
+    "day": 76,
+    "indicator": "sleep_hours",
+    "value": 7.8
+  },
+  {
+    "day": 76,
+    "indicator": "mood_score",
+    "value": 8.7
+  },
+  {
+    "day": 77,
+    "indicator": "heart_rate",
+    "value": 62.9
+  },
+  {
+    "day": 77,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.0
+  },
+  {
+    "day": 77,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.7
+  },
+  {
+    "day": 77,
+    "indicator": "body_temp",
+    "value": 36.36
+  },
+  {
+    "day": 77,
+    "indicator": "blood_sugar",
+    "value": 95.0
+  },
+  {
+    "day": 77,
+    "indicator": "sleep_hours",
+    "value": 7.9
+  },
+  {
+    "day": 77,
+    "indicator": "mood_score",
+    "value": 8.0
+  },
+  {
+    "day": 78,
+    "indicator": "heart_rate",
+    "value": 63.4
+  },
+  {
+    "day": 78,
+    "indicator": "blood_pressure_systolic",
+    "value": 115.8
+  },
+  {
+    "day": 78,
+    "indicator": "blood_pressure_diastolic",
+    "value": 67.1
+  },
+  {
+    "day": 78,
+    "indicator": "body_temp",
+    "value": 36.63
+  },
+  {
+    "day": 78,
+    "indicator": "blood_sugar",
+    "value": 92.6
+  },
+  {
+    "day": 78,
+    "indicator": "sleep_hours",
+    "value": 6.7
+  },
+  {
+    "day": 78,
+    "indicator": "mood_score",
+    "value": 9.0
+  },
+  {
+    "day": 79,
+    "indicator": "heart_rate",
+    "value": 68.1
+  },
+  {
+    "day": 79,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.1
+  },
+  {
+    "day": 79,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.8
+  },
+  {
+    "day": 79,
+    "indicator": "body_temp",
+    "value": 36.54
+  },
+  {
+    "day": 79,
+    "indicator": "blood_sugar",
+    "value": 89.7
+  },
+  {
+    "day": 79,
+    "indicator": "sleep_hours",
+    "value": 6.2
+  },
+  {
+    "day": 79,
+    "indicator": "mood_score",
+    "value": 9.0
+  },
+  {
+    "day": 80,
+    "indicator": "heart_rate",
+    "value": 68.3
+  },
+  {
+    "day": 80,
+    "indicator": "blood_pressure_systolic",
+    "value": 114.8
+  },
+  {
+    "day": 80,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.3
+  },
+  {
+    "day": 80,
+    "indicator": "body_temp",
+    "value": 36.91
+  },
+  {
+    "day": 80,
+    "indicator": "blood_sugar",
+    "value": 100.9
+  },
+  {
+    "day": 80,
+    "indicator": "sleep_hours",
+    "value": 7.2
+  },
+  {
+    "day": 80,
+    "indicator": "mood_score",
+    "value": 7.4
+  },
+  {
+    "day": 81,
+    "indicator": "heart_rate",
+    "value": 62.2
+  },
+  {
+    "day": 81,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.5
+  },
+  {
+    "day": 81,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.7
+  },
+  {
+    "day": 81,
+    "indicator": "body_temp",
+    "value": 36.59
+  },
+  {
+    "day": 81,
+    "indicator": "blood_sugar",
+    "value": 96.9
+  },
+  {
+    "day": 81,
+    "indicator": "sleep_hours",
+    "value": 6.1
+  },
+  {
+    "day": 81,
+    "indicator": "mood_score",
+    "value": 9.4
+  },
+  {
+    "day": 82,
+    "indicator": "heart_rate",
+    "value": 70.0
+  },
+  {
+    "day": 82,
+    "indicator": "blood_pressure_systolic",
+    "value": 107.7
+  },
+  {
+    "day": 82,
+    "indicator": "blood_pressure_diastolic",
+    "value": 69.5
+  },
+  {
+    "day": 82,
+    "indicator": "body_temp",
+    "value": 36.56
+  },
+  {
+    "day": 82,
+    "indicator": "blood_sugar",
+    "value": 87.4
+  },
+  {
+    "day": 82,
+    "indicator": "sleep_hours",
+    "value": 6.9
+  },
+  {
+    "day": 82,
+    "indicator": "mood_score",
+    "value": 6.2
+  },
+  {
+    "day": 83,
+    "indicator": "heart_rate",
+    "value": 64.3
+  },
+  {
+    "day": 83,
+    "indicator": "blood_pressure_systolic",
+    "value": 118.3
+  },
+  {
+    "day": 83,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.2
+  },
+  {
+    "day": 83,
+    "indicator": "body_temp",
+    "value": 36.56
+  },
+  {
+    "day": 83,
+    "indicator": "blood_sugar",
+    "value": 85.3
+  },
+  {
+    "day": 83,
+    "indicator": "sleep_hours",
+    "value": 7.5
+  },
+  {
+    "day": 83,
+    "indicator": "mood_score",
+    "value": 7.8
+  },
+  {
+    "day": 84,
+    "indicator": "heart_rate",
+    "value": 71.2
+  },
+  {
+    "day": 84,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.7
+  },
+  {
+    "day": 84,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.1
+  },
+  {
+    "day": 84,
+    "indicator": "body_temp",
+    "value": 36.68
+  },
+  {
+    "day": 84,
+    "indicator": "blood_sugar",
+    "value": 89.7
+  },
+  {
+    "day": 84,
+    "indicator": "sleep_hours",
+    "value": 6.2
+  },
+  {
+    "day": 84,
+    "indicator": "mood_score",
+    "value": 8.2
+  },
+  {
+    "day": 85,
+    "indicator": "heart_rate",
+    "value": 64.4
+  },
+  {
+    "day": 85,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.6
+  },
+  {
+    "day": 85,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.9
+  },
+  {
+    "day": 85,
+    "indicator": "body_temp",
+    "value": 36.52
+  },
+  {
+    "day": 85,
+    "indicator": "blood_sugar",
+    "value": 93.9
+  },
+  {
+    "day": 85,
+    "indicator": "sleep_hours",
+    "value": 8.2
+  },
+  {
+    "day": 85,
+    "indicator": "mood_score",
+    "value": 7.2
+  },
+  {
+    "day": 86,
+    "indicator": "heart_rate",
+    "value": 70.6
+  },
+  {
+    "day": 86,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.2
+  },
+  {
+    "day": 86,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.1
+  },
+  {
+    "day": 86,
+    "indicator": "body_temp",
+    "value": 36.96
+  },
+  {
+    "day": 86,
+    "indicator": "blood_sugar",
+    "value": 92.7
+  },
+  {
+    "day": 86,
+    "indicator": "sleep_hours",
+    "value": 8.0
+  },
+  {
+    "day": 86,
+    "indicator": "mood_score",
+    "value": 8.6
+  },
+  {
+    "day": 87,
+    "indicator": "heart_rate",
+    "value": 62.9
+  },
+  {
+    "day": 87,
+    "indicator": "blood_pressure_systolic",
+    "value": 114.4
+  },
+  {
+    "day": 87,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.7
+  },
+  {
+    "day": 87,
+    "indicator": "body_temp",
+    "value": 36.4
+  },
+  {
+    "day": 87,
+    "indicator": "blood_sugar",
+    "value": 84.0
+  },
+  {
+    "day": 87,
+    "indicator": "sleep_hours",
+    "value": 6.9
+  },
+  {
+    "day": 87,
+    "indicator": "mood_score",
+    "value": 7.7
+  },
+  {
+    "day": 88,
+    "indicator": "heart_rate",
+    "value": 71.1
+  },
+  {
+    "day": 88,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.9
+  },
+  {
+    "day": 88,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.0
+  },
+  {
+    "day": 88,
+    "indicator": "body_temp",
+    "value": 36.45
+  },
+  {
+    "day": 88,
+    "indicator": "blood_sugar",
+    "value": 89.5
+  },
+  {
+    "day": 88,
+    "indicator": "sleep_hours",
+    "value": 6.1
+  },
+  {
+    "day": 88,
+    "indicator": "mood_score",
+    "value": 6.8
+  },
+  {
+    "day": 89,
+    "indicator": "heart_rate",
+    "value": 70.8
+  },
+  {
+    "day": 89,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.5
+  },
+  {
+    "day": 89,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.4
+  },
+  {
+    "day": 89,
+    "indicator": "body_temp",
+    "value": 36.49
+  },
+  {
+    "day": 89,
+    "indicator": "blood_sugar",
+    "value": 92.0
+  },
+  {
+    "day": 89,
+    "indicator": "sleep_hours",
+    "value": 7.0
+  },
+  {
+    "day": 89,
+    "indicator": "mood_score",
+    "value": 6.8
+  },
+  {
+    "day": 90,
+    "indicator": "heart_rate",
+    "value": 73.0
+  },
+  {
+    "day": 90,
+    "indicator": "blood_pressure_systolic",
+    "value": 110.2
+  },
+  {
+    "day": 90,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.1
+  },
+  {
+    "day": 90,
+    "indicator": "body_temp",
+    "value": 36.64
+  },
+  {
+    "day": 90,
+    "indicator": "blood_sugar",
+    "value": 94.9
+  },
+  {
+    "day": 90,
+    "indicator": "sleep_hours",
+    "value": 5.6
+  },
+  {
+    "day": 90,
+    "indicator": "mood_score",
+    "value": 6.7
+  },
+  {
+    "day": 91,
+    "indicator": "heart_rate",
+    "value": 71.5
+  },
+  {
+    "day": 91,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.0
+  },
+  {
+    "day": 91,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.8
+  },
+  {
+    "day": 91,
+    "indicator": "body_temp",
+    "value": 36.67
+  },
+  {
+    "day": 91,
+    "indicator": "blood_sugar",
+    "value": 93.1
+  },
+  {
+    "day": 91,
+    "indicator": "sleep_hours",
+    "value": 7.4
+  },
+  {
+    "day": 91,
+    "indicator": "mood_score",
+    "value": 7.5
+  },
+  {
+    "day": 92,
+    "indicator": "heart_rate",
+    "value": 65.5
+  },
+  {
+    "day": 92,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.3
+  },
+  {
+    "day": 92,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.6
+  },
+  {
+    "day": 92,
+    "indicator": "body_temp",
+    "value": 36.79
+  },
+  {
+    "day": 92,
+    "indicator": "blood_sugar",
+    "value": 91.1
+  },
+  {
+    "day": 92,
+    "indicator": "sleep_hours",
+    "value": 7.0
+  },
+  {
+    "day": 92,
+    "indicator": "mood_score",
+    "value": 7.7
+  },
+  {
+    "day": 93,
+    "indicator": "heart_rate",
+    "value": 67.5
+  },
+  {
+    "day": 93,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.0
+  },
+  {
+    "day": 93,
+    "indicator": "blood_pressure_diastolic",
+    "value": 75.3
+  },
+  {
+    "day": 93,
+    "indicator": "body_temp",
+    "value": 36.46
+  },
+  {
+    "day": 93,
+    "indicator": "blood_sugar",
+    "value": 87.2
+  },
+  {
+    "day": 93,
+    "indicator": "sleep_hours",
+    "value": 7.2
+  },
+  {
+    "day": 93,
+    "indicator": "mood_score",
+    "value": 8.1
+  },
+  {
+    "day": 94,
+    "indicator": "heart_rate",
+    "value": 66.0
+  },
+  {
+    "day": 94,
+    "indicator": "blood_pressure_systolic",
+    "value": 115.7
+  },
+  {
+    "day": 94,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.0
+  },
+  {
+    "day": 94,
+    "indicator": "body_temp",
+    "value": 36.67
+  },
+  {
+    "day": 94,
+    "indicator": "blood_sugar",
+    "value": 87.9
+  },
+  {
+    "day": 94,
+    "indicator": "sleep_hours",
+    "value": 7.9
+  },
+  {
+    "day": 94,
+    "indicator": "mood_score",
+    "value": 8.4
+  },
+  {
+    "day": 95,
+    "indicator": "heart_rate",
+    "value": 66.7
+  },
+  {
+    "day": 95,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.7
+  },
+  {
+    "day": 95,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.0
+  },
+  {
+    "day": 95,
+    "indicator": "body_temp",
+    "value": 36.55
+  },
+  {
+    "day": 95,
+    "indicator": "blood_sugar",
+    "value": 94.3
+  },
+  {
+    "day": 95,
+    "indicator": "sleep_hours",
+    "value": 7.1
+  },
+  {
+    "day": 95,
+    "indicator": "mood_score",
+    "value": 8.1
+  },
+  {
+    "day": 96,
+    "indicator": "heart_rate",
+    "value": 60.6
+  },
+  {
+    "day": 96,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.6
+  },
+  {
+    "day": 96,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.3
+  },
+  {
+    "day": 96,
+    "indicator": "body_temp",
+    "value": 36.44
+  },
+  {
+    "day": 96,
+    "indicator": "blood_sugar",
+    "value": 91.3
+  },
+  {
+    "day": 96,
+    "indicator": "sleep_hours",
+    "value": 5.9
+  },
+  {
+    "day": 96,
+    "indicator": "mood_score",
+    "value": 8.5
+  },
+  {
+    "day": 97,
+    "indicator": "heart_rate",
+    "value": 67.7
+  },
+  {
+    "day": 97,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.8
+  },
+  {
+    "day": 97,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.5
+  },
+  {
+    "day": 97,
+    "indicator": "body_temp",
+    "value": 36.46
+  },
+  {
+    "day": 97,
+    "indicator": "blood_sugar",
+    "value": 91.3
+  },
+  {
+    "day": 97,
+    "indicator": "sleep_hours",
+    "value": 5.5
+  },
+  {
+    "day": 97,
+    "indicator": "mood_score",
+    "value": 8.1
+  },
+  {
+    "day": 98,
+    "indicator": "heart_rate",
+    "value": 67.1
+  },
+  {
+    "day": 98,
+    "indicator": "blood_pressure_systolic",
+    "value": 110.9
+  },
+  {
+    "day": 98,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.8
+  },
+  {
+    "day": 98,
+    "indicator": "body_temp",
+    "value": 36.63
+  },
+  {
+    "day": 98,
+    "indicator": "blood_sugar",
+    "value": 93.6
+  },
+  {
+    "day": 98,
+    "indicator": "sleep_hours",
+    "value": 7.8
+  },
+  {
+    "day": 98,
+    "indicator": "mood_score",
+    "value": 8.0
+  },
+  {
+    "day": 99,
+    "indicator": "heart_rate",
+    "value": 62.8
+  },
+  {
+    "day": 99,
+    "indicator": "blood_pressure_systolic",
+    "value": 110.4
+  },
+  {
+    "day": 99,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.5
+  },
+  {
+    "day": 99,
+    "indicator": "body_temp",
+    "value": 36.83
+  },
+  {
+    "day": 99,
+    "indicator": "blood_sugar",
+    "value": 90.6
+  },
+  {
+    "day": 99,
+    "indicator": "sleep_hours",
+    "value": 6.4
+  },
+  {
+    "day": 99,
+    "indicator": "mood_score",
+    "value": 7.4
+  },
+  {
+    "day": 100,
+    "indicator": "heart_rate",
+    "value": 58.3
+  },
+  {
+    "day": 100,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.2
+  },
+  {
+    "day": 100,
+    "indicator": "blood_pressure_diastolic",
+    "value": 69.6
+  },
+  {
+    "day": 100,
+    "indicator": "body_temp",
+    "value": 36.41
+  },
+  {
+    "day": 100,
+    "indicator": "blood_sugar",
+    "value": 83.1
+  },
+  {
+    "day": 100,
+    "indicator": "sleep_hours",
+    "value": 6.4
+  },
+  {
+    "day": 100,
+    "indicator": "mood_score",
+    "value": 8.4
+  },
+  {
+    "day": 101,
+    "indicator": "heart_rate",
+    "value": 60.8
+  },
+  {
+    "day": 101,
+    "indicator": "blood_pressure_systolic",
+    "value": 105.9
+  },
+  {
+    "day": 101,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.4
+  },
+  {
+    "day": 101,
+    "indicator": "body_temp",
+    "value": 36.55
+  },
+  {
+    "day": 101,
+    "indicator": "blood_sugar",
+    "value": 93.9
+  },
+  {
+    "day": 101,
+    "indicator": "sleep_hours",
+    "value": 7.6
+  },
+  {
+    "day": 101,
+    "indicator": "mood_score",
+    "value": 8.0
+  },
+  {
+    "day": 102,
+    "indicator": "heart_rate",
+    "value": 60.8
+  },
+  {
+    "day": 102,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.6
+  },
+  {
+    "day": 102,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.3
+  },
+  {
+    "day": 102,
+    "indicator": "body_temp",
+    "value": 36.51
+  },
+  {
+    "day": 102,
+    "indicator": "blood_sugar",
+    "value": 85.5
+  },
+  {
+    "day": 102,
+    "indicator": "sleep_hours",
+    "value": 7.8
+  },
+  {
+    "day": 102,
+    "indicator": "mood_score",
+    "value": 7.7
+  },
+  {
+    "day": 103,
+    "indicator": "heart_rate",
+    "value": 63.7
+  },
+  {
+    "day": 103,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.1
+  },
+  {
+    "day": 103,
+    "indicator": "blood_pressure_diastolic",
+    "value": 75.6
+  },
+  {
+    "day": 103,
+    "indicator": "body_temp",
+    "value": 36.64
+  },
+  {
+    "day": 103,
+    "indicator": "blood_sugar",
+    "value": 90.5
+  },
+  {
+    "day": 103,
+    "indicator": "sleep_hours",
+    "value": 7.5
+  },
+  {
+    "day": 103,
+    "indicator": "mood_score",
+    "value": 9.5
+  },
+  {
+    "day": 104,
+    "indicator": "heart_rate",
+    "value": 69.4
+  },
+  {
+    "day": 104,
+    "indicator": "blood_pressure_systolic",
+    "value": 114.4
+  },
+  {
+    "day": 104,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.2
+  },
+  {
+    "day": 104,
+    "indicator": "body_temp",
+    "value": 37.16
+  },
+  {
+    "day": 104,
+    "indicator": "blood_sugar",
+    "value": 86.6
+  },
+  {
+    "day": 104,
+    "indicator": "sleep_hours",
+    "value": 6.9
+  },
+  {
+    "day": 104,
+    "indicator": "mood_score",
+    "value": 7.5
+  },
+  {
+    "day": 105,
+    "indicator": "heart_rate",
+    "value": 70.2
+  },
+  {
+    "day": 105,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.5
+  },
+  {
+    "day": 105,
+    "indicator": "blood_pressure_diastolic",
+    "value": 69.4
+  },
+  {
+    "day": 105,
+    "indicator": "body_temp",
+    "value": 36.64
+  },
+  {
+    "day": 105,
+    "indicator": "blood_sugar",
+    "value": 94.5
+  },
+  {
+    "day": 105,
+    "indicator": "sleep_hours",
+    "value": 6.9
+  },
+  {
+    "day": 105,
+    "indicator": "mood_score",
+    "value": 7.1
+  },
+  {
+    "day": 106,
+    "indicator": "heart_rate",
+    "value": 62.7
+  },
+  {
+    "day": 106,
+    "indicator": "blood_pressure_systolic",
+    "value": 110.5
+  },
+  {
+    "day": 106,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.1
+  },
+  {
+    "day": 106,
+    "indicator": "body_temp",
+    "value": 36.52
+  },
+  {
+    "day": 106,
+    "indicator": "blood_sugar",
+    "value": 95.3
+  },
+  {
+    "day": 106,
+    "indicator": "sleep_hours",
+    "value": 6.5
+  },
+  {
+    "day": 106,
+    "indicator": "mood_score",
+    "value": 6.8
+  },
+  {
+    "day": 107,
+    "indicator": "heart_rate",
+    "value": 62.6
+  },
+  {
+    "day": 107,
+    "indicator": "blood_pressure_systolic",
+    "value": 116.7
+  },
+  {
+    "day": 107,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.6
+  },
+  {
+    "day": 107,
+    "indicator": "body_temp",
+    "value": 36.95
+  },
+  {
+    "day": 107,
+    "indicator": "blood_sugar",
+    "value": 94.2
+  },
+  {
+    "day": 107,
+    "indicator": "sleep_hours",
+    "value": 6.3
+  },
+  {
+    "day": 107,
+    "indicator": "mood_score",
+    "value": 7.4
+  },
+  {
+    "day": 108,
+    "indicator": "heart_rate",
+    "value": 65.8
+  },
+  {
+    "day": 108,
+    "indicator": "blood_pressure_systolic",
+    "value": 107.9
+  },
+  {
+    "day": 108,
+    "indicator": "blood_pressure_diastolic",
+    "value": 78.9
+  },
+  {
+    "day": 108,
+    "indicator": "body_temp",
+    "value": 36.45
+  },
+  {
+    "day": 108,
+    "indicator": "blood_sugar",
+    "value": 95.1
+  },
+  {
+    "day": 108,
+    "indicator": "sleep_hours",
+    "value": 8.0
+  },
+  {
+    "day": 108,
+    "indicator": "mood_score",
+    "value": 7.9
+  },
+  {
+    "day": 109,
+    "indicator": "heart_rate",
+    "value": 61.8
+  },
+  {
+    "day": 109,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.0
+  },
+  {
+    "day": 109,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.9
+  },
+  {
+    "day": 109,
+    "indicator": "body_temp",
+    "value": 36.73
+  },
+  {
+    "day": 109,
+    "indicator": "blood_sugar",
+    "value": 92.3
+  },
+  {
+    "day": 109,
+    "indicator": "sleep_hours",
+    "value": 6.2
+  },
+  {
+    "day": 109,
+    "indicator": "mood_score",
+    "value": 8.0
+  },
+  {
+    "day": 110,
+    "indicator": "heart_rate",
+    "value": 62.8
+  },
+  {
+    "day": 110,
+    "indicator": "blood_pressure_systolic",
+    "value": 104.4
+  },
+  {
+    "day": 110,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.3
+  },
+  {
+    "day": 110,
+    "indicator": "body_temp",
+    "value": 36.39
+  },
+  {
+    "day": 110,
+    "indicator": "blood_sugar",
+    "value": 94.6
+  },
+  {
+    "day": 110,
+    "indicator": "sleep_hours",
+    "value": 8.4
+  },
+  {
+    "day": 110,
+    "indicator": "mood_score",
+    "value": 9.3
+  },
+  {
+    "day": 111,
+    "indicator": "heart_rate",
+    "value": 63.2
+  },
+  {
+    "day": 111,
+    "indicator": "blood_pressure_systolic",
+    "value": 110.4
+  },
+  {
+    "day": 111,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.7
+  },
+  {
+    "day": 111,
+    "indicator": "body_temp",
+    "value": 36.76
+  },
+  {
+    "day": 111,
+    "indicator": "blood_sugar",
+    "value": 90.1
+  },
+  {
+    "day": 111,
+    "indicator": "sleep_hours",
+    "value": 7.0
+  },
+  {
+    "day": 111,
+    "indicator": "mood_score",
+    "value": 9.5
+  },
+  {
+    "day": 112,
+    "indicator": "heart_rate",
+    "value": 64.7
+  },
+  {
+    "day": 112,
+    "indicator": "blood_pressure_systolic",
+    "value": 110.3
+  },
+  {
+    "day": 112,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.3
+  },
+  {
+    "day": 112,
+    "indicator": "body_temp",
+    "value": 36.69
+  },
+  {
+    "day": 112,
+    "indicator": "blood_sugar",
+    "value": 87.4
+  },
+  {
+    "day": 112,
+    "indicator": "sleep_hours",
+    "value": 6.9
+  },
+  {
+    "day": 112,
+    "indicator": "mood_score",
+    "value": 7.2
+  },
+  {
+    "day": 113,
+    "indicator": "heart_rate",
+    "value": 64.1
+  },
+  {
+    "day": 113,
+    "indicator": "blood_pressure_systolic",
+    "value": 118.6
+  },
+  {
+    "day": 113,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.9
+  },
+  {
+    "day": 113,
+    "indicator": "body_temp",
+    "value": 36.59
+  },
+  {
+    "day": 113,
+    "indicator": "blood_sugar",
+    "value": 87.8
+  },
+  {
+    "day": 113,
+    "indicator": "sleep_hours",
+    "value": 6.9
+  },
+  {
+    "day": 113,
+    "indicator": "mood_score",
+    "value": 8.7
+  },
+  {
+    "day": 114,
+    "indicator": "heart_rate",
+    "value": 63.2
+  },
+  {
+    "day": 114,
+    "indicator": "blood_pressure_systolic",
+    "value": 117.1
+  },
+  {
+    "day": 114,
+    "indicator": "blood_pressure_diastolic",
+    "value": 69.6
+  },
+  {
+    "day": 114,
+    "indicator": "body_temp",
+    "value": 36.56
+  },
+  {
+    "day": 114,
+    "indicator": "blood_sugar",
+    "value": 99.8
+  },
+  {
+    "day": 114,
+    "indicator": "sleep_hours",
+    "value": 5.8
+  },
+  {
+    "day": 114,
+    "indicator": "mood_score",
+    "value": 8.8
+  },
+  {
+    "day": 115,
+    "indicator": "heart_rate",
+    "value": 59.1
+  },
+  {
+    "day": 115,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.7
+  },
+  {
+    "day": 115,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.6
+  },
+  {
+    "day": 115,
+    "indicator": "body_temp",
+    "value": 36.72
+  },
+  {
+    "day": 115,
+    "indicator": "blood_sugar",
+    "value": 77.8
+  },
+  {
+    "day": 115,
+    "indicator": "sleep_hours",
+    "value": 5.9
+  },
+  {
+    "day": 115,
+    "indicator": "mood_score",
+    "value": 7.6
+  },
+  {
+    "day": 116,
+    "indicator": "heart_rate",
+    "value": 65.1
+  },
+  {
+    "day": 116,
+    "indicator": "blood_pressure_systolic",
+    "value": 108.9
+  },
+  {
+    "day": 116,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.4
+  },
+  {
+    "day": 116,
+    "indicator": "body_temp",
+    "value": 36.42
+  },
+  {
+    "day": 116,
+    "indicator": "blood_sugar",
+    "value": 90.2
+  },
+  {
+    "day": 116,
+    "indicator": "sleep_hours",
+    "value": 6.5
+  },
+  {
+    "day": 116,
+    "indicator": "mood_score",
+    "value": 8.2
+  },
+  {
+    "day": 117,
+    "indicator": "heart_rate",
+    "value": 66.9
+  },
+  {
+    "day": 117,
+    "indicator": "blood_pressure_systolic",
+    "value": 117.0
+  },
+  {
+    "day": 117,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.4
+  },
+  {
+    "day": 117,
+    "indicator": "body_temp",
+    "value": 36.55
+  },
+  {
+    "day": 117,
+    "indicator": "blood_sugar",
+    "value": 92.2
+  },
+  {
+    "day": 117,
+    "indicator": "sleep_hours",
+    "value": 6.9
+  },
+  {
+    "day": 117,
+    "indicator": "mood_score",
+    "value": 8.0
+  },
+  {
+    "day": 118,
+    "indicator": "heart_rate",
+    "value": 60.0
+  },
+  {
+    "day": 118,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.3
+  },
+  {
+    "day": 118,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.7
+  },
+  {
+    "day": 118,
+    "indicator": "body_temp",
+    "value": 36.46
+  },
+  {
+    "day": 118,
+    "indicator": "blood_sugar",
+    "value": 84.9
+  },
+  {
+    "day": 118,
+    "indicator": "sleep_hours",
+    "value": 7.9
+  },
+  {
+    "day": 118,
+    "indicator": "mood_score",
+    "value": 7.9
+  },
+  {
+    "day": 119,
+    "indicator": "heart_rate",
+    "value": 68.7
+  },
+  {
+    "day": 119,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.0
+  },
+  {
+    "day": 119,
+    "indicator": "blood_pressure_diastolic",
+    "value": 68.7
+  },
+  {
+    "day": 119,
+    "indicator": "body_temp",
+    "value": 36.44
+  },
+  {
+    "day": 119,
+    "indicator": "blood_sugar",
+    "value": 95.4
+  },
+  {
+    "day": 119,
+    "indicator": "sleep_hours",
+    "value": 6.6
+  },
+  {
+    "day": 119,
+    "indicator": "mood_score",
+    "value": 7.2
+  },
+  {
+    "day": 120,
+    "indicator": "heart_rate",
+    "value": 64.4
+  },
+  {
+    "day": 120,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.4
+  },
+  {
+    "day": 120,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.5
+  },
+  {
+    "day": 120,
+    "indicator": "body_temp",
+    "value": 36.55
+  },
+  {
+    "day": 120,
+    "indicator": "blood_sugar",
+    "value": 89.8
+  },
+  {
+    "day": 120,
+    "indicator": "sleep_hours",
+    "value": 5.4
+  },
+  {
+    "day": 120,
+    "indicator": "mood_score",
+    "value": 8.4
+  },
+  {
+    "day": 121,
+    "indicator": "heart_rate",
+    "value": 62.4
+  },
+  {
+    "day": 121,
+    "indicator": "blood_pressure_systolic",
+    "value": 116.6
+  },
+  {
+    "day": 121,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.1
+  },
+  {
+    "day": 121,
+    "indicator": "body_temp",
+    "value": 36.36
+  },
+  {
+    "day": 121,
+    "indicator": "blood_sugar",
+    "value": 97.3
+  },
+  {
+    "day": 121,
+    "indicator": "sleep_hours",
+    "value": 6.1
+  },
+  {
+    "day": 121,
+    "indicator": "mood_score",
+    "value": 7.6
+  },
+  {
+    "day": 122,
+    "indicator": "heart_rate",
+    "value": 66.9
+  },
+  {
+    "day": 122,
+    "indicator": "blood_pressure_systolic",
+    "value": 110.8
+  },
+  {
+    "day": 122,
+    "indicator": "blood_pressure_diastolic",
+    "value": 68.9
+  },
+  {
+    "day": 122,
+    "indicator": "body_temp",
+    "value": 36.63
+  },
+  {
+    "day": 122,
+    "indicator": "blood_sugar",
+    "value": 91.1
+  },
+  {
+    "day": 122,
+    "indicator": "sleep_hours",
+    "value": 7.9
+  },
+  {
+    "day": 122,
+    "indicator": "mood_score",
+    "value": 8.4
+  },
+  {
+    "day": 123,
+    "indicator": "heart_rate",
+    "value": 74.7
+  },
+  {
+    "day": 123,
+    "indicator": "blood_pressure_systolic",
+    "value": 106.2
+  },
+  {
+    "day": 123,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.9
+  },
+  {
+    "day": 123,
+    "indicator": "body_temp",
+    "value": 36.44
+  },
+  {
+    "day": 123,
+    "indicator": "blood_sugar",
+    "value": 97.2
+  },
+  {
+    "day": 123,
+    "indicator": "sleep_hours",
+    "value": 7.6
+  },
+  {
+    "day": 123,
+    "indicator": "mood_score",
+    "value": 8.5
+  },
+  {
+    "day": 124,
+    "indicator": "heart_rate",
+    "value": 62.5
+  },
+  {
+    "day": 124,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.4
+  },
+  {
+    "day": 124,
+    "indicator": "blood_pressure_diastolic",
+    "value": 67.9
+  },
+  {
+    "day": 124,
+    "indicator": "body_temp",
+    "value": 36.86
+  },
+  {
+    "day": 124,
+    "indicator": "blood_sugar",
+    "value": 94.3
+  },
+  {
+    "day": 124,
+    "indicator": "sleep_hours",
+    "value": 6.9
+  },
+  {
+    "day": 124,
+    "indicator": "mood_score",
+    "value": 8.7
+  },
+  {
+    "day": 125,
+    "indicator": "heart_rate",
+    "value": 67.4
+  },
+  {
+    "day": 125,
+    "indicator": "blood_pressure_systolic",
+    "value": 115.4
+  },
+  {
+    "day": 125,
+    "indicator": "blood_pressure_diastolic",
+    "value": 68.9
+  },
+  {
+    "day": 125,
+    "indicator": "body_temp",
+    "value": 36.49
+  },
+  {
+    "day": 125,
+    "indicator": "blood_sugar",
+    "value": 92.9
+  },
+  {
+    "day": 125,
+    "indicator": "sleep_hours",
+    "value": 7.3
+  },
+  {
+    "day": 125,
+    "indicator": "mood_score",
+    "value": 8.7
+  },
+  {
+    "day": 126,
+    "indicator": "heart_rate",
+    "value": 61.8
+  },
+  {
+    "day": 126,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.4
+  },
+  {
+    "day": 126,
+    "indicator": "blood_pressure_diastolic",
+    "value": 78.5
+  },
+  {
+    "day": 126,
+    "indicator": "body_temp",
+    "value": 36.7
+  },
+  {
+    "day": 126,
+    "indicator": "blood_sugar",
+    "value": 95.9
+  },
+  {
+    "day": 126,
+    "indicator": "sleep_hours",
+    "value": 7.1
+  },
+  {
+    "day": 126,
+    "indicator": "mood_score",
+    "value": 8.5
+  },
+  {
+    "day": 127,
+    "indicator": "heart_rate",
+    "value": 70.8
+  },
+  {
+    "day": 127,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.4
+  },
+  {
+    "day": 127,
+    "indicator": "blood_pressure_diastolic",
+    "value": 76.1
+  },
+  {
+    "day": 127,
+    "indicator": "body_temp",
+    "value": 36.47
+  },
+  {
+    "day": 127,
+    "indicator": "blood_sugar",
+    "value": 94.7
+  },
+  {
+    "day": 127,
+    "indicator": "sleep_hours",
+    "value": 7.7
+  },
+  {
+    "day": 127,
+    "indicator": "mood_score",
+    "value": 7.5
+  },
+  {
+    "day": 128,
+    "indicator": "heart_rate",
+    "value": 68.5
+  },
+  {
+    "day": 128,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.6
+  },
+  {
+    "day": 128,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.0
+  },
+  {
+    "day": 128,
+    "indicator": "body_temp",
+    "value": 36.6
+  },
+  {
+    "day": 128,
+    "indicator": "blood_sugar",
+    "value": 100.7
+  },
+  {
+    "day": 128,
+    "indicator": "sleep_hours",
+    "value": 7.3
+  },
+  {
+    "day": 128,
+    "indicator": "mood_score",
+    "value": 8.7
+  },
+  {
+    "day": 129,
+    "indicator": "heart_rate",
+    "value": 62.7
+  },
+  {
+    "day": 129,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.3
+  },
+  {
+    "day": 129,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.1
+  },
+  {
+    "day": 129,
+    "indicator": "body_temp",
+    "value": 36.51
+  },
+  {
+    "day": 129,
+    "indicator": "blood_sugar",
+    "value": 95.8
+  },
+  {
+    "day": 129,
+    "indicator": "sleep_hours",
+    "value": 7.1
+  },
+  {
+    "day": 129,
+    "indicator": "mood_score",
+    "value": 9.0
+  },
+  {
+    "day": 130,
+    "indicator": "heart_rate",
+    "value": 64.4
+  },
+  {
+    "day": 130,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.3
+  },
+  {
+    "day": 130,
+    "indicator": "blood_pressure_diastolic",
+    "value": 76.2
+  },
+  {
+    "day": 130,
+    "indicator": "body_temp",
+    "value": 36.5
+  },
+  {
+    "day": 130,
+    "indicator": "blood_sugar",
+    "value": 85.2
+  },
+  {
+    "day": 130,
+    "indicator": "sleep_hours",
+    "value": 7.9
+  },
+  {
+    "day": 130,
+    "indicator": "mood_score",
+    "value": 8.3
+  },
+  {
+    "day": 131,
+    "indicator": "heart_rate",
+    "value": 58.1
+  },
+  {
+    "day": 131,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.2
+  },
+  {
+    "day": 131,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.0
+  },
+  {
+    "day": 131,
+    "indicator": "body_temp",
+    "value": 36.86
+  },
+  {
+    "day": 131,
+    "indicator": "blood_sugar",
+    "value": 88.7
+  },
+  {
+    "day": 131,
+    "indicator": "sleep_hours",
+    "value": 6.7
+  },
+  {
+    "day": 131,
+    "indicator": "mood_score",
+    "value": 7.4
+  },
+  {
+    "day": 132,
+    "indicator": "heart_rate",
+    "value": 61.6
+  },
+  {
+    "day": 132,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.5
+  },
+  {
+    "day": 132,
+    "indicator": "blood_pressure_diastolic",
+    "value": 69.4
+  },
+  {
+    "day": 132,
+    "indicator": "body_temp",
+    "value": 36.45
+  },
+  {
+    "day": 132,
+    "indicator": "blood_sugar",
+    "value": 84.8
+  },
+  {
+    "day": 132,
+    "indicator": "sleep_hours",
+    "value": 6.1
+  },
+  {
+    "day": 132,
+    "indicator": "mood_score",
+    "value": 6.9
+  },
+  {
+    "day": 133,
+    "indicator": "heart_rate",
+    "value": 63.3
+  },
+  {
+    "day": 133,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.6
+  },
+  {
+    "day": 133,
+    "indicator": "blood_pressure_diastolic",
+    "value": 69.9
+  },
+  {
+    "day": 133,
+    "indicator": "body_temp",
+    "value": 36.67
+  },
+  {
+    "day": 133,
+    "indicator": "blood_sugar",
+    "value": 91.8
+  },
+  {
+    "day": 133,
+    "indicator": "sleep_hours",
+    "value": 6.8
+  },
+  {
+    "day": 133,
+    "indicator": "mood_score",
+    "value": 7.7
+  },
+  {
+    "day": 134,
+    "indicator": "heart_rate",
+    "value": 70.1
+  },
+  {
+    "day": 134,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.8
+  },
+  {
+    "day": 134,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.2
+  },
+  {
+    "day": 134,
+    "indicator": "body_temp",
+    "value": 36.21
+  },
+  {
+    "day": 134,
+    "indicator": "blood_sugar",
+    "value": 89.1
+  },
+  {
+    "day": 134,
+    "indicator": "sleep_hours",
+    "value": 5.7
+  },
+  {
+    "day": 134,
+    "indicator": "mood_score",
+    "value": 7.7
+  },
+  {
+    "day": 135,
+    "indicator": "heart_rate",
+    "value": 66.2
+  },
+  {
+    "day": 135,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.6
+  },
+  {
+    "day": 135,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.3
+  },
+  {
+    "day": 135,
+    "indicator": "body_temp",
+    "value": 36.45
+  },
+  {
+    "day": 135,
+    "indicator": "blood_sugar",
+    "value": 94.6
+  },
+  {
+    "day": 135,
+    "indicator": "sleep_hours",
+    "value": 6.1
+  },
+  {
+    "day": 135,
+    "indicator": "mood_score",
+    "value": 7.8
+  },
+  {
+    "day": 136,
+    "indicator": "heart_rate",
+    "value": 66.3
+  },
+  {
+    "day": 136,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.9
+  },
+  {
+    "day": 136,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.7
+  },
+  {
+    "day": 136,
+    "indicator": "body_temp",
+    "value": 36.89
+  },
+  {
+    "day": 136,
+    "indicator": "blood_sugar",
+    "value": 90.1
+  },
+  {
+    "day": 136,
+    "indicator": "sleep_hours",
+    "value": 6.8
+  },
+  {
+    "day": 136,
+    "indicator": "mood_score",
+    "value": 6.1
+  },
+  {
+    "day": 137,
+    "indicator": "heart_rate",
+    "value": 70.7
+  },
+  {
+    "day": 137,
+    "indicator": "blood_pressure_systolic",
+    "value": 110.7
+  },
+  {
+    "day": 137,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.1
+  },
+  {
+    "day": 137,
+    "indicator": "body_temp",
+    "value": 36.8
+  },
+  {
+    "day": 137,
+    "indicator": "blood_sugar",
+    "value": 97.6
+  },
+  {
+    "day": 137,
+    "indicator": "sleep_hours",
+    "value": 7.2
+  },
+  {
+    "day": 137,
+    "indicator": "mood_score",
+    "value": 7.0
+  },
+  {
+    "day": 138,
+    "indicator": "heart_rate",
+    "value": 66.3
+  },
+  {
+    "day": 138,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.8
+  },
+  {
+    "day": 138,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.1
+  },
+  {
+    "day": 138,
+    "indicator": "body_temp",
+    "value": 36.76
+  },
+  {
+    "day": 138,
+    "indicator": "blood_sugar",
+    "value": 82.4
+  },
+  {
+    "day": 138,
+    "indicator": "sleep_hours",
+    "value": 7.2
+  },
+  {
+    "day": 138,
+    "indicator": "mood_score",
+    "value": 7.3
+  },
+  {
+    "day": 139,
+    "indicator": "heart_rate",
+    "value": 71.6
+  },
+  {
+    "day": 139,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.1
+  },
+  {
+    "day": 139,
+    "indicator": "blood_pressure_diastolic",
+    "value": 67.9
+  },
+  {
+    "day": 139,
+    "indicator": "body_temp",
+    "value": 36.47
+  },
+  {
+    "day": 139,
+    "indicator": "blood_sugar",
+    "value": 92.3
+  },
+  {
+    "day": 139,
+    "indicator": "sleep_hours",
+    "value": 6.9
+  },
+  {
+    "day": 139,
+    "indicator": "mood_score",
+    "value": 7.0
+  },
+  {
+    "day": 140,
+    "indicator": "heart_rate",
+    "value": 58.7
+  },
+  {
+    "day": 140,
+    "indicator": "blood_pressure_systolic",
+    "value": 110.8
+  },
+  {
+    "day": 140,
+    "indicator": "blood_pressure_diastolic",
+    "value": 75.4
+  },
+  {
+    "day": 140,
+    "indicator": "body_temp",
+    "value": 36.83
+  },
+  {
+    "day": 140,
+    "indicator": "blood_sugar",
+    "value": 100.4
+  },
+  {
+    "day": 140,
+    "indicator": "sleep_hours",
+    "value": 6.4
+  },
+  {
+    "day": 140,
+    "indicator": "mood_score",
+    "value": 7.1
+  },
+  {
+    "day": 141,
+    "indicator": "heart_rate",
+    "value": 70.5
+  },
+  {
+    "day": 141,
+    "indicator": "blood_pressure_systolic",
+    "value": 116.2
+  },
+  {
+    "day": 141,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.8
+  },
+  {
+    "day": 141,
+    "indicator": "body_temp",
+    "value": 36.72
+  },
+  {
+    "day": 141,
+    "indicator": "blood_sugar",
+    "value": 88.4
+  },
+  {
+    "day": 141,
+    "indicator": "sleep_hours",
+    "value": 5.9
+  },
+  {
+    "day": 141,
+    "indicator": "mood_score",
+    "value": 7.6
+  },
+  {
+    "day": 142,
+    "indicator": "heart_rate",
+    "value": 63.9
+  },
+  {
+    "day": 142,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.9
+  },
+  {
+    "day": 142,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.6
+  },
+  {
+    "day": 142,
+    "indicator": "body_temp",
+    "value": 36.54
+  },
+  {
+    "day": 142,
+    "indicator": "blood_sugar",
+    "value": 93.0
+  },
+  {
+    "day": 142,
+    "indicator": "sleep_hours",
+    "value": 6.4
+  },
+  {
+    "day": 142,
+    "indicator": "mood_score",
+    "value": 8.0
+  },
+  {
+    "day": 143,
+    "indicator": "heart_rate",
+    "value": 65.8
+  },
+  {
+    "day": 143,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.7
+  },
+  {
+    "day": 143,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.1
+  },
+  {
+    "day": 143,
+    "indicator": "body_temp",
+    "value": 36.72
+  },
+  {
+    "day": 143,
+    "indicator": "blood_sugar",
+    "value": 100.4
+  },
+  {
+    "day": 143,
+    "indicator": "sleep_hours",
+    "value": 6.7
+  },
+  {
+    "day": 143,
+    "indicator": "mood_score",
+    "value": 8.9
+  },
+  {
+    "day": 144,
+    "indicator": "heart_rate",
+    "value": 67.8
+  },
+  {
+    "day": 144,
+    "indicator": "blood_pressure_systolic",
+    "value": 102.7
+  },
+  {
+    "day": 144,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.1
+  },
+  {
+    "day": 144,
+    "indicator": "body_temp",
+    "value": 36.5
+  },
+  {
+    "day": 144,
+    "indicator": "blood_sugar",
+    "value": 95.5
+  },
+  {
+    "day": 144,
+    "indicator": "sleep_hours",
+    "value": 7.2
+  },
+  {
+    "day": 144,
+    "indicator": "mood_score",
+    "value": 8.3
+  },
+  {
+    "day": 145,
+    "indicator": "heart_rate",
+    "value": 67.0
+  },
+  {
+    "day": 145,
+    "indicator": "blood_pressure_systolic",
+    "value": 108.9
+  },
+  {
+    "day": 145,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.1
+  },
+  {
+    "day": 145,
+    "indicator": "body_temp",
+    "value": 36.42
+  },
+  {
+    "day": 145,
+    "indicator": "blood_sugar",
+    "value": 91.2
+  },
+  {
+    "day": 145,
+    "indicator": "sleep_hours",
+    "value": 7.0
+  },
+  {
+    "day": 145,
+    "indicator": "mood_score",
+    "value": 8.1
+  },
+  {
+    "day": 146,
+    "indicator": "heart_rate",
+    "value": 62.7
+  },
+  {
+    "day": 146,
+    "indicator": "blood_pressure_systolic",
+    "value": 115.2
+  },
+  {
+    "day": 146,
+    "indicator": "blood_pressure_diastolic",
+    "value": 75.3
+  },
+  {
+    "day": 146,
+    "indicator": "body_temp",
+    "value": 36.83
+  },
+  {
+    "day": 146,
+    "indicator": "blood_sugar",
+    "value": 95.2
+  },
+  {
+    "day": 146,
+    "indicator": "sleep_hours",
+    "value": 7.2
+  },
+  {
+    "day": 146,
+    "indicator": "mood_score",
+    "value": 8.5
+  },
+  {
+    "day": 147,
+    "indicator": "heart_rate",
+    "value": 67.0
+  },
+  {
+    "day": 147,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.7
+  },
+  {
+    "day": 147,
+    "indicator": "blood_pressure_diastolic",
+    "value": 76.2
+  },
+  {
+    "day": 147,
+    "indicator": "body_temp",
+    "value": 36.86
+  },
+  {
+    "day": 147,
+    "indicator": "blood_sugar",
+    "value": 100.9
+  },
+  {
+    "day": 147,
+    "indicator": "sleep_hours",
+    "value": 7.1
+  },
+  {
+    "day": 147,
+    "indicator": "mood_score",
+    "value": 8.2
+  },
+  {
+    "day": 148,
+    "indicator": "heart_rate",
+    "value": 66.3
+  },
+  {
+    "day": 148,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.0
+  },
+  {
+    "day": 148,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.5
+  },
+  {
+    "day": 148,
+    "indicator": "body_temp",
+    "value": 36.58
+  },
+  {
+    "day": 148,
+    "indicator": "blood_sugar",
+    "value": 91.1
+  },
+  {
+    "day": 148,
+    "indicator": "sleep_hours",
+    "value": 8.2
+  },
+  {
+    "day": 148,
+    "indicator": "mood_score",
+    "value": 8.1
+  },
+  {
+    "day": 149,
+    "indicator": "heart_rate",
+    "value": 65.2
+  },
+  {
+    "day": 149,
+    "indicator": "blood_pressure_systolic",
+    "value": 115.1
+  },
+  {
+    "day": 149,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.4
+  },
+  {
+    "day": 149,
+    "indicator": "body_temp",
+    "value": 36.64
+  },
+  {
+    "day": 149,
+    "indicator": "blood_sugar",
+    "value": 91.7
+  },
+  {
+    "day": 149,
+    "indicator": "sleep_hours",
+    "value": 6.3
+  },
+  {
+    "day": 149,
+    "indicator": "mood_score",
+    "value": 8.0
+  },
+  {
+    "day": 150,
+    "indicator": "heart_rate",
+    "value": 61.4
+  },
+  {
+    "day": 150,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.7
+  },
+  {
+    "day": 150,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.0
+  },
+  {
+    "day": 150,
+    "indicator": "body_temp",
+    "value": 36.74
+  },
+  {
+    "day": 150,
+    "indicator": "blood_sugar",
+    "value": 95.4
+  },
+  {
+    "day": 150,
+    "indicator": "sleep_hours",
+    "value": 7.3
+  },
+  {
+    "day": 150,
+    "indicator": "mood_score",
+    "value": 7.9
+  },
+  {
+    "day": 151,
+    "indicator": "heart_rate",
+    "value": 66.3
+  },
+  {
+    "day": 151,
+    "indicator": "blood_pressure_systolic",
+    "value": 105.1
+  },
+  {
+    "day": 151,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.3
+  },
+  {
+    "day": 151,
+    "indicator": "body_temp",
+    "value": 36.58
+  },
+  {
+    "day": 151,
+    "indicator": "blood_sugar",
+    "value": 93.6
+  },
+  {
+    "day": 151,
+    "indicator": "sleep_hours",
+    "value": 7.0
+  },
+  {
+    "day": 151,
+    "indicator": "mood_score",
+    "value": 7.3
+  },
+  {
+    "day": 152,
+    "indicator": "heart_rate",
+    "value": 65.4
+  },
+  {
+    "day": 152,
+    "indicator": "blood_pressure_systolic",
+    "value": 110.4
+  },
+  {
+    "day": 152,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.3
+  },
+  {
+    "day": 152,
+    "indicator": "body_temp",
+    "value": 36.65
+  },
+  {
+    "day": 152,
+    "indicator": "blood_sugar",
+    "value": 91.1
+  },
+  {
+    "day": 152,
+    "indicator": "sleep_hours",
+    "value": 7.9
+  },
+  {
+    "day": 152,
+    "indicator": "mood_score",
+    "value": 8.5
+  },
+  {
+    "day": 153,
+    "indicator": "heart_rate",
+    "value": 67.4
+  },
+  {
+    "day": 153,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.1
+  },
+  {
+    "day": 153,
+    "indicator": "blood_pressure_diastolic",
+    "value": 70.9
+  },
+  {
+    "day": 153,
+    "indicator": "body_temp",
+    "value": 36.46
+  },
+  {
+    "day": 153,
+    "indicator": "blood_sugar",
+    "value": 85.4
+  },
+  {
+    "day": 153,
+    "indicator": "sleep_hours",
+    "value": 9.0
+  },
+  {
+    "day": 153,
+    "indicator": "mood_score",
+    "value": 7.2
+  },
+  {
+    "day": 154,
+    "indicator": "heart_rate",
+    "value": 64.3
+  },
+  {
+    "day": 154,
+    "indicator": "blood_pressure_systolic",
+    "value": 110.7
+  },
+  {
+    "day": 154,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.3
+  },
+  {
+    "day": 154,
+    "indicator": "body_temp",
+    "value": 36.51
+  },
+  {
+    "day": 154,
+    "indicator": "blood_sugar",
+    "value": 83.6
+  },
+  {
+    "day": 154,
+    "indicator": "sleep_hours",
+    "value": 6.5
+  },
+  {
+    "day": 154,
+    "indicator": "mood_score",
+    "value": 7.0
+  },
+  {
+    "day": 155,
+    "indicator": "heart_rate",
+    "value": 64.6
+  },
+  {
+    "day": 155,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.6
+  },
+  {
+    "day": 155,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.3
+  },
+  {
+    "day": 155,
+    "indicator": "body_temp",
+    "value": 36.63
+  },
+  {
+    "day": 155,
+    "indicator": "blood_sugar",
+    "value": 89.4
+  },
+  {
+    "day": 155,
+    "indicator": "sleep_hours",
+    "value": 7.7
+  },
+  {
+    "day": 155,
+    "indicator": "mood_score",
+    "value": 7.7
+  },
+  {
+    "day": 156,
+    "indicator": "heart_rate",
+    "value": 65.7
+  },
+  {
+    "day": 156,
+    "indicator": "blood_pressure_systolic",
+    "value": 107.4
+  },
+  {
+    "day": 156,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.6
+  },
+  {
+    "day": 156,
+    "indicator": "body_temp",
+    "value": 36.54
+  },
+  {
+    "day": 156,
+    "indicator": "blood_sugar",
+    "value": 93.8
+  },
+  {
+    "day": 156,
+    "indicator": "sleep_hours",
+    "value": 7.3
+  },
+  {
+    "day": 156,
+    "indicator": "mood_score",
+    "value": 7.9
+  },
+  {
+    "day": 157,
+    "indicator": "heart_rate",
+    "value": 65.7
+  },
+  {
+    "day": 157,
+    "indicator": "blood_pressure_systolic",
+    "value": 110.7
+  },
+  {
+    "day": 157,
+    "indicator": "blood_pressure_diastolic",
+    "value": 76.4
+  },
+  {
+    "day": 157,
+    "indicator": "body_temp",
+    "value": 36.74
+  },
+  {
+    "day": 157,
+    "indicator": "blood_sugar",
+    "value": 94.2
+  },
+  {
+    "day": 157,
+    "indicator": "sleep_hours",
+    "value": 6.3
+  },
+  {
+    "day": 157,
+    "indicator": "mood_score",
+    "value": 7.2
+  },
+  {
+    "day": 158,
+    "indicator": "heart_rate",
+    "value": 62.9
+  },
+  {
+    "day": 158,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.1
+  },
+  {
+    "day": 158,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.1
+  },
+  {
+    "day": 158,
+    "indicator": "body_temp",
+    "value": 36.47
+  },
+  {
+    "day": 158,
+    "indicator": "blood_sugar",
+    "value": 97.3
+  },
+  {
+    "day": 158,
+    "indicator": "sleep_hours",
+    "value": 7.1
+  },
+  {
+    "day": 158,
+    "indicator": "mood_score",
+    "value": 6.6
+  },
+  {
+    "day": 159,
+    "indicator": "heart_rate",
+    "value": 63.5
+  },
+  {
+    "day": 159,
+    "indicator": "blood_pressure_systolic",
+    "value": 103.0
+  },
+  {
+    "day": 159,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.1
+  },
+  {
+    "day": 159,
+    "indicator": "body_temp",
+    "value": 36.52
+  },
+  {
+    "day": 159,
+    "indicator": "blood_sugar",
+    "value": 89.3
+  },
+  {
+    "day": 159,
+    "indicator": "sleep_hours",
+    "value": 6.9
+  },
+  {
+    "day": 159,
+    "indicator": "mood_score",
+    "value": 7.7
+  },
+  {
+    "day": 160,
+    "indicator": "heart_rate",
+    "value": 63.1
+  },
+  {
+    "day": 160,
+    "indicator": "blood_pressure_systolic",
+    "value": 117.3
+  },
+  {
+    "day": 160,
+    "indicator": "blood_pressure_diastolic",
+    "value": 76.0
+  },
+  {
+    "day": 160,
+    "indicator": "body_temp",
+    "value": 36.43
+  },
+  {
+    "day": 160,
+    "indicator": "blood_sugar",
+    "value": 97.6
+  },
+  {
+    "day": 160,
+    "indicator": "sleep_hours",
+    "value": 6.0
+  },
+  {
+    "day": 160,
+    "indicator": "mood_score",
+    "value": 7.4
+  },
+  {
+    "day": 161,
+    "indicator": "heart_rate",
+    "value": 69.9
+  },
+  {
+    "day": 161,
+    "indicator": "blood_pressure_systolic",
+    "value": 104.2
+  },
+  {
+    "day": 161,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.4
+  },
+  {
+    "day": 161,
+    "indicator": "body_temp",
+    "value": 36.41
+  },
+  {
+    "day": 161,
+    "indicator": "blood_sugar",
+    "value": 91.4
+  },
+  {
+    "day": 161,
+    "indicator": "sleep_hours",
+    "value": 7.0
+  },
+  {
+    "day": 161,
+    "indicator": "mood_score",
+    "value": 9.2
+  },
+  {
+    "day": 162,
+    "indicator": "heart_rate",
+    "value": 62.4
+  },
+  {
+    "day": 162,
+    "indicator": "blood_pressure_systolic",
+    "value": 111.8
+  },
+  {
+    "day": 162,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.6
+  },
+  {
+    "day": 162,
+    "indicator": "body_temp",
+    "value": 36.56
+  },
+  {
+    "day": 162,
+    "indicator": "blood_sugar",
+    "value": 88.3
+  },
+  {
+    "day": 162,
+    "indicator": "sleep_hours",
+    "value": 7.1
+  },
+  {
+    "day": 162,
+    "indicator": "mood_score",
+    "value": 8.1
+  },
+  {
+    "day": 163,
+    "indicator": "heart_rate",
+    "value": 67.8
+  },
+  {
+    "day": 163,
+    "indicator": "blood_pressure_systolic",
+    "value": 108.7
+  },
+  {
+    "day": 163,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.9
+  },
+  {
+    "day": 163,
+    "indicator": "body_temp",
+    "value": 36.65
+  },
+  {
+    "day": 163,
+    "indicator": "blood_sugar",
+    "value": 91.2
+  },
+  {
+    "day": 163,
+    "indicator": "sleep_hours",
+    "value": 7.0
+  },
+  {
+    "day": 163,
+    "indicator": "mood_score",
+    "value": 8.0
+  },
+  {
+    "day": 164,
+    "indicator": "heart_rate",
+    "value": 62.8
+  },
+  {
+    "day": 164,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.2
+  },
+  {
+    "day": 164,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.1
+  },
+  {
+    "day": 164,
+    "indicator": "body_temp",
+    "value": 36.44
+  },
+  {
+    "day": 164,
+    "indicator": "blood_sugar",
+    "value": 97.2
+  },
+  {
+    "day": 164,
+    "indicator": "sleep_hours",
+    "value": 7.2
+  },
+  {
+    "day": 164,
+    "indicator": "mood_score",
+    "value": 7.1
+  },
+  {
+    "day": 165,
+    "indicator": "heart_rate",
+    "value": 65.9
+  },
+  {
+    "day": 165,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.6
+  },
+  {
+    "day": 165,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.9
+  },
+  {
+    "day": 165,
+    "indicator": "body_temp",
+    "value": 36.77
+  },
+  {
+    "day": 165,
+    "indicator": "blood_sugar",
+    "value": 90.4
+  },
+  {
+    "day": 165,
+    "indicator": "sleep_hours",
+    "value": 6.6
+  },
+  {
+    "day": 165,
+    "indicator": "mood_score",
+    "value": 7.6
+  },
+  {
+    "day": 166,
+    "indicator": "heart_rate",
+    "value": 61.9
+  },
+  {
+    "day": 166,
+    "indicator": "blood_pressure_systolic",
+    "value": 109.4
+  },
+  {
+    "day": 166,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.7
+  },
+  {
+    "day": 166,
+    "indicator": "body_temp",
+    "value": 36.6
+  },
+  {
+    "day": 166,
+    "indicator": "blood_sugar",
+    "value": 89.8
+  },
+  {
+    "day": 166,
+    "indicator": "sleep_hours",
+    "value": 6.6
+  },
+  {
+    "day": 166,
+    "indicator": "mood_score",
+    "value": 8.2
+  },
+  {
+    "day": 167,
+    "indicator": "heart_rate",
+    "value": 63.4
+  },
+  {
+    "day": 167,
+    "indicator": "blood_pressure_systolic",
+    "value": 108.4
+  },
+  {
+    "day": 167,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.6
+  },
+  {
+    "day": 167,
+    "indicator": "body_temp",
+    "value": 36.56
+  },
+  {
+    "day": 167,
+    "indicator": "blood_sugar",
+    "value": 87.2
+  },
+  {
+    "day": 167,
+    "indicator": "sleep_hours",
+    "value": 7.6
+  },
+  {
+    "day": 167,
+    "indicator": "mood_score",
+    "value": 8.6
+  },
+  {
+    "day": 168,
+    "indicator": "heart_rate",
+    "value": 65.1
+  },
+  {
+    "day": 168,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.5
+  },
+  {
+    "day": 168,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.3
+  },
+  {
+    "day": 168,
+    "indicator": "body_temp",
+    "value": 36.6
+  },
+  {
+    "day": 168,
+    "indicator": "blood_sugar",
+    "value": 96.0
+  },
+  {
+    "day": 168,
+    "indicator": "sleep_hours",
+    "value": 8.2
+  },
+  {
+    "day": 168,
+    "indicator": "mood_score",
+    "value": 8.1
+  },
+  {
+    "day": 169,
+    "indicator": "heart_rate",
+    "value": 66.4
+  },
+  {
+    "day": 169,
+    "indicator": "blood_pressure_systolic",
+    "value": 115.1
+  },
+  {
+    "day": 169,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.2
+  },
+  {
+    "day": 169,
+    "indicator": "body_temp",
+    "value": 36.43
+  },
+  {
+    "day": 169,
+    "indicator": "blood_sugar",
+    "value": 96.1
+  },
+  {
+    "day": 169,
+    "indicator": "sleep_hours",
+    "value": 6.1
+  },
+  {
+    "day": 169,
+    "indicator": "mood_score",
+    "value": 9.3
+  },
+  {
+    "day": 170,
+    "indicator": "heart_rate",
+    "value": 67.8
+  },
+  {
+    "day": 170,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.7
+  },
+  {
+    "day": 170,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.1
+  },
+  {
+    "day": 170,
+    "indicator": "body_temp",
+    "value": 36.86
+  },
+  {
+    "day": 170,
+    "indicator": "blood_sugar",
+    "value": 87.7
+  },
+  {
+    "day": 170,
+    "indicator": "sleep_hours",
+    "value": 6.3
+  },
+  {
+    "day": 170,
+    "indicator": "mood_score",
+    "value": 7.6
+  },
+  {
+    "day": 171,
+    "indicator": "heart_rate",
+    "value": 64.2
+  },
+  {
+    "day": 171,
+    "indicator": "blood_pressure_systolic",
+    "value": 108.5
+  },
+  {
+    "day": 171,
+    "indicator": "blood_pressure_diastolic",
+    "value": 73.4
+  },
+  {
+    "day": 171,
+    "indicator": "body_temp",
+    "value": 36.62
+  },
+  {
+    "day": 171,
+    "indicator": "blood_sugar",
+    "value": 88.3
+  },
+  {
+    "day": 171,
+    "indicator": "sleep_hours",
+    "value": 8.1
+  },
+  {
+    "day": 171,
+    "indicator": "mood_score",
+    "value": 7.0
+  },
+  {
+    "day": 172,
+    "indicator": "heart_rate",
+    "value": 60.9
+  },
+  {
+    "day": 172,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.3
+  },
+  {
+    "day": 172,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.5
+  },
+  {
+    "day": 172,
+    "indicator": "body_temp",
+    "value": 36.66
+  },
+  {
+    "day": 172,
+    "indicator": "blood_sugar",
+    "value": 89.2
+  },
+  {
+    "day": 172,
+    "indicator": "sleep_hours",
+    "value": 6.4
+  },
+  {
+    "day": 172,
+    "indicator": "mood_score",
+    "value": 7.5
+  },
+  {
+    "day": 173,
+    "indicator": "heart_rate",
+    "value": 62.8
+  },
+  {
+    "day": 173,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.8
+  },
+  {
+    "day": 173,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.8
+  },
+  {
+    "day": 173,
+    "indicator": "body_temp",
+    "value": 36.71
+  },
+  {
+    "day": 173,
+    "indicator": "blood_sugar",
+    "value": 94.6
+  },
+  {
+    "day": 173,
+    "indicator": "sleep_hours",
+    "value": 7.8
+  },
+  {
+    "day": 173,
+    "indicator": "mood_score",
+    "value": 8.6
+  },
+  {
+    "day": 174,
+    "indicator": "heart_rate",
+    "value": 67.5
+  },
+  {
+    "day": 174,
+    "indicator": "blood_pressure_systolic",
+    "value": 114.7
+  },
+  {
+    "day": 174,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.7
+  },
+  {
+    "day": 174,
+    "indicator": "body_temp",
+    "value": 36.56
+  },
+  {
+    "day": 174,
+    "indicator": "blood_sugar",
+    "value": 83.8
+  },
+  {
+    "day": 174,
+    "indicator": "sleep_hours",
+    "value": 7.3
+  },
+  {
+    "day": 174,
+    "indicator": "mood_score",
+    "value": 7.5
+  },
+  {
+    "day": 175,
+    "indicator": "heart_rate",
+    "value": 66.3
+  },
+  {
+    "day": 175,
+    "indicator": "blood_pressure_systolic",
+    "value": 113.8
+  },
+  {
+    "day": 175,
+    "indicator": "blood_pressure_diastolic",
+    "value": 69.6
+  },
+  {
+    "day": 175,
+    "indicator": "body_temp",
+    "value": 36.45
+  },
+  {
+    "day": 175,
+    "indicator": "blood_sugar",
+    "value": 90.4
+  },
+  {
+    "day": 175,
+    "indicator": "sleep_hours",
+    "value": 6.8
+  },
+  {
+    "day": 175,
+    "indicator": "mood_score",
+    "value": 8.1
+  },
+  {
+    "day": 176,
+    "indicator": "heart_rate",
+    "value": 61.3
+  },
+  {
+    "day": 176,
+    "indicator": "blood_pressure_systolic",
+    "value": 112.2
+  },
+  {
+    "day": 176,
+    "indicator": "blood_pressure_diastolic",
+    "value": 68.8
+  },
+  {
+    "day": 176,
+    "indicator": "body_temp",
+    "value": 36.28
+  },
+  {
+    "day": 176,
+    "indicator": "blood_sugar",
+    "value": 95.2
+  },
+  {
+    "day": 176,
+    "indicator": "sleep_hours",
+    "value": 6.3
+  },
+  {
+    "day": 176,
+    "indicator": "mood_score",
+    "value": 7.6
+  },
+  {
+    "day": 177,
+    "indicator": "heart_rate",
+    "value": 60.5
+  },
+  {
+    "day": 177,
+    "indicator": "blood_pressure_systolic",
+    "value": 107.1
+  },
+  {
+    "day": 177,
+    "indicator": "blood_pressure_diastolic",
+    "value": 72.0
+  },
+  {
+    "day": 177,
+    "indicator": "body_temp",
+    "value": 36.54
+  },
+  {
+    "day": 177,
+    "indicator": "blood_sugar",
+    "value": 96.4
+  },
+  {
+    "day": 177,
+    "indicator": "sleep_hours",
+    "value": 7.4
+  },
+  {
+    "day": 177,
+    "indicator": "mood_score",
+    "value": 7.8
+  },
+  {
+    "day": 178,
+    "indicator": "heart_rate",
+    "value": 67.4
+  },
+  {
+    "day": 178,
+    "indicator": "blood_pressure_systolic",
+    "value": 115.9
+  },
+  {
+    "day": 178,
+    "indicator": "blood_pressure_diastolic",
+    "value": 74.0
+  },
+  {
+    "day": 178,
+    "indicator": "body_temp",
+    "value": 36.54
+  },
+  {
+    "day": 178,
+    "indicator": "blood_sugar",
+    "value": 96.6
+  },
+  {
+    "day": 178,
+    "indicator": "sleep_hours",
+    "value": 8.2
+  },
+  {
+    "day": 178,
+    "indicator": "mood_score",
+    "value": 8.5
+  },
+  {
+    "day": 179,
+    "indicator": "heart_rate",
+    "value": 70.7
+  },
+  {
+    "day": 179,
+    "indicator": "blood_pressure_systolic",
+    "value": 115.2
+  },
+  {
+    "day": 179,
+    "indicator": "blood_pressure_diastolic",
+    "value": 75.1
+  },
+  {
+    "day": 179,
+    "indicator": "body_temp",
+    "value": 36.44
+  },
+  {
+    "day": 179,
+    "indicator": "blood_sugar",
+    "value": 87.0
+  },
+  {
+    "day": 179,
+    "indicator": "sleep_hours",
+    "value": 7.1
+  },
+  {
+    "day": 179,
+    "indicator": "mood_score",
+    "value": 6.8
+  },
+  {
+    "day": 180,
+    "indicator": "heart_rate",
+    "value": 63.1
+  },
+  {
+    "day": 180,
+    "indicator": "blood_pressure_systolic",
+    "value": 115.0
+  },
+  {
+    "day": 180,
+    "indicator": "blood_pressure_diastolic",
+    "value": 71.3
+  },
+  {
+    "day": 180,
+    "indicator": "body_temp",
+    "value": 36.68
+  },
+  {
+    "day": 180,
+    "indicator": "blood_sugar",
+    "value": 85.9
+  },
+  {
+    "day": 180,
+    "indicator": "sleep_hours",
+    "value": 6.8
+  },
+  {
+    "day": 180,
+    "indicator": "mood_score",
+    "value": 8.7
+  }
+]

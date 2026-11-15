@@ -5,10 +5,10 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-astro_user}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-your_local_secure_password}
       POSTGRES_DB: ${POSTGRES_DB:-astrotrack_db}
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -28,12 +28,13 @@ services:
       - "8000:8000"
     volumes:
       - ./backend:/app
+      - ./data:/data:ro
     environment:
-      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg2://astro_user:astro_pass@db:5432/astrotrack_db}
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg2://${POSTGRES_USER:-astro_user}:${POSTGRES_PASSWORD:-your_local_secure_password}@db:5432/${POSTGRES_DB:-astrotrack_db}}
       SECRET_KEY: ${SECRET_KEY:-insecure_dev_secret_key_for_hackathon_only}
       FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
       POSTGRES_USER: ${POSTGRES_USER:-astro_user}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-your_local_secure_password}
       POSTGRES_DB: ${POSTGRES_DB:-astrotrack_db}
     depends_on:
       db:
