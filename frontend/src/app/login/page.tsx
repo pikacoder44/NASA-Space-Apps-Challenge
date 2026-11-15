@@ -5,14 +5,14 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '../../context/AuthContext';
 import { AuthLayout } from '../../components/auth/AuthLayout';
-import { Eye, EyeOff, Lock, Mail, AlertCircle, ArrowRight, UserCheck, Shield, HelpCircle, X } from 'lucide-react';
+import { Eye, EyeOff, Lock, Mail, AlertCircle, ArrowRight, UserCheck, Shield, X } from 'lucide-react';
 
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const nextUrl = searchParams.get('next') || '/app';
 
-  const { session, isAuthenticated, signIn, signInWithGoogle, isLoading } = useAuth();
+  const { isAuthenticated, signIn, signInWithGoogle, isLoading } = useAuth();
 
   useEffect(() => {
     if (!isLoading && isAuthenticated) {

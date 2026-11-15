@@ -45,13 +45,13 @@ export function generateTrendHistory(
     let origin: DataOrigin = 'sensor';
     let quality: DataQuality = 'valid';
 
-    if (indicatorId === 'sleep') {
-      unit = 'hrs';
+    if (indicatorId === 'sleep' || indicatorId === 'sleep_hours') {
+      unit = 'hours';
       title = 'Sleep Duration';
       base = 7.3;
       baseLow = 6.8;
       baseHigh = 8.2;
-      baselineLabel = 'Personal Baseline: 7.3 hrs (6.8–8.2 hrs normal window)';
+      baselineLabel = 'Personal Baseline: 7.3 hours (6.8–8.2 hrs normal window)';
       origin = 'simulated';
 
       // Days 87-90 have sleep deficit (<6h)
@@ -68,11 +68,11 @@ export function generateTrendHistory(
       }
     } else if (indicatorId === 'heart_rate') {
       unit = 'bpm';
-      title = 'Resting Heart Rate (Sleep-Period)';
+      title = 'Resting Heart Rate';
       base = 62;
       baseLow = 58;
       baseHigh = 66;
-      baselineLabel = 'Personal Baseline: 62 bpm (58–66 bpm)';
+      baselineLabel = 'Personal Baseline: 62 bpm (58–66 bpm normal window)';
       origin = 'sensor';
 
       if (day >= 87) {
@@ -96,13 +96,13 @@ export function generateTrendHistory(
         const jitter = Math.cos(day * 0.8) * 4;
         val = Math.round(50 + jitter);
       }
-    } else if (indicatorId === 'blood_pressure') {
+    } else if (indicatorId === 'blood_pressure' || indicatorId === 'blood_pressure_systolic') {
       unit = 'mmHg';
-      title = 'Systolic Blood Pressure';
+      title = 'Systolic Blood Pressure (Upper)';
       base = 120;
       baseLow = 114;
       baseHigh = 124;
-      baselineLabel = 'Personal Baseline: 120 mmHg (114–124 mmHg)';
+      baselineLabel = 'Personal Baseline: 120 mmHg (114–124 mmHg normal window)';
       origin = 'manual';
 
       if (day >= 87) {
@@ -111,31 +111,46 @@ export function generateTrendHistory(
         const jitter = Math.sin(day * 0.3) * 3;
         val = Math.round(119 + jitter);
       }
-    } else if (indicatorId === 'skin_temperature') {
+    } else if (indicatorId === 'blood_pressure_diastolic') {
+      unit = 'mmHg';
+      title = 'Diastolic Blood Pressure (Lower)';
+      base = 80;
+      baseLow = 74;
+      baseHigh = 84;
+      baselineLabel = 'Personal Baseline: 80 mmHg (74–84 mmHg normal window)';
+      origin = 'manual';
+
+      if (day >= 87) {
+        val = day === 87 ? 84 : day === 88 ? 86 : day === 89 ? 88 : 88;
+      } else {
+        const jitter = Math.sin(day * 0.4) * 2;
+        val = Math.round(79 + jitter);
+      }
+    } else if (indicatorId === 'skin_temperature' || indicatorId === 'body_temp') {
       unit = '°C';
-      title = 'Core/Skin Temperature';
+      title = 'Core Body Temperature';
       base = 36.7;
       baseLow = 36.4;
       baseHigh = 37.1;
-      baselineLabel = 'Personal Baseline: 36.7 °C (36.4–37.1 °C)';
+      baselineLabel = 'Personal Baseline: 36.7 °C (36.4–37.1 °C normal window)';
       origin = 'sensor';
 
       const jitter = Math.sin(day * 0.6) * 0.15;
       val = Math.round((36.7 + jitter) * 10) / 10;
-    } else if (indicatorId === 'mood') {
-      unit = '/5';
-      title = 'Subjective Mood';
-      base = 4.4;
-      baseLow = 4.0;
-      baseHigh = 5.0;
-      baselineLabel = 'Personal Baseline: 4.4 / 5.0';
+    } else if (indicatorId === 'mood' || indicatorId === 'mood_score') {
+      unit = 'pts';
+      title = 'Well-being & Mood Score';
+      base = 8;
+      baseLow = 6;
+      baseHigh = 10;
+      baselineLabel = 'Personal Baseline: 8 / 10 (target: 6–10)';
       origin = 'self_reported';
 
       if (day >= 87) {
-        val = day === 87 ? 3.5 : day === 88 ? 2.9 : day === 89 ? 2.4 : 2.2;
+        val = day === 87 ? 7 : day === 88 ? 6 : day === 89 ? 5 : 5;
       } else {
-        const jitter = Math.sin(day * 0.4) * 0.3;
-        val = Math.round((4.3 + jitter) * 10) / 10;
+        const jitter = Math.sin(day * 0.4) * 1;
+        val = Math.max(1, Math.min(10, Math.round(8 + jitter)));
       }
     } else if (indicatorId === 'fatigue') {
       unit = '/5';
@@ -152,9 +167,9 @@ export function generateTrendHistory(
         const jitter = Math.cos(day * 0.5) * 0.3;
         val = Math.round((4.2 + jitter) * 10) / 10;
       }
-    } else if (indicatorId === 'radiation_dose') {
+    } else if (indicatorId === 'radiation_dose' || indicatorId === 'radiation_dosimetry') {
       unit = 'mSv';
-      title = 'Cumulative Ionizing Dose';
+      title = 'Cumulative Radiation Exposure';
       base = 1.82;
       baselineLabel = 'Nominal Interplanetary Transit Rate: ~1.82 mSv/day';
       origin = 'simulated';
@@ -176,13 +191,13 @@ export function generateTrendHistory(
         const jitter = Math.round((Math.sin(day * 0.9) * 5) / 5) * 5;
         val = 60 + jitter;
       }
-    } else if (indicatorId === 'blood_glucose') {
+    } else if (indicatorId === 'blood_glucose' || indicatorId === 'blood_sugar') {
       unit = 'mg/dL';
-      title = 'Fasting Blood Glucose';
+      title = 'Blood Sugar (Glucose)';
       base = 90;
       baseLow = 82;
       baseHigh = 102;
-      baselineLabel = 'Personal Baseline: 90 mg/dL (82–102 mg/dL)';
+      baselineLabel = 'Personal Baseline: 90 mg/dL (82–102 mg/dL normal window)';
       origin = 'manual';
 
       // Bi-weekly test, show values periodically

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { BodyMapInteractive } from '@/components/body/BodyMapInteractive';
-import { ShieldCheck, BookOpen, Activity, Layers, Radio, Sparkles } from 'lucide-react';
+import { ShieldCheck, BookOpen, Activity, Layers } from 'lucide-react';
 import Link from 'next/link';
 
 export default function BodyMapPage() {
@@ -16,17 +16,17 @@ export default function BodyMapPage() {
         <div>
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold uppercase tracking-wider text-[#176B68] bg-[#DCEDEA] px-2.5 py-0.5 rounded">
-              Crew Anatomy Systems
+              Interactive Body Map
             </span>
             <span className="text-xs text-[#60716E]">
-              Microgravity Physiological Mapping
+              Space Adaptation Guide
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#172A2B] mt-1">
             Interactive Body Systems Map
           </h1>
           <p className="text-xs sm:text-sm text-[#60716E] mt-0.5">
-            Explore how long-duration spaceflight hazards impact organ systems and correlate with AAHMS indicators.
+            Explore how zero gravity affects different areas of your body and your daily health readings.
           </p>
         </div>
 
@@ -43,7 +43,7 @@ export default function BodyMapPage() {
             className="px-3 py-1.5 rounded-lg bg-[#176B68] text-white text-xs font-semibold hover:bg-[#135754] transition-colors flex items-center gap-1.5"
           >
             <BookOpen size={14} />
-            <span>Measurement Guides</span>
+            <span>How-To Guides</span>
           </Link>
         </div>
       </div>

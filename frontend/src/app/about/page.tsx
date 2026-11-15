@@ -3,14 +3,13 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { 
-  ExternalLink, 
-  HeartPulse, 
-  ShieldCheck, 
-  Layers, 
-  Cpu, 
-  Sparkles, 
-  Database,
+import {
+  ExternalLink,
+  HeartPulse,
+  ShieldCheck,
+  Layers,
+  Cpu,
+  Sparkles,
   ArrowRight
 } from 'lucide-react';
 

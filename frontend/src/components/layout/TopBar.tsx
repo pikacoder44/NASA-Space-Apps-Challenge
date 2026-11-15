@@ -23,9 +23,9 @@ interface TopBarProps {
 }
 
 const SCENARIO_LABELS: Record<string, { label: string; color: string; bg: string }> = {
-  day90_yellow:      { label: 'Day 90 Yellow', color: '#8A520F', bg: '#FBF0D9' },
-  nominal_green:     { label: 'Nominal Green',  color: '#1a6b40', bg: '#E4F2E9' },
-  insufficient_data: { label: 'Degraded Link',  color: '#4B5563', bg: '#F1F5F9' },
+  day90_yellow:      { label: 'Sol 90 · Attention', color: '#8A520F', bg: '#FBF0D9' },
+  nominal_green:     { label: 'Sol 90 · Nominal',  color: '#1a6b40', bg: '#E4F2E9' },
+  insufficient_data: { label: 'Sol 90 · Degraded Link',  color: '#4B5563', bg: '#F1F5F9' },
 };
 
 export function TopBar({ mobileMenuOpen, setMobileMenuOpen }: TopBarProps) {
@@ -43,14 +43,14 @@ export function TopBar({ mobileMenuOpen, setMobileMenuOpen }: TopBarProps) {
     if (pathname.includes('/readings')) return 'Health Trends';
     if (pathname.includes('/body-map')) return 'Body Map';
     if (pathname.includes('/check-in')) return 'Daily Log';
-    if (pathname.includes('/trends')) return 'Trends';
-    if (pathname.includes('/alerts')) return 'Alerts';
+    if (pathname.includes('/trends')) return 'Health Trends';
+    if (pathname.includes('/alerts')) return 'Health Alerts';
     if (pathname.includes('/radiation')) return 'Radiation Tracker';
-    if (pathname.includes('/exercise')) return 'Countermeasures';
-    if (pathname.includes('/guides')) return 'Measurement Guides';
-    if (pathname.includes('/ai-explanation')) return 'AI Explanation';
-    if (pathname.includes('/records')) return 'Manual Records';
-    if (pathname.includes('/consistency')) return 'Consistency & Badges';
+    if (pathname.includes('/exercise')) return 'Exercise Routine';
+    if (pathname.includes('/guides')) return 'How-To Guides';
+    if (pathname.includes('/ai-explanation')) return 'AI Health Assistant';
+    if (pathname.includes('/records')) return 'History Log';
+    if (pathname.includes('/consistency')) return 'Streaks & Badges';
     if (pathname.includes('/reaction-test')) return 'Reaction Test';
     if (pathname.includes('/settings')) return 'Settings';
     return 'Health Monitoring';

@@ -2,15 +2,13 @@
 
 import React, { useState } from 'react';
 import { useHealth } from '@/context/HealthContext';
-import { 
-  Sparkles, 
-  ShieldCheck, 
-  RefreshCw, 
-  Stethoscope, 
+import {
+  Sparkles,
+  ShieldCheck,
+  RefreshCw,
+  Stethoscope,
   Brain,
   WifiOff,
-  CheckCircle2,
-  AlertTriangle,
   Code2,
   Server
 } from 'lucide-react';
@@ -22,9 +20,8 @@ export default function AIAssistantPage() {
     overview?.aiExplanation || null
   );
   const [isEvaluating, setIsEvaluating] = useState(false);
-  const [activeTab, setActiveTab] = useState<'explanation' | 'raw_telemetry' | 'contract'>('explanation');
-  
-  // 3 States required by prompt: 'demo' | 'api_ready' | 'offline'
+
+  // 3 States required: 'demo' | 'api_ready' | 'offline'
   const [evalState, setEvalState] = useState<'demo' | 'api_ready' | 'offline'>('demo');
 
   const handleRefreshEvaluation = async () => {
@@ -56,10 +53,10 @@ export default function AIAssistantPage() {
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#172A2B] mt-1">
-            AI-Assisted Health Explanation
+            AI Health Assistant
           </h1>
           <p className="text-xs sm:text-sm text-[#60716E] mt-0.5">
-            Transparent clinical context generated from submitted telemetry and personal baseline variance.
+            Clear, plain-language health summaries generated from your recent readings compared to your personal baseline.
           </p>
         </div>
 
@@ -70,7 +67,7 @@ export default function AIAssistantPage() {
           className="px-4 py-2 rounded-xl bg-[#176B68] text-white text-xs font-bold hover:bg-[#135754] transition-all flex items-center gap-2 cursor-pointer shadow-xs disabled:opacity-40"
         >
           <RefreshCw size={14} className={isEvaluating ? 'animate-spin' : ''} />
-          <span>{isEvaluating ? 'Synthesizing...' : 'Request Backend AI Synthesis'}</span>
+          <span>{isEvaluating ? 'Updating...' : 'Update AI Summary'}</span>
         </button>
       </div>
 
@@ -202,7 +199,7 @@ export default function AIAssistantPage() {
               <div className="flex items-center gap-2">
                 <Brain size={18} className="text-[#176B68]" />
                 <h2 className="text-sm font-bold text-[#172A2B]">
-                  Autonomous Clinical Assessment
+                  Health Summary &amp; Analysis
                 </h2>
               </div>
               <span className="text-xs text-[#60716E]">
@@ -217,10 +214,10 @@ export default function AIAssistantPage() {
             {/* Contributing Indicators */}
             <div className="pt-2">
               <span className="text-xs uppercase font-bold text-[#60716E] block mb-2">
-                Key Telemetry Observations Analyzed:
+                Key Health Readings Analyzed:
               </span>
               <ul className="space-y-2 text-xs text-[#172A2B]">
-                {explanation.observedPatterns.map((pat, idx) => (
+                {(explanation.observedPatterns || []).map((pat, idx) => (
                   <li key={idx} className="p-3.5 rounded-xl bg-[#F4F6F4] border border-[#D9E2DE]/70 leading-relaxed">
                     <span className="font-bold text-[#176B68] uppercase text-[10px] tracking-wide block mb-0.5">
                       {pat.indicator.replace('_', ' ')}
@@ -239,10 +236,10 @@ export default function AIAssistantPage() {
             <div className="bg-white rounded-xl border border-[#D9E2DE] p-5 shadow-xs space-y-3 flex flex-col justify-between">
               <div className="space-y-3">
                 <h3 className="text-xs uppercase font-bold text-[#176B68]">
-                  Conservative Countermeasures Suggested
+                  Recommended Self-Care Steps
                 </h3>
                 <ul className="space-y-2 text-xs text-[#172A2B]">
-                  {explanation.suggestedReviewSteps.map((rec, idx) => (
+                  {(explanation.suggestedReviewSteps || []).map((rec, idx) => (
                     <li key={idx} className="flex items-start gap-2">
                       <span className="w-4 h-4 rounded-full bg-[#DCEDEA] text-[#176B68] font-bold flex items-center justify-center shrink-0 text-[10px] mt-0.5">
                         {idx + 1}
@@ -264,7 +261,7 @@ export default function AIAssistantPage() {
                   </h3>
                 </div>
                 <p className="text-xs text-[#60716E] leading-relaxed">
-                  {explanation.flightSurgeonEscalation.reason}
+                  {explanation.flightSurgeonEscalation?.reason || 'Standard operational protocol.'}
                 </p>
                 <div className="p-3 rounded-lg bg-[#FBF0D9]/50 border border-[#EED8A7] text-xs space-y-1">
                   <span className="font-bold text-[#8A520F] block">Safety Boundary:</span>

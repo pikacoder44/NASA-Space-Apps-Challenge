@@ -4,19 +4,19 @@ import React, { useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { Logo } from '../brand/Logo';
 import { usePathname, useRouter } from 'next/navigation';
-import { 
-  LayoutDashboard, 
-  CheckSquare, 
-  Layers, 
-  TrendingUp, 
-  AlertTriangle, 
-  BookOpen, 
-  Sparkles, 
-  ShieldAlert, 
-  Dumbbell, 
-  ClipboardList, 
-  Award, 
-  Zap, 
+import {
+  LayoutDashboard,
+  CheckSquare,
+  Layers,
+  TrendingUp,
+  AlertTriangle,
+  BookOpen,
+  Sparkles,
+  ShieldAlert,
+  Dumbbell,
+  ClipboardList,
+  Award,
+  Zap,
   LogOut,
   ChevronLeft,
   ChevronRight
@@ -59,17 +59,17 @@ export function SidebarNavigation({
       title: 'Explore',
       items: [
         { name: 'Body Map', href: '/body-map', icon: Layers },
-        { name: 'Radiation', href: '/app/radiation', icon: ShieldAlert },
-        { name: 'Exercise', href: '/app/exercise', icon: Dumbbell },
-        { name: 'Guides', href: '/app/guides', icon: BookOpen }
+        { name: 'Radiation Tracker', href: '/app/radiation', icon: ShieldAlert },
+        { name: 'Exercise Routine', href: '/app/exercise', icon: Dumbbell },
+        { name: 'How-To Guides', href: '/app/guides', icon: BookOpen }
       ]
     },
     {
       title: 'Tools',
       items: [
-        { name: 'AI Explanation', href: '/app/ai-explanation', icon: Sparkles, tag: 'Gemini' },
-        { name: 'Manual Records', href: '/app/records', icon: ClipboardList },
-        { name: 'Consistency', href: '/app/consistency', icon: Award },
+        { name: 'AI Health Assistant', href: '/app/ai-explanation', icon: Sparkles, tag: 'AI' },
+        { name: 'History Log', href: '/app/records', icon: ClipboardList },
+        { name: 'Streaks & Badges', href: '/app/consistency', icon: Award },
         { name: 'Reaction Test', href: '/app/reaction-test', icon: Zap }
       ]
     }

@@ -4,14 +4,9 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { useHealth } from '@/context/HealthContext';
 import { ExerciseEntry } from '@/types/health';
-import { 
-  Dumbbell, 
-  PlusCircle, 
-  CheckCircle2, 
-  Bone,
-  Heart,
-  Activity,
-  Flame,
+import {
+  PlusCircle,
+  CheckCircle2,
   ShieldCheck
 } from 'lucide-react';
 
@@ -40,7 +35,7 @@ export default function ExerciseActivityPage() {
       durationMinutes,
       avgHeartRate,
       intensityScore,
-      notes: notes || 'Standard countermeasure workout completed.',
+      notes: notes || 'Standard workout session completed.',
       origin: 'manual'
     };
     await repository.addExerciseEntry(newEntry);
@@ -62,17 +57,17 @@ export default function ExerciseActivityPage() {
         <div>
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold uppercase tracking-wider text-[#176B68] bg-[#DCEDEA] px-2.5 py-0.5 rounded">
-              Musculoskeletal Countermeasures
+              Daily Physical Fitness
             </span>
             <span className="text-xs text-[#60716E]">
-              ARED & T2 Exercise Operations
+              Strength &amp; Cardio Workouts
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#172A2B] mt-1">
-            Exercise & Activity Logging
+            Exercise Routine
           </h1>
           <p className="text-xs sm:text-sm text-[#60716E] mt-0.5">
-            Preserve cancellous bone density, cardiovascular stroke volume, and muscular endurance in zero-g.
+            Keeps your bones, heart, and muscles strong while living in zero gravity.
           </p>
         </div>
 
@@ -89,7 +84,7 @@ export default function ExerciseActivityPage() {
       {saveSuccess && (
         <div className="p-4 rounded-xl bg-[#E4F2E9] border border-[#BDE0CB] text-[#247A55] text-xs font-bold flex items-center gap-2">
           <CheckCircle2 size={16} />
-          <span>Exercise workout recorded and +30 protocol points awarded to your crew profile!</span>
+          <span>Workout saved! +30 points added to your streak.</span>
         </div>
       )}
 
@@ -100,11 +95,11 @@ export default function ExerciseActivityPage() {
             <div className="flex items-center gap-2">
               <ShieldCheck size={18} className="text-[#176B68]" />
               <h2 className="text-sm font-bold text-[#172A2B] uppercase tracking-wide">
-                NASA Countermeasure Protocol (NASA-STD-3001)
+                NASA Spaceflight Exercise Guidelines
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-[#172A2B] leading-relaxed">
-              Crew members on long-duration exploration missions perform 2.5 hours of daily scheduled physical exercise (combining resistive and aerobic modalities) to counter microgravity deconditioning and bone calcium loss.
+              In space, your muscles and bones do not have to fight gravity. Daily exercise (combining strength resistance and treadmill cardio) protects bone density and keeps your heart fit throughout the mission.
             </p>
           </div>
 
@@ -115,12 +110,12 @@ export default function ExerciseActivityPage() {
               <span className="text-[10px] text-[#60716E] block">Target: 300+ min/wk</span>
             </div>
             <div className="p-3 rounded-lg bg-[#F4F6F4] border border-[#D9E2DE]">
-              <span className="text-[#60716E] block mb-0.5">ARED Adherence</span>
+              <span className="text-[#60716E] block mb-0.5">Workout Adherence</span>
               <span className="text-xl font-extrabold text-[#247A55] tabular-data">94%</span>
-              <span className="text-[10px] text-[#60716E] block">Nominal protocol status</span>
+              <span className="text-[10px] text-[#60716E] block">Target met</span>
             </div>
             <div className="p-3 rounded-lg bg-[#F4F6F4] border border-[#D9E2DE]">
-              <span className="text-[#60716E] block mb-0.5">Mean Cardiac Load</span>
+              <span className="text-[#60716E] block mb-0.5">Average Workout Heart Rate</span>
               <span className="text-xl font-extrabold text-[#176B68] tabular-data">138 bpm</span>
               <span className="text-[10px] text-[#60716E] block">Aerobic zone maintained</span>
             </div>
