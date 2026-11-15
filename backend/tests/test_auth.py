@@ -85,5 +85,28 @@ class TestAuth(unittest.TestCase):
         self.assertEqual(data["email"], settings.DEFAULT_ASTRONAUT_EMAIL)
 
 
+
+class TestSecurityHardening(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        Base.metadata.create_all(bind=engine)
+        cls.client = TestClient(app)
+
+    def test_stored_hash_is_not_accepted_as_password(self):
+        email = f"hash_{os.getpid()}_{id(self)}@astrotrack.space"
+        self.client.post("/api/auth/register", json={"email": email, "password": "RealPass123!", "name": "Hash Test"})
+        with SessionLocal() as db:
+            stored = db.query(Astronaut).filter(Astronaut.email == email).first().password_hash
+        res = self.client.post("/api/auth/login", json={"email": email, "password": stored})
+        self.assertEqual(res.status_code, 401)
+
+    def test_cors_allows_frontend_and_blocks_unknown_origins(self):
+        def allowed(origin):
+            res = self.client.options("/api/readings", headers={"Origin": origin, "Access-Control-Request-Method": "POST"})
+            return res.headers.get("access-control-allow-origin") == origin
+        self.assertTrue(allowed("http://localhost:3000"))
+        self.assertTrue(allowed("https://astrotrack.vercel.app"))
+        self.assertFalse(allowed("https://evil.example.com"))
+
 if __name__ == "__main__":
     unittest.main()

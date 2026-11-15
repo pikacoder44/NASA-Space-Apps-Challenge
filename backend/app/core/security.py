@@ -1,6 +1,7 @@
 """Security utilities: password hashing (bcrypt) and JWT token generation."""
 
 import hashlib
+import hmac
 from datetime import datetime, timedelta
 from typing import Optional, Any, Union
 
@@ -40,7 +41,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     # Check fallback or direct match
     salt = "astro_salt_2026".encode("utf-8")
     expected = hashlib.pbkdf2_hmac("sha256", plain_password.encode("utf-8"), salt, 100000).hex()
-    return expected == hashed_password or plain_password == hashed_password
+    return hmac.compare_digest(expected, hashed_password or "")
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:

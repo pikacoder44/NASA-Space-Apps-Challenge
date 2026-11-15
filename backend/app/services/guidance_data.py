@@ -1,6 +1,6 @@
 """Clinical guidance knowledge base and body map mappings."""
 
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 
 GUIDANCE_CATALOG: Dict[str, Dict[str, Dict[str, Any]]] = {
     "heart_rate": {
@@ -304,19 +304,29 @@ def get_clinical_guidance(indicator: str, status: str) -> Dict[str, Any]:
     }
 
 
-def get_body_map_region(body_part: str) -> Dict[str, Any]:
-    """Retrieve indicators relevant to a specific anatomical region."""
-    normalized = body_part.lower().replace("-", "_").replace(" ", "_")
-    region_data = BODY_MAP_REGIONS.get(normalized)
-    if not region_data:
-        # Default to chest/vitals
-        return {
-            "body_part": body_part,
-            "indicators": ["heart_rate", "blood_pressure_systolic", "blood_pressure_diastolic"],
-            "status": "normal"
-        }
-    return {
-        "body_part": body_part,
-        "indicators": region_data["indicators"],
-        "status": region_data["default_status"]
-    }
+BODY_PART_ALIASES: Dict[str, str] = {
+    "heart": "chest",
+    "lungs": "chest",
+    "brain": "head",
+    "mind": "head",
+    "stomach": "abdomen",
+    "arms": "limbs",
+    "legs": "limbs",
+    "whole_body": "full_body",
+    "body": "full_body",
+}
+
+
+def normalize_body_part(body_part: str) -> Optional[str]:
+    """Map a body part name (any case, '-', ' ' or aliases like 'heart') to a region key, or None."""
+    key = body_part.strip().lower().replace("-", "_").replace(" ", "_")
+    key = BODY_PART_ALIASES.get(key, key)
+    return key if key in BODY_MAP_REGIONS else None
+
+
+def get_body_map_region(body_part: str) -> Optional[Dict[str, Any]]:
+    """Indicators monitored for a body region, or None if the region is unknown."""
+    key = normalize_body_part(body_part)
+    if key is None:
+        return None
+    return {"body_part": key, "indicators": list(BODY_MAP_REGIONS[key]["indicators"])}

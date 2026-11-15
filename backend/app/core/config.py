@@ -1,7 +1,15 @@
 """Application configuration and environment settings for AstroTrack."""
 
 import os
+import secrets
 from typing import List
+
+try:
+    from dotenv import load_dotenv  # optional: read backend/.env when python-dotenv is installed
+
+    load_dotenv(os.path.join(os.path.dirname(__file__), "..", "..", ".env"))
+except ImportError:
+    pass
 
 try:
     from pydantic_settings import BaseSettings
@@ -24,19 +32,20 @@ class Settings(BaseSettings):
     DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./aahms.db")
 
     # Security & JWT
-    SECRET_KEY: str = os.getenv("SECRET_KEY", "insecure_dev_secret_key_for_hackathon_only")
+    # No secret in code: without SECRET_KEY a random key is generated at startup
+    # (login tokens then stop working after a restart). Always set it when deployed.
+    SECRET_KEY: str = os.getenv("SECRET_KEY") or secrets.token_urlsafe(32)
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
 
-    # CORS
+    # CORS: FRONTEND_URL may be a comma-separated list (e.g. local + Vercel URL).
+    # Any localhost port and *.vercel.app deployments are also allowed (see CORS_ORIGIN_REGEX).
     FRONTEND_URL: str = os.getenv("FRONTEND_URL", "http://localhost:3000")
-    CORS_ORIGINS: List[str] = [
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:8000",
-        "http://127.0.0.1:8000",
-        "*"
-    ]
+    CORS_ORIGIN_REGEX: str = r"^(https?://(localhost|127\.0\.0\.1)(:\d+)?|https://[a-z0-9-]+\.vercel\.app)$"
+
+    @property
+    def CORS_ORIGINS(self) -> List[str]:
+        return [o.strip().rstrip("/") for o in self.FRONTEND_URL.split(",") if o.strip()]
 
     # Authentication requirement toggle:
     # When False (default for demo), anonymous requests map to demo astronaut.
