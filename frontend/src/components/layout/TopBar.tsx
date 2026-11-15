@@ -1,10 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useHealth } from '../../context/HealthContext';
 import { useAuth } from '../../context/AuthContext';
+import { getDashboardSummary } from '../../lib/api';
+import type { Status } from '../../lib/types';
 import { Logo } from '../brand/Logo';
 import {
   Bell,
@@ -28,11 +30,32 @@ const SCENARIO_LABELS: Record<string, { label: string; color: string; bg: string
   insufficient_data: { label: 'Sol 90 · Degraded Link',  color: '#4B5563', bg: '#F1F5F9' },
 };
 
+const LIVE_STATUS_CONFIG: Record<Status, { label: string; color: string; bg: string }> = {
+  normal:   { label: 'Nominal', color: '#1a6b40', bg: '#E4F2E9' },
+  warning:  { label: 'Attention', color: '#8A520F', bg: '#FBF0D9' },
+  critical: { label: 'Act Now', color: '#B33C3C', bg: '#F9E7E5' },
+};
+
 export function TopBar({ mobileMenuOpen, setMobileMenuOpen }: TopBarProps) {
   const pathname = usePathname();
   const { overview, syncState, triggerSync, activeScenario, setScenario, loading } = useHealth();
   const { user } = useAuth();
   const [showScenarioPicker, setShowScenarioPicker] = useState(false);
+  const [liveStatus, setLiveStatus] = useState<Status | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    getDashboardSummary()
+      .then((sum) => {
+        if (mounted && sum?.overall_status) {
+          setLiveStatus(sum.overall_status);
+        }
+      })
+      .catch(() => {});
+    return () => {
+      mounted = false;
+    };
+  }, [pathname, overview?.overallStatus]);
 
   const isSyncing = syncState?.queueState === 'syncing';
   const alertCount = overview?.activeAlerts?.length || 0;
@@ -62,7 +85,28 @@ export function TopBar({ mobileMenuOpen, setMobileMenuOpen }: TopBarProps) {
   if (isAuthRoute) return null;
 
   const isPublicRoute = pathname === '/' || pathname === '/about' || pathname === '/demo';
-  const scenario = SCENARIO_LABELS[activeScenario || 'day90_yellow'] ?? SCENARIO_LABELS['day90_yellow'];
+
+  // Dynamic status taking real backend status into account
+  const solNumber = overview?.missionDay || 90;
+  let activeStatusConfig = SCENARIO_LABELS[activeScenario || 'day90_yellow'] ?? SCENARIO_LABELS['day90_yellow'];
+
+  if (liveStatus && LIVE_STATUS_CONFIG[liveStatus]) {
+    const cfg = LIVE_STATUS_CONFIG[liveStatus];
+    activeStatusConfig = {
+      label: `Sol ${solNumber} · ${cfg.label}`,
+      color: cfg.color,
+      bg: cfg.bg
+    };
+  } else if (overview?.overallStatus) {
+    const statusMap: Record<string, { label: string; color: string; bg: string }> = {
+      green: { label: `Sol ${solNumber} · Nominal`, color: '#1a6b40', bg: '#E4F2E9' },
+      yellow: { label: `Sol ${solNumber} · Watch`, color: '#8A520F', bg: '#FBF0D9' },
+      red: { label: `Sol ${solNumber} · Act Now`, color: '#B33C3C', bg: '#F9E7E5' }
+    };
+    if (statusMap[overview.overallStatus]) {
+      activeStatusConfig = statusMap[overview.overallStatus];
+    }
+  }
 
   /* ── PUBLIC nav ─────────────────────────────────────── */
   if (isPublicRoute) {
@@ -113,10 +157,10 @@ export function TopBar({ mobileMenuOpen, setMobileMenuOpen }: TopBarProps) {
 
         {/* CENTER: Scenario pill + Mission chip */}
         <div className="hidden sm:flex items-center gap-2.5 shrink-0">
-          {/* Sim pill */}
+          {/* Sim / Live pill */}
           <span className="inline-flex items-center gap-1 bg-[#12343B] text-[#EAF0ED] px-2.5 py-0.5 rounded-full text-xs font-semibold shrink-0">
             <Sparkles size={11} aria-hidden="true" />
-            Sim
+            {liveStatus ? 'Live' : 'Sim'}
           </span>
 
           {/* Scenario selector */}
@@ -126,10 +170,10 @@ export function TopBar({ mobileMenuOpen, setMobileMenuOpen }: TopBarProps) {
               disabled={loading}
               onClick={() => setShowScenarioPicker((v) => !v)}
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border cursor-pointer transition-colors"
-              style={{ color: scenario.color, background: scenario.bg, borderColor: scenario.color + '44' }}
+              style={{ color: activeStatusConfig.color, background: activeStatusConfig.bg, borderColor: activeStatusConfig.color + '44' }}
               title="Click to change scenario"
             >
-              {scenario.label}
+              {activeStatusConfig.label}
               <Info size={12} className="opacity-60" />
             </button>
             {showScenarioPicker && (

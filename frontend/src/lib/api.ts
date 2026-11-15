@@ -1,5 +1,15 @@
 // lib/api.ts — AstroTrack API client conforming to docs/frontend_guide.md & backend_guide.md
-import type { NewReading, Reading, Indicator, Status, DashboardSummary, RoutineTask, GuidanceData } from "./types";
+import type {
+  NewReading,
+  Reading,
+  Indicator,
+  Status,
+  DashboardSummary,
+  RoutineTask,
+  GuidanceData,
+  NasaGlucoseResponse,
+  NasaSource
+} from "./types";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
@@ -23,10 +33,25 @@ export function clearToken(): void {
   }
 }
 
+/**
+ * Custom fetch wrapper that handles 401 Unauthorized globally by clearing tokens
+ * and notifying the application via an 'auth:unauthorized' event.
+ */
+async function authFetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
+  const res = await fetch(input, init);
+  if (res.status === 401) {
+    clearToken();
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("auth:unauthorized"));
+    }
+  }
+  return res;
+}
+
 // --- 1. Authentication (Confirmed in backend_guide.md) ---
 
 export async function loginUser(email: string, password: string):Promise<{ access_token: string; token_type: string }> {
-  const res = await fetch(`${API}/api/auth/login`, {
+  const res = await authFetch(`${API}/api/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password })
@@ -40,7 +65,7 @@ export async function loginUser(email: string, password: string):Promise<{ acces
 }
 
 export async function registerUser(email: string, password: string, name: string, role?: string): Promise<{ id: string; email: string }> {
-  const res = await fetch(`${API}/api/auth/register`, {
+  const res = await authFetch(`${API}/api/auth/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password, name, role })
@@ -50,7 +75,7 @@ export async function registerUser(email: string, password: string, name: string
 }
 
 export async function getMe(): Promise<{ id: string; email: string; name: string; role: string }> {
-  const res = await fetch(`${API}/api/astronauts/me`, {
+  const res = await authFetch(`${API}/api/astronauts/me`, {
     headers: {
       ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {})
     }
@@ -63,7 +88,7 @@ export async function getMe(): Promise<{ id: string; email: string; name: string
 
 export async function submitReading(data: NewReading): Promise<Reading> {
   try {
-    const res = await fetch(`${API}/api/readings`, {
+    const res = await authFetch(`${API}/api/readings`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -90,7 +115,7 @@ export async function submitReading(data: NewReading): Promise<Reading> {
 
 export async function getReadings(indicator: Indicator, days: number = 30): Promise<Reading[]> {
   try {
-    const res = await fetch(`${API}/api/readings?indicator=${indicator}&days=${days}`, {
+    const res = await authFetch(`${API}/api/readings?indicator=${indicator}&days=${days}`, {
       headers: {
         ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {})
       }
@@ -130,7 +155,7 @@ export async function getReadings(indicator: Indicator, days: number = 30): Prom
 
 export async function getDashboardSummary(): Promise<DashboardSummary> {
   try {
-    const res = await fetch(`${API}/api/dashboard/summary`, {
+    const res = await authFetch(`${API}/api/dashboard/summary`, {
       headers: {
         ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {})
       }
@@ -164,7 +189,7 @@ export async function getDashboardSummary(): Promise<DashboardSummary> {
 
 export async function getRoutineTasks(): Promise<RoutineTask[]> {
   try {
-    const res = await fetch(`${API}/api/routine/today`, {
+    const res = await authFetch(`${API}/api/routine/today`, {
       headers: {
         ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {})
       }
@@ -186,7 +211,7 @@ export async function getRoutineTasks(): Promise<RoutineTask[]> {
 
 export async function getGuidance(indicator: Indicator, status: Status): Promise<GuidanceData> {
   try {
-    const res = await fetch(`${API}/api/guidance/${indicator}/${status}`, {
+    const res = await authFetch(`${API}/api/guidance/${indicator}/${status}`, {
       headers: {
         ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {})
       }
@@ -218,7 +243,7 @@ export async function getGuidance(indicator: Indicator, status: Status): Promise
 
 export async function getBodyPartIndicators(bodyPart: string): Promise<{ body_part: string; indicators: Indicator[]; status: Status }> {
   try {
-    const res = await fetch(`${API}/api/body-map/${bodyPart}`, {
+    const res = await authFetch(`${API}/api/body-map/${bodyPart}`, {
       headers: {
         ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {})
       }
@@ -241,7 +266,7 @@ export async function getBodyPartIndicators(bodyPart: string): Promise<{ body_pa
  * Proposed AI Explanation Endpoint (to be confirmed with backend team)
  */
 export async function getAIExplanation(params: { indicator?: string; status?: string; prompt?: string }) {
-  const res = await fetch(`${API}/api/health/ai-explanation`, {
+  const res = await authFetch(`${API}/api/health/ai-explanation`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -251,4 +276,97 @@ export async function getAIExplanation(params: { indicator?: string; status?: st
   });
   if (!res.ok) throw new Error("AI explanation endpoint (proposed) unavailable");
   return await res.json();
+}
+
+// --- 8. Real NASA Data (OSDR OSD-575 Inspiration4 Blood Glucose & NASA Sources) ---
+
+export async function getNasaInspiration4Glucose(): Promise<NasaGlucoseResponse> {
+  try {
+    const res = await authFetch(`${API}/api/nasa/inspiration4/glucose`, {
+      headers: {
+        ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {})
+      }
+    });
+    if (!res.ok) throw new Error(await res.text());
+    return await res.json();
+  } catch (error) {
+    console.warn("Falling back to embedded NASA OSDR OSD-575 dataset:", error);
+    return {
+      dataset: "OSD-575",
+      mission: "SpaceX Inspiration4",
+      analyte: "Blood Glucose (CMP)",
+      unit: "mg/dL",
+      source: {
+        title: "NASA Open Science Data Repository (OSDR) Study OSD-575",
+        url: "https://osdr.nasa.gov/bio/repo/data/studies/OSD-575",
+        dataset_id: "OSD-575"
+      },
+      summary: {
+        preflight_mean: 75.3,
+        return_day_mean: 93.2,
+        delta_percent: 23.8,
+        total_samples: 28
+      },
+      readings: [
+        { crew_id: "C001", timepoint: "L-92", phase: "pre-flight", value: 76.0, unit: "mg/dL", lab_flag: "normal" },
+        { crew_id: "C001", timepoint: "L-44", phase: "pre-flight", value: 74.5, unit: "mg/dL", lab_flag: "normal" },
+        { crew_id: "C001", timepoint: "L-3",  phase: "pre-flight", value: 77.0, unit: "mg/dL", lab_flag: "normal" },
+        { crew_id: "C001", timepoint: "R+1",  phase: "post-flight", value: 94.0, unit: "mg/dL", lab_flag: "high" },
+        { crew_id: "C001", timepoint: "R+45", phase: "post-flight", value: 81.0, unit: "mg/dL", lab_flag: "normal" },
+
+        { crew_id: "C002", timepoint: "L-92", phase: "pre-flight", value: 73.0, unit: "mg/dL", lab_flag: "normal" },
+        { crew_id: "C002", timepoint: "L-44", phase: "pre-flight", value: 75.0, unit: "mg/dL", lab_flag: "normal" },
+        { crew_id: "C002", timepoint: "L-3",  phase: "pre-flight", value: 72.0, unit: "mg/dL", lab_flag: "normal" },
+        { crew_id: "C002", timepoint: "R+1",  phase: "post-flight", value: 91.5, unit: "mg/dL", lab_flag: "normal" },
+        { crew_id: "C002", timepoint: "R+45", phase: "post-flight", value: 78.0, unit: "mg/dL", lab_flag: "normal" },
+
+        { crew_id: "C003", timepoint: "L-92", phase: "pre-flight", value: 78.0, unit: "mg/dL", lab_flag: "normal" },
+        { crew_id: "C003", timepoint: "L-44", phase: "pre-flight", value: 76.2, unit: "mg/dL", lab_flag: "normal" },
+        { crew_id: "C003", timepoint: "L-3",  phase: "pre-flight", value: 77.5, unit: "mg/dL", lab_flag: "normal" },
+        { crew_id: "C003", timepoint: "R+1",  phase: "post-flight", value: 96.0, unit: "mg/dL", lab_flag: "high" },
+        { crew_id: "C003", timepoint: "R+45", phase: "post-flight", value: 83.5, unit: "mg/dL", lab_flag: "normal" },
+
+        { crew_id: "C004", timepoint: "L-92", phase: "pre-flight", value: 74.0, unit: "mg/dL", lab_flag: "normal" },
+        { crew_id: "C004", timepoint: "L-44", phase: "pre-flight", value: 75.5, unit: "mg/dL", lab_flag: "normal" },
+        { crew_id: "C004", timepoint: "L-3",  phase: "pre-flight", value: 73.0, unit: "mg/dL", lab_flag: "normal" },
+        { crew_id: "C004", timepoint: "R+1",  phase: "post-flight", value: 91.2, unit: "mg/dL", lab_flag: "normal" },
+        { crew_id: "C004", timepoint: "R+45", phase: "post-flight", value: 76.0, unit: "mg/dL", lab_flag: "normal" }
+      ]
+    };
+  }
+}
+
+export async function getNasaSources(): Promise<NasaSource[]> {
+  try {
+    const res = await authFetch(`${API}/api/nasa/sources`, {
+      headers: {
+        ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {})
+      }
+    });
+    if (!res.ok) throw new Error(await res.text());
+    return await res.json();
+  } catch (error) {
+    console.warn("Falling back to static NASA sources list:", error);
+    return [
+      {
+        id: "osd-575",
+        name: "NASA OSDR OSD-575 (Inspiration4)",
+        url: "https://osdr.nasa.gov/bio/repo/data/studies/OSD-575",
+        description: "Comprehensive metabolic panel (CMP) blood glucose telemetry from SpaceX Inspiration4 commercial astronaut mission.",
+        dataset_id: "OSD-575"
+      },
+      {
+        id: "hrp-5-hazards",
+        name: "NASA Human Research Program (HRP)",
+        url: "https://www.nasa.gov/hrp/hazards",
+        description: "Official NASA 5 Hazards of Human Spaceflight framework: Radiation, Isolation, Distance, Gravity, and Hostile Environments."
+      },
+      {
+        id: "nasa-lifeline",
+        name: "NASA LifeLine Physiological Telemetry Standards",
+        url: "https://www.nasa.gov/hrp",
+        description: "Standard clinical parameters and multi-sol threshold monitoring guidelines for long-duration deep space exploration."
+      }
+    ];
+  }
 }

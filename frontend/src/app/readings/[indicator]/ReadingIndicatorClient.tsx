@@ -13,6 +13,7 @@ import { STATUS_COLORS } from '../../../lib/colors';
 import { getReadings } from '../../../lib/api';
 import type { Reading, Indicator } from '../../../lib/types';
 import { ErrorBoundary } from '../../../components/ui/ErrorBoundary';
+import { NasaInspiration4Card } from '../../../components/nasa/NasaInspiration4Card';
 import { 
   ResponsiveContainer, 
   LineChart, 
@@ -316,6 +317,13 @@ export default function ReadingIndicatorClient({ indicatorKey }: Props) {
           </div>
         </div>
       </ErrorBoundary>
+
+      {/* Real NASA Open Science Data Grounding (Inspiration4 Study OSD-575) */}
+      {indicatorKey === 'blood_sugar' && (
+        <ErrorBoundary widgetName="Real NASA Inspiration4 Glucose Data" variant="card">
+          <NasaInspiration4Card />
+        </ErrorBoundary>
+      )}
 
       {/* Space Clinical Interpretation */}
       <div className="p-5 rounded-2xl bg-surface border border-border space-y-3 shadow-xs">

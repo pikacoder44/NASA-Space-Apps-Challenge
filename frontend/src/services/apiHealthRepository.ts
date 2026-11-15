@@ -8,7 +8,8 @@ import {
   ManualRecordEntry,
   SyncState,
   AIAssistantExplanation,
-  IndicatorSnapshot
+  IndicatorSnapshot,
+  HealthStatus
 } from '../types/health';
 import { HealthRepository, IndicatorHistoryResult } from './healthRepository';
 import { DemoHealthRepository } from './demoHealthRepository';
@@ -29,13 +30,57 @@ export class ApiHealthRepository implements HealthRepository {
 
   public async getMissionOverview(): Promise<MissionOverview> {
     try {
-      // Proposed endpoint: to be confirmed with backend team
       const res = await fetch(getApiUrl(API_ENDPOINTS.MISSION_OVERVIEW), {
         headers: { 'Accept': 'application/json' },
         signal: AbortSignal.timeout(2500)
       });
       if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-      return await res.json();
+      const summary = await res.json();
+      const fallback = await this.fallbackRepo.getMissionOverview();
+
+      const statusMap: Record<string, HealthStatus> = {
+        normal: 'green',
+        warning: 'yellow',
+        critical: 'red'
+      };
+      const mappedStatus: HealthStatus = statusMap[summary.overall_status] || fallback.overallStatus;
+
+      const updatedIndicators = fallback.keyIndicators.map((ind) => {
+        const found = summary.indicators?.find((si: { indicator?: string; value?: number; latest_value?: number; status?: string; measured_at?: string }) => 
+          si.indicator === ind.id || 
+          (ind.id === 'sleep' && si.indicator === 'sleep_hours') ||
+          (ind.id === 'mood' && si.indicator === 'mood_score') ||
+          (ind.id === 'blood_glucose' && si.indicator === 'blood_sugar') ||
+          (ind.id === 'skin_temperature' && si.indicator === 'body_temp') ||
+          (ind.id === 'blood_pressure' && si.indicator === 'blood_pressure_systolic')
+        );
+        if (found) {
+          const indStatus: HealthStatus = statusMap[found.status || ''] || ind.status;
+          return {
+            ...ind,
+            status: indStatus,
+            latest: ind.latest ? {
+              ...ind.latest,
+              value: found.value ?? found.latest_value ?? ind.latest.value,
+              measuredAt: found.measured_at || ind.latest.measuredAt
+            } : undefined
+          };
+        }
+        return ind;
+      });
+
+      return {
+        ...fallback,
+        missionDay: summary.mission_day || summary.astronaut?.mission_day || fallback.missionDay,
+        overallStatus: mappedStatus,
+        keyIndicators: updatedIndicators,
+        sync: {
+          connectivity: 'online',
+          queueState: 'empty',
+          pendingCount: 0,
+          lastSuccessfulSyncAt: new Date().toISOString()
+        }
+      };
     } catch {
       return this.fallbackRepo.getMissionOverview();
     }
@@ -210,7 +255,7 @@ export class ApiHealthRepository implements HealthRepository {
         return {
           id: `ai-${Date.now()}`,
           generatedAt: new Date().toISOString(),
-          modelProvider: 'Gemini (FastAPI Service)',
+          modelProvider: 'Clinical Decision Engine (FastAPI Service)',
           overallAssessment: `${raw.title}: ${raw.explanation}`,
           observedPatterns: [
             {

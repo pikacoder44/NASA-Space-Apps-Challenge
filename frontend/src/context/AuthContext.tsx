@@ -28,12 +28,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [logoutToast, setLogoutToast] = useState<string | null>(null);
 
+  // Match backend ACCESS_TOKEN_EXPIRE_MINUTES (30 minutes)
+  const SESSION_DURATION_MS = 30 * 60 * 1000;
+
   // Singleton demo repository for demo mode
   const repository = useMemo<AuthRepository>(() => new DemoAuthRepository(), []);
   const useLiveApi = process.env.NEXT_PUBLIC_USE_API === 'true';
 
   useEffect(() => {
     let isMounted = true;
+
+    // Listen for global 401 unauthorized events from apiClient / lib/api
+    const handleUnauthorized = () => {
+      clearToken();
+      repository.signOut().catch(() => {});
+      setSession(null);
+      setLogoutToast('Your session has expired. Please log in again.');
+      setTimeout(() => {
+        setLogoutToast(null);
+      }, 5000);
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('auth:unauthorized', handleUnauthorized);
+    }
 
     // Check if we have an active backend token in localStorage
     const liveToken = getToken();
@@ -42,7 +60,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (isMounted) {
           const liveSession: UserSession = {
             token: liveToken,
-            expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+            expiresAt: new Date(Date.now() + SESSION_DURATION_MS).toISOString(),
             user: {
               id: me.id,
               name: me.name,
@@ -57,7 +75,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
       }).catch(() => {
         if (isMounted) {
-          // Fallback to local demo session
+          // Token invalid or expired
+          clearToken();
           repository.getSession().then((s) => {
             if (isMounted) {
               setSession(s);
@@ -69,7 +88,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } else {
       repository.getSession().then((s) => {
         if (isMounted) {
-          setSession(s);
+          // Validate expiration if present
+          if (s && s.expiresAt && new Date(s.expiresAt).getTime() <= Date.now()) {
+            repository.signOut().catch(() => {});
+            setSession(null);
+            setLogoutToast('Your session has expired. Please log in again.');
+          } else {
+            setSession(s);
+          }
           setIsLoading(false);
         }
       }).catch(() => {
@@ -79,10 +105,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       });
     }
 
+    // Periodic check every 30 seconds for session expiration
+    const expiryInterval = setInterval(() => {
+      setSession((currentSession) => {
+        if (currentSession && currentSession.expiresAt) {
+          if (new Date(currentSession.expiresAt).getTime() <= Date.now()) {
+            clearToken();
+            repository.signOut().catch(() => {});
+            setLogoutToast('Your session has expired (30 minutes). Please log in again.');
+            return null;
+          }
+        }
+        return currentSession;
+      });
+    }, 30000);
+
     return () => {
       isMounted = false;
+      clearInterval(expiryInterval);
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('auth:unauthorized', handleUnauthorized);
+      }
     };
-  }, [repository, useLiveApi]);
+  }, [repository, useLiveApi, SESSION_DURATION_MS]);
 
   const signIn = async (email: string, password: string, rememberMe = true) => {
     if (useLiveApi) {
@@ -92,7 +137,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const me = await getMe();
         const liveSession: UserSession = {
           token: authRes.access_token,
-          expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+          expiresAt: new Date(Date.now() + SESSION_DURATION_MS).toISOString(),
           user: {
             id: me.id,
             name: me.name,

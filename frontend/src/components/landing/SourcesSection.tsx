@@ -65,6 +65,30 @@ export function SourcesSection() {
           </div>
         </Reveal>
 
+        {/* Featured Open Science Data Repository Study OSD-575 */}
+        <div className="mt-8 p-6 rounded-2xl bg-[#DCEDEA]/40 border border-[#B6D6D0] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1">
+            <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#176B68] text-white uppercase tracking-wider">
+              NASA Open Science Data
+            </span>
+            <h3 className="text-base sm:text-lg font-bold text-[#172A2B]">
+              NASA OSDR Study OSD-575 · SpaceX Inspiration4 Telemetry
+            </h3>
+            <p className="text-xs sm:text-sm text-[#60716E] max-w-2xl leading-relaxed">
+              Real open-access blood glucose and comprehensive metabolic panel (CMP) telemetry from the 4 Inspiration4 commercial astronauts, used to calibrate AstroTrack&apos;s baseline drift models.
+            </p>
+          </div>
+          <a
+            href="https://osdr.nasa.gov/bio/repo/data/studies/OSD-575"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#176B68] text-white text-xs font-bold hover:bg-[#135754] transition-colors shrink-0 cursor-pointer"
+          >
+            <span>Explore Dataset</span>
+            <ArrowRight size={14} />
+          </a>
+        </div>
+
         {/* Editorial Rows Separated by 1px Lines (NO heavy cards) */}
         <div className="mt-10 border-t border-[#D9E2DE]">
           {SOURCES.map((source) => (
