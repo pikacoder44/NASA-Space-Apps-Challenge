@@ -6,32 +6,161 @@ import { TrendChart } from '../charts/TrendChart';
 import { generateTrendHistory } from '../../data/trendData';
 import { StatusBadge } from '../ui/StatusBadge';
 import { DataSourceTag } from '../ui/DataSourceTag';
+import { ErrorBoundary } from '../ui/ErrorBoundary';
 import Link from 'next/link';
 import { 
   ArrowLeft, 
   Info, 
   BookOpen, 
   AlertTriangle, 
-  Layers 
+  Layers,
+  RefreshCw
 } from 'lucide-react';
-import { notFound } from 'next/navigation';
 
 export function IndicatorDetailView({ indicatorId }: { indicatorId: string }) {
-  const { overview } = useHealth();
+  const { overview, loading, error, refreshOverview } = useHealth();
   const [range, setRange] = useState<'7d' | '30d' | 'mission'>('7d');
 
-  if (!overview) return null;
-
-  const indicator = overview.keyIndicators.find((k) => k.id === indicatorId);
-
-  if (!indicator) {
-    notFound();
+  // Loading skeleton when data is initially loading
+  if (loading && !overview) {
+    return (
+      <div className="max-w-5xl mx-auto space-y-6 animate-pulse">
+        <div className="flex items-center justify-between">
+          <div className="h-4 bg-[#EAF0ED] rounded w-32" />
+          <div className="h-4 bg-[#EAF0ED] rounded w-24" />
+        </div>
+        <div className="bg-white rounded-xl border border-[#D9E2DE] p-6 space-y-4">
+          <div className="h-8 bg-[#EAF0ED] rounded w-1/3" />
+          <div className="h-4 bg-[#EAF0ED] rounded w-2/3" />
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+            <div className="h-24 bg-[#EAF0ED] rounded-xl" />
+            <div className="h-24 bg-[#EAF0ED] rounded-xl" />
+            <div className="h-24 bg-[#EAF0ED] rounded-xl" />
+          </div>
+        </div>
+        <div className="h-72 bg-white rounded-xl border border-[#D9E2DE] p-6" />
+      </div>
+    );
   }
 
-  const trendData = generateTrendHistory(indicator.id, range);
-  const relatedAlert = overview.activeAlerts.find((a) =>
-    a.contributingIndicators.includes(indicator.id)
+  // Fetch failure state with friendly retry
+  if (error && !overview) {
+    return (
+      <div className="max-w-5xl mx-auto space-y-6">
+        <div className="flex items-center justify-between">
+          <Link
+            href="/app/indicators"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#176B68] hover:underline"
+          >
+            <ArrowLeft size={14} />
+            <span>Back to All Health Indicators</span>
+          </Link>
+        </div>
+
+        <div className="p-6 sm:p-8 rounded-2xl bg-white border border-[#D9E2DE] shadow-xs space-y-4 text-center">
+          <div className="w-12 h-12 mx-auto rounded-2xl bg-[#FEF8EC] border border-[#F3DB9A] flex items-center justify-center text-[#8A520F]">
+            <AlertTriangle className="w-6 h-6" />
+          </div>
+          <div className="space-y-1">
+            <h2 className="text-xl font-extrabold text-[#172A2B]">Telemetry Stream Unavailable</h2>
+            <p className="text-xs sm:text-sm text-[#60716E] max-w-md mx-auto leading-relaxed">
+              Unable to load telemetry data for indicator <span className="font-mono font-bold text-[#172A2B]">{indicatorId}</span>. The communication link may be degraded or offline.
+            </p>
+          </div>
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => refreshOverview()}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-[#176B68] text-white hover:bg-[#125553] shadow-xs transition-all cursor-pointer"
+            >
+              <RefreshCw size={14} />
+              <span>Retry Telemetry Sync</span>
+            </button>
+            <Link
+              href="/app/indicators"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-white text-[#172A2B] border border-[#D9E2DE] hover:bg-[#F4F6F4] transition-all"
+            >
+              <span>Back to All Indicators</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!overview) {
+    return (
+      <div className="max-w-5xl mx-auto p-8 text-center text-xs text-[#60716E]">
+        Telemetry data not initialized.
+      </div>
+    );
+  }
+
+  const indicator = overview.keyIndicators?.find((k) => k.id === indicatorId);
+
+  // Missing indicator graceful fallback
+  if (!indicator) {
+    return (
+      <div className="max-w-5xl mx-auto space-y-6">
+        <div className="flex items-center justify-between">
+          <Link
+            href="/app/indicators"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#176B68] hover:underline"
+          >
+            <ArrowLeft size={14} />
+            <span>Back to All Health Indicators</span>
+          </Link>
+        </div>
+
+        <div className="p-6 sm:p-8 rounded-2xl bg-white border border-[#D9E2DE] shadow-xs space-y-4 text-center">
+          <div className="w-12 h-12 mx-auto rounded-2xl bg-[#EAF0ED] border border-[#D9E2DE] flex items-center justify-center text-[#176B68]">
+            <Info className="w-6 h-6" />
+          </div>
+          <div className="space-y-1">
+            <h2 className="text-xl font-extrabold text-[#172A2B]">Indicator Not Found</h2>
+            <p className="text-xs sm:text-sm text-[#60716E] max-w-md mx-auto leading-relaxed">
+              No calibrated metric exists for code <span className="font-mono font-bold text-[#172A2B]">{indicatorId}</span> in current mission logs.
+            </p>
+          </div>
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => refreshOverview()}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-[#176B68] text-white hover:bg-[#125553] shadow-xs transition-all cursor-pointer"
+            >
+              <RefreshCw size={14} />
+              <span>Retry Telemetry Sync</span>
+            </button>
+            <Link
+              href="/app/indicators"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-white text-[#172A2B] border border-[#D9E2DE] hover:bg-[#F4F6F4] transition-all"
+            >
+              <span>Back to All Indicators</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Safe trend history calculation with try/catch fallback
+  let trendData: ReturnType<typeof generateTrendHistory>;
+  try {
+    trendData = generateTrendHistory(indicator.id, range);
+  } catch {
+    trendData = {
+      unit: indicator.latest?.unit || '',
+      title: `${indicator.name} Multi-Day Trajectory`,
+      baselineLabel: 'Personal Baseline',
+      data: []
+    };
+  }
+
+  const relatedAlert = overview.activeAlerts?.find((a) =>
+    Array.isArray(a.contributingIndicators) && a.contributingIndicators.includes(indicator.id)
   );
+
+  const safeTrend = (indicator.trend || 'stable').replace(/_/g, ' ');
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
@@ -46,7 +175,7 @@ export function IndicatorDetailView({ indicatorId }: { indicatorId: string }) {
         </Link>
 
         <span className="text-xs text-[#60716E]">
-          Indicator Code: {indicator.id.toUpperCase()}
+          Indicator Code: {indicator.id ? indicator.id.toUpperCase() : 'UNKNOWN'}
         </span>
       </div>
 
@@ -56,7 +185,7 @@ export function IndicatorDetailView({ indicatorId }: { indicatorId: string }) {
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xs font-semibold uppercase tracking-wider text-[#60716E]">
-                {indicator.category}
+                {indicator.category || 'Physiological'}
               </span>
               <DataSourceTag origin={indicator.latest?.origin || 'simulated'} />
             </div>
@@ -86,7 +215,7 @@ export function IndicatorDetailView({ indicatorId }: { indicatorId: string }) {
               </span>
             </div>
             <span className="text-xs text-[#60716E] mt-1 block">
-              Observed at Sol {overview.missionDay}
+              Observed at Sol {overview.missionDay ?? 90}
             </span>
           </div>
 
@@ -115,7 +244,7 @@ export function IndicatorDetailView({ indicatorId }: { indicatorId: string }) {
               {indicator.deltaFromBaseline || 'Matching nominal range'}
             </p>
             <span className="text-xs text-[#60716E] mt-1 block capitalize">
-              Trend trajectory: {indicator.trend.replace('_', ' ')}
+              Trend trajectory: {safeTrend}
             </span>
           </div>
         </div>
@@ -141,7 +270,7 @@ export function IndicatorDetailView({ indicatorId }: { indicatorId: string }) {
           </p>
           <div className="pt-2 flex items-center justify-between text-xs">
             <span className="font-mono text-[11px] text-[#8A520F]">
-              Confidence: {Math.round((relatedAlert.confidence || 0.85) * 100)}% · Duration: {relatedAlert.duration}
+              Confidence: {Math.round((relatedAlert.confidence || 0.85) * 100)}% · Duration: {relatedAlert.duration || 'Persistent'}
             </span>
             <Link href="/app/alerts" className="font-semibold text-[#8A520F] hover:underline">
               Inspect Full Advisory Next Steps →
@@ -150,15 +279,20 @@ export function IndicatorDetailView({ indicatorId }: { indicatorId: string }) {
         </div>
       )}
 
-      {/* Trend History Chart */}
-      <TrendChart
-        data={trendData.data}
-        title={`${indicator.name} Multi-Day Trajectory`}
-        unit={trendData.unit}
-        baselineLabel={trendData.baselineLabel}
-        activeRange={range}
-        onRangeChange={setRange}
-      />
+      {/* Trend History Chart protected by ErrorBoundary */}
+      <ErrorBoundary
+        widgetName={`${indicator.name} Trajectory Chart`}
+        variant="card"
+      >
+        <TrendChart
+          data={trendData.data}
+          title={`${indicator.name} Multi-Day Trajectory`}
+          unit={trendData.unit}
+          baselineLabel={trendData.baselineLabel}
+          activeRange={range}
+          onRangeChange={setRange}
+        />
+      </ErrorBoundary>
 
       {/* Spaceflight Physiological Relevance & Citation */}
       <div className="bg-white rounded-xl border border-[#D9E2DE] p-5 sm:p-6 shadow-xs space-y-4">
@@ -167,7 +301,7 @@ export function IndicatorDetailView({ indicatorId }: { indicatorId: string }) {
             Spaceflight Physiological Context
           </h2>
           <p className="text-xs sm:text-sm text-[#172A2B] leading-relaxed mt-1">
-            {indicator.spaceflightRelevance}
+            {indicator.spaceflightRelevance || 'Monitored as part of the NASA Human Research Program spaceflight physiological envelope.'}
           </p>
         </div>
 
