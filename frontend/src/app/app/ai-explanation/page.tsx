@@ -46,14 +46,14 @@ export default function AIAssistantPage() {
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold uppercase tracking-wider text-[#176B68] bg-[#DCEDEA] px-2.5 py-0.5 rounded flex items-center gap-1">
               <Sparkles size={12} />
-              AI Assistant Interface
+              Clinical Decision Assistant
             </span>
             <span className="text-xs text-[#60716E]">
-              FastAPI Backend Contract · Gemini Model
+              FastAPI Backend · Rule-Based Engine
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#172A2B] mt-1">
-            AI Health Assistant
+            Clinical Decision Assistant
           </h1>
           <p className="text-xs sm:text-sm text-[#60716E] mt-0.5">
             Clear, plain-language health summaries generated from your recent readings compared to your personal baseline.
@@ -67,7 +67,7 @@ export default function AIAssistantPage() {
           className="px-4 py-2 rounded-xl bg-[#176B68] text-white text-xs font-bold hover:bg-[#135754] transition-all flex items-center gap-2 cursor-pointer shadow-xs disabled:opacity-40"
         >
           <RefreshCw size={14} className={isEvaluating ? 'animate-spin' : ''} />
-          <span>{isEvaluating ? 'Updating...' : 'Update AI Summary'}</span>
+          <span>{isEvaluating ? 'Updating...' : 'Update Clinical Summary'}</span>
         </button>
       </div>
 
@@ -116,7 +116,7 @@ export default function AIAssistantPage() {
             <h2 className="text-sm font-bold">FastAPI Backend Unreachable (Deep-Space Latency Window)</h2>
           </div>
           <p className="text-xs leading-relaxed">
-            Gemini generative models run through our connected FastAPI backend server (proposed endpoint: <code className="bg-white/60 px-1 py-0.5 rounded text-[#172A2B]">POST /api/v1/health/ai-explanation</code>, to be confirmed with the backend team) and are not hosted locally on client hardware. During telemetry blackouts, AAHMS falls back smoothly to deterministic, rule-based clinical advice:
+            Automated clinical decision rules run through our connected FastAPI backend server (endpoint: <code className="bg-white/60 px-1 py-0.5 rounded text-[#172A2B]">POST /api/health/ai-explanation</code>) and are also cached locally for resilient execution. During telemetry blackouts, AAHMS falls back smoothly to deterministic, rule-based clinical advice:
           </p>
           <div className="p-3.5 rounded-lg bg-white/80 border border-[#EED8A7] text-xs text-[#172A2B] space-y-1.5">
             <span className="font-bold text-[#8A520F] block">Deterministic Emergency Rule Summary:</span>
@@ -143,7 +143,7 @@ export default function AIAssistantPage() {
             When connected to the live FastAPI backend server, the client packages the active crew member’s calibrated baselines and latest Sol observations into the payload below:
           </p>
           <div className="p-4 rounded-xl bg-[#122B31] text-[#A2BEB9] text-xs font-mono overflow-x-auto space-y-1">
-            <div className="text-[#84C2B4]">POST http://localhost:8000/api/v1/health/ai-explanation <span className="text-white/60 text-[11px]">(proposed, to be confirmed with the backend team)</span></div>
+            <div className="text-[#84C2B4]">POST http://localhost:8000/api/health/ai-explanation <span className="text-white/60 text-[11px]">(FastAPI Clinical Engine)</span></div>
             <div className="text-white/40">Content-Type: application/json</div>
             <pre className="text-white mt-2 leading-relaxed">
 {`{
@@ -185,7 +185,7 @@ export default function AIAssistantPage() {
         <div className="space-y-1">
           <p className="font-bold">Medical Safety & Architectural Separation</p>
           <p className="text-[#60716E] leading-relaxed">
-            The frontend never calls Gemini directly with private API keys. All AI evaluations pass through our validated FastAPI backend schema (`POST /api/v1/health/ai-explanation`). Measured telemetry facts are strictly isolated from advisory suggestions.
+            The frontend never calls external unvalidated APIs directly. All clinical guidance passes through our validated FastAPI backend schema (`POST /api/health/ai-explanation`) or runs locally via deterministic rules. Measured telemetry facts are strictly isolated from advisory suggestions.
           </p>
         </div>
       </div>
@@ -203,7 +203,7 @@ export default function AIAssistantPage() {
                 </h2>
               </div>
               <span className="text-xs text-[#60716E]">
-                Provider: {explanation.modelProvider} ({explanation.sourceType === 'gemini_fastapi_contract' ? 'FastAPI Contract' : 'Deterministic Rule'})
+                Engine: Clinical Decision Logic ({explanation.sourceType === 'gemini_fastapi_contract' ? 'FastAPI Engine' : 'Deterministic Rule'})
               </span>
             </div>
 

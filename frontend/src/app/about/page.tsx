@@ -110,10 +110,10 @@ export default function AboutPage() {
         <div>
           <span className="text-xs font-bold text-[#176B68] uppercase tracking-wider">Technical Architecture</span>
           <h2 className="text-xl sm:text-2xl font-bold text-[#172A2B] mt-1">
-            Frontend, Backend & AI Integration Contract
+            Frontend, Backend & Clinical Engine Contract
           </h2>
           <p className="text-xs sm:text-sm text-[#60716E] mt-1">
-            Built strictly adhering to the technical specification separating UI, FastAPI backend, and Gemini models.
+            Built strictly adhering to the technical specification separating UI, FastAPI backend, and clinical decision logic.
           </p>
         </div>
 
@@ -149,12 +149,12 @@ export default function AboutPage() {
               <div className="w-8 h-8 rounded-lg bg-white text-[#176B68] flex items-center justify-center shadow-xs">
                 <Sparkles size={16} />
               </div>
-              <h3 className="font-bold text-sm text-[#172A2B]">Google Gemini via Backend</h3>
+              <h3 className="font-bold text-sm text-[#172A2B]">Clinical Decision Engine</h3>
               <p className="text-xs text-[#60716E] leading-relaxed">
-                Narrative clinical explanations synthesized through backend proxy calls. When unlinked, AAHMS falls back to deterministic rule summaries.
+                Narrative clinical explanations synthesized through validated backend rules. When unlinked, AAHMS falls back to deterministic local rule summaries.
               </p>
             </div>
-            <span className="text-[11px] font-semibold text-[#176B68]">Gemini 1.5 Pro / Flash</span>
+            <span className="text-[11px] font-semibold text-[#176B68]">Rule-Based Clinical Intelligence</span>
           </div>
         </div>
       </div>

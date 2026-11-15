@@ -81,7 +81,7 @@ const STEPS = [
   {
     step: '03',
     title: 'Understand',
-    subtitle: 'FastAPI + Gemini AI explanation',
+    subtitle: 'FastAPI Clinical Decision Engine',
     description: 'When connected to the habitat gateway, our FastAPI backend generates concise, plain-language clinical synthesis. Clear offline fallbacks are shown when unlinked.',
     icon: Sparkles,
     previewTitle: 'Clinical Telemetry Synthesis',
@@ -90,7 +90,7 @@ const STEPS = [
       <div className="p-4 rounded-xl bg-white border border-[#D9E2DE] space-y-3">
         <div className="flex items-center gap-2 text-xs font-bold text-[#176B68]">
           <Sparkles size={14} />
-          <span>Gemini-Powered Clinical Assistant (via FastAPI)</span>
+          <span>Automated Clinical Assistant (via FastAPI)</span>
         </div>
         <p className="text-xs text-[#172A2B] leading-relaxed">
           &ldquo;Based on your 4-day telemetry, your rising nocturnal heart rate (+13 bpm) and declining sleep duration reflect cumulative operational fatigue rather than acute medical illness.&rdquo;
