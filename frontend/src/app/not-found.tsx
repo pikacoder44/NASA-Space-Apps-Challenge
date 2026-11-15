@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Compass, ArrowRight, Home, LayoutDashboard } from 'lucide-react';
+import { Compass, Home, LayoutDashboard } from 'lucide-react';
 
 export default function NotFound() {
   return (

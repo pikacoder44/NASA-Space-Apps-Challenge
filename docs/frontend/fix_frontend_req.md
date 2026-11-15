@@ -1,15 +1,15 @@
 # Frontend Integration Requirements — AstroTrack
 
-**Target Audience:** Frontend Development Team  
-**Author:** Syed Muhammad Hashir Ali (Backend Track B — Evaluation Engine, Baseline, Simulator, Dashboard)  
-**Date:** 2026-11-15  
-**Status:** Action Required (Contract Reconciliation)  
+**Target Audience:** Frontend Development Team
+**Author:** Syed Muhammad Hashir Ali (Backend Track B — Evaluation Engine, Baseline, Simulator, Dashboard)
+**Date:** 2026-11-15
+**Status:** Action Required (Contract Reconciliation)
 
 ---
 
 ## Executive Summary
 
-To establish a zero-error end-to-end integration between the AstroTrack Next.js frontend and the FastAPI backend, Track B has resolved all backend-side mismatches within our domain. 
+To establish a zero-error end-to-end integration between the AstroTrack Next.js frontend and the FastAPI backend, Track B has resolved all backend-side mismatches within our domain.
 
 The backend `/api/dashboard/summary` endpoint now directly supplies:
 * Both `value` (frontend requirement) and `latest_value` (backend spec).

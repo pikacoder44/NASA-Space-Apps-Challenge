@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useHealth } from '@/context/HealthContext';
 import { TrendChart } from '@/components/charts/TrendChart';
 import { generateTrendHistory } from '@/data/trendData';
-import { Radio, ExternalLink, ShieldAlert, AlertTriangle, ShieldCheck } from 'lucide-react';
+import { Radio, ExternalLink, ShieldAlert } from 'lucide-react';
 
 export default function RadiationTrackerPage() {
   const { overview } = useHealth();
@@ -23,23 +23,23 @@ export default function RadiationTrackerPage() {
         <div>
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold uppercase tracking-wider text-[#176B68] bg-[#DCEDEA] px-2.5 py-0.5 rounded">
-              Environmental Dosimetry
+              Space Environment
             </span>
             <span className="text-xs text-[#60716E]">
-              Galactic Cosmic Rays (GCR) & Solar Particle Events (SPE)
+              Cosmic Rays &amp; Solar Activity
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#172A2B] mt-1">
-            Cumulative Space Radiation Tracker
+            Space Radiation Tracker
           </h1>
           <p className="text-xs sm:text-sm text-[#60716E] mt-0.5">
-            Monitors ionizing radiation absorbed dose across long-duration interplanetary cruise.
+            Monitors total radiation exposure over the course of your deep-space transit to Mars.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
           <span className="text-xs font-semibold text-[#247A55] bg-[#E4F2E9] px-3 py-1.5 rounded-lg border border-[#BDE0CB]">
-            Nominal Cruise Rate
+            Normal Daily Level
           </span>
         </div>
       </div>

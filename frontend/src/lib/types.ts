@@ -28,23 +28,37 @@ export interface NewReading {
 }
 
 export interface DashboardSummary {
-  astronaut: {
-    name: string;
-    role: string;
-    mission_day: number;
+  /** Overall worst status across indicators: 'normal' | 'warning' | 'critical' (FastAPI required) */
+  overall_status: Status;
+  /** Evaluated mission day (FastAPI optional: Optional[int] = None) */
+  mission_day?: number;
+  /** Astronaut profile identifier (FastAPI optional: Optional[str] = None) */
+  astronaut_id?: string;
+  /** Demo/fallback metadata container; in live API, profile is fetched via /api/astronauts/me */
+  astronaut?: {
+    name?: string;
+    role?: string;
+    mission_day?: number;
   };
+  /** Clinical disclaimer (FastAPI default string provided) */
+  disclaimer?: string;
+  /** Demo helper count; live tasks are fetched separately via GET /api/routine/today */
+  pending_tasks_count?: number;
+  /** Indicator evaluations list (FastAPI required: List[IndicatorSummary]) */
   indicators: Array<{
     indicator: Indicator;
     name: string;
     value: number;
+    latest_value?: number;
     unit: string;
     status: Status;
     trend: "up" | "down" | "stable";
-    measured_at: string;
-    message: string;
+    trend_7d?: number[];
+    reason?: string;
+    message?: string;
+    mode?: "baseline" | "reference";
+    measured_at?: string;
   }>;
-  overall_status: Status;
-  pending_tasks_count: number;
 }
 
 export interface RoutineTask {

@@ -1,9 +1,12 @@
 import React from 'react';
 import { HealthStatus } from '../../types/health';
+import type { Status } from '../../lib/types';
 import { CheckCircle2, AlertTriangle, AlertOctagon, HelpCircle, Clock } from 'lucide-react';
 
+export type StatusInput = HealthStatus | Status | 'empty' | string;
+
 interface StatusBadgeProps {
-  status: HealthStatus;
+  status: StatusInput;
   size?: 'sm' | 'md' | 'lg';
   variant?: 'compact' | 'full';
   showIcon?: boolean;
@@ -31,36 +34,72 @@ export function StatusBadge({
       Icon: React.ComponentType<{ size: number; className?: string; 'aria-hidden'?: boolean | 'true' | 'false' }>;
     }
   > = {
-    green: {
-      shortLabel: 'Green',
-      fullLabel: 'Green · Within Baseline',
+    normal: {
+      shortLabel: 'Normal',
+      fullLabel: 'Normal · Within Healthy Baseline',
       bg: 'bg-[#E4F2E9]',
       text: 'text-[#247A55]',
       border: 'border-[#BDE0CB]',
       dot: 'bg-[#247A55]',
       Icon: CheckCircle2
     },
-    yellow: {
-      shortLabel: 'Yellow',
-      fullLabel: 'Yellow · Watch',
+    green: {
+      shortLabel: 'Normal',
+      fullLabel: 'Normal · Within Healthy Baseline',
+      bg: 'bg-[#E4F2E9]',
+      text: 'text-[#247A55]',
+      border: 'border-[#BDE0CB]',
+      dot: 'bg-[#247A55]',
+      Icon: CheckCircle2
+    },
+    warning: {
+      shortLabel: 'Watch',
+      fullLabel: 'Watch · Needs Attention',
       bg: 'bg-[#FBF0D9]',
       text: 'text-[#8A520F]',
       border: 'border-[#EED8A7]',
       dot: 'bg-[#A96617]',
       Icon: AlertTriangle
     },
-    red: {
-      shortLabel: 'Red',
-      fullLabel: 'Red · Alert',
+    yellow: {
+      shortLabel: 'Watch',
+      fullLabel: 'Watch · Needs Attention',
+      bg: 'bg-[#FBF0D9]',
+      text: 'text-[#8A520F]',
+      border: 'border-[#EED8A7]',
+      dot: 'bg-[#A96617]',
+      Icon: AlertTriangle
+    },
+    critical: {
+      shortLabel: 'Act Now',
+      fullLabel: 'Act Now · Immediate Action',
       bg: 'bg-[#F9E7E5]',
       text: 'text-[#B33C3C]',
       border: 'border-[#F1BCB7]',
       dot: 'bg-[#B33C3C]',
       Icon: AlertOctagon
     },
+    red: {
+      shortLabel: 'Act Now',
+      fullLabel: 'Act Now · Immediate Action',
+      bg: 'bg-[#F9E7E5]',
+      text: 'text-[#B33C3C]',
+      border: 'border-[#F1BCB7]',
+      dot: 'bg-[#B33C3C]',
+      Icon: AlertOctagon
+    },
+    empty: {
+      shortLabel: 'No Data',
+      fullLabel: 'No Data · Not Recorded Yet',
+      bg: 'bg-[#EEF1F0]',
+      text: 'text-[#556865]',
+      border: 'border-[#D0DED9]',
+      dot: 'bg-[#7C8F8C]',
+      Icon: HelpCircle
+    },
     unknown: {
-      shortLabel: 'Unknown',
-      fullLabel: 'Unknown · No Data',
+      shortLabel: 'No Data',
+      fullLabel: 'No Data · Not Recorded Yet',
       bg: 'bg-[#EEF1F0]',
       text: 'text-[#556865]',
       border: 'border-[#D0DED9]',
@@ -68,8 +107,8 @@ export function StatusBadge({
       Icon: HelpCircle
     },
     stale: {
-      shortLabel: 'Stale',
-      fullLabel: 'Stale · Telemetry Link Delayed',
+      shortLabel: 'Delayed',
+      fullLabel: 'Delayed · Telemetry Link Delayed',
       bg: 'bg-[#EEF1F0]',
       text: 'text-[#556865]',
       border: 'border-[#D0DED9]',
@@ -77,8 +116,8 @@ export function StatusBadge({
       Icon: Clock
     },
     insufficient_data: {
-      shortLabel: 'Unknown',
-      fullLabel: 'Unknown · No Recent Telemetry',
+      shortLabel: 'No Data',
+      fullLabel: 'No Data · Waiting for Telemetry',
       bg: 'bg-[#EEF1F0]',
       text: 'text-[#556865]',
       border: 'border-[#D0DED9]',
@@ -87,7 +126,8 @@ export function StatusBadge({
     }
   };
 
-  const current = configs[status] || configs.unknown;
+  const key = String(status).toLowerCase();
+  const current = configs[key] || configs.unknown;
   const Icon = current.Icon;
   const label = labelOverride || (variant === 'compact' ? current.shortLabel : current.fullLabel);
 
@@ -108,13 +148,9 @@ export function StatusBadge({
       className={`inline-flex items-center rounded-full border shrink-0 max-w-full ${current.bg} ${current.text} ${current.border} ${sizeClasses[size]} ${className}`}
       role="status"
       title={current.fullLabel}
-      aria-label={label}
     >
-      <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${current.dot}`} aria-hidden="true" />
       {showIcon && <Icon size={iconSizes[size]} className="shrink-0" aria-hidden="true" />}
-      <span className="truncate tracking-wide font-medium">
-        {label}
-      </span>
+      <span className="truncate">{label}</span>
     </span>
   );
 }

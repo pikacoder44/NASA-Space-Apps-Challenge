@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../context/AuthContext';
 import { AuthLayout } from '../../components/auth/AuthLayout';
-import { Eye, EyeOff, Lock, Mail, User, ShieldCheck, AlertCircle, ArrowRight, Check } from 'lucide-react';
+import { Eye, EyeOff, Lock, Mail, User, AlertCircle, ArrowRight } from 'lucide-react';
 import { MissionRole } from '../../types/auth';
 
 export default function SignupPage() {

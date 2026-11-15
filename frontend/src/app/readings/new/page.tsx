@@ -2,10 +2,10 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { 
-  Activity, 
-  ArrowLeft, 
-  Send, 
+import {
+  Activity,
+  ArrowLeft,
+  Send,
   Info,
   CheckCircle,
   AlertCircle
@@ -31,36 +31,36 @@ interface IndicatorConfig {
 const INDICATORS: IndicatorConfig[] = [
   {
     key: 'heart_rate',
-    label: 'Heart Rate (Resting)',
+    label: 'Resting Heart Rate',
     unit: 'bpm',
     min: 40,
     max: 180,
     normalRange: [60, 100],
     warningRange: [50, 120],
     defaultVal: 74,
-    spaceContext: 'Microgravity alters autonomic balance and central blood volume; tachycardia may indicate fluid loss or high workload.'
+    spaceContext: 'In zero gravity, fluids shift toward your chest and head. A rising pulse is an early sign of dehydration, fatigue, or stress.'
   },
   {
     key: 'blood_pressure_systolic',
-    label: 'Blood Pressure (Systolic)',
+    label: 'Blood Pressure (Upper)',
     unit: 'mmHg',
     min: 70,
     max: 200,
     normalRange: [90, 120],
     warningRange: [80, 140],
     defaultVal: 122,
-    spaceContext: 'Cephalic fluid shifts alter carotid baroreceptors, impacting upper body arterial perfusion.'
+    spaceContext: 'In zero gravity, fluids move into your upper body and head, which can raise pressure and cause headaches or puffiness.'
   },
   {
     key: 'blood_pressure_diastolic',
-    label: 'Blood Pressure (Diastolic)',
+    label: 'Blood Pressure (Lower)',
     unit: 'mmHg',
     min: 40,
     max: 130,
     normalRange: [60, 80],
     warningRange: [50, 90],
     defaultVal: 81,
-    spaceContext: 'Peripheral resistance decreases in spaceflight; monitoring diastolic pressure detects systemic vascular adaptation.'
+    spaceContext: 'Shows how well your blood vessels relax between heartbeats as your circulatory system adapts to space.'
   },
   {
     key: 'body_temp',
@@ -71,40 +71,40 @@ const INDICATORS: IndicatorConfig[] = [
     normalRange: [36.1, 37.2],
     warningRange: [35.5, 38.0],
     defaultVal: 36.8,
-    spaceContext: 'Spaceflight-associated core temperature elevation ("space fever") impairs physical thermoregulation during heavy work.'
+    spaceContext: 'In an enclosed spacecraft cabin, sweat does not evaporate easily. Body temperature can rise during exercise or if an illness is developing.'
   },
   {
     key: 'blood_sugar',
-    label: 'Blood Glucose (Post-absorptive)',
+    label: 'Blood Sugar (Glucose)',
     unit: 'mg/dL',
     min: 40,
     max: 300,
     normalRange: [70, 140],
     warningRange: [60, 180],
     defaultVal: 95,
-    spaceContext: 'Metabolic shifts in space may cause transient insulin resistance; regular tracking avoids hypoglycemic fatigue.'
+    spaceContext: 'Spaceflight alters how your body uses energy and insulin. Regular tracking helps avoid energy crashes and fatigue.'
   },
   {
     key: 'sleep_hours',
-    label: 'Sleep Duration (Last Sol)',
+    label: 'Sleep Duration (Last Sleep)',
     unit: 'hours',
     min: 1.0,
     max: 16.0,
     normalRange: [7.0, 9.0],
     warningRange: [6.0, 10.0],
     defaultVal: 6.8,
-    spaceContext: 'Circadian desynchrony in enclosed spacecraft cabins directly correlates with cognitive errors and slow reaction times.'
+    spaceContext: 'Cabin noise and frequent sunrises can disrupt your sleep. Getting enough sleep keeps your reaction time sharp and your mind clear.'
   },
   {
     key: 'mood_score',
-    label: 'Subjective Well-being / Mood',
+    label: 'Well-being & Mood Score',
     unit: '1-10',
     min: 1,
     max: 10,
     normalRange: [6, 10],
     warningRange: [4, 10],
     defaultVal: 7,
-    spaceContext: 'Confinement and mission stress can degrade mood; regular subjective ratings maintain crew psychological safety.'
+    spaceContext: 'Living far from Earth in a confined space is demanding. Tracking how you feel helps catch stress and burnout early.'
   }
 ];
 
@@ -122,8 +122,8 @@ export default function NewReadingPage() {
   // Zod Validator dynamically created per indicator
   const validateWithZod = (value: number, config: IndicatorConfig): boolean => {
     const schema = z.number()
-      .min(config.min, { message: `Value must be at least ${config.min} ${config.unit} (aerospace physiological limit).` })
-      .max(config.max, { message: `Value cannot exceed ${config.max} ${config.unit} (aerospace physiological limit).` });
+      .min(config.min, { message: `${config.label} must be at least ${config.min} ${config.unit}. Please check your reading.` })
+      .max(config.max, { message: `${config.label} cannot exceed ${config.max} ${config.unit}. Please check your reading.` });
 
     const result = schema.safeParse(value);
     if (!result.success) {
@@ -189,25 +189,25 @@ export default function NewReadingPage() {
     <div className="max-w-3xl mx-auto space-y-6 pb-12 relative">
         {/* Success Toast */}
         {showToast && (
-          <div className="fixed top-20 right-4 sm:right-8 z-50 flex items-center gap-2.5 p-4 rounded-xl bg-surface border-2 border-[#22c55e] text-main shadow-2xl animate-in slide-in-from-top-4 duration-200">
+          <div className="fixed top-20 right-4 sm:right-8 z-50 flex items-center gap-2.5 p-4 rounded-xl bg-surface border-2 border-[#22c55e] text-main shadow-2xl animate-in slide-in-from-top-4 duration-200" role="alert">
             <CheckCircle size={20} className="text-[#22c55e] shrink-0" />
             <div>
-              <div className="font-extrabold text-xs">Telemetry Reading Recorded!</div>
-              <div className="text-[11px] text-muted">Saved on local spacecraft terminal · Pending DSN sync</div>
+              <div className="font-extrabold text-xs">Health Reading Saved!</div>
+              <div className="text-[11px] text-muted">Saved on your device · Syncs automatically when online</div>
             </div>
           </div>
         )}
 
         {/* Navigation Breadcrumb */}
         <div className="flex items-center justify-between">
-          <Link 
+          <Link
             href="/dashboard"
             className="inline-flex items-center gap-1.5 text-xs font-bold text-muted hover:text-main transition-colors"
           >
             <ArrowLeft size={14} />
             <span>Back to Dashboard</span>
           </Link>
-          <span className="text-xs text-[#60716E]">AstroTrack Telemetry Ingestion</span>
+          <span className="text-xs text-[#60716E]">AstroTrack Health Log</span>
         </div>
 
         {/* Card Header */}
@@ -217,8 +217,8 @@ export default function NewReadingPage() {
               <Activity size={18} />
             </div>
             <div>
-              <h1 className="text-2xl font-extrabold text-main tracking-tight">Record Vital Reading</h1>
-              <p className="text-xs text-muted">Designed for rapid crew self-assessment under 30 seconds</p>
+              <h1 className="text-2xl font-extrabold text-main tracking-tight">Record Health Reading</h1>
+              <p className="text-xs text-muted">Quick daily check-in (takes under 30 seconds)</p>
             </div>
           </div>
         </div>
@@ -228,7 +228,7 @@ export default function NewReadingPage() {
           {/* Indicator Selector */}
           <div className="space-y-2">
             <label className="text-xs font-bold uppercase tracking-wider text-muted">
-              Select Physiological Metric
+              1. Choose what you are measuring
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {INDICATORS.map((ind) => {
@@ -265,7 +265,7 @@ export default function NewReadingPage() {
                 {currentConfig.label}
               </label>
               <span className="text-xs text-[#60716E] font-medium">
-                Valid: {currentConfig.min} – {currentConfig.max} {currentConfig.unit}
+                Valid range: {currentConfig.min} – {currentConfig.max} {currentConfig.unit}
               </span>
             </div>
 
@@ -297,8 +297,8 @@ export default function NewReadingPage() {
             {/* Live Evaluation Preview Before Submit */}
             <div className="mt-4 pt-3 border-t border-border/60 flex items-center justify-between">
               <div className="flex items-center gap-2 text-xs">
-                <span className="text-muted">Live Evaluation Preview:</span>
-                <span 
+                <span className="text-muted">Estimated Status:</span>
+                <span
                   className="px-2 py-0.5 rounded font-extrabold text-white text-[11px] uppercase tracking-wider"
                   style={{ backgroundColor: STATUS_COLORS[previewStatus] }}
                 >
@@ -306,7 +306,7 @@ export default function NewReadingPage() {
                 </span>
               </div>
               <span className="text-xs text-muted">
-                Normal target: {currentConfig.normalRange[0]}–{currentConfig.normalRange[1]} {currentConfig.unit}
+                Healthy target: {currentConfig.normalRange[0]}–{currentConfig.normalRange[1]} {currentConfig.unit}
               </span>
             </div>
           </div>
@@ -315,7 +315,7 @@ export default function NewReadingPage() {
           <div className="flex items-start gap-2.5 p-3.5 rounded-xl bg-surface-alt border border-border text-xs text-muted">
             <Info size={16} className="text-brand shrink-0 mt-0.5" />
             <p className="leading-relaxed">
-              <strong className="text-main">Aerospace Context: </strong>
+              <strong className="text-main">Why this matters in space: </strong>
               {currentConfig.spaceContext}
             </p>
           </div>
@@ -327,11 +327,11 @@ export default function NewReadingPage() {
             className="w-full py-4 rounded-xl font-extrabold text-base bg-brand text-white hover:bg-brand-hover shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
           >
             {submitting ? (
-              <span>Transmitting Telemetry...</span>
+              <span>Saving Health Reading...</span>
             ) : (
               <>
                 <Send size={18} />
-                <span>Submit &amp; Evaluate Reading</span>
+                <span>Save Reading &amp; Check Status</span>
               </>
             )}
           </button>
