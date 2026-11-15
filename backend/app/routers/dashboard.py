@@ -10,7 +10,7 @@ import os
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 try:
-    from fastapi import APIRouter, Query
+    from fastapi import APIRouter, Depends, Query
 except ImportError:
     # Fallback decorators for running tests in lightweight host environments without FastAPI
     class APIRouter:  # type: ignore
@@ -25,6 +25,14 @@ except ImportError:
     def Query(default=None, **kwargs):  # type: ignore
         return default
 
+    def Depends(dependency=None):  # type: ignore
+        return None
+
+from sqlalchemy.orm import Session
+
+from app.core.database import get_db
+from app.models.astronaut import Astronaut
+from app.routers.auth import get_current_astronaut
 from app.schemas.dashboard import DashboardSummaryResponse, IndicatorSummary
 from app.services.evaluator import evaluate
 from app.services.reference_data import (
@@ -320,34 +328,83 @@ def compute_dashboard_summary(
     )
 
 
+def _database_indicator_data(db, astronaut_id: str) -> Tuple[Dict[str, Dict[str, Any]], Dict[str, str]]:
+    """Latest reading + up to 30 previous values per indicator from the database.
+
+    Returns (indicator_data, measured_at_by_indicator). Indicators without any
+    logged reading are left out.
+    """
+    from app.core.timeutils import iso_utc
+    from app.services.readings_service import HISTORY_LIMIT, recent_values
+
+    data: Dict[str, Dict[str, Any]] = {}
+    measured: Dict[str, str] = {}
+    for indicator in REFERENCE_RANGES:
+        rows = recent_values(db, astronaut_id, indicator, limit=HISTORY_LIMIT + 1)
+        if not rows:
+            continue
+        latest, previous = rows[0], rows[1:]
+        data[indicator] = {"latest": latest.value, "history": [r.value for r in reversed(previous)]}
+        measured[indicator] = iso_utc(latest.measured_at)
+    return data, measured
+
+
 @router.get(
     "/summary",
     response_model=DashboardSummaryResponse,
     summary="Get astronaut health dashboard summary",
     description=(
-        "Retrieves the comprehensive health status assessment for the astronaut. "
-        "Evaluates the latest reading of all 7 indicators against individual personal baselines "
-        "(or population reference ranges if history < 7 readings), computes 7-point sequential sparkline trends, "
-        "directional velocity ('up', 'down', 'stable'), and calculates the worst-case overall mission status."
+        "Health status for all 7 indicators. Without `day`: each indicator's latest logged reading "
+        "and its previous 30 values from the database (indicators with no logged readings fall back "
+        "to the simulated mission data, marked source='simulator'). With `day`: the simulated mission "
+        "scenario for that day (synthetic demo data). Evaluates against the personal baseline "
+        "(or reference ranges if history < 7), adds 7-point sparklines, trend direction, and the "
+        "worst-case overall status."
     ),
 )
 def get_dashboard_summary(
     day: Optional[int] = Query(
-        default=90,
+        default=None,
         ge=1,
         le=180,
-        description="Simulated mission day to evaluate (defaults to Day 90)",
+        description="Optional: show the simulated mission scenario for this day (1-180) instead of logged readings",
     ),
+    db: Session = Depends(get_db),
+    current_astro: Astronaut = Depends(get_current_astronaut),
 ) -> DashboardSummaryResponse:
-    """FastAPI endpoint to return the astronaut health dashboard summary.
+    """Dashboard summary for the active astronaut (demo astronaut when not logged in).
 
-    NOTE: The hardcoded astronaut ID '1' and simulated dataset fallback are strictly temporary demo
-    behaviors for Track B. Database queries and session authentication will be wired by Track A (Abu Huraira).
+    Default: real logged readings from the database. `?day=N`: simulated scenario for day N.
     """
-    eval_day = day or 90
-    simulated_data = _load_fallback_mission_data(day=eval_day)
-    return compute_dashboard_summary(
-        astronaut_id=DEFAULT_DEMO_ASTRONAUT_ID,
-        indicator_data=simulated_data,
-        mission_day=eval_day,
+    if day is not None:
+        summary = compute_dashboard_summary(
+            astronaut_id=DEFAULT_DEMO_ASTRONAUT_ID,
+            indicator_data=_load_fallback_mission_data(day=day),
+            mission_day=day,
+        )
+        for ind in summary.indicators:
+            ind.source = "simulator"
+        summary.data_source = "simulator"
+        return summary
+
+    mission_day = min(max(int(current_astro.mission_day or 90), 1), 180)
+    db_data, measured = _database_indicator_data(db, current_astro.id)
+    merged = dict(db_data)
+    if len(db_data) < len(REFERENCE_RANGES):
+        simulated = _load_fallback_mission_data(day=mission_day)
+        for indicator in REFERENCE_RANGES:
+            merged.setdefault(indicator, simulated[indicator])
+
+    summary = compute_dashboard_summary(
+        astronaut_id=str(current_astro.id), indicator_data=merged, mission_day=mission_day
     )
+    for ind in summary.indicators:
+        ind.source = "database" if ind.indicator in db_data else "simulator"
+        ind.measured_at = measured.get(ind.indicator)
+    if len(db_data) == len(REFERENCE_RANGES):
+        summary.data_source = "database"
+    elif db_data:
+        summary.data_source = "mixed"
+    else:
+        summary.data_source = "simulator"
+    return summary

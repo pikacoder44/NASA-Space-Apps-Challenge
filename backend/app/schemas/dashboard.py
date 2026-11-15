@@ -97,6 +97,16 @@ class IndicatorSummary(BaseModel):
         description="Evaluation mode: 'baseline' or 'reference'",
         example="baseline",
     )
+    measured_at: Optional[str] = Field(
+        default=None,
+        description="UTC timestamp of the latest reading (database readings only)",
+        example="2026-11-15T08:00:00Z",
+    )
+    source: Optional[str] = Field(
+        default=None,
+        description="Where this indicator's data comes from: 'database' (logged readings) or 'simulator' (synthetic demo data)",
+        example="database",
+    )
 
 
 class DashboardSummaryResponse(BaseModel):
@@ -120,6 +130,11 @@ class DashboardSummaryResponse(BaseModel):
         default=None,
         description="Astronaut profile identifier",
         example="1",
+    )
+    data_source: Optional[str] = Field(
+        default=None,
+        description="'database', 'simulator' or 'mixed' (some indicators have no logged readings yet)",
+        example="database",
     )
     disclaimer: str = Field(
         default=(

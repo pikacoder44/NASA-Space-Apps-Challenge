@@ -55,6 +55,24 @@ def latest_readings(db: Session, astronaut_id: str, now: Optional[datetime] = No
     return latest
 
 
+def recent_values(
+    db: Session, astronaut_id: str, indicator: str, limit: int, now: Optional[datetime] = None
+) -> List[Reading]:
+    """Up to `limit` most recent readings (not in the future) of one indicator, NEWEST first."""
+    now = now or utcnow()
+    return (
+        db.query(Reading)
+        .filter(
+            Reading.astronaut_id == astronaut_id,
+            Reading.indicator == indicator,
+            Reading.measured_at <= now,
+        )
+        .order_by(Reading.measured_at.desc(), Reading.id.desc())
+        .limit(limit)
+        .all()
+    )
+
+
 def worst_status(statuses: List[str]) -> str:
     """Worst of a list of statuses ('normal' when empty)."""
     return max(statuses, key=lambda s: _SEVERITY.get(s, 0), default="normal")
