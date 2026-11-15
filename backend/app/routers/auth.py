@@ -44,7 +44,7 @@ def get_current_astronaut(
         demo_astro = Astronaut(
             id=settings.DEFAULT_ASTRONAUT_ID,
             email=settings.DEFAULT_ASTRONAUT_EMAIL,
-            password_hash=get_password_hash("SpaceOps2026!"),
+            password_hash=get_password_hash(settings.DEMO_PASSWORD),
             name=settings.DEFAULT_ASTRONAUT_NAME,
             role=settings.DEFAULT_ASTRONAUT_ROLE,
             mission_day=settings.DEFAULT_MISSION_DAY,

@@ -48,6 +48,10 @@ class Settings(BaseSettings):
     DEFAULT_ASTRONAUT_NAME: str = "Commander Sarah Walker"
     DEFAULT_ASTRONAUT_ROLE: str = "CDR-01"
     DEFAULT_MISSION_DAY: int = 90
+    # Public demo account password (the demo astronaut is a shared showcase profile).
+    DEMO_PASSWORD: str = os.getenv("DEMO_PASSWORD", "SpaceOps2026!")
+    # Last simulated mission day loaded by the seed (that day = today).
+    SEED_MISSION_DAY: int = int(os.getenv("SEED_MISSION_DAY", "90"))
 
 
 settings = Settings()
