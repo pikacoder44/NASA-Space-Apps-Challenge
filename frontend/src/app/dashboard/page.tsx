@@ -32,6 +32,7 @@ import { generateTrendHistory } from '../../data/trendData';
 import { useHealth } from '../../context/HealthContext';
 import { StatusBadge } from '../../components/ui/StatusBadge';
 import { ErrorBoundary } from '../../components/ui/ErrorBoundary';
+import { NasaInspiration4Card } from '../../components/nasa/NasaInspiration4Card';
 
 interface IndicatorInfo {
   what: string;
@@ -46,63 +47,77 @@ const INDICATOR_DETAILS: Record<Indicator, IndicatorInfo> = {
     what: 'How many times your heart beats in one minute while you are resting.',
     why: 'In zero gravity, fluids shift toward your chest and head. A rising pulse is an early sign of dehydration, fatigue, or stress.',
     how: 'Chest heart strap or optical wrist sensor.',
-    contextSentence: (val, status) => status === 'normal'
-      ? 'Within your usual healthy resting range.'
-      : 'Higher than usual — drink water and take a rest break.',
+    contextSentence: (val, status) => {
+      if (status === 'critical') return 'Critical resting pulse — alert crew medical officer and rest.';
+      if (status === 'warning') return 'Elevated resting pulse — drink water and take a rest break.';
+      return 'Within your usual healthy resting range.';
+    },
     sparkline: [68, 70, 69, 72, 71, 74, 74]
   },
   blood_pressure_systolic: {
     what: 'The maximum pressure in your blood vessels when your heart beats.',
     why: 'Fluid shifting toward the upper body slightly increases resting blood pressure.',
     how: 'Upper arm blood pressure cuff during morning check-in.',
-    contextSentence: (val, status) => status === 'normal'
-      ? 'Optimal resting blood pressure.'
-      : 'Slightly higher than normal — check again after resting.',
+    contextSentence: (val, status) => {
+      if (status === 'critical') return 'High systolic pressure exceeding safety threshold — immediate rest and recheck.';
+      if (status === 'warning') return 'Slightly higher than normal — check again after resting.';
+      return 'Optimal resting blood pressure.';
+    },
     sparkline: [118, 120, 119, 124, 121, 123, 122]
   },
   blood_pressure_diastolic: {
     what: 'The resting pressure in your blood vessels between heartbeats.',
     why: 'Helps track how your blood vessels adapt without gravity pulling blood down.',
     how: 'Upper arm blood pressure cuff during morning check-in.',
-    contextSentence: (val, status) => status === 'normal'
-      ? 'Healthy resting vascular pressure.'
-      : 'Mild difference from your baseline — re-test at your next check.',
+    contextSentence: (val, status) => {
+      if (status === 'critical') return 'High diastolic pressure — suspend strenuous tasks and retest.';
+      if (status === 'warning') return 'Mild difference from your baseline — re-test at your next check.';
+      return 'Healthy resting vascular pressure.';
+    },
     sparkline: [78, 80, 79, 82, 80, 81, 81]
   },
   body_temp: {
     what: 'Your core body temperature.',
     why: 'Without gravity, heat does not easily rise away from the body. An elevated temperature can signal heat buildup or infection.',
     how: 'Infrared ear thermometer.',
-    contextSentence: (val, status) => status === 'normal'
-      ? 'Normal body temperature.'
-      : 'Slightly warm — hydrate and reduce heavy gear.',
+    contextSentence: (val, status) => {
+      if (status === 'critical') return 'Core temperature elevated beyond safe limits — initiate active cooling.';
+      if (status === 'warning') return 'Slightly warm — hydrate and reduce heavy gear.';
+      return 'Normal body temperature.';
+    },
     sparkline: [36.6, 36.7, 36.8, 36.9, 36.7, 36.8, 36.8]
   },
   blood_sugar: {
     what: 'The concentration of glucose sugar in your bloodstream.',
     why: 'Prolonged microgravity changes how muscle tissue and cells use glucose for energy.',
     how: 'Capillary finger-prick test strip with morning kit.',
-    contextSentence: (val, status) => status === 'normal'
-      ? 'Fasting blood sugar is stable.'
-      : 'Small change in blood sugar — follow daily meal plan.',
+    contextSentence: (val, status) => {
+      if (status === 'critical') return 'Severe glucose variance — consult flight surgeon nutrition protocol.';
+      if (status === 'warning') return 'Small change in blood sugar — follow daily meal plan.';
+      return 'Fasting blood sugar is stable.';
+    },
     sparkline: [92, 94, 91, 95, 93, 94, 94]
   },
   sleep_hours: {
     what: 'How many continuous hours of restful sleep you got last night.',
     why: 'Cabin noise, artificial light, and floating make deep sleep harder, causing slow tiredness to build up over months.',
     how: 'Sleep wristband tracker and crew log.',
-    contextSentence: (val, status) => status === 'normal'
-      ? 'Healthy sleep duration reached.'
-      : 'You are down on sleep — schedule a rest period.',
+    contextSentence: (val, status) => {
+      if (status === 'critical') return 'Severe cumulative sleep deficit — schedule mandatory sleep recovery extension.';
+      if (status === 'warning') return 'You are down on sleep — schedule a rest period.';
+      return 'Healthy sleep duration reached.';
+    },
     sparkline: [7.2, 6.8, 7.0, 5.8, 6.2, 5.6, 6.4]
   },
   mood_score: {
     what: 'Your own rating of your energy, focus, and morale from 1 (low) to 10 (great).',
     why: 'Confinement and isolation can affect mood and team cohesion over time.',
     how: 'Quick 1-to-10 self-rating during daily check-in.',
-    contextSentence: (val, status) => status === 'normal'
-      ? 'Morale and energy remain high.'
-      : 'Slight fatigue reported — check in with crewmates.',
+    contextSentence: (val, status) => {
+      if (status === 'critical') return 'Severe behavioral strain reported — mandatory crew peer check-in.';
+      if (status === 'warning') return 'Slight fatigue reported — check in with crewmates.';
+      return 'Morale and energy remain high.';
+    },
     sparkline: [8, 8, 7, 7, 6, 7, 7]
   }
 };
@@ -595,7 +610,12 @@ export default function DashboardPage() {
           </div>
         </ErrorBoundary>
 
-        {/* 5. Bottom Split: Routine Checklist & AI / Radiation Panels */}
+        {/* Real NASA Open Science Data Section (OSDR OSD-575 Inspiration4) */}
+        <ErrorBoundary widgetName="Real NASA Inspiration4 Data" variant="card">
+          <NasaInspiration4Card />
+        </ErrorBoundary>
+
+        {/* 5. Bottom Split: Routine Checklist & Clinical / Radiation Panels */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-2">
           {/* Left: Routine List with Points, Streak and Badges */}
           <div className="lg:col-span-2">
@@ -608,18 +628,18 @@ export default function DashboardPage() {
             </ErrorBoundary>
           </div>
 
-          {/* Right: AI Synthesis & Radiation Dosimetry Stack */}
+          {/* Right: Clinical Advisory & Radiation Dosimetry Stack */}
           <div className="space-y-4">
-            {/* Gemini AI Synthesis Card */}
-            <ErrorBoundary widgetName="AI Health Advisory" variant="card">
+            {/* Clinical Decision Rule Synthesis Card */}
+            <ErrorBoundary widgetName="Clinical Decision Advisory" variant="card">
               <div className="p-5 rounded-2xl bg-white border border-[#D9E2DE] shadow-xs space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Sparkles size={17} className="text-[#176B68]" />
-                    <span className="font-bold text-sm text-[#172A2B]">AI Health Assistant</span>
+                    <span className="font-bold text-sm text-[#172A2B]">Clinical Decision Advisory</span>
                   </div>
                   <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-[#DCEDEA] text-[#176B68]">
-                    AI Advisory
+                    Rule Engine
                   </span>
                 </div>
                 <p className="text-xs text-[#60716E] leading-relaxed">
@@ -629,7 +649,7 @@ export default function DashboardPage() {
                   href="/app/ai-explanation"
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-[#176B68] hover:underline pt-1"
                 >
-                  <span>Read Full AI Summary</span>
+                  <span>Read Clinical Guidance</span>
                   <ArrowRight size={13} />
                 </Link>
               </div>

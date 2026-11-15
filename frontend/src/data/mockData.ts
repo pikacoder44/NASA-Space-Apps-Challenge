@@ -566,7 +566,7 @@ export const BODY_SYSTEMS: BodySystemInfo[] = [
 export const AI_ASSISTANT_DAY90: AIAssistantExplanation = {
   id: 'ai_exp_day90_001',
   generatedAt: '2026-11-14T06:50:00Z',
-  modelProvider: 'Gemini (via FastAPI Backend Integration Contract)',
+  modelProvider: 'Clinical Decision Engine (FastAPI Rule Service)',
   overallAssessment: 'Based on your submitted 4-day telemetry and personal baseline comparison, the system identifies an early autonomic and behavioral recovery deficit. All parameters remain within sub-acute boundaries, but the synchronous pattern of shortened sleep, elevated resting pulse, and decreased mood warrants cautious operational self-care.',
   observedPatterns: [
     {

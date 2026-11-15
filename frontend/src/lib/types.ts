@@ -76,3 +76,40 @@ export interface GuidanceData {
   citation: string;
   citation_url?: string;
 }
+
+export interface NasaGlucoseReading {
+  crew_id?: string;
+  subject?: string;
+  timepoint: string;
+  phase: "pre-flight" | "post-flight" | string;
+  value: number;
+  unit?: string;
+  lab_flag: "low" | "normal" | "high" | string;
+}
+
+export interface NasaGlucoseResponse {
+  dataset: string;
+  mission: string;
+  analyte: string;
+  unit: string;
+  source: {
+    title: string;
+    url: string;
+    dataset_id?: string;
+  };
+  summary: {
+    preflight_mean: number;
+    return_day_mean: number;
+    delta_percent?: number;
+    total_samples?: number;
+  };
+  readings: NasaGlucoseReading[];
+}
+
+export interface NasaSource {
+  id: string;
+  name: string;
+  url: string;
+  description: string;
+  dataset_id?: string;
+}

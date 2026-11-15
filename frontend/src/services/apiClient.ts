@@ -16,8 +16,8 @@ export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost
  * Status: Proposed, to be confirmed with the backend team.
  */
 export const API_ENDPOINTS = {
-  // Proposed: to be confirmed with the backend team
-  MISSION_OVERVIEW: '/mission/overview',
+  // Aligned with FastAPI backend summary
+  MISSION_OVERVIEW: '/api/dashboard/summary',
 
   // Proposed: to be confirmed with the backend team
   INDICATOR_DETAIL: (id: string) => `/indicators/${encodeURIComponent(id)}`,

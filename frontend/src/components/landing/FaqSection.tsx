@@ -18,8 +18,8 @@ const FAQS = [
     a: 'Instead of comparing against rigid population averages that fail in microgravity, AstroTrack compares each reading against the astronaut’s own multi-day rolling baseline. Observations are classified as Normal (green), Watch (yellow), or Act Now (red), with an explicit clinical reason sentence explaining the deviation.'
   },
   {
-    q: 'How does Gemini AI function, and does it work offline?',
-    a: 'Gemini-powered explanations run via our FastAPI backend to generate concise, human-readable clinical summaries. When a spacecraft is disconnected from the habitat gateway or ground network, AstroTrack gracefully displays an offline fallback with pre-computed protocol countermeasures.'
+    q: 'How does the clinical explanation engine function, and does it work offline?',
+    a: 'Automated clinical explanations run via our FastAPI backend evaluation engine to generate concise, human-readable medical summaries based on aerospace protocols. When a spacecraft is disconnected from the ground network, AstroTrack operates completely autonomously with local deterministic rule evaluation.'
   },
   {
     q: 'Who developed this software?',
