@@ -85,7 +85,8 @@ def get_simulator_data_path() -> str:
 
     Order of resolution:
     1. Explicit environment variable SIMULATOR_DATA_PATH.
-    2. Repository root relative to this file: ../../../data/simulator/mission_data.json.
+    2. Copy inside backend/ (deployed bundle, e.g. Vercel): ../../data/simulator/mission_data.json,
+       then the repository root: ../../../data/simulator/mission_data.json.
     3. Container root mount: /data/simulator/mission_data.json.
     4. Container app mount: /app/data/simulator/mission_data.json.
     5. Working directory paths: data/simulator/mission_data.json and ../data/simulator/mission_data.json.
@@ -95,6 +96,7 @@ def get_simulator_data_path() -> str:
         return os.path.abspath(env_path)
 
     candidate_paths = [
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "../../data/simulator/mission_data.json")),
         os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../data/simulator/mission_data.json")),
         "/data/simulator/mission_data.json",
         "/app/data/simulator/mission_data.json",

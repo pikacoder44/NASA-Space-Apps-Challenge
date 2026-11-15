@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.core.timeutils import utcnow
+from app.core.timeutils import to_naive_utc, utcnow
 from app.models.astronaut import Astronaut
 from app.routers.auth import get_current_astronaut
 from app.schemas.routine import RoutineTask
@@ -40,7 +40,7 @@ def get_today_routine(
     """
     latest = latest_readings(db, current_astro.id)
     today = utcnow().date()
-    logged_today = {ind for ind, r in latest.items() if r.measured_at.date() == today}
+    logged_today = {ind for ind, r in latest.items() if to_naive_utc(r.measured_at).date() == today}
 
     tasks = [
         RoutineTask(id="task-1", title="Morning Vitals Check (heart rate, blood pressure, temperature)",

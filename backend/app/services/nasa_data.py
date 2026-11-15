@@ -1,6 +1,8 @@
 """Real NASA data: SpaceX Inspiration4 blood glucose from NASA OSDR study OSD-575.
 
-The original CSV is stored unchanged in data/nasa/inspiration4/original/.
+The original CSV is stored unchanged in data/nasa/inspiration4/original/
+(an identical copy lives in backend/data/nasa/ so a deployment with only the
+backend/ folder, e.g. Vercel, still has it).
 Only the GLUCOSE rows are used. Values are flagged against the lab's own
 reference range from the file, never against AstroTrack's evaluator, so real
 crew members are not labelled "critical" by a demo algorithm.
@@ -12,7 +14,8 @@ import re
 from functools import lru_cache
 from typing import Any, Dict, List
 
-_REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
+_BACKEND_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+_REPO_ROOT = os.path.abspath(os.path.join(_BACKEND_DIR, ".."))
 CSV_NAME = "LSDS-8_Comprehensive_Metabolic_Panel_CMP.upload_SUBMITTED.csv"
 NASA_DATA_ENV_VAR = "NASA_DATA_DIR"
 
@@ -63,8 +66,15 @@ class NasaDataUnavailable(RuntimeError):
 
 
 def get_nasa_csv_path() -> str:
-    base = os.environ.get(NASA_DATA_ENV_VAR) or os.path.join(_REPO_ROOT, "data", "nasa")
-    return os.path.join(base, "inspiration4", "original", CSV_NAME)
+    """NASA_DATA_DIR if set, else backend/data/nasa (deployed bundle), else repo-root data/nasa."""
+    def csv_in(base: str) -> str:
+        return os.path.join(base, "inspiration4", "original", CSV_NAME)
+
+    env_dir = os.environ.get(NASA_DATA_ENV_VAR)
+    if env_dir:
+        return csv_in(env_dir)
+    bundled = csv_in(os.path.join(_BACKEND_DIR, "data", "nasa"))
+    return bundled if os.path.exists(bundled) else csv_in(os.path.join(_REPO_ROOT, "data", "nasa"))
 
 
 def parse_timepoint(tp: str) -> Dict[str, Any]:

@@ -44,6 +44,7 @@ MAX_MISSION_DAY = 180
 def _find_mission_data() -> Optional[str]:
     candidate_paths = [
         os.environ.get("SIMULATOR_DATA_PATH") or "",
+        os.path.join(_BACKEND_DIR, "data", "simulator", "mission_data.json"),  # deployed bundle (Vercel)
         os.path.join(_REPO_ROOT, "data", "simulator", "mission_data.json"),
         "/data/simulator/mission_data.json",
         "/app/data/simulator/mission_data.json",
