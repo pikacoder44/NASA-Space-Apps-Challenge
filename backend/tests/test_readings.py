@@ -131,5 +131,53 @@ class TestReadingsValidationAndHistory(unittest.TestCase):
         self.assertEqual(calls, [[], [61.0], [61.0]])
 
 
+    # ---- Issue #12: pagination (skip / limit / stable order) ----
+    def add_hourly(self, count):
+        """Log `count` heart-rate readings one hour apart; value = 60 + i (oldest first)."""
+        for i in range(count):
+            self.post(indicator="heart_rate", value=60 + i, measured_at=self.iso(hours=count - i))
+
+    def get(self, query):
+        return self.client.get(f"/api/readings?indicator=heart_rate&days=30{query}", headers=self.headers)
+
+    def test_pagination_default_limit_is_100_newest_readings(self):
+        self.add_hourly(105)
+        values = [r["value"] for r in self.get("").json()]
+        self.assertEqual(len(values), 100)
+        self.assertEqual(values[0], 65.0)    # oldest 5 are on the next page
+        self.assertEqual(values[-1], 164.0)  # newest reading included
+        self.assertEqual(values, sorted(values))  # default order asc (charts unchanged)
+
+    def test_pagination_skip_limit_and_desc_order(self):
+        self.add_hourly(10)
+        page1 = [r["value"] for r in self.get("&limit=4&order=desc").json()]
+        page2 = [r["value"] for r in self.get("&skip=4&limit=4&order=desc").json()]
+        page3 = [r["value"] for r in self.get("&skip=8&limit=4&order=desc").json()]
+        self.assertEqual(page1, [69.0, 68.0, 67.0, 66.0])
+        self.assertEqual(page2, [65.0, 64.0, 63.0, 62.0])
+        self.assertEqual(page3, [61.0, 60.0])
+        self.assertEqual(self.get("&skip=50").json(), [])
+
+    def test_pagination_order_is_stable_for_equal_timestamps(self):
+        same_time = self.iso(hours=2)
+        for v in (70, 71, 72):
+            self.post(indicator="heart_rate", value=v, measured_at=same_time)
+        first = [r["id"] for r in self.get("&order=desc").json()]
+        second = [r["id"] for r in self.get("&order=desc").json()]
+        self.assertEqual(first, second)
+        self.assertEqual(first, sorted(first, reverse=True))  # ties broken by id desc
+
+    def test_pagination_invalid_params_return_422(self):
+        for query in ("&skip=-1", "&limit=0", "&limit=1001", "&order=random"):
+            self.assertEqual(self.get(query).status_code, 422, query)
+        self.assertEqual(self.get("&limit=1000").status_code, 200)
+
+    def test_existing_calls_without_new_params_still_work(self):
+        self.add_hourly(3)
+        res = self.client.get("/api/readings?indicator=heart_rate&days=7", headers=self.headers)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual([r["value"] for r in res.json()], [60.0, 61.0, 62.0])
+
+
 if __name__ == "__main__":
     unittest.main()
