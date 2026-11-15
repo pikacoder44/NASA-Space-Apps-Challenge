@@ -2,14 +2,11 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { 
-  CheckCircle2, 
-  ArrowRight, 
+import {
+  CheckCircle2,
+  ArrowRight,
   ArrowLeft,
-  SlidersHorizontal,
-  Compass,
-  Sparkles,
-  Info
+  SlidersHorizontal
 } from 'lucide-react';
 import { StatusBadge } from '../../components/ui/StatusBadge';
 import { useHealth } from '../../context/HealthContext';
@@ -20,9 +17,9 @@ export default function GuidedDemoPage() {
   const { activeScenario, setScenario } = useHealth();
 
   const scenarios: { id: DemoScenarioKey; name: string; desc: string }[] = [
-    { id: 'day90_yellow', name: 'Sol 90 Attention Needed (Yellow)', desc: 'Accumulated 4.2h sleep debt, +19% resting heart rate elevation' },
-    { id: 'nominal_green', name: 'Nominal Baseline (Green)', desc: 'Full compliance, nominal resting heart rate, 7.2h sleep' },
-    { id: 'insufficient_data', name: 'Insufficient Telemetry Data (Grey)', desc: 'Sensor gap / cold start baseline awaiting input' }
+    { id: 'day90_yellow', name: 'Sol 90 · Mild Fatigue (Watch)', desc: 'Accumulated 4.2h sleep debt, +19% resting heart rate elevation' },
+    { id: 'nominal_green', name: 'Sol 90 · All Normal', desc: 'Full workout adherence, normal resting heart rate, 7.2h sleep' },
+    { id: 'insufficient_data', name: 'Sol 90 · Degraded Telemetry Link', desc: 'Sensor gap / communication link awaiting fresh telemetry' }
   ];
 
   const steps = [

@@ -4,12 +4,12 @@ import React, { useState } from 'react';
 import { BODY_SYSTEMS } from '../../data/mockData';
 import { BodySystemInfo } from '../../types/health';
 import { StatusBadge } from '../ui/StatusBadge';
-import { 
-  Heart, 
-  Brain, 
-  Bone, 
-  Eye, 
-  ShieldAlert, 
+import {
+  Heart,
+  Brain,
+  Bone,
+  Eye,
+  ShieldAlert,
   BookOpen,
   TrendingUp,
   Info
@@ -64,10 +64,10 @@ export function BodyMapInteractive({ initialSystemId = 'cardiovascular', onSelec
         {/* Status legend */}
         <div className="flex items-center gap-3 text-xs font-medium text-[#60716E]">
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#247A55]" /> Nominal
+            <span className="w-2.5 h-2.5 rounded-full bg-[#247A55]" /> Normal
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#A96617]" /> Attention
+            <span className="w-2.5 h-2.5 rounded-full bg-[#A96617]" /> Watch
           </span>
         </div>
       </div>
@@ -75,7 +75,7 @@ export function BodyMapInteractive({ initialSystemId = 'cardiovascular', onSelec
       <div className="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left column: SVG Human Body Diagram with Interactive Hotspots (5 cols) */}
         <div className="lg:col-span-5 flex flex-col items-center justify-center p-4 rounded-xl bg-[#F4F6F4] border border-[#D9E2DE]/80 relative min-h-[440px]">
-          <div className="text-xs text-[#60716E] mb-3 text-center font-medium">Select an anatomical zone to inspect spaceflight adaptations</div>
+          <div className="text-xs text-[#60716E] mb-3 text-center font-medium">Click any body area to inspect spaceflight adaptations</div>
 
           {/* Scientific SVG Human Figure */}
           <svg

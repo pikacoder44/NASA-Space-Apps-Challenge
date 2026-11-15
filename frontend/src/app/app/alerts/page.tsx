@@ -3,11 +3,11 @@
 import React, { useState } from 'react';
 import { useHealth } from '@/context/HealthContext';
 import { StatusBadge } from '@/components/ui/StatusBadge';
-import { 
-  CheckCircle2, 
-  ShieldAlert, 
-  Stethoscope, 
-  ArrowRight, 
+import {
+  CheckCircle2,
+  ShieldAlert,
+  Stethoscope,
+  ArrowRight,
   Info,
   Check
 } from 'lucide-react';
@@ -30,17 +30,17 @@ export default function AlertsGuidancePage() {
         <div>
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold uppercase tracking-wider text-[#176B68] bg-[#DCEDEA] px-2 py-0.5 rounded">
-              Explainable Health Monitoring
+              Health Advisory
             </span>
             <span className="text-xs text-[#60716E]">
-              {overview.activeAlerts.length} Active System Advisories
+              {overview.activeAlerts.length} Active Advisories
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#172A2B] mt-1">
-            Alerts & Cautious Next Steps
+            Health Alerts &amp; Suggested Actions
           </h1>
           <p className="text-xs sm:text-sm text-[#60716E] mt-0.5">
-            Every Green / Yellow / Red state is completely transparent and traceable to individual baseline variance.
+            Every alert clearly explains what changed from your usual baseline and what steps you can take.
           </p>
         </div>
 
@@ -51,9 +51,9 @@ export default function AlertsGuidancePage() {
       <div className="p-4 rounded-xl bg-[#EAF0ED] border border-[#D9E2DE] text-xs text-[#172A2B] flex items-start gap-3">
         <Info size={18} className="text-[#176B68] shrink-0 mt-0.5" />
         <div className="space-y-1">
-          <p className="font-bold">Transparent Decision Logic (Non-Diagnostic Prototype)</p>
+          <p className="font-bold">How AstroTrack Advisories Work</p>
           <p className="text-[#60716E] leading-relaxed">
-            AAHMS never shows mystery health scores. Any alert explains which indicators changed, by how much, and for how many sleep cycles. Guidance consists of conservative operational countermeasure suggestions, never unverified medical treatments.
+            AstroTrack never shows mystery health scores. Any alert clearly explains which reading changed, by how much, and for how long. Guidance offers safe, practical self-care steps — such as resting or drinking water — never unverified medical treatments.
           </p>
         </div>
       </div>
@@ -78,7 +78,7 @@ export default function AlertsGuidancePage() {
                     <div className="flex items-center gap-2">
                       <StatusBadge status={alert.status} size="sm" />
                       <span className="text-xs text-[#60716E]">
-                        Source: {alert.source === 'demo_rule' ? 'Deterministic Baseline Rule' : 'Analysis Service'}
+                        Source: {alert.source === 'demo_rule' ? 'Personal Baseline Comparison' : 'Automated Health Analysis'}
                       </span>
                     </div>
                     <h2 className="text-base sm:text-lg font-bold text-[#172A2B]">
@@ -104,7 +104,7 @@ export default function AlertsGuidancePage() {
                 <div className="my-4 space-y-3">
                   <div>
                     <h3 className="text-xs uppercase font-bold text-[#60716E]">
-                      Clinical Explanation of Variance
+                      What Changed &amp; Why
                     </h3>
                     <p className="mt-1 text-xs sm:text-sm text-[#172A2B] leading-relaxed">
                       {alert.explanation}
@@ -114,7 +114,7 @@ export default function AlertsGuidancePage() {
                   {/* Variance metadata ribbon */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                     <div className="p-2.5 rounded-lg bg-[#F4F6F4] border border-[#D9E2DE]/70">
-                      <span className="text-xs text-[#60716E] uppercase font-semibold block">Magnitude</span>
+                      <span className="text-xs text-[#60716E] uppercase font-semibold block">Change Level</span>
                       <span className="font-bold text-[#172A2B]">{alert.magnitude || 'Moderate variance'}</span>
                     </div>
                     <div className="p-2.5 rounded-lg bg-[#F4F6F4] border border-[#D9E2DE]/70">
@@ -131,7 +131,7 @@ export default function AlertsGuidancePage() {
 
                   {/* Contributing indicators pills */}
                   <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                    <span className="text-xs font-medium text-[#60716E]">Contributing Indicators:</span>
+                    <span className="text-xs font-medium text-[#60716E]">Related Readings:</span>
                     {alert.contributingIndicators.map((indKey) => (
                       <Link
                         key={indKey}
@@ -149,7 +149,7 @@ export default function AlertsGuidancePage() {
                 <div className="pt-3 border-t border-[#D9E2DE] space-y-2">
                   <h3 className="text-xs uppercase font-bold text-[#172A2B] flex items-center gap-1.5">
                     <ShieldAlert size={14} className="text-[#176B68]" />
-                    <span>Approved Operational Next Steps</span>
+                    <span>Recommended Next Steps</span>
                   </h3>
                   <ul className="space-y-1.5 text-xs text-[#172A2B]">
                     {alert.suggestedActions.map((act, idx) => (
@@ -168,7 +168,7 @@ export default function AlertsGuidancePage() {
                   <div className="flex items-center gap-2">
                     <Stethoscope size={16} className="text-[#60716E]" />
                     <span className="text-[#60716E]">
-                      Flight Surgeon Escalation: <strong className="text-[#172A2B]">Condition Not Met</strong>
+                      Flight Doctor Escalation: <strong className="text-[#247A55]">Not Required</strong>
                     </span>
                   </div>
                   <span className="text-xs text-[#60716E]">

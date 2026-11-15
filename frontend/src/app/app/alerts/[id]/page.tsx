@@ -2,16 +2,12 @@
 
 import React, { useState, use } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useHealth } from '@/context/HealthContext';
 import { StatusBadge } from '@/components/ui/StatusBadge';
-import { 
-  ArrowLeft, 
-  ShieldAlert, 
-  CheckCircle2, 
-  AlertTriangle, 
-  Stethoscope, 
-  Activity, 
+import {
+  ArrowLeft,
+  Stethoscope,
+  Activity,
   ArrowRight,
   ClipboardCheck,
   Check
@@ -23,7 +19,6 @@ export default function AlertDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
-  const router = useRouter();
   const { overview } = useHealth();
   const [checkedActions, setCheckedActions] = useState<Record<number, boolean>>({});
 

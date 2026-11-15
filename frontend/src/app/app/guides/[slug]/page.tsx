@@ -3,14 +3,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { MEASUREMENT_GUIDES } from '@/data/mockData';
-import { 
-  ArrowLeft, 
-  Clock, 
-  Wrench, 
-  AlertTriangle, 
-  CheckCircle2, 
+import {
+  ArrowLeft,
+  Clock,
+  Wrench,
+  AlertTriangle,
+  CheckCircle2,
   HelpCircle,
-  Activity,
   ArrowRight
 } from 'lucide-react';
 

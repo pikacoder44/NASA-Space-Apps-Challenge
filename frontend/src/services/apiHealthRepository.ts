@@ -17,7 +17,7 @@ import { API_ENDPOINTS, getApiUrl } from './apiClient';
 /**
  * ApiHealthRepository implements the API contract for the FastAPI backend.
  * Falls back transparently to DemoHealthRepository when the backend is not yet deployed or unreachable.
- * 
+ *
  * NOTE: All endpoints are proposed and to be confirmed with the backend team.
  */
 export class ApiHealthRepository implements HealthRepository {
@@ -204,7 +204,34 @@ export class ApiHealthRepository implements HealthRepository {
         signal: AbortSignal.timeout(8000)
       });
       if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-      return await res.json();
+      const raw = await res.json();
+      // Gracefully adapt FastAPI backend AIExplanationResponse if returned
+      if (raw && raw.title && raw.explanation && !raw.overallAssessment) {
+        return {
+          id: `ai-${Date.now()}`,
+          generatedAt: new Date().toISOString(),
+          modelProvider: 'Gemini (FastAPI Service)',
+          overallAssessment: `${raw.title}: ${raw.explanation}`,
+          observedPatterns: [
+            {
+              indicator: raw.indicator || 'telemetry',
+              finding: raw.explanation,
+              baselineComparison: `Risk evaluated as ${raw.risk_level || 'nominal'}. Reference: ${raw.clinical_reference || 'NASA HRP'}`
+            }
+          ],
+          physiologicalContext: raw.explanation,
+          suggestedReviewSteps: raw.recommendation ? [raw.recommendation] : ['Log repeat reading per protocol schedule.'],
+          flightSurgeonEscalation: {
+            recommended: raw.risk_level === 'high' || raw.status === 'critical',
+            reason: raw.risk_level === 'high'
+              ? 'Telemetry divergence exceeds flight thresholds; flight surgeon consultation recommended.'
+              : 'Routine autonomous flight monitoring; physician call not required.'
+          },
+          uncertaintyDisclaimer: raw.clinical_reference || 'NASA Human Research Program (HRP) protocol.',
+          sourceType: 'gemini_fastapi_contract'
+        };
+      }
+      return raw;
     } catch {
       return this.fallbackRepo.requestAIExplanation(forceRefresh);
     }
