@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { IndicatorDetailView } from '@/components/health/IndicatorDetailView';
+import { ErrorBoundary } from '@/components/ui/ErrorBoundary';
 
 export function generateStaticParams() {
   return [
@@ -24,8 +25,10 @@ export default async function IndicatorDetailPage({
   const { indicator } = await params;
 
   return (
-    <Suspense fallback={<div className="p-8 text-center text-xs font-mono text-[#60716E]">Loading indicator telemetry...</div>}>
-      <IndicatorDetailView indicatorId={indicator} />
-    </Suspense>
+    <ErrorBoundary widgetName="Indicator Detail View" variant="page">
+      <Suspense fallback={<div className="p-8 text-center text-xs font-mono text-[#60716E]">Loading indicator telemetry...</div>}>
+        <IndicatorDetailView indicatorId={indicator} />
+      </Suspense>
+    </ErrorBoundary>
   );
 }
