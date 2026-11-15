@@ -36,7 +36,8 @@ class Settings(BaseSettings):
     # (login tokens then stop working after a restart). Always set it when deployed.
     SECRET_KEY: str = os.getenv("SECRET_KEY") or secrets.token_urlsafe(32)
     ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
+    # Login token lifetime in minutes, read from ACCESS_TOKEN_EXPIRE_MINUTES (.env). Default 30 minutes.
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
 
     # CORS: FRONTEND_URL may be a comma-separated list (e.g. local + Vercel URL).
     # Any localhost port and *.vercel.app deployments are also allowed (see CORS_ORIGIN_REGEX).

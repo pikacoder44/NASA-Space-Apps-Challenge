@@ -2,7 +2,7 @@
 
 import hashlib
 import hmac
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional, Any, Union
 
 try:
@@ -47,10 +47,13 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
     """Generate a signed JWT access token."""
     to_encode = data.copy()
+    # Timezone-aware UTC: a naive utcnow().timestamp() is read as LOCAL time, which made
+    # tokens expire hours early on machines outside UTC (e.g. 5 hours early in Pakistan).
+    now = datetime.now(timezone.utc)
     if expires_delta:
-        expire = datetime.utcnow() + expires_delta
+        expire = now + expires_delta
     else:
-        expire = datetime.utcnow() + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+        expire = now + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode.update({"exp": int(expire.timestamp())})
 
     if _HAS_JOSE:

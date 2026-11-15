@@ -1,7 +1,7 @@
 """Telemetry readings endpoint: ingestion, clinical evaluation, and historical queries."""
 
 from datetime import timedelta
-from typing import List, Optional
+from typing import List, Literal, Optional
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 
@@ -118,10 +118,21 @@ def submit_reading(
 def get_readings(
     indicator: Optional[str] = Query(None, description="Optional indicator filter"),
     days: int = Query(30, ge=1, le=365, description="Only readings from the last N days"),
+    skip: int = Query(0, ge=0, description="Pagination: number of readings to skip (newest first)"),
+    limit: int = Query(100, ge=1, le=1000, description="Pagination: maximum readings to return (max 1000)"),
+    order: Literal["asc", "desc"] = Query(
+        "asc", description="Order of the returned page: 'asc' = oldest first (charts), 'desc' = newest first"
+    ),
     db: Session = Depends(get_db),
     current_astro: Astronaut = Depends(get_current_astronaut),
 ):
-    """Readings of the active astronaut from the last `days` days, oldest first (UTC timestamps)."""
+    """Readings of the active astronaut from the last `days` days (UTC timestamps), paginated.
+
+    Pages are always cut from a stable newest-first order (timestamp desc, then id desc):
+    `skip=0&limit=100` returns the 100 most recent readings, `skip=100` the next 100.
+    `order` only controls how the returned page is sorted (default 'asc', oldest first,
+    so existing chart calls without these parameters behave as before).
+    """
     now = utcnow()
     query = db.query(Reading).filter(
         Reading.astronaut_id == current_astro.id,
@@ -133,5 +144,12 @@ def get_readings(
             raise _unknown_indicator(indicator)
         query = query.filter(Reading.indicator == indicator)
 
-    records = query.order_by(Reading.measured_at.asc(), Reading.id.asc()).all()
+    records = (
+        query.order_by(Reading.measured_at.desc(), Reading.id.desc())
+        .offset(skip)
+        .limit(limit)
+        .all()
+    )
+    if order == "asc":
+        records.reverse()
     return [to_response(r) for r in records]

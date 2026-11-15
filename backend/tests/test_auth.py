@@ -3,6 +3,7 @@
 import os
 import sys
 import unittest
+from unittest.mock import patch
 
 _REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 _BACKEND_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -107,6 +108,30 @@ class TestSecurityHardening(unittest.TestCase):
         self.assertTrue(allowed("http://localhost:3000"))
         self.assertTrue(allowed("https://astrotrack.vercel.app"))
         self.assertFalse(allowed("https://evil.example.com"))
+
+
+class TestTokenExpiryConfig(unittest.TestCase):
+    """Issue #13: token expiry read from env/.env, default 30 minutes, correct UTC timestamp."""
+
+    def test_default_expiry_is_30_minutes(self):
+        from app.core.config import Settings
+        with patch.dict(os.environ, {}, clear=False):
+            os.environ.pop("ACCESS_TOKEN_EXPIRE_MINUTES", None)
+            self.assertEqual(Settings().ACCESS_TOKEN_EXPIRE_MINUTES, 30)
+
+    def test_expiry_read_from_environment(self):
+        from app.core.config import Settings
+        with patch.dict(os.environ, {"ACCESS_TOKEN_EXPIRE_MINUTES": "45"}):
+            self.assertEqual(Settings().ACCESS_TOKEN_EXPIRE_MINUTES, 45)
+
+    def test_token_exp_is_now_plus_configured_minutes_in_utc(self):
+        import time
+        from app.core.security import create_access_token, decode_access_token
+        with patch.object(settings, "ACCESS_TOKEN_EXPIRE_MINUTES", 30):
+            payload = decode_access_token(create_access_token({"sub": "1"}))
+        self.assertIsNotNone(payload, "a fresh token must be valid")
+        self.assertAlmostEqual(payload["exp"], time.time() + 30 * 60, delta=60)
+
 
 if __name__ == "__main__":
     unittest.main()
