@@ -1,0 +1,2 @@
+# Keep original NASA files byte-for-byte (no line-ending conversion).
+*.csv -text
